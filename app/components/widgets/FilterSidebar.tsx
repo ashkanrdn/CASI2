@@ -52,11 +52,6 @@ export default function FiltersSidebar() {
         (categoryFilters as Filter[]).filter((filter: Filter) => filter.isActive)
     );
 
-    useEffect(() => {
-        console.log('Active Filters:', activeFilters);
-        console.log('Filtered Data:', filteredData);
-    }, [activeFilters, filteredData]);
-
     const handleToggleFilter = (category: FilterCategory, filterId: string) => {
         console.log('Toggling filter:', category, filterId);
         dispatch(toggleFilter({ category, filterId }));
@@ -105,14 +100,14 @@ export default function FiltersSidebar() {
                 <div className='space-y-4'>
                     <Slider
                         value={[activeFilters.year]}
-                        min={2000}
+                        min={2017}
                         max={2025}
                         step={1}
                         onValueChange={([value]) => handleYearChange(value)}
                         className='w-full'
                     />
                     <div className='flex justify-between text-sm text-gray-600'>
-                        <span>2000</span>
+                        <span>2017</span>
                         <span className='font-medium text-black'>{activeFilters.year}</span>
                         <span>2025</span>
                     </div>
