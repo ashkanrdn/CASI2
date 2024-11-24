@@ -59,13 +59,46 @@ const initialState: FilterState = {
     filteredData: [],
 };
 
+// Helper function to apply filters
+const applyFilters = (
+    data: CsvRow[],
+    activeFilters: FilterState['activeFilters']
+): CsvRow[] => {
+    let filtered = data;
+
+    // Apply all active filters
+    Object.entries(activeFilters).forEach(([key, activeIds]) => {
+        if (key !== 'year' && Array.isArray(activeIds) && activeIds.length > 0) {
+            filtered = filtered.filter(row => {
+                switch (key as FilterCategory) {
+                    case 'gender':
+                        return activeIds.includes(row.Sex);
+                    case 'age':
+                        return activeIds.includes(row.Status);
+                    case 'crime':
+                        return activeIds.includes(row.OffenseCat);
+                    case 'race':
+                        return activeIds.includes(row.Race);
+                    default:
+                        return true;
+                }
+            });
+        }
+    });
+
+    // Apply year filter
+    filtered = filtered.filter(row => row.Year === activeFilters.year);
+
+    return filtered;
+};
+
 export const filterSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
         setCsvData: (state, action: PayloadAction<CsvRow[]>) => {
             state.csvData = action.payload;
-            state.filteredData = action.payload;
+            state.filteredData = applyFilters(action.payload, state.activeFilters);
         },
         toggleFilter: (state, action: PayloadAction<{ category: FilterCategory; filterId: string }>) => {
             const { category, filterId } = action.payload;
@@ -79,62 +112,14 @@ export const filterSlice = createSlice({
                     .filter(f => f.isActive)
                     .map(f => f.id);
 
-                // Update filtered data
-                let filtered = state.csvData;
-
-                // Apply all active filters
-                Object.entries(state.activeFilters).forEach(([key, activeIds]) => {
-                    if (key !== 'year' && Array.isArray(activeIds) && activeIds.length > 0) {
-                        filtered = filtered.filter(row => {
-                            switch (key as FilterCategory) {
-                                case 'gender':
-                                    return activeIds.includes(row.Sex);
-                                case 'age':
-                                    return activeIds.includes(row.Status);
-                                case 'crime':
-                                    return activeIds.includes(row.OffenseCat);
-                                case 'race':
-                                    return activeIds.includes(row.Race);
-                                default:
-                                    return true;
-                            }
-                        });
-                    }
-                });
-
-                // Apply year filter
-                filtered = filtered.filter(row => row.Year === state.activeFilters.year);
-
-                state.filteredData = filtered;
+                // Update filtered data using helper function
+                state.filteredData = applyFilters(state.csvData, state.activeFilters);
             }
         },
         setYear: (state, action: PayloadAction<number>) => {
             state.activeFilters.year = action.payload;
-
-            // Update filtered data with new year
-            let filtered = state.csvData.filter(row => row.Year === action.payload);
-
-            // Apply existing filters
-            Object.entries(state.activeFilters).forEach(([key, activeIds]) => {
-                if (key !== 'year' && Array.isArray(activeIds) && activeIds.length > 0) {
-                    filtered = filtered.filter(row => {
-                        switch (key as FilterCategory) {
-                            case 'gender':
-                                return activeIds.includes(row.Sex);
-                            case 'age':
-                                return activeIds.includes(row.Status);
-                            case 'crime':
-                                return activeIds.includes(row.OffenseCat);
-                            case 'race':
-                                return activeIds.includes(row.Race);
-                            default:
-                                return true;
-                        }
-                    });
-                }
-            });
-
-            state.filteredData = filtered;
+            // Update filtered data using helper function
+            state.filteredData = applyFilters(state.csvData, state.activeFilters);
         },
         removeFilter: (state, action: PayloadAction<string>) => {
             const filterId = action.payload;
@@ -157,33 +142,8 @@ export const filterSlice = createSlice({
                 }
             });
 
-            // Update filtered data
-            let filtered = state.csvData;
-
-            // Apply remaining filters
-            Object.entries(state.activeFilters).forEach(([key, activeIds]) => {
-                if (key !== 'year' && Array.isArray(activeIds) && activeIds.length > 0) {
-                    filtered = filtered.filter(row => {
-                        switch (key as FilterCategory) {
-                            case 'gender':
-                                return activeIds.includes(row.Sex);
-                            case 'age':
-                                return activeIds.includes(row.Status);
-                            case 'crime':
-                                return activeIds.includes(row.OffenseCat);
-                            case 'race':
-                                return activeIds.includes(row.Race);
-                            default:
-                                return true;
-                        }
-                    });
-                }
-            });
-
-            // Apply year filter
-            filtered = filtered.filter(row => row.Year === state.activeFilters.year);
-
-            state.filteredData = filtered;
+            // Update filtered data using helper function
+            state.filteredData = applyFilters(state.csvData, state.activeFilters);
         },
     },
 });
