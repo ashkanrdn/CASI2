@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Props) {
                         {/* Main content area with sidebars */}
                         <div className='flex flex-1'>
                             {/* Left sidebar */}
-                            <aside className='w-64 bg-gray-100 p-4'>
+                            <aside className='min-w-64 w-64 bg-gray-100 p-4'>
                                 <FilterSidebar />
                             </aside>
 

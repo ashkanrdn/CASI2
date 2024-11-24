@@ -58,7 +58,7 @@ export default function MapStory() {
     ];
 
     return (
-        <div className='flex h-screen'>
+        <div className='flex h-[100%]'>
             <div className='w-1/4 p-4 border-r'>
                 <FiltersSidebar />
             </div>
