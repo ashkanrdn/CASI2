@@ -1,12 +1,12 @@
 export interface CsvRow {
-    Status: string;
+    Status: 'Adult prisoners' | 'Juvenile prisoners';
     Year: number;
     County: string;
-    Sex: string;
-    Race: string;
+    Sex: 'Male' | 'Female' | 'Other';
+    Race: 'White' | 'Latinx' | 'Black' | 'Other';
     OffenseCat: string;
     Imprisonments: number;
     Arrests: number;
-    'Population 18-69': number;
-    'Cost/inmate': string;
+    'Population18-69': number;
+    'CostPerInmate': string;
 } 

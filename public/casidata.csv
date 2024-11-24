@@ -1,4 +1,4 @@
-Status,Year,County,Sex,Race,OffenseCat,Imprisonments,Arrests,Population 18-69,Cost/inmate
+Status,Year,County,Sex,Race,OffenseCat,Imprisonments,Arrests,Population18-69,CostPerInmate
 Adult prisoners,2017,Alameda,Female,Asian/other,Drug,0,15,188249,"98,731"
 Adult prisoners,2017,Alpine,Female,Asian/other,Drug,0,0,79,"98,731"
 Adult prisoners,2017,Amador,Female,Asian/other,Drug,0,6,666,"98,731"
