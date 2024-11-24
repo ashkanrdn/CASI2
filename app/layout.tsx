@@ -1,85 +1,55 @@
-import Image from "next/image";
-import type { ReactNode } from "react";
-import { StoreProvider } from "./StoreProvider";
-import { Nav } from "./components/Nav";
+'use client';
 
-import "./styles/globals.css";
-import styles from "./styles/layout.module.css";
+import type { ReactNode } from 'react';
+import { Provider } from 'react-redux';
+import { store } from '@/lib/store';
+
+import './styles/globals.css';
+
+import FilterSidebar from './components/widgets/FilterSidebar';
 
 interface Props {
-  readonly children: ReactNode;
+    readonly children: ReactNode;
 }
 
 export default function RootLayout({ children }: Props) {
-  return (
-    <StoreProvider>
-      <html lang="en">
-        <body>
-          <section className={styles.container}>
-            <Nav />
+    return (
+        <Provider store={store}>
+            <html lang='en'>
+                <body>
+                    <div className='min-h-screen flex flex-col'>
+                        {/* Header */}
+                        <header className='bg-gray-600 text-white p-4'>
+                            <h1 className='text-2xl font-bold'>Header</h1>
+                        </header>
 
-            <header className={styles.header}>
-              <Image
-                src="/logo.svg"
-                className={styles.logo}
-                alt="logo"
-                width={100}
-                height={100}
-              />
-            </header>
+                        {/* Main content area with sidebars */}
+                        <div className='flex flex-1'>
+                            {/* Left sidebar */}
+                            <aside className='w-64 bg-gray-100 p-4'>
+                                <FilterSidebar />
+                            </aside>
 
-            <main className={styles.main}>{children}</main>
+                            {/* Main content */}
+                            <main className='flex-1 p-4'>{children}</main>
 
-            <footer className={styles.footer}>
-              <span>Learn </span>
-              <a
-                className={styles.link}
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                React
-              </a>
-              <span>, </span>
-              <a
-                className={styles.link}
-                href="https://redux.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Redux
-              </a>
-              <span>, </span>
-              <a
-                className={styles.link}
-                href="https://redux-toolkit.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Redux Toolkit
-              </a>
-              <span>, </span>
-              <a
-                className={styles.link}
-                href="https://react-redux.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                React Redux
-              </a>
-              ,<span> and </span>
-              <a
-                className={styles.link}
-                href="https://reselect.js.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Reselect
-              </a>
-            </footer>
-          </section>
-        </body>
-      </html>
-    </StoreProvider>
-  );
+                            {/* Right sidebar */}
+                            <aside className='w-64 bg-gray-100 p-4'>
+                                <h2 className='font-semibold mb-4'>Right Sidebar</h2>
+                                <div className='space-y-4'>
+                                    <div>Widget 1</div>
+                                    <div>Widget 2</div>
+                                </div>
+                            </aside>
+                        </div>
+
+                        {/* Footer */}
+                        <footer className='bg-gray-800 text-white p-4'>
+                            <p>Footer Content</p>
+                        </footer>
+                    </div>
+                </body>
+            </html>
+        </Provider>
+    );
 }
