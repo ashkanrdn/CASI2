@@ -20,6 +20,15 @@
         "plugins": [{ "name": "next" }],
         "typeRoots": ["./node_modules/@types", "./app/types", "./lib/types"]
     },
-    "include": ["next-env.d.ts", "app/**/*.ts", "app/**/*.tsx", "lib/**/*.ts", "lib/**/*.tsx", ".next/types/**/*.ts"],
+    "include": [
+        "next-env.d.ts",
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "lib/features/**/*.ts",
+        "lib/features/**/*.tsx",
+        "lib/store.ts",
+        "lib/types/**/*.ts",
+        ".next/types/**/*.ts"
+    ],
     "exclude": ["node_modules"]
 }

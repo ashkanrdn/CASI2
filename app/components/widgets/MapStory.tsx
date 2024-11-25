@@ -158,10 +158,7 @@ export default function MapStory() {
 
     return (
         <div className='flex h-[100%]'>
-            <div className='w-1/4 p-4 border-r'>
-                <FiltersSidebar />
-            </div>
-            <div className='w-3/4 relative'>
+            <div className='w-[100%] relative'>
                 <DeckGL layers={layers} initialViewState={INITIAL_VIEW_STATE} controller={true}>
                     <Map mapboxAccessToken={MAP_BOX_TOKEN} mapStyle='mapbox://styles/mapbox/light-v10' />
                 </DeckGL>
