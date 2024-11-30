@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { setSelectedMetric, setRankedCounties, MetricType } from '@/lib/features/filters/filterSlice';
+import { FlyToInterpolator } from '@deck.gl/core';
+import type { ViewStateChangeParameters } from '@deck.gl/core';
 
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
 
@@ -21,6 +23,13 @@ const INITIAL_VIEW_STATE: MapViewState = {
     pitch: 0,
     bearing: 0,
 };
+
+const INITIAL_COORDINATES = {
+    longitude: -122.41669,
+    latitude: 37.7853,
+};
+
+const RANDOM_OFFSET_RANGE = 0.5; // Degree offset for random points
 
 interface EnhancedFeature extends Feature {
     properties: {
@@ -87,6 +96,12 @@ function enhanceGeoJsonWithData(
     });
 }
 
+// Update the ViewState interface
+interface ViewState extends Omit<MapViewState, 'transitionDuration'> {
+    transitionDuration?: number;
+    transitionInterpolator?: FlyToInterpolator;
+}
+
 export default function MapStory() {
     const dispatch = useDispatch();
     const filteredData = useSelector((state: RootState) => state.filters.filteredData);
@@ -97,6 +112,8 @@ export default function MapStory() {
         y: number;
         object?: EnhancedFeature;
     } | null>(null);
+    const selectedCounty = useSelector((state: RootState) => state.filters.selectedCounty);
+    const [viewState, setViewState] = useState<ViewState>(INITIAL_VIEW_STATE);
 
     // Enhance GeoJSON with filtered data
     const enhancedGeojson = useMemo(
@@ -155,6 +172,56 @@ export default function MapStory() {
         dispatch(setRankedCounties(rankedCounties));
     }, [rankedCounties]);
 
+    // Add function to generate random coordinates
+    const getCountyCoordinates = (countyName: string) => {
+        const county = enhancedGeojson.find((feature) => feature.properties.name === countyName);
+
+        if (!county || !county.geometry) {
+            return INITIAL_COORDINATES;
+        }
+
+        // Calculate the centroid of the county's geometry
+        if (county.geometry.type === 'MultiPolygon') {
+            // Flatten all coordinates into a single array
+            const allCoords = county.geometry.coordinates.flat(2);
+
+            // Calculate average of all coordinates
+            const centroid = allCoords.reduce(
+                (acc, coord) => {
+                    acc.longitude += coord[0];
+                    acc.latitude += coord[1];
+                    return acc;
+                },
+                { longitude: 0, latitude: 0 }
+            );
+
+            return {
+                longitude: centroid.longitude / allCoords.length,
+                latitude: centroid.latitude / allCoords.length,
+            };
+        }
+
+        return INITIAL_COORDINATES;
+    };
+
+    // Add effect to handle county selection
+    useEffect(() => {
+        if (selectedCounty) {
+            // Generate random coordinates
+            const randomPoint = getCountyCoordinates(selectedCounty);
+
+            // Update view state with animation
+            setViewState({
+                ...viewState,
+                longitude: randomPoint.longitude,
+                latitude: randomPoint.latitude,
+                zoom: 12,
+                transitionDuration: 1000,
+                transitionInterpolator: new FlyToInterpolator(),
+            });
+        }
+    }, [selectedCounty]);
+
     const layers = [
         new GeoJsonLayer({
             id: 'counties',
@@ -212,7 +279,28 @@ export default function MapStory() {
             </div>
 
             <div className='absolute inset-0'>
-                <DeckGL layers={layers} initialViewState={INITIAL_VIEW_STATE} controller={true}>
+                <DeckGL
+                    layers={layers}
+                    initialViewState={INITIAL_VIEW_STATE}
+                    viewState={viewState}
+                    onViewStateChange={(params: ViewStateChangeParameters) => {
+                        const newViewState: ViewState = {
+                            longitude: params.viewState.longitude,
+                            latitude: params.viewState.latitude,
+                            zoom: params.viewState.zoom,
+                            pitch: params.viewState.pitch || 0,
+                            bearing: params.viewState.bearing || 0,
+                            ...(params.viewState.transitionDuration
+                                ? {
+                                      transitionDuration: params.viewState.transitionDuration,
+                                      transitionInterpolator: new FlyToInterpolator(),
+                                  }
+                                : {}),
+                        };
+                        setViewState(newViewState);
+                    }}
+                    controller={true}
+                >
                     <Map
                         mapboxAccessToken={MAP_BOX_TOKEN}
                         mapStyle='mapbox://styles/mapbox/light-v10'
