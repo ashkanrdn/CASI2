@@ -30,6 +30,7 @@ export interface FilterState {
     yearRange: [number, number];
     selectedMetric: MetricType;
     rankedCounties: { name: string; value: number; rank: number }[];
+    selectedCounty: string;
 }
 
 const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
@@ -70,6 +71,7 @@ const initialState: FilterState = {
     yearRange: [2017, 2023],
     selectedMetric: MetricType.Arrests,
     rankedCounties: [],
+    selectedCounty: '',
 };
 
 // Helper function to apply filters
@@ -112,6 +114,9 @@ export const filterSlice = createSlice({
 
         setRankedCounties: (state, action: PayloadAction<{ name: string; value: number; rank: number }[]>) => {
             state.rankedCounties = action.payload;
+        },
+        setSelectedCounty: (state, action: PayloadAction<string>) => {
+            state.selectedCounty = action.payload;
         },
         setCsvData: (state, action: PayloadAction<CsvRow[]>) => {
             state.csvData = action.payload;
@@ -180,6 +185,7 @@ export const filterSlice = createSlice({
 
 export const {
     setRankedCounties,
+    setSelectedCounty,
     setCsvData,
     toggleFilter,
     setYear,
