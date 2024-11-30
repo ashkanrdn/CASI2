@@ -35,7 +35,7 @@ export default function CountyRank() {
                         <motion.div className='flex justify-between items-center' layout>
                             <div className='flex items-center gap-3'>
                                 <motion.div
-                                    className='bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center font-semibold'
+                                    className='text-gray-600 rounded-full w-8 h-8 flex items-center justify-center  font-semibold '
                                     layoutId={`rank-${county.rank}`}
                                 >
                                     #{county.rank}

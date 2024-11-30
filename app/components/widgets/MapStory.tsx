@@ -194,7 +194,21 @@ export default function MapStory() {
                 },
                 { longitude: 0, latitude: 0 }
             );
+            return {
+                longitude: centroid.longitude / allCoords.length,
+                latitude: centroid.latitude / allCoords.length,
+            };
+        } else if (county.geometry.type === 'Polygon') {
+            const allCoords = county.geometry.coordinates.flat(1);
 
+            const centroid = allCoords.reduce(
+                (acc, coord) => {
+                    acc.longitude += coord[0];
+                    acc.latitude += coord[1];
+                    return acc;
+                },
+                { longitude: 0, latitude: 0 }
+            );
             return {
                 longitude: centroid.longitude / allCoords.length,
                 latitude: centroid.latitude / allCoords.length,
