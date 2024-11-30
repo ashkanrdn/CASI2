@@ -8,5 +8,5 @@ export interface CsvRow {
     Imprisonments: number;
     Arrests: number;
     'Population18-69': number;
-    CostPerInmate: string;
+    CostPerInmate: number;
 } 

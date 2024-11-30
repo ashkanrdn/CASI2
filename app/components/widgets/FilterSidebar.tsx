@@ -66,7 +66,7 @@ export default function FiltersSidebar() {
     };
 
     const FilterGroup = ({ title, category }: { title: string; category: FilterCategory }) => (
-        <div className='mb-4'>
+        <div className='mb-4 p-2'>
             <h3 className='font-semibold mb-2'>{title}</h3>
             <div className='flex flex-wrap gap-2'>
                 {filters[category].map((filter: Filter) => (
@@ -84,8 +84,7 @@ export default function FiltersSidebar() {
     );
 
     return (
-        <div className='h-full overflow-y-auto'>
-            <h2 className='text-xl font-bold mb-4'>FILTERS</h2>
+        <div className='h-full overflow-y-auto p-2'>
             <FilterGroup title='Gender' category='gender' />
             <Separator className='my-4' />
             <FilterGroup title='Age' category='age' />

@@ -5,12 +5,12 @@ import Map from 'react-map-gl';
 import * as d3 from 'd3';
 import type { MapViewState } from '@deck.gl/core';
 import type { PickingInfo } from '@deck.gl/core';
-import type { Feature, FeatureCollection } from 'geojson';
+import type { Feature } from 'geojson';
 import type { CsvRow } from '@/app/types/shared';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
-import FiltersSidebar from './FilterSidebar';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { setSelectedMetric, setRankedCounties, MetricType } from '@/lib/features/filters/filterSlice';
 
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
 
@@ -22,33 +22,13 @@ const INITIAL_VIEW_STATE: MapViewState = {
     bearing: 0,
 };
 
-const GEOJSON_LAYER_SETTINGS = {
-    getFillColor: [255, 0, 0, 200] as [number, number, number, number],
-    getLineColor: [255, 255, 255] as [number, number, number],
-    getLineWidth: 2,
-    lineWidthUnits: 'pixels',
-    stroked: true,
-    filled: true,
-    pickable: true,
-    autoHighlight: true,
-    highlightColor: [255, 255, 255, 100] as [number, number, number, number],
-};
-
-// Add enum for metrics
-enum MetricType {
-    Arrests = 'Arrests',
-    Imprisonments = 'Imprisonments',
-    Population = 'Population18-69',
-    Cost = 'CostPerInmate',
-}
-
 interface EnhancedFeature extends Feature {
     properties: {
         name: string;
         [MetricType.Arrests]: number;
         [MetricType.Imprisonments]: number;
         [MetricType.Population]: number;
-        [MetricType.Cost]: string;
+        [MetricType.Cost]: number;
         rowCount: number;
         [key: string]: any;
     };
@@ -63,21 +43,29 @@ function enhanceGeoJsonWithData(
 
     filteredData.forEach((row) => {
         const county = row.County;
-        const value =
-            selectedMetric === MetricType.Cost
-                ? parseFloat(row[selectedMetric].replace(/[^0-9.-]+/g, ''))
-                : Number(row[selectedMetric]) || 0;
+        const value = Number(row[selectedMetric]) || 0;
 
-        if (!countyData[county]) {
-            countyData[county] = {
-                value,
-                rowCount: 1,
-            };
+        if (selectedMetric === MetricType.Cost) {
+            // For CostPerInmate, just store the constant value
+            if (!countyData[county]) {
+                countyData[county] = {
+                    value,
+                    rowCount: 1,
+                };
+            }
         } else {
-            countyData[county] = {
-                value: countyData[county].value + value,
-                rowCount: countyData[county].rowCount + 1,
-            };
+            // For other metrics, aggregate the values
+            if (!countyData[county]) {
+                countyData[county] = {
+                    value,
+                    rowCount: 1,
+                };
+            } else {
+                countyData[county] = {
+                    value: countyData[county].value + value,
+                    rowCount: countyData[county].rowCount + 1,
+                };
+            }
         }
     });
 
@@ -100,9 +88,10 @@ function enhanceGeoJsonWithData(
 }
 
 export default function MapStory() {
+    const dispatch = useDispatch();
     const filteredData = useSelector((state: RootState) => state.filters.filteredData);
+    const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
     const [geojsonData, setGeojsonData] = useState<Feature[]>([]);
-    const [selectedMetric, setSelectedMetric] = useState<MetricType>(MetricType.Arrests);
     const [hoverInfo, setHoverInfo] = useState<{
         x: number;
         y: number;
@@ -121,7 +110,7 @@ export default function MapStory() {
         const values = enhancedGeojson
             .map((f) => {
                 const val = f.properties[selectedMetric];
-                return typeof val === 'string' ? parseFloat(val.replace(/[^0-9.-]+/g, '')) : val;
+                return val;
             })
             .filter((val): val is number => typeof val === 'number' && !isNaN(val));
 
@@ -147,6 +136,25 @@ export default function MapStory() {
         fetchGeoJsonData();
     }, []);
 
+    const rankedCounties = useMemo(() => {
+        return enhancedGeojson
+            .map((feature) => ({
+                name: feature.properties.name,
+                value: feature.properties[selectedMetric],
+                rank: 0,
+            }))
+            .sort((a, b) => b.value - a.value)
+            .map((county, index) => ({
+                ...county,
+                rank: index + 1,
+            }));
+    }, [enhancedGeojson, selectedMetric]);
+
+    useEffect(() => {
+        console.log(rankedCounties);
+        dispatch(setRankedCounties(rankedCounties));
+    }, [rankedCounties]);
+
     const layers = [
         new GeoJsonLayer({
             id: 'counties',
@@ -157,10 +165,9 @@ export default function MapStory() {
             getFillColor: (feature: EnhancedFeature) => {
                 // Convert the value to a number if it's a string
                 const value = feature.properties[selectedMetric];
-                const numericValue = typeof value === 'string' ? parseFloat(value.replace(/[^0-9.-]+/g, '')) : value;
 
                 // Convert the sequential scale output to RGB values
-                const colorString = colorScale(numericValue);
+                const colorString = colorScale(value);
                 const rgb = d3.rgb(colorString);
                 return [rgb.r, rgb.g, rgb.b, 200];
             },
@@ -187,15 +194,14 @@ export default function MapStory() {
     ];
 
     return (
-        <div className='relative w-full h-full'>
-            {/* Metric Toggle Buttons */}
-            <div className='absolute top-4 left-4 z-10 bg-white p-2 rounded shadow-lg'>
-                <div className='flex gap-2'>
+        <div className='relative w-full h-full overflow-hidden'>
+            <div className='absolute top-4 left-4 z-10 bg-white p-2 rounded shadow-lg max-w-[calc(100%-2rem)]'>
+                <div className='flex flex-wrap gap-2'>
                     {Object.values(MetricType).map((metric) => (
                         <button
                             key={metric}
-                            onClick={() => setSelectedMetric(metric)}
-                            className={`px-3 py-1 rounded ${
+                            onClick={() => dispatch(setSelectedMetric(metric))}
+                            className={`px-3 py-1 rounded text-sm ${
                                 selectedMetric === metric ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'
                             }`}
                         >
@@ -214,31 +220,32 @@ export default function MapStory() {
                     />
                 </DeckGL>
 
-                {/* Update Tooltip to show selected metric */}
+                {/* Tooltip - Added max-width and word-wrap */}
                 {hoverInfo && (
                     <div
                         className='absolute z-10 pointer-events-none bg-white p-2 rounded shadow-lg'
                         style={{
                             left: hoverInfo.x + 10,
                             top: hoverInfo.y + 10,
+                            maxWidth: 'calc(100% - 20px)',
+                            wordWrap: 'break-word',
                         }}
                     >
                         <h3 className='font-bold'>{hoverInfo.object?.properties.name}</h3>
                         <p>
-                            {selectedMetric}:{' '}
-                            {selectedMetric === MetricType.Cost
-                                ? `$${hoverInfo.object?.properties[selectedMetric].toLocaleString()}`
-                                : hoverInfo.object?.properties[selectedMetric].toLocaleString()}
+                            {selectedMetric}: {`${hoverInfo.object?.properties[selectedMetric]}`}
                         </p>
                         <p>Number of Records: {hoverInfo.object?.properties.rowCount}</p>
                     </div>
                 )}
 
-                {/* Update Legend title */}
-                <div className='absolute bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10'>
-                    <h4 className='text-sm font-bold mb-2'>{selectedMetric.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                {/* Legend - Updated positioning and responsiveness */}
+                <div className='absolute bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10 max-w-[calc(100%-4rem)]'>
+                    <h4 className='text-sm font-bold mb-2 break-words'>
+                        {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}
+                    </h4>
                     <div
-                        className='w-48 h-4 relative'
+                        className='w-48 max-w-full h-4 relative'
                         style={{
                             background: `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
                                 colorScale.domain()[1]

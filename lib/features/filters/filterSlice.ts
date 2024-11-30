@@ -9,6 +9,13 @@ export interface Filter {
 
 export type FilterCategory = 'gender' | 'age' | 'crime' | 'race';
 
+export enum MetricType {
+    Arrests = 'Arrests',
+    Imprisonments = 'Imprisonments',
+    Population = 'Population18-69',
+    Cost = 'CostPerInmate',
+}
+
 export interface FilterState {
     filters: Record<FilterCategory, Filter[]>;
     activeFilters: {
@@ -20,6 +27,9 @@ export interface FilterState {
     };
     csvData: CsvRow[];
     filteredData: CsvRow[];
+    yearRange: [number, number];
+    selectedMetric: MetricType;
+    rankedCounties: { name: string; value: number; rank: number }[];
 }
 
 const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
@@ -57,6 +67,9 @@ const initialState: FilterState = {
     },
     csvData: [],
     filteredData: [],
+    yearRange: [2017, 2023],
+    selectedMetric: MetricType.Arrests,
+    rankedCounties: [],
 };
 
 // Helper function to apply filters
@@ -96,9 +109,23 @@ export const filterSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
+
+        setRankedCounties: (state, action: PayloadAction<{ name: string; value: number; rank: number }[]>) => {
+            state.rankedCounties = action.payload;
+        },
         setCsvData: (state, action: PayloadAction<CsvRow[]>) => {
             state.csvData = action.payload;
             state.filteredData = applyFilters(action.payload, state.activeFilters);
+
+            // // Get min and max years from the data
+            // const years = action.payload.map(row => row.Year);
+
+            // const minYear = years[0];
+            // const maxYear = years[years.length - 1];
+
+
+            // state.yearRange = [minYear, maxYear];
+
         },
         toggleFilter: (state, action: PayloadAction<{ category: FilterCategory; filterId: string }>) => {
             const { category, filterId } = action.payload;
@@ -145,14 +172,19 @@ export const filterSlice = createSlice({
             // Update filtered data using helper function
             state.filteredData = applyFilters(state.csvData, state.activeFilters);
         },
+        setSelectedMetric: (state, action: PayloadAction<MetricType>) => {
+            state.selectedMetric = action.payload;
+        },
     },
 });
 
 export const {
+    setRankedCounties,
     setCsvData,
     toggleFilter,
     setYear,
     removeFilter,
+    setSelectedMetric,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
