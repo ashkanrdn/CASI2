@@ -7,6 +7,6 @@ export interface CsvRow {
     OffenseCat: string;
     Imprisonments: number;
     Arrests: number;
-    'Population 18-69': number;
+    'Population18-69': number;
     CostPerInmate: string;
 } 
