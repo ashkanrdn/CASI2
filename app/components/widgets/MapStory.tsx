@@ -289,8 +289,7 @@ export default function MapStory() {
                 county: feature.properties.name,
                 value: feature.properties[selectedMetric],
             }))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 15); // Show top 10 counties
+            .sort((a, b) => b.value - a.value);
     }, [enhancedGeojson, selectedMetric]);
 
     return (
@@ -362,15 +361,16 @@ export default function MapStory() {
 
                 {/* Bar Chart */}
                 <motion.div
-                    className='absolute bottom-40 right-8 bg-white rounded shadow-lg z-10'
+                    className='absolute bottom-40 right-8 bg-white   w-96 rounded shadow-lg z-10'
                     animate={{
-                        height: isBarChartExpanded ? '70%' : '40px',
-                        width: isBarChartExpanded ? '300px' : '200px',
+                        height: isBarChartExpanded ? 'calc(80% - 40px)' : '40px',
+                        width: isBarChartExpanded ? '320px' : '320px',
                     }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 >
+                    {/* barchart close */}
                     <div
-                        className='flex items-center justify-between p-2 cursor-pointer'
+                        className='flex items-center justify-between p-2  w-80 cursor-pointer'
                         onClick={() => setIsBarChartExpanded(!isBarChartExpanded)}
                     >
                         <h3 className='font-semibold w-48 text-sm'>Chart</h3>
@@ -378,6 +378,7 @@ export default function MapStory() {
                             <ChevronDown className='w-5 h-5' />
                         </motion.div>
                     </div>
+
                     <motion.div
                         className='relative'
                         animate={{
@@ -387,12 +388,12 @@ export default function MapStory() {
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         style={{ overflow: 'hidden' }}
                     >
-                        <div style={{ height: '100%', width: '300px' }} className='p-2'>
+                        <div style={{ height: '100%', width: '300px', overflowY: 'auto' }} className='p-2'>
                             <ResponsiveBar
                                 data={barChartData}
                                 keys={['value']}
                                 indexBy='county'
-                                margin={{ top: 10, right: 20, bottom: 90, left: 100 }}
+                                margin={{ top: 10, right: 20, bottom: 90, left: 90 }}
                                 layout='horizontal'
                                 valueScale={{ type: 'linear' }}
                                 colors={({ data }: { data: { value: number } }) => {
@@ -415,14 +416,12 @@ export default function MapStory() {
                                 axisLeft={{
                                     tickSize: 5,
                                     tickPadding: 5,
-                                    tickRotation: 0,
                                     truncateTickAt: 20,
                                 }}
                                 axisBottom={{
                                     tickSize: 5,
                                     tickPadding: 5,
                                     tickRotation: 90,
-
                                     format: (value: number) =>
                                         selectedMetric === MetricType.Cost
                                             ? `$${Number(value).toLocaleString()}`
@@ -452,12 +451,12 @@ export default function MapStory() {
                 </motion.div>
 
                 {/* Legend - moved below bar chart */}
-                <div className='absolute bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10'>
+                <div className='absolute w-80 bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10'>
                     <h4 className='text-sm font-bold mb-2 break-words'>
                         {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}
                     </h4>
                     <div
-                        className='w-48 max-w-full h-4 relative'
+                        className='w-80 max-w-full h-4 relative'
                         style={{
                             background: `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
                                 colorScale.domain()[1]

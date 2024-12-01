@@ -21,13 +21,13 @@ declare module '@nivo/bar' {
             tickPadding?: number;
             tickRotation?: number;
             truncateTickAt?: number;
-        };
+        } | null;
         axisBottom?: {
             tickSize?: number;
             tickPadding?: number;
             tickRotation?: number;
             format?: (value: number) => string;
-        };
+        } | null;
         tooltip?: (props: { data: BarDatum; value: number }) => React.ReactNode;
         theme?: {
             axis?: {
@@ -41,6 +41,7 @@ declare module '@nivo/bar' {
         enableLabel?: boolean;
         label?: string | ((datum: any) => string);
         labelTextColor?: string | object;
+        height?: number;
     }
 
     export const ResponsiveBar: React.FC<BarProps>;
