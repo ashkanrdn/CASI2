@@ -13,10 +13,21 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { setSelectedMetric, setRankedCounties, MetricType } from '@/lib/features/filters/filterSlice';
 import { FlyToInterpolator } from '@deck.gl/core';
 import type { ViewStateChangeParameters } from '@deck.gl/core';
+import { ResponsiveBar } from '@nivo/bar';
 
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
 
-const INITIAL_VIEW_STATE: MapViewState = {
+interface ViewState {
+    longitude: number;
+    latitude: number;
+    zoom: number;
+    pitch: number;
+    bearing: number;
+    transitionDuration?: number;
+    transitionInterpolator?: FlyToInterpolator;
+}
+
+const INITIAL_VIEW_STATE: ViewState = {
     longitude: -122.41669,
     latitude: 37.7853,
     zoom: 13,
@@ -94,12 +105,6 @@ function enhanceGeoJsonWithData(
             },
         } as EnhancedFeature;
     });
-}
-
-// Update the ViewState interface
-interface ViewState extends Omit<MapViewState, 'transitionDuration'> {
-    transitionDuration?: number;
-    transitionInterpolator?: FlyToInterpolator;
 }
 
 export default function MapStory() {
@@ -274,6 +279,17 @@ export default function MapStory() {
         }),
     ];
 
+    // Prepare data for bar chart
+    const barChartData = useMemo(() => {
+        return enhancedGeojson
+            .map((feature) => ({
+                county: feature.properties.name,
+                value: feature.properties[selectedMetric],
+            }))
+            .sort((a, b) => b.value - a.value)
+            .slice(0, 15); // Show top 10 counties
+    }, [enhancedGeojson, selectedMetric]);
+
     return (
         <div className='relative w-full h-full overflow-hidden'>
             <div className='absolute top-4 left-4 z-10 bg-white p-2 rounded shadow-lg max-w-[calc(100%-2rem)]'>
@@ -322,7 +338,7 @@ export default function MapStory() {
                     />
                 </DeckGL>
 
-                {/* Tooltip - Added max-width and word-wrap */}
+                {/* Tooltip - */}
                 {hoverInfo && (
                     <div
                         className='absolute z-10 pointer-events-none bg-white p-2 rounded shadow-lg'
@@ -341,8 +357,74 @@ export default function MapStory() {
                     </div>
                 )}
 
-                {/* Legend - Updated positioning and responsiveness */}
-                <div className='absolute bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10 max-w-[calc(100%-4rem)]'>
+                {/* Bar Chart */}
+                <div className='absolute bottom-40 right-8 bg-white rounded shadow-lg z-10 h-[70%]'>
+                    <div style={{ height: '100%', width: '300px' }} className='p-2'>
+                        <ResponsiveBar
+                            data={barChartData}
+                            keys={['value']}
+                            indexBy='county'
+                            margin={{ top: 10, right: 20, bottom: 90, left: 100 }}
+                            layout='horizontal'
+                            valueScale={{ type: 'linear' }}
+                            colors={({ data }: { data: { value: number } }) => {
+                                // Use the same color scale as the map
+                                const value = data.value;
+                                const colorString = colorScale(value);
+                                return colorString;
+                            }}
+                            borderRadius={4}
+                            padding={0.5}
+                            labelSkipWidth={40}
+                            labelSkipHeight={12}
+                            enableLabel={false}
+                            label={(d: { value: number }) =>
+                                selectedMetric === MetricType.Cost
+                                    ? `$${Number(d.value).toLocaleString()}`
+                                    : Number(d.value).toLocaleString()
+                            }
+                            labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                            axisLeft={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                truncateTickAt: 20,
+                            }}
+                            axisBottom={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 90,
+                                truncateTickAt: 1,
+
+                                format: (value: number) =>
+                                    selectedMetric === MetricType.Cost
+                                        ? `$${Number(value).toLocaleString()}`
+                                        : Number(value).toLocaleString(),
+                            }}
+                            tooltip={({ data, value }: { data: { county: string }; value: number }) => (
+                                <div className='bg-white p-2 shadow rounded'>
+                                    <strong>{data.county}</strong>
+                                    <br />
+                                    {selectedMetric === MetricType.Cost
+                                        ? `$${Number(value).toLocaleString()}`
+                                        : Number(value).toLocaleString()}
+                                </div>
+                            )}
+                            theme={{
+                                axis: {
+                                    ticks: {
+                                        text: {
+                                            fontSize: 11,
+                                        },
+                                    },
+                                },
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {/* Legend - moved below bar chart */}
+                <div className='absolute bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10'>
                     <h4 className='text-sm font-bold mb-2 break-words'>
                         {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}
                     </h4>

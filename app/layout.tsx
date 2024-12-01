@@ -33,8 +33,7 @@ export default function RootLayout({ children }: Props) {
                             <main className='flex-1 overflow-hidden'>{children}</main>
 
                             {/* Right sidebar */}
-                            <aside className='w-64 bg-gray-100 overflow-hidden flex flex-col'>
-                                <h2 className='p-4 font-semibold'>County Rankings</h2>
+                            <aside className='w-64 bg-gray-100 overflow-hidden pt-2 flex flex-col'>
                                 <div className='flex-1 overflow-auto px-4 pb-4'>
                                     <CountyRank />
                                 </div>
