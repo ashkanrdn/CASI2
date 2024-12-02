@@ -1,13 +1,10 @@
-import { useMemo, useState } from 'react';
 import { BarDatum, ResponsiveBar } from '@nivo/bar';
-import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as d3 from 'd3';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
 import { MetricType } from '@/lib/features/filters/filterSlice';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent } from '@/components/ui/card';
 import CountyRank from './CountyRank';
 
 export default function BarChartWidget() {
@@ -93,7 +90,7 @@ export default function BarChartWidget() {
                                 </div>
                             </motion.div>
 
-                            <motion.div className='h-28 w-full mt-4' layout>
+                            <motion.div className='h-28 w-full mt-1' layout>
                                 <ResponsiveBar
                                     data={[{ id: 'axis', value: maxValue }]}
                                     keys={['value']}

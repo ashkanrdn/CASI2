@@ -36,7 +36,7 @@ export default function RootLayout({ children }: Props) {
 
                             {/* Right sidebar */}
                             <aside className='w-64 bg-gray-100 overflow-hidden pt-2 flex flex-col'>
-                                <div className='flex-1 overflow-auto px-4 pb-4'>
+                                <div className='flex-1 overflow-auto pb-4'>
                                     {/* <CountyRank />
                                      */}
                                     <BarChartWidget />

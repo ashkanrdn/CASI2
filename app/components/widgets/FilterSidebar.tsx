@@ -4,17 +4,15 @@ import * as React from 'react';
 import { X } from 'lucide-react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Papa from 'papaparse';
-import type { CsvRow } from '@/app/types/shared';
+import { AppDispatch, RootState } from '@/lib/store';
 import {
-    setCsvData,
-    toggleFilter,
-    setYear,
+    fetchCsvData,
+    Filter,
+    FilterCategory,
     removeFilter,
-    type FilterCategory,
-    type Filter,
+    setYear,
+    toggleFilter,
 } from '@/lib/features/filters/filterSlice';
-import type { RootState } from '@/lib/store';
 
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
@@ -22,38 +20,30 @@ import { Separator } from '@/app/components/ui/separator';
 import { Slider } from '@/app/components/ui/slider';
 
 export default function FiltersSidebar() {
-    const dispatch = useDispatch();
-    const { filters, activeFilters, csvData, filteredData } = useSelector((state: RootState) => state.filters);
-
-    const loadCSV = async () => {
-        try {
-            const response = await fetch('/casidata.csv');
-            const csvText = await response.text();
-            Papa.parse<CsvRow>(csvText, {
-                header: true,
-                dynamicTyping: true,
-                complete: (results: any) => {
-                    dispatch(setCsvData(results.data));
-                },
-                error: (error: Error) => {
-                    console.error('Error parsing CSV:', error);
-                },
-            });
-        } catch (error) {
-            console.error('Error loading CSV:', error);
-        }
-    };
+    const dispatch = useDispatch<AppDispatch>();
+    const { filters, activeFilters, csvData, filteredData, status, error } = useSelector(
+        (state: RootState) => state.filters
+    );
 
     useEffect(() => {
-        loadCSV();
-    }, []);
+        if (status === 'idle') {
+            dispatch(fetchCsvData());
+        }
+    }, [status, dispatch]);
+
+    if (status === 'loading') {
+        return <div className='p-4'>Loading data...</div>;
+    }
+
+    if (status === 'failed') {
+        return <div className='p-4 text-red-500'>Error: {error}</div>;
+    }
 
     const activeFiltersList = Object.entries(filters).flatMap(([category, categoryFilters]) =>
         (categoryFilters as Filter[]).filter((filter: Filter) => filter.isActive)
     );
 
     const handleToggleFilter = (category: FilterCategory, filterId: string) => {
-        console.log('Toggling filter:', category, filterId);
         dispatch(toggleFilter({ category, filterId }));
     };
 

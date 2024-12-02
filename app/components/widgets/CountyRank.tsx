@@ -29,14 +29,14 @@ export default function CountyRank() {
                             damping: 50,
                             mass: 1,
                         }}
-                        className={`bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow cursor-pointer ${
+                        className={`bg-white rounded-lg shadow p-4 mx-2 hover:shadow-md transition-shadow cursor-pointer ${
                             selectedCounty === county.name ? 'ring-2 ring-blue-500' : ''
                         }`}
                         onClick={() => dispatch(setSelectedCounty(county.name))}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                     >
-                        <motion.div className='flex justify-between items-center' layout>
+                        <motion.div className='flex justify-between items-center ' layout>
                             <div className='flex items-center gap-3'>
                                 <motion.div
                                     className='text-gray-600 rounded-full w-8 h-8 flex items-center justify-center font-semibold'

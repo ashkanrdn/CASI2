@@ -14,6 +14,7 @@ import { FlyToInterpolator } from '@deck.gl/core';
 import type { ViewStateChangeParameters } from '@deck.gl/core';
 
 import { setBarChartData, setColorScaleValues } from '@/lib/features/map/mapSlice';
+import { Button } from '@/app/components/ui/button';
 
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
 
@@ -117,35 +118,7 @@ export default function MapStory() {
     } | null>(null);
     const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
     const [viewState, setViewState] = useState<ViewState>(INITIAL_VIEW_STATE);
-
-    // Enhance GeoJSON with filtered data
-    const enhancedGeojson = useMemo(
-        () => enhanceGeoJsonWithData(geojsonData, filteredData, selectedMetric),
-        [geojsonData, filteredData, selectedMetric]
-    );
-
-    // Create color scale based on enhanced data
-    const colorScale = useMemo(() => {
-        // Convert values to numbers and filter out any NaN values
-        const values = enhancedGeojson
-            .map((f) => {
-                const val = f.properties[selectedMetric];
-                return val;
-            })
-            .filter((val): val is number => typeof val === 'number' && !isNaN(val));
-
-        return d3
-            .scaleSequential<string>()
-            .domain([0, d3.max(values) || 0])
-            .interpolator(d3.interpolateOranges);
-    }, [enhancedGeojson, selectedMetric]);
-
-    useEffect(() => {
-        const values = enhancedGeojson
-            .map((f) => f.properties[selectedMetric])
-            .filter((val): val is number => typeof val === 'number' && !isNaN(val));
-        dispatch(setColorScaleValues(values));
-    }, [enhancedGeojson, selectedMetric, dispatch]);
+    const [colorValues, setColorValues] = useState<number[]>([]);
 
     useEffect(() => {
         const fetchGeoJsonData = async () => {
@@ -162,6 +135,32 @@ export default function MapStory() {
 
         fetchGeoJsonData();
     }, []);
+
+    // Enhance GeoJSON with filtered data
+    const enhancedGeojson = useMemo(
+        () => enhanceGeoJsonWithData(geojsonData, filteredData, selectedMetric),
+        [geojsonData, filteredData, selectedMetric]
+    );
+
+    // Create color scale based on enhanced data
+    const colorScale = useMemo(() => {
+        // Convert values to numbers and filter out any NaN values
+        const values = enhancedGeojson
+            .map((f) => {
+                const val = f.properties[selectedMetric];
+                return val;
+            })
+            .filter((val): val is number => typeof val === 'number' && !isNaN(val));
+        setColorValues(values);
+        return d3
+            .scaleSequential<string>()
+            .domain([0, d3.max(values) || 0])
+            .interpolator(d3.interpolateOranges);
+    }, [enhancedGeojson, selectedMetric]);
+    // dispatch color values to be used with the barchart
+    useEffect(() => {
+        dispatch(setColorScaleValues(colorValues));
+    }, [enhancedGeojson, selectedMetric, colorValues, dispatch]);
 
     const rankedCounties = useMemo(() => {
         return enhancedGeojson
@@ -181,7 +180,7 @@ export default function MapStory() {
         dispatch(setRankedCounties(rankedCounties));
     }, [rankedCounties]);
 
-    // Add function to generate random coordinates
+    // Add function to generate county centroid coordinates
     const getCountyCoordinates = (countyName: string) => {
         const county = enhancedGeojson.find((feature) => feature.properties.name === countyName);
 
@@ -229,11 +228,8 @@ export default function MapStory() {
 
     // Add effect to handle county selection
     useEffect(() => {
-        console.log('selectedCounty', selectedCounty);
         if (selectedCounty) {
-            // Generate random coordinates
             const polygonCentroid = getCountyCoordinates(selectedCounty);
-            console.log('working?');
             // Update view state with animation
             setViewState({
                 ...viewState,
@@ -299,50 +295,45 @@ export default function MapStory() {
         dispatch(setBarChartData(barChartData));
     }, [barChartData, dispatch]);
 
+    const onViewStateChange = (params: ViewStateChangeParameters) => {
+        const newViewState: ViewState = {
+            longitude: params.viewState.longitude,
+            latitude: params.viewState.latitude,
+            zoom: params.viewState.zoom,
+            pitch: params.viewState.pitch || 0,
+            bearing: params.viewState.bearing || 0,
+            ...(params.viewState.transitionDuration
+                ? {
+                      transitionDuration: params.viewState.transitionDuration,
+                      transitionInterpolator: new FlyToInterpolator(),
+                  }
+                : {}),
+        };
+        setViewState(newViewState);
+    };
+
     return (
         <div className='relative w-full h-full overflow-hidden'>
-            <div className='absolute top-4 left-4 z-10 bg-white p-2 rounded shadow-lg max-w-[calc(100%-2rem)]'>
+            <div className='absolute top-4 left-4 z-10  p-2   max-w-[calc(100%-2rem)]'>
                 <div className='flex flex-wrap gap-2'>
                     {Object.values(MetricType).map((metric) => (
-                        <button
+                        <Button
                             key={metric}
                             onClick={() => dispatch(setSelectedMetric(metric))}
-                            className={`px-3 py-1 rounded text-sm ${
-                                selectedMetric === metric ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'
-                            }`}
+                            className={`h-8 text-x ${selectedMetric === metric ? ' text-white' : ''}`}
+                            variant={selectedMetric === metric ? 'default' : 'outline'}
                         >
                             {metric.replace(/([A-Z])/g, ' $1').trim()}
-                        </button>
+                        </Button>
                     ))}
                 </div>
             </div>
 
             <div className='absolute inset-0'>
-                <DeckGL
-                    layers={layers}
-                    initialViewState={INITIAL_VIEW_STATE}
-                    viewState={viewState}
-                    onViewStateChange={(params: ViewStateChangeParameters) => {
-                        const newViewState: ViewState = {
-                            longitude: params.viewState.longitude,
-                            latitude: params.viewState.latitude,
-                            zoom: params.viewState.zoom,
-                            pitch: params.viewState.pitch || 0,
-                            bearing: params.viewState.bearing || 0,
-                            ...(params.viewState.transitionDuration
-                                ? {
-                                      transitionDuration: params.viewState.transitionDuration,
-                                      transitionInterpolator: new FlyToInterpolator(),
-                                  }
-                                : {}),
-                        };
-                        setViewState(newViewState);
-                    }}
-                    controller={true}
-                >
+                <DeckGL layers={layers} viewState={viewState} onViewStateChange={onViewStateChange} controller={true}>
                     <Map
                         mapboxAccessToken={MAP_BOX_TOKEN}
-                        mapStyle='mapbox://styles/mapbox/light-v10'
+                        mapStyle='mapbox://styles/mapbox/light-v11'
                         attributionControl={false}
                     />
                 </DeckGL>
@@ -360,19 +351,22 @@ export default function MapStory() {
                     >
                         <h3 className='font-bold'>{hoverInfo.object?.properties.name}</h3>
                         <p>
-                            {selectedMetric}: {`${hoverInfo.object?.properties[selectedMetric]}`}
+                            {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}:{' '}
+                            {selectedMetric === MetricType.Cost
+                                ? `$${Number(hoverInfo.object?.properties[selectedMetric]).toLocaleString()}`
+                                : Number(hoverInfo.object?.properties[selectedMetric]).toLocaleString()}
                         </p>
-                        <p>Number of Records: {hoverInfo.object?.properties.rowCount}</p>
+                        <p>Number of Records: {Number(hoverInfo.object?.properties.rowCount)}</p>
                     </div>
                 )}
 
-                {/* Legend - moved below bar chart */}
-                <div className='absolute w-80 bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10'>
+                {/* Legend -  */}
+                <div className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10'>
                     <h4 className='text-sm font-bold mb-2 break-words'>
                         {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}
                     </h4>
                     <div
-                        className='w-80 max-w-full h-4 relative'
+                        className='w-48 max-w-full h-4 relative'
                         style={{
                             background: `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
                                 colorScale.domain()[1]

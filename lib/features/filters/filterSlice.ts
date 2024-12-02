@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import type { CsvRow } from '@/app/types/shared';
+import Papa from 'papaparse';
 
 export interface Filter {
     id: string;
@@ -31,6 +32,8 @@ export interface FilterState {
     selectedMetric: MetricType;
     rankedCounties: { name: string; value: number; rank: number }[];
     selectedCounty: string;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
 }
 
 const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
@@ -72,6 +75,8 @@ const initialState: FilterState = {
     selectedMetric: MetricType.Arrests,
     rankedCounties: [],
     selectedCounty: '',
+    status: 'idle',
+    error: null,
 };
 
 // Helper function to apply filters
@@ -106,6 +111,32 @@ const applyFilters = (
 
     return filtered;
 };
+
+// Create async thunk for fetching CSV data
+export const fetchCsvData = createAsyncThunk(
+    'filters/fetchCsvData',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await fetch('/casidata.csv');
+            const csvText = await response.text();
+
+            return new Promise<CsvRow[]>((resolve, reject) => {
+                Papa.parse<CsvRow>(csvText, {
+                    header: true,
+                    dynamicTyping: true,
+                    complete: (results) => {
+                        resolve(results.data);
+                    },
+                    error: (error: Error) => {
+                        reject(error);
+                    },
+                });
+            });
+        } catch (error) {
+            return rejectWithValue('Failed to fetch CSV data');
+        }
+    }
+);
 
 export const filterSlice = createSlice({
     name: 'filters',
@@ -180,6 +211,29 @@ export const filterSlice = createSlice({
         setSelectedMetric: (state, action: PayloadAction<MetricType>) => {
             state.selectedMetric = action.payload;
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchCsvData.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchCsvData.fulfilled, (state, action: PayloadAction<CsvRow[]>) => {
+                state.status = 'succeeded';
+                state.csvData = action.payload;
+                state.filteredData = applyFilters(action.payload, state.activeFilters);
+                state.error = null;
+
+                // Get min and max years from the data if needed
+                const years = action.payload.map(row => row.Year);
+                const uniqueYears = Array.from(new Set(years)).sort();
+                if (uniqueYears.length >= 2) {
+                    state.yearRange = [uniqueYears[0], uniqueYears[uniqueYears.length - 1]];
+                }
+            })
+            .addCase(fetchCsvData.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload as string || 'Failed to fetch data';
+            });
     },
 });
 
