@@ -42,7 +42,7 @@ export default function MapComponent() {
 
     return (
         <div className='space-y-4  h-[100%] w-[100%] '>
-            <div className='bg-white-700 py-1  z-0   h-[100%] w-[100%] relative'>
+            <div className='bg-white-700 py-1  m-1 z-0   h-[100%] w-[100%] relative'>
                 <MapStory />
             </div>
         </div>

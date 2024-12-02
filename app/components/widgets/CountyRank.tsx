@@ -3,13 +3,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
-import { MetricType, setSelectedCounty } from '@/lib/features/filters/filterSlice';
+import { MetricType } from '@/lib/features/filters/filterSlice';
+import { setSelectedCounty } from '@/lib/features/map/mapSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CountyRank() {
     const dispatch = useDispatch();
     const counties = useSelector((state: RootState) => state.filters.rankedCounties);
     const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
+    const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
 
     return (
         <div className='space-y-3'>
@@ -27,7 +29,9 @@ export default function CountyRank() {
                             damping: 50,
                             mass: 1,
                         }}
-                        className='bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow cursor-pointer'
+                        className={`bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow cursor-pointer ${
+                            selectedCounty === county.name ? 'ring-2 ring-blue-500' : ''
+                        }`}
                         onClick={() => dispatch(setSelectedCounty(county.name))}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -35,7 +39,7 @@ export default function CountyRank() {
                         <motion.div className='flex justify-between items-center' layout>
                             <div className='flex items-center gap-3'>
                                 <motion.div
-                                    className='text-gray-600 rounded-full w-8 h-8 flex items-center justify-center  font-semibold '
+                                    className='text-gray-600 rounded-full w-8 h-8 flex items-center justify-center font-semibold'
                                     layoutId={`rank-${county.rank}`}
                                 >
                                     #{county.rank}

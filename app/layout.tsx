@@ -6,6 +6,8 @@ import { store } from '@/lib/store';
 import './styles/globals.css';
 import FilterSidebar from './components/widgets/FilterSidebar';
 import CountyRank from './components/widgets/CountyRank';
+import BarChartWidget from './components/widgets/BarChartWidget';
+import RightSideBar from './components/widgets/RightSideBar';
 
 interface Props {
     readonly children: ReactNode;
@@ -35,7 +37,10 @@ export default function RootLayout({ children }: Props) {
                             {/* Right sidebar */}
                             <aside className='w-64 bg-gray-100 overflow-hidden pt-2 flex flex-col'>
                                 <div className='flex-1 overflow-auto px-4 pb-4'>
-                                    <CountyRank />
+                                    {/* <CountyRank />
+                                     */}
+                                    <BarChartWidget />
+                                    {/* <RightSideBar /> */}
                                 </div>
                             </aside>
                         </div>

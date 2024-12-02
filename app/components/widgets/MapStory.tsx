@@ -3,7 +3,6 @@ import DeckGL from '@deck.gl/react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import Map from 'react-map-gl';
 import * as d3 from 'd3';
-import type { MapViewState } from '@deck.gl/core';
 import type { PickingInfo } from '@deck.gl/core';
 import type { Feature } from 'geojson';
 import type { CsvRow } from '@/app/types/shared';
@@ -13,9 +12,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { setSelectedMetric, setRankedCounties, MetricType } from '@/lib/features/filters/filterSlice';
 import { FlyToInterpolator } from '@deck.gl/core';
 import type { ViewStateChangeParameters } from '@deck.gl/core';
-import { BarDatum, ResponsiveBar } from '@nivo/bar';
-import { ChevronDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+
+import { setBarChartData, setColorScaleValues } from '@/lib/features/map/mapSlice';
 
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
 
@@ -41,8 +39,6 @@ const INITIAL_COORDINATES = {
     longitude: -122.41669,
     latitude: 37.7853,
 };
-
-const RANDOM_OFFSET_RANGE = 0.5; // Degree offset for random points
 
 interface EnhancedFeature extends Feature {
     properties: {
@@ -119,9 +115,8 @@ export default function MapStory() {
         y: number;
         object?: EnhancedFeature;
     } | null>(null);
-    const selectedCounty = useSelector((state: RootState) => state.filters.selectedCounty);
+    const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
     const [viewState, setViewState] = useState<ViewState>(INITIAL_VIEW_STATE);
-    const [isBarChartExpanded, setIsBarChartExpanded] = useState(true);
 
     // Enhance GeoJSON with filtered data
     const enhancedGeojson = useMemo(
@@ -144,6 +139,13 @@ export default function MapStory() {
             .domain([0, d3.max(values) || 0])
             .interpolator(d3.interpolateOranges);
     }, [enhancedGeojson, selectedMetric]);
+
+    useEffect(() => {
+        const values = enhancedGeojson
+            .map((f) => f.properties[selectedMetric])
+            .filter((val): val is number => typeof val === 'number' && !isNaN(val));
+        dispatch(setColorScaleValues(values));
+    }, [enhancedGeojson, selectedMetric, dispatch]);
 
     useEffect(() => {
         const fetchGeoJsonData = async () => {
@@ -176,7 +178,6 @@ export default function MapStory() {
     }, [enhancedGeojson, selectedMetric]);
 
     useEffect(() => {
-        console.log(rankedCounties);
         dispatch(setRankedCounties(rankedCounties));
     }, [rankedCounties]);
 
@@ -228,10 +229,11 @@ export default function MapStory() {
 
     // Add effect to handle county selection
     useEffect(() => {
+        console.log('selectedCounty', selectedCounty);
         if (selectedCounty) {
             // Generate random coordinates
             const polygonCentroid = getCountyCoordinates(selectedCounty);
-
+            console.log('working?');
             // Update view state with animation
             setViewState({
                 ...viewState,
@@ -284,13 +286,18 @@ export default function MapStory() {
 
     // Prepare data for bar chart
     const barChartData = useMemo(() => {
-        return enhancedGeojson
+        const data = enhancedGeojson
             .map((feature) => ({
                 county: feature.properties.name,
                 value: feature.properties[selectedMetric],
             }))
             .sort((a, b) => b.value - a.value);
+        return data;
     }, [enhancedGeojson, selectedMetric]);
+
+    useEffect(() => {
+        dispatch(setBarChartData(barChartData));
+    }, [barChartData, dispatch]);
 
     return (
         <div className='relative w-full h-full overflow-hidden'>
@@ -358,97 +365,6 @@ export default function MapStory() {
                         <p>Number of Records: {hoverInfo.object?.properties.rowCount}</p>
                     </div>
                 )}
-
-                {/* Bar Chart */}
-                <motion.div
-                    className='absolute bottom-40 right-8 bg-white   w-96 rounded shadow-lg z-10'
-                    animate={{
-                        height: isBarChartExpanded ? 'calc(80% - 40px)' : '40px',
-                        width: isBarChartExpanded ? '320px' : '320px',
-                    }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                >
-                    {/* barchart close */}
-                    <div
-                        className='flex items-center justify-between p-2  w-80 cursor-pointer'
-                        onClick={() => setIsBarChartExpanded(!isBarChartExpanded)}
-                    >
-                        <h3 className='font-semibold w-48 text-sm'>Chart</h3>
-                        <motion.div animate={{ rotate: isBarChartExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                            <ChevronDown className='w-5 h-5' />
-                        </motion.div>
-                    </div>
-
-                    <motion.div
-                        className='relative'
-                        animate={{
-                            height: isBarChartExpanded ? 'calc(100% - 40px)' : 0,
-                            opacity: isBarChartExpanded ? 1 : 0,
-                        }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        style={{ overflow: 'hidden' }}
-                    >
-                        <div style={{ height: '100%', width: '300px', overflowY: 'auto' }} className='p-2'>
-                            <ResponsiveBar
-                                data={barChartData}
-                                keys={['value']}
-                                indexBy='county'
-                                margin={{ top: 10, right: 20, bottom: 90, left: 90 }}
-                                layout='horizontal'
-                                valueScale={{ type: 'linear' }}
-                                colors={({ data }: { data: { value: number } }) => {
-                                    // Use the same color scale as the map
-                                    const value = data.value;
-                                    const colorString = colorScale(value);
-                                    return colorString;
-                                }}
-                                borderRadius={4}
-                                padding={0.5}
-                                labelSkipWidth={40}
-                                labelSkipHeight={12}
-                                enableLabel={false}
-                                label={(d: { value: number }) =>
-                                    selectedMetric === MetricType.Cost
-                                        ? `$${Number(d.value).toLocaleString()}`
-                                        : Number(d.value).toLocaleString()
-                                }
-                                labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-                                axisLeft={{
-                                    tickSize: 5,
-                                    tickPadding: 5,
-                                    truncateTickAt: 20,
-                                }}
-                                axisBottom={{
-                                    tickSize: 5,
-                                    tickPadding: 5,
-                                    tickRotation: 90,
-                                    format: (value: number) =>
-                                        selectedMetric === MetricType.Cost
-                                            ? `$${Number(value).toLocaleString()}`
-                                            : Number(value).toLocaleString(),
-                                }}
-                                tooltip={(props: { data: BarDatum; value: number }) => (
-                                    <div className='bg-white p-2 shadow rounded'>
-                                        <strong>{props.data.county}</strong>
-                                        <br />
-                                        {selectedMetric === MetricType.Cost
-                                            ? `$${Number(props.value).toLocaleString()}`
-                                            : Number(props.value).toLocaleString()}
-                                    </div>
-                                )}
-                                theme={{
-                                    axis: {
-                                        ticks: {
-                                            text: {
-                                                fontSize: 11,
-                                            },
-                                        },
-                                    },
-                                }}
-                            />
-                        </div>
-                    </motion.div>
-                </motion.div>
 
                 {/* Legend - moved below bar chart */}
                 <div className='absolute w-80 bottom-8 right-8 bg-white p-4 rounded shadow-lg z-10'>
