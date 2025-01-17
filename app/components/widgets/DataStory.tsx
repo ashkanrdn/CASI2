@@ -84,8 +84,7 @@ export default function DataStory() {
     useMotionValueEvent(scrollYProgress, 'change', (latest) => {
         if (latest > 0.3 && latest < 0.7 && counties?.length) {
             const randomIndex = Math.floor(Math.random() * counties.length);
-            console.log('Current County:', selectedCounty?.name);
-            console.log('Random County:', counties[randomIndex]?.name);
+
             dispatch(setSelectedCounty(counties[randomIndex]?.name));
         }
     });
