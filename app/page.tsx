@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Progress } from '@/components/ui/progress';
 import DataStory from './components/widgets/DataStory';
+import Plx from './components/widgets/plx';
 export default function MapComponent() {
     const [progress, setProgress] = useState(13);
 
@@ -29,10 +30,12 @@ export default function MapComponent() {
     return (
         <div className='space-y-4  h-[100%] w-[100%] '>
             <div className='flex h-[100%] w-[100%]'>
-                <div className='w-[40%] h-full bg-white'>
+                {/* <div className='w-[40%] h-full  bg-white'>
                     <DataStory />
-                </div>
-                <div className='w-[60%] h-full relative'>
+
+                    <Plx />
+                </div> */}
+                <div className='w-full h-full relative'>
                     <MapStory />
                 </div>
             </div>

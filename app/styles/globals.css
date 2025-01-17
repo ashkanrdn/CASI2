@@ -84,13 +84,4 @@ a {
     }
 }
 
-/* Fix Mapbox attribution positioning */
-.mapboxgl-control-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none; /* Allows clicking through to map */
-}
-
 /* Ensure the map container fills its parent */

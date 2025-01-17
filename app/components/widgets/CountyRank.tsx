@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
 import { MetricType } from '@/lib/features/filters/filterSlice';
 import { setSelectedCounty } from '@/lib/features/map/mapSlice';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function CountyRank() {
     const dispatch = useDispatch();

@@ -124,7 +124,7 @@ export default function FiltersSidebar() {
                 </div>
             </div>
 
-            <div className='mt-4 text-sm text-gray-600'>
+            <div className='mt-4 sticky bottom-0 text-sm text-gray-600'>
                 Showing {filteredData.length} out of {csvData.length} records
             </div>
         </div>

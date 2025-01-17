@@ -9,7 +9,10 @@ import CountyRank from './CountyRank';
 
 export default function BarChartWidget() {
     const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
-    const barChartData = useSelector((state: RootState) => state.map.barChartData);
+    const temp = useSelector((state: RootState) => state.map.barChartData);
+    const barChartData = [...temp].sort((a, b) => {
+        return a.value - b.value;
+    });
     const colorScaleValues = useSelector((state: RootState) => state.map.colorScaleValues);
 
     const colorScale = d3
