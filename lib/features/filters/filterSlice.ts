@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import type { CsvRow } from '@/app/types/shared';
+import type { CsvRow } from '@/app/types/shared'; // Import the updated type
 import Papa from 'papaparse';
+
+// Define supported data sources
+export type DataSourceType = 'young_adult' | 'jail' | 'county_prison' | 'demographic'; // Updated sources
+
 
 export interface Filter {
     id: string;
@@ -8,7 +12,7 @@ export interface Filter {
     isActive: boolean;
 }
 
-export type FilterCategory = 'gender' | 'age' | 'crime' | 'race';
+export type FilterCategory = 'gender' | 'age' | 'crime' | 'race' | 'sentencing'; // Add more categories if needed
 
 export enum MetricType {
     Arrests = 'Arrests',
@@ -17,6 +21,15 @@ export enum MetricType {
     Cost = 'CostPerInmate',
 }
 
+// Define available metrics for each data source
+// Using simple strings for metrics now, map component will handle display names
+export const DataSourceMetrics: Record<DataSourceType, string[]> = {
+    young_adult: ['Count'], // Represents arrests for the combined file
+    jail: ['Jail_ADP'], // Average Daily Population
+    county_prison: ['Imprisonments', 'Cost_per_prisoner', 'Population'], // Population might need clarification
+    demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
+};
+
 export interface FilterState {
     filters: Record<FilterCategory, Filter[]>;
     activeFilters: {
@@ -24,16 +37,18 @@ export interface FilterState {
         age: string[];
         crime: string[];
         race: string[];
+        sentencing: string[]; // Add sentencing status filter
         year: number;
     };
     csvData: CsvRow[];
     filteredData: CsvRow[];
     yearRange: [number, number];
-    selectedMetric: MetricType;
+    selectedMetric: string; // Use string for flexibility
     rankedCounties: { name: string; value: number; rank: number }[];
     selectedCounty: string;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
+    selectedDataSource: DataSourceType; // Add selected data source
 }
 
 const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
@@ -42,21 +57,29 @@ const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
         { id: 'Male', label: 'Male', isActive: false },
     ],
     age: [
-        { id: 'Adult prisoners', label: 'Adults', isActive: false },
-        { id: 'Juvenile prisoners', label: 'Juvenile', isActive: false },
+        { id: 'Adult', label: 'Adult', isActive: false },
+        { id: 'Juvenile', label: 'Juvenile', isActive: false },
     ],
     crime: [
         { id: 'Violent', label: 'Violent', isActive: false },
         { id: 'Property', label: 'Property', isActive: false },
         { id: 'Drug', label: 'Drug', isActive: false },
         { id: 'PublicOrder', label: 'Public Order', isActive: false },
+        { id: 'StatusOffense', label: 'Status Offense', isActive: false },
+        { id: 'Misdemeanors', label: 'Misdemeanors', isActive: false },
+        { id: 'Felony', label: 'Felony', isActive: false },
         { id: 'Other', label: 'Other', isActive: false },
     ],
     race: [
         { id: 'Black', label: 'Black', isActive: false },
-        { id: 'Hispanic', label: 'Hispanic', isActive: false },
+        { id: 'Latinx', label: 'Latinx', isActive: false },
         { id: 'White', label: 'White', isActive: false },
         { id: 'Asian/other', label: 'Asian/Other', isActive: false },
+    ],
+    // Add sentencing status filters (relevant for jail.csv)
+    sentencing: [
+        { id: 'Unsentenced', label: 'Unsentenced', isActive: false },
+        { id: 'Sentenced', label: 'Sentenced', isActive: false },
     ],
 };
 
@@ -67,42 +90,59 @@ const initialState: FilterState = {
         age: [],
         crime: [],
         race: [],
-        year: 2017,
+        sentencing: [], // Initialize sentencing filters
+        year: 2017, // Default year
     },
     csvData: [],
     filteredData: [],
-    yearRange: [2017, 2023],
-    selectedMetric: MetricType.Arrests,
+    yearRange: [2017, 2023], // Default range, will be updated
+    selectedMetric: DataSourceMetrics['young_adult'][0], // Default metric for 'young_adult' source
     rankedCounties: [],
     selectedCounty: '',
     status: 'idle',
     error: null,
+    selectedDataSource: 'young_adult', // Default to the combined source
+};
+
+// Helper function to get the correct column name based on data source
+const getColumnName = (category: FilterCategory, source: DataSourceType): keyof CsvRow | null => {
+    switch (category) {
+        case 'gender':
+            return (source === 'jail' ? 'Sex' : 'Gender') as keyof CsvRow;
+        case 'age':
+            return 'Age' as keyof CsvRow;
+        case 'crime':
+            return 'Offense_Category' as keyof CsvRow;
+        case 'race':
+            return 'Race' as keyof CsvRow;
+        case 'sentencing':
+            return source === 'jail' ? 'Sentencing status' as keyof CsvRow : null;
+        default:
+            return null;
+    }
 };
 
 // Helper function to apply filters
 const applyFilters = (
     data: CsvRow[],
-    activeFilters: FilterState['activeFilters']
+    activeFilters: FilterState['activeFilters'],
+    dataSource: DataSourceType // Pass the current data source
 ): CsvRow[] => {
     let filtered = data;
 
     // Apply all active filters
     Object.entries(activeFilters).forEach(([key, activeIds]) => {
         if (key !== 'year' && Array.isArray(activeIds) && activeIds.length > 0) {
-            filtered = filtered.filter(row => {
-                switch (key as FilterCategory) {
-                    case 'gender':
-                        return activeIds.includes(row.Sex);
-                    case 'age':
-                        return activeIds.includes(row.Status);
-                    case 'crime':
-                        return activeIds.includes(row.OffenseCat);
-                    case 'race':
-                        return activeIds.includes(row.Race);
-                    default:
-                        return true;
-                }
-            });
+            const category = key as FilterCategory;
+            const columnName = getColumnName(category, dataSource); // Get the correct column name
+
+            if (columnName) { // Only filter if the column is relevant for the source
+                filtered = filtered.filter(row => {
+                    const rowValue = row[columnName];
+                    // Handle cases where the column might be missing or value is null/undefined
+                    return rowValue != null && activeIds.includes(String(rowValue));
+                });
+            }
         }
     });
 
@@ -112,12 +152,12 @@ const applyFilters = (
     return filtered;
 };
 
-// Create async thunk for fetching CSV data
-export const fetchCsvData = createAsyncThunk(
-    'filters/fetchCsvData',
-    async (_, { rejectWithValue }) => {
+// Create async thunk for fetching CSV data based on source
+export const fetchDataForSource = createAsyncThunk(
+    'filters/fetchDataForSource',
+    async (dataSource: DataSourceType, { rejectWithValue }) => {
         try {
-            const response = await fetch('/casidata.csv');
+            const response = await fetch(`/cleaned/${dataSource}.csv`); // Fetch based on dataSource
             const csvText = await response.text();
 
             return new Promise<CsvRow[]>((resolve, reject) => {
@@ -133,7 +173,7 @@ export const fetchCsvData = createAsyncThunk(
                 });
             });
         } catch (error) {
-            return rejectWithValue('Failed to fetch CSV data');
+            return rejectWithValue(`Failed to fetch ${dataSource}.csv data`);
         }
     }
 );
@@ -142,7 +182,6 @@ export const filterSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
-
         setRankedCounties: (state, action: PayloadAction<{ name: string; value: number; rank: number }[]>) => {
             state.rankedCounties = action.payload;
         },
@@ -151,7 +190,7 @@ export const filterSlice = createSlice({
         },
         setCsvData: (state, action: PayloadAction<CsvRow[]>) => {
             state.csvData = action.payload;
-            state.filteredData = applyFilters(action.payload, state.activeFilters);
+            state.filteredData = applyFilters(action.payload, state.activeFilters, state.selectedDataSource);
 
             // // Get min and max years from the data
             // const years = action.payload.map(row => row.Year);
@@ -176,13 +215,13 @@ export const filterSlice = createSlice({
                     .map(f => f.id);
 
                 // Update filtered data using helper function
-                state.filteredData = applyFilters(state.csvData, state.activeFilters);
+                state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
             }
         },
         setYear: (state, action: PayloadAction<number>) => {
             state.activeFilters.year = action.payload;
             // Update filtered data using helper function
-            state.filteredData = applyFilters(state.csvData, state.activeFilters);
+            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
         },
         removeFilter: (state, action: PayloadAction<string>) => {
             const filterId = action.payload;
@@ -206,33 +245,81 @@ export const filterSlice = createSlice({
             });
 
             // Update filtered data using helper function
-            state.filteredData = applyFilters(state.csvData, state.activeFilters);
+            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
         },
-        setSelectedMetric: (state, action: PayloadAction<MetricType>) => {
+        setSelectedMetric: (state, action: PayloadAction<string>) => {
             state.selectedMetric = action.payload;
+        },
+        setSelectedDataSource: (state, action: PayloadAction<DataSourceType>) => {
+            if (state.selectedDataSource !== action.payload) {
+                state.selectedDataSource = action.payload;
+                // Reset filters or adjust based on the new source if necessary
+                // Example: Reset sentencing filter if switching away from 'jail'
+                if (action.payload !== 'jail') {
+                    state.filters.sentencing.forEach(f => f.isActive = false);
+                    state.activeFilters.sentencing = [];
+                }
+                // Reset other filters potentially? For now, keep them active if possible.
+
+                // Set default metric for the new source
+                state.selectedMetric = DataSourceMetrics[action.payload][0];
+                // Reset Age filter if switching to a source without it (e.g., jail)
+                if (!DataSourceMetrics[action.payload]?.includes('Count') && action.payload !== 'demographic') { // Heuristic: Count implies Age might be relevant
+                    state.filters.age.forEach(f => f.isActive = false);
+                    state.activeFilters.age = [];
+                }
+
+                // Reset data and status before fetching new data
+                state.csvData = [];
+                state.filteredData = [];
+                state.status = 'idle'; // Trigger fetching in component or dispatch thunk here
+                state.error = null;
+                // Consider resetting rankedCounties and selectedCounty as well
+                state.rankedCounties = [];
+                state.selectedCounty = '';
+            }
         },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchCsvData.pending, (state) => {
+            .addCase(fetchDataForSource.pending, (state) => {
                 state.status = 'loading';
+                state.error = null; // Clear previous errors
             })
-            .addCase(fetchCsvData.fulfilled, (state, action: PayloadAction<CsvRow[]>) => {
+            .addCase(fetchDataForSource.fulfilled, (state, action: PayloadAction<CsvRow[]>) => {
                 state.status = 'succeeded';
-                state.csvData = action.payload;
-                state.filteredData = applyFilters(action.payload, state.activeFilters);
+                // Ensure data has Year, filter out rows without it or with invalid values
+                const validData = action.payload.filter(row => row && typeof row.Year === 'number' && !isNaN(row.Year));
+                state.csvData = validData;
+                // state.filteredData = applyFilters(action.payload, state.activeFilters);
+                state.filteredData = applyFilters(validData, state.activeFilters, state.selectedDataSource);
                 state.error = null;
 
                 // Get min and max years from the data if needed
-                const years = action.payload.map(row => row.Year);
-                const uniqueYears = Array.from(new Set(years)).sort();
+                // const years = action.payload.map(row => row.Year);
+                const years = validData.map(row => row.Year);
+                // const uniqueYears = Array.from(new Set(years)).sort();
+                const uniqueYears = Array.from(new Set(years)).filter(y => y != null).sort((a, b) => a - b); // Filter null/undefined and sort
                 if (uniqueYears.length >= 2) {
                     state.yearRange = [uniqueYears[0], uniqueYears[uniqueYears.length - 1]];
+                } else if (uniqueYears.length === 1) {
+                    // If only one year, set range start and end to the same year
+                    state.yearRange = [uniqueYears[0], uniqueYears[0]];
+                } else {
+                    // Fallback if no valid years found
+                    state.yearRange = initialState.yearRange;
                 }
+                // Ensure the current selected year is within the new range
+                state.activeFilters.year = Math.max(state.yearRange[0], Math.min(state.yearRange[1], state.activeFilters.year));
+                // Re-apply filters with potentially adjusted year
+                state.filteredData = applyFilters(validData, state.activeFilters, state.selectedDataSource);
+
             })
-            .addCase(fetchCsvData.rejected, (state, action) => {
+            .addCase(fetchDataForSource.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload as string || 'Failed to fetch data';
+                state.error = action.payload as string || `Failed to fetch ${state.selectedDataSource}.csv data`;
+                state.csvData = []; // Clear data on failure
+                state.filteredData = [];
             });
     },
 });
@@ -245,6 +332,7 @@ export const {
     setYear,
     removeFilter,
     setSelectedMetric,
+    setSelectedDataSource,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

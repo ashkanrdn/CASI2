@@ -7,9 +7,14 @@ import type { PickingInfo } from '@deck.gl/core';
 import type { Feature } from 'geojson';
 import type { CsvRow } from '@/app/types/shared';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '@/lib/store';
+import type { RootState, AppDispatch } from '@/lib/store';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { setSelectedMetric, setRankedCounties, MetricType } from '@/lib/features/filters/filterSlice';
+import {
+    setSelectedMetric,
+    setRankedCounties,
+    DataSourceMetrics,
+    DataSourceType,
+} from '@/lib/features/filters/filterSlice';
 import { FlyToInterpolator } from '@deck.gl/core';
 import type { ViewStateChangeParameters } from '@deck.gl/core';
 
@@ -44,19 +49,16 @@ const INITIAL_COORDINATES = {
 interface EnhancedFeature extends Feature {
     properties: {
         name: string;
-        [MetricType.Arrests]: number;
-        [MetricType.Imprisonments]: number;
-        [MetricType.Population]: number;
-        [MetricType.Cost]: number;
+        [metricKey: string]: any;
         rowCount: number;
-        [key: string]: any;
     };
 }
 
 function enhanceGeoJsonWithData(
     geojsonFeatures: Feature[],
     filteredData: CsvRow[],
-    selectedMetric: MetricType
+    selectedMetric: string,
+    dataSource: DataSourceType
 ): EnhancedFeature[] {
     const countyData: Record<string, { value: number; rowCount: number }> = {};
 
@@ -64,21 +66,16 @@ function enhanceGeoJsonWithData(
         const county = row.County;
         const value = Number(row[selectedMetric]) || 0;
 
-        if (selectedMetric === MetricType.Cost) {
-            // For CostPerInmate, just store the constant value
+        if (selectedMetric === 'Cost_per_prisoner') {
             if (!countyData[county]) {
-                countyData[county] = {
-                    value,
-                    rowCount: 1,
-                };
+                countyData[county] = { value: value, rowCount: 1 };
+            } else {
+                countyData[county].value += value;
+                countyData[county].rowCount += 1;
             }
         } else {
-            // For other metrics, aggregate the values
             if (!countyData[county]) {
-                countyData[county] = {
-                    value,
-                    rowCount: 1,
-                };
+                countyData[county] = { value, rowCount: 1 };
             } else {
                 countyData[county] = {
                     value: countyData[county].value + value,
@@ -90,16 +87,15 @@ function enhanceGeoJsonWithData(
 
     return geojsonFeatures.map((feature) => {
         const countyName = feature.properties?.name;
-        const data = countyData[countyName] || {
-            value: 0,
-            rowCount: 0,
-        };
+        const data = countyData[countyName] || { value: 0, rowCount: 0 };
+        const averageValue =
+            data.rowCount > 0 && selectedMetric === 'Cost_per_prisoner' ? data.value / data.rowCount : data.value;
 
         return {
             ...feature,
             properties: {
                 ...feature.properties,
-                [selectedMetric]: data.value,
+                [selectedMetric]: selectedMetric === 'Cost_per_prisoner' ? averageValue : data.value,
                 rowCount: data.rowCount,
             },
         } as EnhancedFeature;
@@ -107,9 +103,10 @@ function enhanceGeoJsonWithData(
 }
 
 export default function MapStory() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const filteredData = useSelector((state: RootState) => state.filters.filteredData);
     const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
+    const selectedDataSource = useSelector((state: RootState) => state.filters.selectedDataSource);
     const [geojsonData, setGeojsonData] = useState<Feature[]>([]);
     const [hoverInfo, setHoverInfo] = useState<{
         x: number;
@@ -136,15 +133,12 @@ export default function MapStory() {
         fetchGeoJsonData();
     }, []);
 
-    // Enhance GeoJSON with filtered data
     const enhancedGeojson = useMemo(
-        () => enhanceGeoJsonWithData(geojsonData, filteredData, selectedMetric),
-        [geojsonData, filteredData, selectedMetric]
+        () => enhanceGeoJsonWithData(geojsonData, filteredData, selectedMetric, selectedDataSource),
+        [geojsonData, filteredData, selectedMetric, selectedDataSource]
     );
 
-    // Create color scale based on enhanced data
     const colorScale = useMemo(() => {
-        // Convert values to numbers and filter out any NaN values
         const values = enhancedGeojson
             .map((f) => {
                 const val = f.properties[selectedMetric];
@@ -154,10 +148,10 @@ export default function MapStory() {
         setColorValues(values);
         return d3
             .scaleSequential<string>()
-            .domain([0, d3.max(values) || 0])
+            .domain([0, d3.max(values.filter((v) => isFinite(v))) || 0])
             .interpolator(d3.interpolateOranges);
     }, [enhancedGeojson, selectedMetric]);
-    // dispatch color values to be used with the barchart
+
     useEffect(() => {
         dispatch(setColorScaleValues(colorValues));
     }, [enhancedGeojson, selectedMetric, colorValues, dispatch]);
@@ -178,9 +172,8 @@ export default function MapStory() {
 
     useEffect(() => {
         dispatch(setRankedCounties(rankedCounties));
-    }, [rankedCounties]);
+    }, [rankedCounties, dispatch]);
 
-    // Add function to generate county centroid coordinates
     const getCountyCoordinates = (countyName: string) => {
         const county = enhancedGeojson.find((feature) => feature.properties.name === countyName);
 
@@ -188,12 +181,9 @@ export default function MapStory() {
             return INITIAL_COORDINATES;
         }
 
-        // Calculate the centroid of the county's geometry
         if (county.geometry.type === 'MultiPolygon') {
-            // Flatten all coordinates into a single array
             const allCoords = county.geometry.coordinates.flat(2);
 
-            // Calculate average of all coordinates
             const centroid = allCoords.reduce(
                 (acc, coord) => {
                     acc.longitude += coord[0];
@@ -226,11 +216,9 @@ export default function MapStory() {
         return INITIAL_COORDINATES;
     };
 
-    // Add effect to handle county selection
     useEffect(() => {
         if (selectedCounty) {
             const polygonCentroid = getCountyCoordinates(selectedCounty);
-            // Update view state with animation
             setViewState({
                 ...viewState,
                 longitude: polygonCentroid.longitude,
@@ -240,7 +228,7 @@ export default function MapStory() {
                 transitionInterpolator: new FlyToInterpolator(),
             });
         }
-    }, [selectedCounty]);
+    }, [selectedCounty, enhancedGeojson, viewState, dispatch]);
 
     const layers = [
         new GeoJsonLayer({
@@ -250,10 +238,7 @@ export default function MapStory() {
             filled: true,
             lineWidthMinPixels: 1,
             getFillColor: (feature: EnhancedFeature) => {
-                // Convert the value to a number if it's a string
                 const value = feature.properties[selectedMetric];
-
-                // Convert the sequential scale output to RGB values
                 const colorString = colorScale(value);
                 const rgb = d3.rgb(colorString);
                 return [rgb.r, rgb.g, rgb.b, 200];
@@ -263,7 +248,7 @@ export default function MapStory() {
             pickable: true,
             autoHighlight: true,
             highlightColor: [255, 255, 255, 50],
-            onHover: (info: PickingInfo) => {
+            onHover: (info: PickingInfo<EnhancedFeature>) => {
                 if (info.object) {
                     setHoverInfo({
                         x: info.x,
@@ -275,12 +260,11 @@ export default function MapStory() {
                 }
             },
             updateTriggers: {
-                getFillColor: [colorScale],
+                getFillColor: [selectedMetric, enhancedGeojson],
             },
         }),
     ];
 
-    // Prepare data for bar chart
     const barChartData = useMemo(() => {
         const data = enhancedGeojson
             .map((feature) => ({
@@ -312,18 +296,20 @@ export default function MapStory() {
         setViewState(newViewState);
     };
 
+    const availableMetrics = DataSourceMetrics[selectedDataSource] || [];
+
     return (
         <div className='relative w-full h-full overflow-hidden'>
             <div className='absolute top-4 left-4 z-10  p-2   max-w-[calc(100%-2rem)]'>
                 <div className='flex flex-wrap gap-2'>
-                    {Object.values(MetricType).map((metric) => (
+                    {availableMetrics.map((metric) => (
                         <Button
                             key={metric}
                             onClick={() => dispatch(setSelectedMetric(metric))}
-                            className={`h-8 text-x ${selectedMetric === metric ? ' text-white' : ''}`}
+                            className={`h-8 text-xs ${selectedMetric === metric ? ' text-white' : ''}`}
                             variant={selectedMetric === metric ? 'default' : 'outline'}
                         >
-                            {metric.replace(/([A-Z])/g, ' $1').trim()}
+                            {formatMetricLabel(metric)}
                         </Button>
                     ))}
                 </div>
@@ -338,7 +324,6 @@ export default function MapStory() {
                     />
                 </DeckGL>
 
-                {/* Tooltip - */}
                 {hoverInfo && (
                     <div
                         className='absolute z-10 pointer-events-none bg-white p-2 rounded shadow-lg'
@@ -351,32 +336,35 @@ export default function MapStory() {
                     >
                         <h3 className='font-bold'>{hoverInfo.object?.properties.name}</h3>
                         <p>
-                            {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}:{' '}
-                            {selectedMetric === MetricType.Cost
-                                ? `$${Number(hoverInfo.object?.properties[selectedMetric]).toLocaleString()}`
-                                : Number(hoverInfo.object?.properties[selectedMetric]).toLocaleString()}
+                            {formatMetricLabel(selectedMetric)}:{' '}
+                            {selectedMetric === 'Cost_per_prisoner'
+                                ? `$${Number(hoverInfo.object?.properties[selectedMetric] ?? 0).toLocaleString(
+                                      undefined,
+                                      { maximumFractionDigits: 0 }
+                                  )}`
+                                : Number(hoverInfo.object?.properties[selectedMetric] ?? 0).toLocaleString()}
                         </p>
-                        <p>Number of Records: {Number(hoverInfo.object?.properties.rowCount)}</p>
+                        <p>Number of Records: {Number(hoverInfo.object?.properties.rowCount ?? 0).toLocaleString()}</p>
                     </div>
                 )}
 
-                {/* Legend -  */}
                 <div className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10'>
-                    <h4 className='text-sm font-bold mb-2 break-words'>
-                        {selectedMetric.replace(/([A-Z])/g, ' $1').trim()}
-                    </h4>
+                    <h4 className='text-sm font-bold mb-2 break-words'>{formatMetricLabel(selectedMetric)}</h4>
                     <div
                         className='w-48 max-w-full h-4 relative'
                         style={{
-                            background: `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
-                                colorScale.domain()[1]
-                            )})`,
+                            background:
+                                colorScale.domain()[1] > 0
+                                    ? `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
+                                          colorScale.domain()[1]
+                                      )})`
+                                    : '#ccc',
                         }}
                     ></div>
                     <div className='flex justify-between text-xs mt-1'>
                         <span>0</span>
                         <span>
-                            {selectedMetric === MetricType.Cost
+                            {selectedMetric === 'Cost_per_prisoner'
                                 ? `$${Math.round(colorScale.domain()[1]).toLocaleString()}`
                                 : Math.round(colorScale.domain()[1]).toLocaleString()}
                         </span>
@@ -385,4 +373,12 @@ export default function MapStory() {
             </div>
         </div>
     );
+}
+
+function formatMetricLabel(metric: string) {
+    return metric
+        .replace(/_/g, ' ')
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, (str) => str.toUpperCase())
+        .trim();
 }

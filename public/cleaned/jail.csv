@@ -1623,1627 +1623,1627 @@ Index,County,Year,Sex,Sentencing status,Offense_Category,Jail_ADP
 1621,Ventura,2023,Male,Sentenced,Felony,274
 1622,Yolo,2023,Male,Sentenced,Felony,47
 1623,Yuba,2023,Male,Sentenced,Felony,38
-1624,Alameda,2017,Female,Unsentenced,Misdemeanor,12
-1625,Alpine,2017,Female,Unsentenced,Misdemeanor,0
-1626,Amador,2017,Female,Unsentenced,Misdemeanor,1
-1627,Butte,2017,Female,Unsentenced,Misdemeanor,6
-1628,Calaveras,2017,Female,Unsentenced,Misdemeanor,1
-1629,Colusa,2017,Female,Unsentenced,Misdemeanor,4
-1630,Contra Costa,2017,Female,Unsentenced,Misdemeanor,24
-1631,Del Norte,2017,Female,Unsentenced,Misdemeanor,3
-1632,El Dorado,2017,Female,Unsentenced,Misdemeanor,5
-1633,Fresno,2017,Female,Unsentenced,Misdemeanor,19
-1634,Glenn,2017,Female,Unsentenced,Misdemeanor,3
-1635,Humboldt,2017,Female,Unsentenced,Misdemeanor,4
-1636,Imperial,2017,Female,Unsentenced,Misdemeanor,4
-1637,Inyo,2017,Female,Unsentenced,Misdemeanor,2
-1638,Kern,2017,Female,Unsentenced,Misdemeanor,27
-1639,Kings,2017,Female,Unsentenced,Misdemeanor,13
-1640,Lake,2017,Female,Unsentenced,Misdemeanor,5
-1641,Lassen,2017,Female,Unsentenced,Misdemeanor,2
-1642,Los Angeles,2017,Female,Unsentenced,Misdemeanor,158
-1643,Madera,2017,Female,Unsentenced,Misdemeanor,10
-1644,Marin,2017,Female,Unsentenced,Misdemeanor,8
-1645,Mariposa,2017,Female,Unsentenced,Misdemeanor,2
-1646,Mendocino,2017,Female,Unsentenced,Misdemeanor,12
-1647,Merced,2017,Female,Unsentenced,Misdemeanor,7
-1648,Modoc,2017,Female,Unsentenced,Misdemeanor,0
-1649,Mono,2017,Female,Unsentenced,Misdemeanor,1
-1650,Monterey,2017,Female,Unsentenced,Misdemeanor,4
-1651,Napa,2017,Female,Unsentenced,Misdemeanor,4
-1652,Nevada,2017,Female,Unsentenced,Misdemeanor,4
-1653,Orange,2017,Female,Unsentenced,Misdemeanor,82
-1654,Placer,2017,Female,Unsentenced,Misdemeanor,13
-1655,Plumas,2017,Female,Unsentenced,Misdemeanor,2
-1656,Riverside,2017,Female,Unsentenced,Misdemeanor,20
-1657,Sacramento,2017,Female,Unsentenced,Misdemeanor,24
-1658,San Benito,2017,Female,Unsentenced,Misdemeanor,3
-1659,San Bernardino,2017,Female,Unsentenced,Misdemeanor,152
-1660,San Diego,2017,Female,Unsentenced,Misdemeanor,39
-1661,San Francisco,2017,Female,Unsentenced,Misdemeanor,0
-1662,San Joaquin,2017,Female,Unsentenced,Misdemeanor,9
-1663,San Luis Obispo,2017,Female,Unsentenced,Misdemeanor,40
-1664,San Mateo,2017,Female,Unsentenced,Misdemeanor,5
-1665,Santa Barbara,2017,Female,Unsentenced,Misdemeanor,0
-1666,Santa Clara,2017,Female,Unsentenced,Misdemeanor,15
-1667,Santa Cruz,2017,Female,Unsentenced,Misdemeanor,162
-1668,Shasta,2017,Female,Unsentenced,Misdemeanor,3
-1669,Sierra,2017,Female,Unsentenced,Misdemeanor,0
-1670,Siskiyou,2017,Female,Unsentenced,Misdemeanor,0
-1671,Solano,2017,Female,Unsentenced,Misdemeanor,9
-1672,Sonoma,2017,Female,Unsentenced,Misdemeanor,28
-1673,Stanislaus,2017,Female,Unsentenced,Misdemeanor,10
-1674,Sutter,2017,Female,Unsentenced,Misdemeanor,1
-1675,Tehama,2017,Female,Unsentenced,Misdemeanor,0
-1676,Trinity,2017,Female,Unsentenced,Misdemeanor,0
-1677,Tulare,2017,Female,Unsentenced,Misdemeanor,14
-1678,Tuolumne,2017,Female,Unsentenced,Misdemeanor,1
-1679,Ventura,2017,Female,Unsentenced,Misdemeanor,25
-1680,Yolo,2017,Female,Unsentenced,Misdemeanor,2
-1681,Yuba,2017,Female,Unsentenced,Misdemeanor,2
-1682,Alameda,2018,Female,Unsentenced,Misdemeanor,12
-1683,Alpine,2018,Female,Unsentenced,Misdemeanor,0
-1684,Amador,2018,Female,Unsentenced,Misdemeanor,1
-1685,Butte,2018,Female,Unsentenced,Misdemeanor,7
-1686,Calaveras,2018,Female,Unsentenced,Misdemeanor,2
-1687,Colusa,2018,Female,Unsentenced,Misdemeanor,2
-1688,Contra Costa,2018,Female,Unsentenced,Misdemeanor,24
-1689,Del Norte,2018,Female,Unsentenced,Misdemeanor,4
-1690,El Dorado,2018,Female,Unsentenced,Misdemeanor,3
-1691,Fresno,2018,Female,Unsentenced,Misdemeanor,14
-1692,Glenn,2018,Female,Unsentenced,Misdemeanor,3
-1693,Humboldt,2018,Female,Unsentenced,Misdemeanor,4
-1694,Imperial,2018,Female,Unsentenced,Misdemeanor,11
-1695,Inyo,2018,Female,Unsentenced,Misdemeanor,2
-1696,Kern,2018,Female,Unsentenced,Misdemeanor,22
-1697,Kings,2018,Female,Unsentenced,Misdemeanor,10
-1698,Lake,2018,Female,Unsentenced,Misdemeanor,4
-1699,Lassen,2018,Female,Unsentenced,Misdemeanor,2
-1700,Los Angeles,2018,Female,Unsentenced,Misdemeanor,148
-1701,Madera,2018,Female,Unsentenced,Misdemeanor,10
-1702,Marin,2018,Female,Unsentenced,Misdemeanor,8
-1703,Mariposa,2018,Female,Unsentenced,Misdemeanor,2
-1704,Mendocino,2018,Female,Unsentenced,Misdemeanor,19
-1705,Merced,2018,Female,Unsentenced,Misdemeanor,0
-1706,Modoc,2018,Female,Unsentenced,Misdemeanor,0
-1707,Mono,2018,Female,Unsentenced,Misdemeanor,1
-1708,Monterey,2018,Female,Unsentenced,Misdemeanor,6
-1709,Napa,2018,Female,Unsentenced,Misdemeanor,2
-1710,Nevada,2018,Female,Unsentenced,Misdemeanor,2
-1711,Orange,2018,Female,Unsentenced,Misdemeanor,77
-1712,Placer,2018,Female,Unsentenced,Misdemeanor,11
-1713,Plumas,2018,Female,Unsentenced,Misdemeanor,3
-1714,Riverside,2018,Female,Unsentenced,Misdemeanor,20
-1715,Sacramento,2018,Female,Unsentenced,Misdemeanor,33
-1716,San Benito,2018,Female,Unsentenced,Misdemeanor,2
-1717,San Bernardino,2018,Female,Unsentenced,Misdemeanor,150
-1718,San Diego,2018,Female,Unsentenced,Misdemeanor,38
-1719,San Francisco,2018,Female,Unsentenced,Misdemeanor,10
-1720,San Joaquin,2018,Female,Unsentenced,Misdemeanor,12
-1721,San Luis Obispo,2018,Female,Unsentenced,Misdemeanor,14
-1722,San Mateo,2018,Female,Unsentenced,Misdemeanor,8
-1723,Santa Barbara,2018,Female,Unsentenced,Misdemeanor,19
-1724,Santa Clara,2018,Female,Unsentenced,Misdemeanor,45
-1725,Santa Cruz,2018,Female,Unsentenced,Misdemeanor,27
-1726,Shasta,2018,Female,Unsentenced,Misdemeanor,4
-1727,Sierra,2018,Female,Unsentenced,Misdemeanor,0
-1728,Siskiyou,2018,Female,Unsentenced,Misdemeanor,0
-1729,Solano,2018,Female,Unsentenced,Misdemeanor,7
-1730,Sonoma,2018,Female,Unsentenced,Misdemeanor,23
-1731,Stanislaus,2018,Female,Unsentenced,Misdemeanor,11
-1732,Sutter,2018,Female,Unsentenced,Misdemeanor,0
-1733,Tehama,2018,Female,Unsentenced,Misdemeanor,0
-1734,Trinity,2018,Female,Unsentenced,Misdemeanor,1
-1735,Tulare,2018,Female,Unsentenced,Misdemeanor,12
-1736,Tuolumne,2018,Female,Unsentenced,Misdemeanor,2
-1737,Ventura,2018,Female,Unsentenced,Misdemeanor,0
-1738,Yolo,2018,Female,Unsentenced,Misdemeanor,4
-1739,Yuba,2018,Female,Unsentenced,Misdemeanor,2
-1740,Alameda,2019,Female,Unsentenced,Misdemeanor,12
-1741,Alpine,2019,Female,Unsentenced,Misdemeanor,0
-1742,Amador,2019,Female,Unsentenced,Misdemeanor,1
-1743,Butte,2019,Female,Unsentenced,Misdemeanor,6
-1744,Calaveras,2019,Female,Unsentenced,Misdemeanor,2
-1745,Colusa,2019,Female,Unsentenced,Misdemeanor,2
-1746,Contra Costa,2019,Female,Unsentenced,Misdemeanor,21
-1747,Del Norte,2019,Female,Unsentenced,Misdemeanor,3
-1748,El Dorado,2019,Female,Unsentenced,Misdemeanor,3
-1749,Fresno,2019,Female,Unsentenced,Misdemeanor,11
-1750,Glenn,2019,Female,Unsentenced,Misdemeanor,4
-1751,Humboldt,2019,Female,Unsentenced,Misdemeanor,4
-1752,Imperial,2019,Female,Unsentenced,Misdemeanor,2
-1753,Inyo,2019,Female,Unsentenced,Misdemeanor,0
-1754,Kern,2019,Female,Unsentenced,Misdemeanor,13
-1755,Kings,2019,Female,Unsentenced,Misdemeanor,10
-1756,Lake,2019,Female,Unsentenced,Misdemeanor,5
-1757,Lassen,2019,Female,Unsentenced,Misdemeanor,1
-1758,Los Angeles,2019,Female,Unsentenced,Misdemeanor,161
-1759,Madera,2019,Female,Unsentenced,Misdemeanor,7
-1760,Marin,2019,Female,Unsentenced,Misdemeanor,8
-1761,Mariposa,2019,Female,Unsentenced,Misdemeanor,1
-1762,Mendocino,2019,Female,Unsentenced,Misdemeanor,13
-1763,Merced,2019,Female,Unsentenced,Misdemeanor,0
-1764,Modoc,2019,Female,Unsentenced,Misdemeanor,0
-1765,Mono,2019,Female,Unsentenced,Misdemeanor,1
-1766,Monterey,2019,Female,Unsentenced,Misdemeanor,5
-1767,Napa,2019,Female,Unsentenced,Misdemeanor,3
-1768,Nevada,2019,Female,Unsentenced,Misdemeanor,3
-1769,Orange,2019,Female,Unsentenced,Misdemeanor,88
-1770,Placer,2019,Female,Unsentenced,Misdemeanor,13
-1771,Plumas,2019,Female,Unsentenced,Misdemeanor,4
-1772,Riverside,2019,Female,Unsentenced,Misdemeanor,21
-1773,Sacramento,2019,Female,Unsentenced,Misdemeanor,32
-1774,San Benito,2019,Female,Unsentenced,Misdemeanor,4
-1775,San Bernardino,2019,Female,Unsentenced,Misdemeanor,110
-1776,San Diego,2019,Female,Unsentenced,Misdemeanor,28
-1777,San Francisco,2019,Female,Unsentenced,Misdemeanor,0
-1778,San Joaquin,2019,Female,Unsentenced,Misdemeanor,10
-1779,San Luis Obispo,2019,Female,Unsentenced,Misdemeanor,38
-1780,San Mateo,2019,Female,Unsentenced,Misdemeanor,4
-1781,Santa Barbara,2019,Female,Unsentenced,Misdemeanor,11
-1782,Santa Clara,2019,Female,Unsentenced,Misdemeanor,13
-1783,Santa Cruz,2019,Female,Unsentenced,Misdemeanor,229
-1784,Shasta,2019,Female,Unsentenced,Misdemeanor,3
-1785,Sierra,2019,Female,Unsentenced,Misdemeanor,0
-1786,Siskiyou,2019,Female,Unsentenced,Misdemeanor,0
-1787,Solano,2019,Female,Unsentenced,Misdemeanor,7
-1788,Sonoma,2019,Female,Unsentenced,Misdemeanor,16
-1789,Stanislaus,2019,Female,Unsentenced,Misdemeanor,13
-1790,Sutter,2019,Female,Unsentenced,Misdemeanor,4
-1791,Tehama,2019,Female,Unsentenced,Misdemeanor,0
-1792,Trinity,2019,Female,Unsentenced,Misdemeanor,2
-1793,Tulare,2019,Female,Unsentenced,Misdemeanor,10
-1794,Tuolumne,2019,Female,Unsentenced,Misdemeanor,2
-1795,Ventura,2019,Female,Unsentenced,Misdemeanor,29
-1796,Yolo,2019,Female,Unsentenced,Misdemeanor,3
-1797,Yuba,2019,Female,Unsentenced,Misdemeanor,2
-1798,Alameda,2020,Female,Unsentenced,Misdemeanor,9
-1799,Alpine,2020,Female,Unsentenced,Misdemeanor,0
-1800,Amador,2020,Female,Unsentenced,Misdemeanor,0
-1801,Butte,2020,Female,Unsentenced,Misdemeanor,3
-1802,Calaveras,2020,Female,Unsentenced,Misdemeanor,1
-1803,Colusa,2020,Female,Unsentenced,Misdemeanor,2
-1804,Contra Costa,2020,Female,Unsentenced,Misdemeanor,10
-1805,Del Norte,2020,Female,Unsentenced,Misdemeanor,0
-1806,El Dorado,2020,Female,Unsentenced,Misdemeanor,1
-1807,Fresno,2020,Female,Unsentenced,Misdemeanor,6
-1808,Glenn,2020,Female,Unsentenced,Misdemeanor,2
-1809,Humboldt,2020,Female,Unsentenced,Misdemeanor,2
-1810,Imperial,2020,Female,Unsentenced,Misdemeanor,0
-1811,Inyo,2020,Female,Unsentenced,Misdemeanor,1
-1812,Kern,2020,Female,Unsentenced,Misdemeanor,5
-1813,Kings,2020,Female,Unsentenced,Misdemeanor,2
-1814,Lake,2020,Female,Unsentenced,Misdemeanor,3
-1815,Lassen,2020,Female,Unsentenced,Misdemeanor,0
-1816,Los Angeles,2020,Female,Unsentenced,Misdemeanor,59
-1817,Madera,2020,Female,Unsentenced,Misdemeanor,3
-1818,Marin,2020,Female,Unsentenced,Misdemeanor,2
-1819,Mariposa,2020,Female,Unsentenced,Misdemeanor,0
-1820,Mendocino,2020,Female,Unsentenced,Misdemeanor,0
-1821,Merced,2020,Female,Unsentenced,Misdemeanor,0
-1822,Modoc,2020,Female,Unsentenced,Misdemeanor,0
-1823,Mono,2020,Female,Unsentenced,Misdemeanor,0
-1824,Monterey,2020,Female,Unsentenced,Misdemeanor,2
-1825,Napa,2020,Female,Unsentenced,Misdemeanor,1
-1826,Nevada,2020,Female,Unsentenced,Misdemeanor,1
-1827,Orange,2020,Female,Unsentenced,Misdemeanor,44
-1828,Placer,2020,Female,Unsentenced,Misdemeanor,11
-1829,Plumas,2020,Female,Unsentenced,Misdemeanor,1
-1830,Riverside,2020,Female,Unsentenced,Misdemeanor,5
-1831,Sacramento,2020,Female,Unsentenced,Misdemeanor,11
-1832,San Benito,2020,Female,Unsentenced,Misdemeanor,1
-1833,San Bernardino,2020,Female,Unsentenced,Misdemeanor,114
-1834,San Diego,2020,Female,Unsentenced,Misdemeanor,7
-1835,San Francisco,2020,Female,Unsentenced,Misdemeanor,0
-1836,San Joaquin,2020,Female,Unsentenced,Misdemeanor,2
-1837,San Luis Obispo,2020,Female,Unsentenced,Misdemeanor,22
-1838,San Mateo,2020,Female,Unsentenced,Misdemeanor,1
-1839,Santa Barbara,2020,Female,Unsentenced,Misdemeanor,5
-1840,Santa Clara,2020,Female,Unsentenced,Misdemeanor,3
-1841,Santa Cruz,2020,Female,Unsentenced,Misdemeanor,101
-1842,Shasta,2020,Female,Unsentenced,Misdemeanor,1
-1843,Sierra,2020,Female,Unsentenced,Misdemeanor,0
-1844,Siskiyou,2020,Female,Unsentenced,Misdemeanor,0
-1845,Solano,2020,Female,Unsentenced,Misdemeanor,5
-1846,Sonoma,2020,Female,Unsentenced,Misdemeanor,6
-1847,Stanislaus,2020,Female,Unsentenced,Misdemeanor,4
-1848,Sutter,2020,Female,Unsentenced,Misdemeanor,2
-1849,Tehama,2020,Female,Unsentenced,Misdemeanor,0
-1850,Trinity,2020,Female,Unsentenced,Misdemeanor,1
-1851,Tulare,2020,Female,Unsentenced,Misdemeanor,5
-1852,Tuolumne,2020,Female,Unsentenced,Misdemeanor,0
-1853,Ventura,2020,Female,Unsentenced,Misdemeanor,12
-1854,Yolo,2020,Female,Unsentenced,Misdemeanor,1
-1855,Yuba,2020,Female,Unsentenced,Misdemeanor,1
-1856,Alameda,2021,Female,Unsentenced,Misdemeanor,9
-1857,Alpine,2021,Female,Unsentenced,Misdemeanor,0
-1858,Amador,2021,Female,Unsentenced,Misdemeanor,1
-1859,Butte,2021,Female,Unsentenced,Misdemeanor,4
-1860,Calaveras,2021,Female,Unsentenced,Misdemeanor,1
-1861,Colusa,2021,Female,Unsentenced,Misdemeanor,2
-1862,Contra Costa,2021,Female,Unsentenced,Misdemeanor,5
-1863,Del Norte,2021,Female,Unsentenced,Misdemeanor,0
-1864,El Dorado,2021,Female,Unsentenced,Misdemeanor,0
-1865,Fresno,2021,Female,Unsentenced,Misdemeanor,8
-1866,Glenn,2021,Female,Unsentenced,Misdemeanor,1
-1867,Humboldt,2021,Female,Unsentenced,Misdemeanor,2
-1868,Imperial,2021,Female,Unsentenced,Misdemeanor,1
-1869,Inyo,2021,Female,Unsentenced,Misdemeanor,0
-1870,Kern,2021,Female,Unsentenced,Misdemeanor,8
-1871,Kings,2021,Female,Unsentenced,Misdemeanor,3
-1872,Lake,2021,Female,Unsentenced,Misdemeanor,6
-1873,Lassen,2021,Female,Unsentenced,Misdemeanor,1
-1874,Los Angeles,2021,Female,Unsentenced,Misdemeanor,74
-1875,Madera,2021,Female,Unsentenced,Misdemeanor,5
-1876,Marin,2021,Female,Unsentenced,Misdemeanor,2
-1877,Mariposa,2021,Female,Unsentenced,Misdemeanor,0
-1878,Mendocino,2021,Female,Unsentenced,Misdemeanor,0
-1879,Merced,2021,Female,Unsentenced,Misdemeanor,0
-1880,Modoc,2021,Female,Unsentenced,Misdemeanor,0
-1881,Mono,2021,Female,Unsentenced,Misdemeanor,1
-1882,Monterey,2021,Female,Unsentenced,Misdemeanor,0
-1883,Napa,2021,Female,Unsentenced,Misdemeanor,1
-1884,Nevada,2021,Female,Unsentenced,Misdemeanor,1
-1885,Orange,2021,Female,Unsentenced,Misdemeanor,47
-1886,Placer,2021,Female,Unsentenced,Misdemeanor,13
-1887,Plumas,2021,Female,Unsentenced,Misdemeanor,1
-1888,Riverside,2021,Female,Unsentenced,Misdemeanor,10
-1889,Sacramento,2021,Female,Unsentenced,Misdemeanor,14
-1890,San Benito,2021,Female,Unsentenced,Misdemeanor,0
-1891,San Bernardino,2021,Female,Unsentenced,Misdemeanor,80
-1892,San Diego,2021,Female,Unsentenced,Misdemeanor,8
-1893,San Francisco,2021,Female,Unsentenced,Misdemeanor,3
-1894,San Joaquin,2021,Female,Unsentenced,Misdemeanor,7
-1895,San Luis Obispo,2021,Female,Unsentenced,Misdemeanor,5
-1896,San Mateo,2021,Female,Unsentenced,Misdemeanor,3
-1897,Santa Barbara,2021,Female,Unsentenced,Misdemeanor,40
-1898,Santa Clara,2021,Female,Unsentenced,Misdemeanor,14
-1899,Santa Cruz,2021,Female,Unsentenced,Misdemeanor,24
-1900,Shasta,2021,Female,Unsentenced,Misdemeanor,1
-1901,Sierra,2021,Female,Unsentenced,Misdemeanor,0
-1902,Siskiyou,2021,Female,Unsentenced,Misdemeanor,0
-1903,Solano,2021,Female,Unsentenced,Misdemeanor,3
-1904,Sonoma,2021,Female,Unsentenced,Misdemeanor,5
-1905,Stanislaus,2021,Female,Unsentenced,Misdemeanor,8
-1906,Sutter,2021,Female,Unsentenced,Misdemeanor,3
-1907,Tehama,2021,Female,Unsentenced,Misdemeanor,0
-1908,Trinity,2021,Female,Unsentenced,Misdemeanor,1
-1909,Tulare,2021,Female,Unsentenced,Misdemeanor,8
-1910,Tuolumne,2021,Female,Unsentenced,Misdemeanor,0
-1911,Ventura,2021,Female,Unsentenced,Misdemeanor,12
-1912,Yolo,2021,Female,Unsentenced,Misdemeanor,2
-1913,Yuba,2021,Female,Unsentenced,Misdemeanor,2
-1914,Alameda,2022,Female,Unsentenced,Misdemeanor,12
-1915,Alpine,2022,Female,Unsentenced,Misdemeanor,0
-1916,Amador,2022,Female,Unsentenced,Misdemeanor,1
-1917,Butte,2022,Female,Unsentenced,Misdemeanor,3
-1918,Calaveras,2022,Female,Unsentenced,Misdemeanor,2
-1919,Colusa,2022,Female,Unsentenced,Misdemeanor,0
-1920,Contra Costa,2022,Female,Unsentenced,Misdemeanor,8
-1921,Del Norte,2022,Female,Unsentenced,Misdemeanor,1
-1922,El Dorado,2022,Female,Unsentenced,Misdemeanor,9
-1923,Fresno,2022,Female,Unsentenced,Misdemeanor,11
-1924,Glenn,2022,Female,Unsentenced,Misdemeanor,2
-1925,Humboldt,2022,Female,Unsentenced,Misdemeanor,1
-1926,Imperial,2022,Female,Unsentenced,Misdemeanor,1
-1927,Inyo,2022,Female,Unsentenced,Misdemeanor,1
-1928,Kern,2022,Female,Unsentenced,Misdemeanor,8
-1929,Kings,2022,Female,Unsentenced,Misdemeanor,4
-1930,Lake,2022,Female,Unsentenced,Misdemeanor,4
-1931,Lassen,2022,Female,Unsentenced,Misdemeanor,3
-1932,Los Angeles,2022,Female,Unsentenced,Misdemeanor,82
-1933,Madera,2022,Female,Unsentenced,Misdemeanor,1
-1934,Marin,2022,Female,Unsentenced,Misdemeanor,1
-1935,Mariposa,2022,Female,Unsentenced,Misdemeanor,1
-1936,Mendocino,2022,Female,Unsentenced,Misdemeanor,18
-1937,Merced,2022,Female,Unsentenced,Misdemeanor,0
-1938,Modoc,2022,Female,Unsentenced,Misdemeanor,0
-1939,Mono,2022,Female,Unsentenced,Misdemeanor,1
-1940,Monterey,2022,Female,Unsentenced,Misdemeanor,4
-1941,Napa,2022,Female,Unsentenced,Misdemeanor,2
-1942,Nevada,2022,Female,Unsentenced,Misdemeanor,2
-1943,Orange,2022,Female,Unsentenced,Misdemeanor,41
-1944,Placer,2022,Female,Unsentenced,Misdemeanor,21
-1945,Plumas,2022,Female,Unsentenced,Misdemeanor,0
-1946,Riverside,2022,Female,Unsentenced,Misdemeanor,9
-1947,Sacramento,2022,Female,Unsentenced,Misdemeanor,14
-1948,San Benito,2022,Female,Unsentenced,Misdemeanor,1
-1949,San Bernardino,2022,Female,Unsentenced,Misdemeanor,136
-1950,San Diego,2022,Female,Unsentenced,Misdemeanor,9
-1951,San Francisco,2022,Female,Unsentenced,Misdemeanor,0
-1952,San Joaquin,2022,Female,Unsentenced,Misdemeanor,2
-1953,San Luis Obispo,2022,Female,Unsentenced,Misdemeanor,6
-1954,San Mateo,2022,Female,Unsentenced,Misdemeanor,3
-1955,Santa Barbara,2022,Female,Unsentenced,Misdemeanor,8
-1956,Santa Clara,2022,Female,Unsentenced,Misdemeanor,9
-1957,Santa Cruz,2022,Female,Unsentenced,Misdemeanor,215
-1958,Shasta,2022,Female,Unsentenced,Misdemeanor,0
-1959,Sierra,2022,Female,Unsentenced,Misdemeanor,0
-1960,Siskiyou,2022,Female,Unsentenced,Misdemeanor,0
-1961,Solano,2022,Female,Unsentenced,Misdemeanor,5
-1962,Sonoma,2022,Female,Unsentenced,Misdemeanor,8
-1963,Stanislaus,2022,Female,Unsentenced,Misdemeanor,7
-1964,Sutter,2022,Female,Unsentenced,Misdemeanor,9
-1965,Tehama,2022,Female,Unsentenced,Misdemeanor,0
-1966,Trinity,2022,Female,Unsentenced,Misdemeanor,1
-1967,Tulare,2022,Female,Unsentenced,Misdemeanor,5
-1968,Tuolumne,2022,Female,Unsentenced,Misdemeanor,1
-1969,Ventura,2022,Female,Unsentenced,Misdemeanor,15
-1970,Yolo,2022,Female,Unsentenced,Misdemeanor,5
-1971,Yuba,2022,Female,Unsentenced,Misdemeanor,3
-1972,Alameda,2023,Female,Unsentenced,Misdemeanor,11
-1973,Alpine,2023,Female,Unsentenced,Misdemeanor,0
-1974,Amador,2023,Female,Unsentenced,Misdemeanor,1
-1975,Butte,2023,Female,Unsentenced,Misdemeanor,4
-1976,Calaveras,2023,Female,Unsentenced,Misdemeanor,2
-1977,Colusa,2023,Female,Unsentenced,Misdemeanor,1
-1978,Contra Costa,2023,Female,Unsentenced,Misdemeanor,6
-1979,Del Norte,2023,Female,Unsentenced,Misdemeanor,2
-1980,El Dorado,2023,Female,Unsentenced,Misdemeanor,5
-1981,Fresno,2023,Female,Unsentenced,Misdemeanor,15
-1982,Glenn,2023,Female,Unsentenced,Misdemeanor,1
-1983,Humboldt,2023,Female,Unsentenced,Misdemeanor,2
-1984,Imperial,2023,Female,Unsentenced,Misdemeanor,2
-1985,Inyo,2023,Female,Unsentenced,Misdemeanor,2
-1986,Kern,2023,Female,Unsentenced,Misdemeanor,9
-1987,Kings,2023,Female,Unsentenced,Misdemeanor,4
-1988,Lake,2023,Female,Unsentenced,Misdemeanor,4
-1989,Lassen,2023,Female,Unsentenced,Misdemeanor,5
-1990,Los Angeles,2023,Female,Unsentenced,Misdemeanor,81
-1991,Madera,2023,Female,Unsentenced,Misdemeanor,0
-1992,Marin,2023,Female,Unsentenced,Misdemeanor,2
-1993,Mariposa,2023,Female,Unsentenced,Misdemeanor,0
-1994,Mendocino,2023,Female,Unsentenced,Misdemeanor,13
-1995,Merced,2023,Female,Unsentenced,Misdemeanor,0
-1996,Modoc,2023,Female,Unsentenced,Misdemeanor,1
-1997,Mono,2023,Female,Unsentenced,Misdemeanor,0
-1998,Monterey,2023,Female,Unsentenced,Misdemeanor,4
-1999,Napa,2023,Female,Unsentenced,Misdemeanor,1
-2000,Nevada,2023,Female,Unsentenced,Misdemeanor,1
-2001,Orange,2023,Female,Unsentenced,Misdemeanor,46
-2002,Placer,2023,Female,Unsentenced,Misdemeanor,31
-2003,Plumas,2023,Female,Unsentenced,Misdemeanor,0
-2004,Riverside,2023,Female,Unsentenced,Misdemeanor,11
-2005,Sacramento,2023,Female,Unsentenced,Misdemeanor,12
-2006,San Benito,2023,Female,Unsentenced,Misdemeanor,1
-2007,San Bernardino,2023,Female,Unsentenced,Misdemeanor,119
-2008,San Diego,2023,Female,Unsentenced,Misdemeanor,12
-2009,San Francisco,2023,Female,Unsentenced,Misdemeanor,5
-2010,San Joaquin,2023,Female,Unsentenced,Misdemeanor,7
-2011,San Luis Obispo,2023,Female,Unsentenced,Misdemeanor,2
-2012,San Mateo,2023,Female,Unsentenced,Misdemeanor,5
-2013,Santa Barbara,2023,Female,Unsentenced,Misdemeanor,10
-2014,Santa Clara,2023,Female,Unsentenced,Misdemeanor,22
-2015,Santa Cruz,2023,Female,Unsentenced,Misdemeanor,17
-2016,Shasta,2023,Female,Unsentenced,Misdemeanor,1
-2017,Sierra,2023,Female,Unsentenced,Misdemeanor,0
-2018,Siskiyou,2023,Female,Unsentenced,Misdemeanor,0
-2019,Solano,2023,Female,Unsentenced,Misdemeanor,6
-2020,Sonoma,2023,Female,Unsentenced,Misdemeanor,4
-2021,Stanislaus,2023,Female,Unsentenced,Misdemeanor,9
-2022,Sutter,2023,Female,Unsentenced,Misdemeanor,13
-2023,Tehama,2023,Female,Unsentenced,Misdemeanor,0
-2024,Trinity,2023,Female,Unsentenced,Misdemeanor,1
-2025,Tulare,2023,Female,Unsentenced,Misdemeanor,5
-2026,Tuolumne,2023,Female,Unsentenced,Misdemeanor,1
-2027,Ventura,2023,Female,Unsentenced,Misdemeanor,16
-2028,Yolo,2023,Female,Unsentenced,Misdemeanor,2
-2029,Yuba,2023,Female,Unsentenced,Misdemeanor,3
-2030,Alameda,2017,Female,Sentenced,Misdemeanor,3
-2031,Alpine,2017,Female,Sentenced,Misdemeanor,0
-2032,Amador,2017,Female,Sentenced,Misdemeanor,1
-2033,Butte,2017,Female,Sentenced,Misdemeanor,4
-2034,Calaveras,2017,Female,Sentenced,Misdemeanor,1
-2035,Colusa,2017,Female,Sentenced,Misdemeanor,3
-2036,Contra Costa,2017,Female,Sentenced,Misdemeanor,12
-2037,Del Norte,2017,Female,Sentenced,Misdemeanor,4
-2038,El Dorado,2017,Female,Sentenced,Misdemeanor,5
-2039,Fresno,2017,Female,Sentenced,Misdemeanor,10
-2040,Glenn,2017,Female,Sentenced,Misdemeanor,2
-2041,Humboldt,2017,Female,Sentenced,Misdemeanor,1
-2042,Imperial,2017,Female,Sentenced,Misdemeanor,2
-2043,Inyo,2017,Female,Sentenced,Misdemeanor,1
-2044,Kern,2017,Female,Sentenced,Misdemeanor,12
-2045,Kings,2017,Female,Sentenced,Misdemeanor,4
-2046,Lake,2017,Female,Sentenced,Misdemeanor,6
-2047,Lassen,2017,Female,Sentenced,Misdemeanor,1
-2048,Los Angeles,2017,Female,Sentenced,Misdemeanor,109
-2049,Madera,2017,Female,Sentenced,Misdemeanor,2
-2050,Marin,2017,Female,Sentenced,Misdemeanor,2
-2051,Mariposa,2017,Female,Sentenced,Misdemeanor,2
-2052,Mendocino,2017,Female,Sentenced,Misdemeanor,13
-2053,Merced,2017,Female,Sentenced,Misdemeanor,0
-2054,Modoc,2017,Female,Sentenced,Misdemeanor,0
-2055,Mono,2017,Female,Sentenced,Misdemeanor,0
-2056,Monterey,2017,Female,Sentenced,Misdemeanor,4
-2057,Napa,2017,Female,Sentenced,Misdemeanor,1
-2058,Nevada,2017,Female,Sentenced,Misdemeanor,1
-2059,Orange,2017,Female,Sentenced,Misdemeanor,104
-2060,Placer,2017,Female,Sentenced,Misdemeanor,19
-2061,Plumas,2017,Female,Sentenced,Misdemeanor,0
-2062,Riverside,2017,Female,Sentenced,Misdemeanor,12
-2063,Sacramento,2017,Female,Sentenced,Misdemeanor,32
-2064,San Benito,2017,Female,Sentenced,Misdemeanor,2
-2065,San Bernardino,2017,Female,Sentenced,Misdemeanor,68
-2066,San Diego,2017,Female,Sentenced,Misdemeanor,41
-2067,San Francisco,2017,Female,Sentenced,Misdemeanor,3
-2068,San Joaquin,2017,Female,Sentenced,Misdemeanor,2
-2069,San Luis Obispo,2017,Female,Sentenced,Misdemeanor,17
-2070,San Mateo,2017,Female,Sentenced,Misdemeanor,5
-2071,Santa Barbara,2017,Female,Sentenced,Misdemeanor,0
-2072,Santa Clara,2017,Female,Sentenced,Misdemeanor,5
-2073,Santa Cruz,2017,Female,Sentenced,Misdemeanor,93
-2074,Shasta,2017,Female,Sentenced,Misdemeanor,2
-2075,Sierra,2017,Female,Sentenced,Misdemeanor,0
-2076,Siskiyou,2017,Female,Sentenced,Misdemeanor,0
-2077,Solano,2017,Female,Sentenced,Misdemeanor,4
-2078,Sonoma,2017,Female,Sentenced,Misdemeanor,18
-2079,Stanislaus,2017,Female,Sentenced,Misdemeanor,5
-2080,Sutter,2017,Female,Sentenced,Misdemeanor,2
-2081,Tehama,2017,Female,Sentenced,Misdemeanor,0
-2082,Trinity,2017,Female,Sentenced,Misdemeanor,0
-2083,Tulare,2017,Female,Sentenced,Misdemeanor,11
-2084,Tuolumne,2017,Female,Sentenced,Misdemeanor,0
-2085,Ventura,2017,Female,Sentenced,Misdemeanor,16
-2086,Yolo,2017,Female,Sentenced,Misdemeanor,1
-2087,Yuba,2017,Female,Sentenced,Misdemeanor,1
-2088,Alameda,2018,Female,Sentenced,Misdemeanor,3
-2089,Alpine,2018,Female,Sentenced,Misdemeanor,0
-2090,Amador,2018,Female,Sentenced,Misdemeanor,1
-2091,Butte,2018,Female,Sentenced,Misdemeanor,5
-2092,Calaveras,2018,Female,Sentenced,Misdemeanor,2
-2093,Colusa,2018,Female,Sentenced,Misdemeanor,2
-2094,Contra Costa,2018,Female,Sentenced,Misdemeanor,7
-2095,Del Norte,2018,Female,Sentenced,Misdemeanor,3
-2096,El Dorado,2018,Female,Sentenced,Misdemeanor,6
-2097,Fresno,2018,Female,Sentenced,Misdemeanor,7
-2098,Glenn,2018,Female,Sentenced,Misdemeanor,1
-2099,Humboldt,2018,Female,Sentenced,Misdemeanor,2
-2100,Imperial,2018,Female,Sentenced,Misdemeanor,2
-2101,Inyo,2018,Female,Sentenced,Misdemeanor,2
-2102,Kern,2018,Female,Sentenced,Misdemeanor,5
-2103,Kings,2018,Female,Sentenced,Misdemeanor,11
-2104,Lake,2018,Female,Sentenced,Misdemeanor,7
-2105,Lassen,2018,Female,Sentenced,Misdemeanor,2
-2106,Los Angeles,2018,Female,Sentenced,Misdemeanor,103
-2107,Madera,2018,Female,Sentenced,Misdemeanor,2
-2108,Marin,2018,Female,Sentenced,Misdemeanor,5
-2109,Mariposa,2018,Female,Sentenced,Misdemeanor,1
-2110,Mendocino,2018,Female,Sentenced,Misdemeanor,10
-2111,Merced,2018,Female,Sentenced,Misdemeanor,0
-2112,Modoc,2018,Female,Sentenced,Misdemeanor,0
-2113,Mono,2018,Female,Sentenced,Misdemeanor,0
-2114,Monterey,2018,Female,Sentenced,Misdemeanor,5
-2115,Napa,2018,Female,Sentenced,Misdemeanor,3
-2116,Nevada,2018,Female,Sentenced,Misdemeanor,1
-2117,Orange,2018,Female,Sentenced,Misdemeanor,104
-2118,Placer,2018,Female,Sentenced,Misdemeanor,12
-2119,Plumas,2018,Female,Sentenced,Misdemeanor,2
-2120,Riverside,2018,Female,Sentenced,Misdemeanor,8
-2121,Sacramento,2018,Female,Sentenced,Misdemeanor,35
-2122,San Benito,2018,Female,Sentenced,Misdemeanor,2
-2123,San Bernardino,2018,Female,Sentenced,Misdemeanor,61
-2124,San Diego,2018,Female,Sentenced,Misdemeanor,39
-2125,San Francisco,2018,Female,Sentenced,Misdemeanor,2
-2126,San Joaquin,2018,Female,Sentenced,Misdemeanor,7
-2127,San Luis Obispo,2018,Female,Sentenced,Misdemeanor,12
-2128,San Mateo,2018,Female,Sentenced,Misdemeanor,7
-2129,Santa Barbara,2018,Female,Sentenced,Misdemeanor,10
-2130,Santa Clara,2018,Female,Sentenced,Misdemeanor,20
-2131,Santa Cruz,2018,Female,Sentenced,Misdemeanor,13
-2132,Shasta,2018,Female,Sentenced,Misdemeanor,1
-2133,Sierra,2018,Female,Sentenced,Misdemeanor,0
-2134,Siskiyou,2018,Female,Sentenced,Misdemeanor,0
-2135,Solano,2018,Female,Sentenced,Misdemeanor,2
-2136,Sonoma,2018,Female,Sentenced,Misdemeanor,16
-2137,Stanislaus,2018,Female,Sentenced,Misdemeanor,3
-2138,Sutter,2018,Female,Sentenced,Misdemeanor,0
-2139,Tehama,2018,Female,Sentenced,Misdemeanor,0
-2140,Trinity,2018,Female,Sentenced,Misdemeanor,0
-2141,Tulare,2018,Female,Sentenced,Misdemeanor,12
-2142,Tuolumne,2018,Female,Sentenced,Misdemeanor,1
-2143,Ventura,2018,Female,Sentenced,Misdemeanor,0
-2144,Yolo,2018,Female,Sentenced,Misdemeanor,2
-2145,Yuba,2018,Female,Sentenced,Misdemeanor,0
-2146,Alameda,2019,Female,Sentenced,Misdemeanor,3
-2147,Alpine,2019,Female,Sentenced,Misdemeanor,0
-2148,Amador,2019,Female,Sentenced,Misdemeanor,1
-2149,Butte,2019,Female,Sentenced,Misdemeanor,4
-2150,Calaveras,2019,Female,Sentenced,Misdemeanor,1
-2151,Colusa,2019,Female,Sentenced,Misdemeanor,1
-2152,Contra Costa,2019,Female,Sentenced,Misdemeanor,4
-2153,Del Norte,2019,Female,Sentenced,Misdemeanor,2
-2154,El Dorado,2019,Female,Sentenced,Misdemeanor,3
-2155,Fresno,2019,Female,Sentenced,Misdemeanor,4
-2156,Glenn,2019,Female,Sentenced,Misdemeanor,1
-2157,Humboldt,2019,Female,Sentenced,Misdemeanor,2
-2158,Imperial,2019,Female,Sentenced,Misdemeanor,2
-2159,Inyo,2019,Female,Sentenced,Misdemeanor,1
-2160,Kern,2019,Female,Sentenced,Misdemeanor,2
-2161,Kings,2019,Female,Sentenced,Misdemeanor,6
-2162,Lake,2019,Female,Sentenced,Misdemeanor,4
-2163,Lassen,2019,Female,Sentenced,Misdemeanor,2
-2164,Los Angeles,2019,Female,Sentenced,Misdemeanor,97
-2165,Madera,2019,Female,Sentenced,Misdemeanor,2
-2166,Marin,2019,Female,Sentenced,Misdemeanor,4
-2167,Mariposa,2019,Female,Sentenced,Misdemeanor,1
-2168,Mendocino,2019,Female,Sentenced,Misdemeanor,13
-2169,Merced,2019,Female,Sentenced,Misdemeanor,0
-2170,Modoc,2019,Female,Sentenced,Misdemeanor,0
-2171,Mono,2019,Female,Sentenced,Misdemeanor,0
-2172,Monterey,2019,Female,Sentenced,Misdemeanor,4
-2173,Napa,2019,Female,Sentenced,Misdemeanor,3
-2174,Nevada,2019,Female,Sentenced,Misdemeanor,1
-2175,Orange,2019,Female,Sentenced,Misdemeanor,88
-2176,Placer,2019,Female,Sentenced,Misdemeanor,16
-2177,Plumas,2019,Female,Sentenced,Misdemeanor,1
-2178,Riverside,2019,Female,Sentenced,Misdemeanor,10
-2179,Sacramento,2019,Female,Sentenced,Misdemeanor,25
-2180,San Benito,2019,Female,Sentenced,Misdemeanor,2
-2181,San Bernardino,2019,Female,Sentenced,Misdemeanor,52
-2182,San Diego,2019,Female,Sentenced,Misdemeanor,29
-2183,San Francisco,2019,Female,Sentenced,Misdemeanor,4
-2184,San Joaquin,2019,Female,Sentenced,Misdemeanor,2
-2185,San Luis Obispo,2019,Female,Sentenced,Misdemeanor,22
-2186,San Mateo,2019,Female,Sentenced,Misdemeanor,4
-2187,Santa Barbara,2019,Female,Sentenced,Misdemeanor,8
-2188,Santa Clara,2019,Female,Sentenced,Misdemeanor,8
-2189,Santa Cruz,2019,Female,Sentenced,Misdemeanor,71
-2190,Shasta,2019,Female,Sentenced,Misdemeanor,1
-2191,Sierra,2019,Female,Sentenced,Misdemeanor,0
-2192,Siskiyou,2019,Female,Sentenced,Misdemeanor,0
-2193,Solano,2019,Female,Sentenced,Misdemeanor,2
-2194,Sonoma,2019,Female,Sentenced,Misdemeanor,11
-2195,Stanislaus,2019,Female,Sentenced,Misdemeanor,4
-2196,Sutter,2019,Female,Sentenced,Misdemeanor,2
-2197,Tehama,2019,Female,Sentenced,Misdemeanor,0
-2198,Trinity,2019,Female,Sentenced,Misdemeanor,0
-2199,Tulare,2019,Female,Sentenced,Misdemeanor,10
-2200,Tuolumne,2019,Female,Sentenced,Misdemeanor,0
-2201,Ventura,2019,Female,Sentenced,Misdemeanor,19
-2202,Yolo,2019,Female,Sentenced,Misdemeanor,1
-2203,Yuba,2019,Female,Sentenced,Misdemeanor,1
-2204,Alameda,2020,Female,Sentenced,Misdemeanor,1
-2205,Alpine,2020,Female,Sentenced,Misdemeanor,0
-2206,Amador,2020,Female,Sentenced,Misdemeanor,0
-2207,Butte,2020,Female,Sentenced,Misdemeanor,1
-2208,Calaveras,2020,Female,Sentenced,Misdemeanor,0
-2209,Colusa,2020,Female,Sentenced,Misdemeanor,0
-2210,Contra Costa,2020,Female,Sentenced,Misdemeanor,2
-2211,Del Norte,2020,Female,Sentenced,Misdemeanor,0
-2212,El Dorado,2020,Female,Sentenced,Misdemeanor,1
-2213,Fresno,2020,Female,Sentenced,Misdemeanor,0
-2214,Glenn,2020,Female,Sentenced,Misdemeanor,1
-2215,Humboldt,2020,Female,Sentenced,Misdemeanor,0
-2216,Imperial,2020,Female,Sentenced,Misdemeanor,0
-2217,Inyo,2020,Female,Sentenced,Misdemeanor,0
-2218,Kern,2020,Female,Sentenced,Misdemeanor,0
-2219,Kings,2020,Female,Sentenced,Misdemeanor,1
-2220,Lake,2020,Female,Sentenced,Misdemeanor,1
-2221,Lassen,2020,Female,Sentenced,Misdemeanor,0
-2222,Los Angeles,2020,Female,Sentenced,Misdemeanor,25
-2223,Madera,2020,Female,Sentenced,Misdemeanor,1
-2224,Marin,2020,Female,Sentenced,Misdemeanor,1
-2225,Mariposa,2020,Female,Sentenced,Misdemeanor,0
-2226,Mendocino,2020,Female,Sentenced,Misdemeanor,0
-2227,Merced,2020,Female,Sentenced,Misdemeanor,0
-2228,Modoc,2020,Female,Sentenced,Misdemeanor,0
-2229,Mono,2020,Female,Sentenced,Misdemeanor,0
-2230,Monterey,2020,Female,Sentenced,Misdemeanor,2
-2231,Napa,2020,Female,Sentenced,Misdemeanor,0
-2232,Nevada,2020,Female,Sentenced,Misdemeanor,0
-2233,Orange,2020,Female,Sentenced,Misdemeanor,21
-2234,Placer,2020,Female,Sentenced,Misdemeanor,7
-2235,Plumas,2020,Female,Sentenced,Misdemeanor,0
-2236,Riverside,2020,Female,Sentenced,Misdemeanor,1
-2237,Sacramento,2020,Female,Sentenced,Misdemeanor,7
-2238,San Benito,2020,Female,Sentenced,Misdemeanor,1
-2239,San Bernardino,2020,Female,Sentenced,Misdemeanor,28
-2240,San Diego,2020,Female,Sentenced,Misdemeanor,4
-2241,San Francisco,2020,Female,Sentenced,Misdemeanor,4
-2242,San Joaquin,2020,Female,Sentenced,Misdemeanor,0
-2243,San Luis Obispo,2020,Female,Sentenced,Misdemeanor,4
-2244,San Mateo,2020,Female,Sentenced,Misdemeanor,1
-2245,Santa Barbara,2020,Female,Sentenced,Misdemeanor,2
-2246,Santa Clara,2020,Female,Sentenced,Misdemeanor,2
-2247,Santa Cruz,2020,Female,Sentenced,Misdemeanor,19
-2248,Shasta,2020,Female,Sentenced,Misdemeanor,0
-2249,Sierra,2020,Female,Sentenced,Misdemeanor,0
-2250,Siskiyou,2020,Female,Sentenced,Misdemeanor,0
-2251,Solano,2020,Female,Sentenced,Misdemeanor,0
-2252,Sonoma,2020,Female,Sentenced,Misdemeanor,3
-2253,Stanislaus,2020,Female,Sentenced,Misdemeanor,1
-2254,Sutter,2020,Female,Sentenced,Misdemeanor,1
-2255,Tehama,2020,Female,Sentenced,Misdemeanor,0
-2256,Trinity,2020,Female,Sentenced,Misdemeanor,1
-2257,Tulare,2020,Female,Sentenced,Misdemeanor,2
-2258,Tuolumne,2020,Female,Sentenced,Misdemeanor,0
-2259,Ventura,2020,Female,Sentenced,Misdemeanor,7
-2260,Yolo,2020,Female,Sentenced,Misdemeanor,0
-2261,Yuba,2020,Female,Sentenced,Misdemeanor,0
-2262,Alameda,2021,Female,Sentenced,Misdemeanor,1
-2263,Alpine,2021,Female,Sentenced,Misdemeanor,0
-2264,Amador,2021,Female,Sentenced,Misdemeanor,1
-2265,Butte,2021,Female,Sentenced,Misdemeanor,2
-2266,Calaveras,2021,Female,Sentenced,Misdemeanor,0
-2267,Colusa,2021,Female,Sentenced,Misdemeanor,0
-2268,Contra Costa,2021,Female,Sentenced,Misdemeanor,0
-2269,Del Norte,2021,Female,Sentenced,Misdemeanor,0
-2270,El Dorado,2021,Female,Sentenced,Misdemeanor,0
-2271,Fresno,2021,Female,Sentenced,Misdemeanor,1
-2272,Glenn,2021,Female,Sentenced,Misdemeanor,1
-2273,Humboldt,2021,Female,Sentenced,Misdemeanor,0
-2274,Imperial,2021,Female,Sentenced,Misdemeanor,1
-2275,Inyo,2021,Female,Sentenced,Misdemeanor,0
-2276,Kern,2021,Female,Sentenced,Misdemeanor,1
-2277,Kings,2021,Female,Sentenced,Misdemeanor,1
-2278,Lake,2021,Female,Sentenced,Misdemeanor,1
-2279,Lassen,2021,Female,Sentenced,Misdemeanor,0
-2280,Los Angeles,2021,Female,Sentenced,Misdemeanor,28
-2281,Madera,2021,Female,Sentenced,Misdemeanor,1
-2282,Marin,2021,Female,Sentenced,Misdemeanor,1
-2283,Mariposa,2021,Female,Sentenced,Misdemeanor,0
-2284,Mendocino,2021,Female,Sentenced,Misdemeanor,0
-2285,Merced,2021,Female,Sentenced,Misdemeanor,0
-2286,Modoc,2021,Female,Sentenced,Misdemeanor,0
-2287,Mono,2021,Female,Sentenced,Misdemeanor,0
-2288,Monterey,2021,Female,Sentenced,Misdemeanor,0
-2289,Napa,2021,Female,Sentenced,Misdemeanor,0
-2290,Nevada,2021,Female,Sentenced,Misdemeanor,0
-2291,Orange,2021,Female,Sentenced,Misdemeanor,31
-2292,Placer,2021,Female,Sentenced,Misdemeanor,7
-2293,Plumas,2021,Female,Sentenced,Misdemeanor,1
-2294,Riverside,2021,Female,Sentenced,Misdemeanor,1
-2295,Sacramento,2021,Female,Sentenced,Misdemeanor,8
-2296,San Benito,2021,Female,Sentenced,Misdemeanor,0
-2297,San Bernardino,2021,Female,Sentenced,Misdemeanor,6
-2298,San Diego,2021,Female,Sentenced,Misdemeanor,5
-2299,San Francisco,2021,Female,Sentenced,Misdemeanor,1
-2300,San Joaquin,2021,Female,Sentenced,Misdemeanor,3
-2301,San Luis Obispo,2021,Female,Sentenced,Misdemeanor,3
-2302,San Mateo,2021,Female,Sentenced,Misdemeanor,2
-2303,Santa Barbara,2021,Female,Sentenced,Misdemeanor,11
-2304,Santa Clara,2021,Female,Sentenced,Misdemeanor,2
-2305,Santa Cruz,2021,Female,Sentenced,Misdemeanor,5
-2306,Shasta,2021,Female,Sentenced,Misdemeanor,0
-2307,Sierra,2021,Female,Sentenced,Misdemeanor,0
-2308,Siskiyou,2021,Female,Sentenced,Misdemeanor,0
-2309,Solano,2021,Female,Sentenced,Misdemeanor,0
-2310,Sonoma,2021,Female,Sentenced,Misdemeanor,3
-2311,Stanislaus,2021,Female,Sentenced,Misdemeanor,2
-2312,Sutter,2021,Female,Sentenced,Misdemeanor,1
-2313,Tehama,2021,Female,Sentenced,Misdemeanor,0
-2314,Trinity,2021,Female,Sentenced,Misdemeanor,0
-2315,Tulare,2021,Female,Sentenced,Misdemeanor,3
-2316,Tuolumne,2021,Female,Sentenced,Misdemeanor,0
-2317,Ventura,2021,Female,Sentenced,Misdemeanor,7
-2318,Yolo,2021,Female,Sentenced,Misdemeanor,0
-2319,Yuba,2021,Female,Sentenced,Misdemeanor,1
-2320,Alameda,2022,Female,Sentenced,Misdemeanor,1
-2321,Alpine,2022,Female,Sentenced,Misdemeanor,0
-2322,Amador,2022,Female,Sentenced,Misdemeanor,0
-2323,Butte,2022,Female,Sentenced,Misdemeanor,1
-2324,Calaveras,2022,Female,Sentenced,Misdemeanor,1
-2325,Colusa,2022,Female,Sentenced,Misdemeanor,1
-2326,Contra Costa,2022,Female,Sentenced,Misdemeanor,2
-2327,Del Norte,2022,Female,Sentenced,Misdemeanor,1
-2328,El Dorado,2022,Female,Sentenced,Misdemeanor,2
-2329,Fresno,2022,Female,Sentenced,Misdemeanor,1
-2330,Glenn,2022,Female,Sentenced,Misdemeanor,0
-2331,Humboldt,2022,Female,Sentenced,Misdemeanor,0
-2332,Imperial,2022,Female,Sentenced,Misdemeanor,2
-2333,Inyo,2022,Female,Sentenced,Misdemeanor,0
-2334,Kern,2022,Female,Sentenced,Misdemeanor,0
-2335,Kings,2022,Female,Sentenced,Misdemeanor,1
-2336,Lake,2022,Female,Sentenced,Misdemeanor,2
-2337,Lassen,2022,Female,Sentenced,Misdemeanor,2
-2338,Los Angeles,2022,Female,Sentenced,Misdemeanor,37
-2339,Madera,2022,Female,Sentenced,Misdemeanor,0
-2340,Marin,2022,Female,Sentenced,Misdemeanor,1
-2341,Mariposa,2022,Female,Sentenced,Misdemeanor,0
-2342,Mendocino,2022,Female,Sentenced,Misdemeanor,7
-2343,Merced,2022,Female,Sentenced,Misdemeanor,0
-2344,Modoc,2022,Female,Sentenced,Misdemeanor,1
-2345,Mono,2022,Female,Sentenced,Misdemeanor,0
-2346,Monterey,2022,Female,Sentenced,Misdemeanor,3
-2347,Napa,2022,Female,Sentenced,Misdemeanor,1
-2348,Nevada,2022,Female,Sentenced,Misdemeanor,0
-2349,Orange,2022,Female,Sentenced,Misdemeanor,24
-2350,Placer,2022,Female,Sentenced,Misdemeanor,16
-2351,Plumas,2022,Female,Sentenced,Misdemeanor,1
-2352,Riverside,2022,Female,Sentenced,Misdemeanor,1
-2353,Sacramento,2022,Female,Sentenced,Misdemeanor,8
-2354,San Benito,2022,Female,Sentenced,Misdemeanor,0
-2355,San Bernardino,2022,Female,Sentenced,Misdemeanor,23
-2356,San Diego,2022,Female,Sentenced,Misdemeanor,6
-2357,San Francisco,2022,Female,Sentenced,Misdemeanor,4
-2358,San Joaquin,2022,Female,Sentenced,Misdemeanor,0
-2359,San Luis Obispo,2022,Female,Sentenced,Misdemeanor,1
-2360,San Mateo,2022,Female,Sentenced,Misdemeanor,1
-2361,Santa Barbara,2022,Female,Sentenced,Misdemeanor,2
-2362,Santa Clara,2022,Female,Sentenced,Misdemeanor,3
-2363,Santa Cruz,2022,Female,Sentenced,Misdemeanor,20
-2364,Shasta,2022,Female,Sentenced,Misdemeanor,0
-2365,Sierra,2022,Female,Sentenced,Misdemeanor,0
-2366,Siskiyou,2022,Female,Sentenced,Misdemeanor,0
-2367,Solano,2022,Female,Sentenced,Misdemeanor,1
-2368,Sonoma,2022,Female,Sentenced,Misdemeanor,3
-2369,Stanislaus,2022,Female,Sentenced,Misdemeanor,3
-2370,Sutter,2022,Female,Sentenced,Misdemeanor,1
-2371,Tehama,2022,Female,Sentenced,Misdemeanor,0
-2372,Trinity,2022,Female,Sentenced,Misdemeanor,0
-2373,Tulare,2022,Female,Sentenced,Misdemeanor,3
-2374,Tuolumne,2022,Female,Sentenced,Misdemeanor,1
-2375,Ventura,2022,Female,Sentenced,Misdemeanor,10
-2376,Yolo,2022,Female,Sentenced,Misdemeanor,1
-2377,Yuba,2022,Female,Sentenced,Misdemeanor,1
-2378,Alameda,2023,Female,Sentenced,Misdemeanor,1
-2379,Alpine,2023,Female,Sentenced,Misdemeanor,0
-2380,Amador,2023,Female,Sentenced,Misdemeanor,1
-2381,Butte,2023,Female,Sentenced,Misdemeanor,2
-2382,Calaveras,2023,Female,Sentenced,Misdemeanor,0
-2383,Colusa,2023,Female,Sentenced,Misdemeanor,0
-2384,Contra Costa,2023,Female,Sentenced,Misdemeanor,2
-2385,Del Norte,2023,Female,Sentenced,Misdemeanor,1
-2386,El Dorado,2023,Female,Sentenced,Misdemeanor,0
-2387,Fresno,2023,Female,Sentenced,Misdemeanor,3
-2388,Glenn,2023,Female,Sentenced,Misdemeanor,1
-2389,Humboldt,2023,Female,Sentenced,Misdemeanor,0
-2390,Imperial,2023,Female,Sentenced,Misdemeanor,2
-2391,Inyo,2023,Female,Sentenced,Misdemeanor,0
-2392,Kern,2023,Female,Sentenced,Misdemeanor,1
-2393,Kings,2023,Female,Sentenced,Misdemeanor,2
-2394,Lake,2023,Female,Sentenced,Misdemeanor,2
-2395,Lassen,2023,Female,Sentenced,Misdemeanor,2
-2396,Los Angeles,2023,Female,Sentenced,Misdemeanor,31
-2397,Madera,2023,Female,Sentenced,Misdemeanor,0
-2398,Marin,2023,Female,Sentenced,Misdemeanor,0
-2399,Mariposa,2023,Female,Sentenced,Misdemeanor,0
-2400,Mendocino,2023,Female,Sentenced,Misdemeanor,5
-2401,Merced,2023,Female,Sentenced,Misdemeanor,0
-2402,Modoc,2023,Female,Sentenced,Misdemeanor,1
-2403,Mono,2023,Female,Sentenced,Misdemeanor,0
-2404,Monterey,2023,Female,Sentenced,Misdemeanor,4
-2405,Napa,2023,Female,Sentenced,Misdemeanor,0
-2406,Nevada,2023,Female,Sentenced,Misdemeanor,0
-2407,Orange,2023,Female,Sentenced,Misdemeanor,32
-2408,Placer,2023,Female,Sentenced,Misdemeanor,13
-2409,Plumas,2023,Female,Sentenced,Misdemeanor,1
-2410,Riverside,2023,Female,Sentenced,Misdemeanor,2
-2411,Sacramento,2023,Female,Sentenced,Misdemeanor,5
-2412,San Benito,2023,Female,Sentenced,Misdemeanor,0
-2413,San Bernardino,2023,Female,Sentenced,Misdemeanor,21
-2414,San Diego,2023,Female,Sentenced,Misdemeanor,10
-2415,San Francisco,2023,Female,Sentenced,Misdemeanor,1
-2416,San Joaquin,2023,Female,Sentenced,Misdemeanor,2
-2417,San Luis Obispo,2023,Female,Sentenced,Misdemeanor,1
-2418,San Mateo,2023,Female,Sentenced,Misdemeanor,2
-2419,Santa Barbara,2023,Female,Sentenced,Misdemeanor,4
-2420,Santa Clara,2023,Female,Sentenced,Misdemeanor,2
-2421,Santa Cruz,2023,Female,Sentenced,Misdemeanor,2
-2422,Shasta,2023,Female,Sentenced,Misdemeanor,0
-2423,Sierra,2023,Female,Sentenced,Misdemeanor,0
-2424,Siskiyou,2023,Female,Sentenced,Misdemeanor,0
-2425,Solano,2023,Female,Sentenced,Misdemeanor,1
-2426,Sonoma,2023,Female,Sentenced,Misdemeanor,2
-2427,Stanislaus,2023,Female,Sentenced,Misdemeanor,4
-2428,Sutter,2023,Female,Sentenced,Misdemeanor,1
-2429,Tehama,2023,Female,Sentenced,Misdemeanor,0
-2430,Trinity,2023,Female,Sentenced,Misdemeanor,0
-2431,Tulare,2023,Female,Sentenced,Misdemeanor,4
-2432,Tuolumne,2023,Female,Sentenced,Misdemeanor,1
-2433,Ventura,2023,Female,Sentenced,Misdemeanor,9
-2434,Yolo,2023,Female,Sentenced,Misdemeanor,1
-2435,Yuba,2023,Female,Sentenced,Misdemeanor,2
-2436,Alameda,2017,Male,Unsentenced,Misdemeanor,134
-2437,Alpine,2017,Male,Unsentenced,Misdemeanor,0
-2438,Amador,2017,Male,Unsentenced,Misdemeanor,4
-2439,Butte,2017,Male,Unsentenced,Misdemeanor,40
-2440,Calaveras,2017,Male,Unsentenced,Misdemeanor,7
-2441,Colusa,2017,Male,Unsentenced,Misdemeanor,19
-2442,Contra Costa,2017,Male,Unsentenced,Misdemeanor,174
-2443,Del Norte,2017,Male,Unsentenced,Misdemeanor,21
-2444,El Dorado,2017,Male,Unsentenced,Misdemeanor,23
-2445,Fresno,2017,Male,Unsentenced,Misdemeanor,160
-2446,Glenn,2017,Male,Unsentenced,Misdemeanor,13
-2447,Humboldt,2017,Male,Unsentenced,Misdemeanor,22
-2448,Imperial,2017,Male,Unsentenced,Misdemeanor,28
-2449,Inyo,2017,Male,Unsentenced,Misdemeanor,4
-2450,Kern,2017,Male,Unsentenced,Misdemeanor,174
-2451,Kings,2017,Male,Unsentenced,Misdemeanor,69
-2452,Lake,2017,Male,Unsentenced,Misdemeanor,33
-2453,Lassen,2017,Male,Unsentenced,Misdemeanor,9
-2454,Los Angeles,2017,Male,Unsentenced,Misdemeanor,1026
-2455,Madera,2017,Male,Unsentenced,Misdemeanor,58
-2456,Marin,2017,Male,Unsentenced,Misdemeanor,42
-2457,Mariposa,2017,Male,Unsentenced,Misdemeanor,8
-2458,Mendocino,2017,Male,Unsentenced,Misdemeanor,113
-2459,Merced,2017,Male,Unsentenced,Misdemeanor,56
-2460,Modoc,2017,Male,Unsentenced,Misdemeanor,1
-2461,Mono,2017,Male,Unsentenced,Misdemeanor,4
-2462,Monterey,2017,Male,Unsentenced,Misdemeanor,33
-2463,Napa,2017,Male,Unsentenced,Misdemeanor,15
-2464,Nevada,2017,Male,Unsentenced,Misdemeanor,21
-2465,Orange,2017,Male,Unsentenced,Misdemeanor,622
-2466,Placer,2017,Male,Unsentenced,Misdemeanor,155
-2467,Plumas,2017,Male,Unsentenced,Misdemeanor,7
-2468,Riverside,2017,Male,Unsentenced,Misdemeanor,171
-2469,Sacramento,2017,Male,Unsentenced,Misdemeanor,281
-2470,San Benito,2017,Male,Unsentenced,Misdemeanor,18
-2471,San Bernardino,2017,Male,Unsentenced,Misdemeanor,863
-2472,San Diego,2017,Male,Unsentenced,Misdemeanor,223
-2473,San Francisco,2017,Male,Unsentenced,Misdemeanor,0
-2474,San Joaquin,2017,Male,Unsentenced,Misdemeanor,96
-2475,San Luis Obispo,2017,Male,Unsentenced,Misdemeanor,301
-2476,San Mateo,2017,Male,Unsentenced,Misdemeanor,28
-2477,Santa Barbara,2017,Male,Unsentenced,Misdemeanor,0
-2478,Santa Clara,2017,Male,Unsentenced,Misdemeanor,93
-2479,Santa Cruz,2017,Male,Unsentenced,Misdemeanor,1358
-2480,Shasta,2017,Male,Unsentenced,Misdemeanor,29
-2481,Sierra,2017,Male,Unsentenced,Misdemeanor,0
-2482,Siskiyou,2017,Male,Unsentenced,Misdemeanor,0
-2483,Solano,2017,Male,Unsentenced,Misdemeanor,60
-2484,Sonoma,2017,Male,Unsentenced,Misdemeanor,142
-2485,Stanislaus,2017,Male,Unsentenced,Misdemeanor,74
-2486,Sutter,2017,Male,Unsentenced,Misdemeanor,10
-2487,Tehama,2017,Male,Unsentenced,Misdemeanor,0
-2488,Trinity,2017,Male,Unsentenced,Misdemeanor,0
-2489,Tulare,2017,Male,Unsentenced,Misdemeanor,114
-2490,Tuolumne,2017,Male,Unsentenced,Misdemeanor,2
-2491,Ventura,2017,Male,Unsentenced,Misdemeanor,151
-2492,Yolo,2017,Male,Unsentenced,Misdemeanor,17
-2493,Yuba,2017,Male,Unsentenced,Misdemeanor,21
-2494,Alameda,2018,Male,Unsentenced,Misdemeanor,127
-2495,Alpine,2018,Male,Unsentenced,Misdemeanor,0
-2496,Amador,2018,Male,Unsentenced,Misdemeanor,4
-2497,Butte,2018,Male,Unsentenced,Misdemeanor,41
-2498,Calaveras,2018,Male,Unsentenced,Misdemeanor,10
-2499,Colusa,2018,Male,Unsentenced,Misdemeanor,15
-2500,Contra Costa,2018,Male,Unsentenced,Misdemeanor,130
-2501,Del Norte,2018,Male,Unsentenced,Misdemeanor,16
-2502,El Dorado,2018,Male,Unsentenced,Misdemeanor,25
-2503,Fresno,2018,Male,Unsentenced,Misdemeanor,120
-2504,Glenn,2018,Male,Unsentenced,Misdemeanor,16
-2505,Humboldt,2018,Male,Unsentenced,Misdemeanor,22
-2506,Imperial,2018,Male,Unsentenced,Misdemeanor,51
-2507,Inyo,2018,Male,Unsentenced,Misdemeanor,6
-2508,Kern,2018,Male,Unsentenced,Misdemeanor,154
-2509,Kings,2018,Male,Unsentenced,Misdemeanor,70
-2510,Lake,2018,Male,Unsentenced,Misdemeanor,31
-2511,Lassen,2018,Male,Unsentenced,Misdemeanor,5
-2512,Los Angeles,2018,Male,Unsentenced,Misdemeanor,1099
-2513,Madera,2018,Male,Unsentenced,Misdemeanor,63
-2514,Marin,2018,Male,Unsentenced,Misdemeanor,54
-2515,Mariposa,2018,Male,Unsentenced,Misdemeanor,5
-2516,Mendocino,2018,Male,Unsentenced,Misdemeanor,96
-2517,Merced,2018,Male,Unsentenced,Misdemeanor,0
-2518,Modoc,2018,Male,Unsentenced,Misdemeanor,2
-2519,Mono,2018,Male,Unsentenced,Misdemeanor,3
-2520,Monterey,2018,Male,Unsentenced,Misdemeanor,39
-2521,Napa,2018,Male,Unsentenced,Misdemeanor,21
-2522,Nevada,2018,Male,Unsentenced,Misdemeanor,17
-2523,Orange,2018,Male,Unsentenced,Misdemeanor,680
-2524,Placer,2018,Male,Unsentenced,Misdemeanor,124
-2525,Plumas,2018,Male,Unsentenced,Misdemeanor,10
-2526,Riverside,2018,Male,Unsentenced,Misdemeanor,162
-2527,Sacramento,2018,Male,Unsentenced,Misdemeanor,286
-2528,San Benito,2018,Male,Unsentenced,Misdemeanor,16
-2529,San Bernardino,2018,Male,Unsentenced,Misdemeanor,890
-2530,San Diego,2018,Male,Unsentenced,Misdemeanor,208
-2531,San Francisco,2018,Male,Unsentenced,Misdemeanor,77
-2532,San Joaquin,2018,Male,Unsentenced,Misdemeanor,83
-2533,San Luis Obispo,2018,Male,Unsentenced,Misdemeanor,103
-2534,San Mateo,2018,Male,Unsentenced,Misdemeanor,75
-2535,Santa Barbara,2018,Male,Unsentenced,Misdemeanor,98
-2536,Santa Clara,2018,Male,Unsentenced,Misdemeanor,352
-2537,Santa Cruz,2018,Male,Unsentenced,Misdemeanor,242
-2538,Shasta,2018,Male,Unsentenced,Misdemeanor,17
-2539,Sierra,2018,Male,Unsentenced,Misdemeanor,0
-2540,Siskiyou,2018,Male,Unsentenced,Misdemeanor,0
-2541,Solano,2018,Male,Unsentenced,Misdemeanor,50
-2542,Sonoma,2018,Male,Unsentenced,Misdemeanor,128
-2543,Stanislaus,2018,Male,Unsentenced,Misdemeanor,77
-2544,Sutter,2018,Male,Unsentenced,Misdemeanor,5
-2545,Tehama,2018,Male,Unsentenced,Misdemeanor,0
-2546,Trinity,2018,Male,Unsentenced,Misdemeanor,4
-2547,Tulare,2018,Male,Unsentenced,Misdemeanor,94
-2548,Tuolumne,2018,Male,Unsentenced,Misdemeanor,7
-2549,Ventura,2018,Male,Unsentenced,Misdemeanor,0
-2550,Yolo,2018,Male,Unsentenced,Misdemeanor,28
-2551,Yuba,2018,Male,Unsentenced,Misdemeanor,19
-2552,Alameda,2019,Male,Unsentenced,Misdemeanor,135
-2553,Alpine,2019,Male,Unsentenced,Misdemeanor,0
-2554,Amador,2019,Male,Unsentenced,Misdemeanor,9
-2555,Butte,2019,Male,Unsentenced,Misdemeanor,36
-2556,Calaveras,2019,Male,Unsentenced,Misdemeanor,9
-2557,Colusa,2019,Male,Unsentenced,Misdemeanor,11
-2558,Contra Costa,2019,Male,Unsentenced,Misdemeanor,110
-2559,Del Norte,2019,Male,Unsentenced,Misdemeanor,13
-2560,El Dorado,2019,Male,Unsentenced,Misdemeanor,19
-2561,Fresno,2019,Male,Unsentenced,Misdemeanor,109
-2562,Glenn,2019,Male,Unsentenced,Misdemeanor,17
-2563,Humboldt,2019,Male,Unsentenced,Misdemeanor,22
-2564,Imperial,2019,Male,Unsentenced,Misdemeanor,9
-2565,Inyo,2019,Male,Unsentenced,Misdemeanor,4
-2566,Kern,2019,Male,Unsentenced,Misdemeanor,103
-2567,Kings,2019,Male,Unsentenced,Misdemeanor,68
-2568,Lake,2019,Male,Unsentenced,Misdemeanor,23
-2569,Lassen,2019,Male,Unsentenced,Misdemeanor,4
-2570,Los Angeles,2019,Male,Unsentenced,Misdemeanor,1090
-2571,Madera,2019,Male,Unsentenced,Misdemeanor,39
-2572,Marin,2019,Male,Unsentenced,Misdemeanor,45
-2573,Mariposa,2019,Male,Unsentenced,Misdemeanor,3
-2574,Mendocino,2019,Male,Unsentenced,Misdemeanor,96
-2575,Merced,2019,Male,Unsentenced,Misdemeanor,0
-2576,Modoc,2019,Male,Unsentenced,Misdemeanor,3
-2577,Mono,2019,Male,Unsentenced,Misdemeanor,5
-2578,Monterey,2019,Male,Unsentenced,Misdemeanor,50
-2579,Napa,2019,Male,Unsentenced,Misdemeanor,17
-2580,Nevada,2019,Male,Unsentenced,Misdemeanor,11
-2581,Orange,2019,Male,Unsentenced,Misdemeanor,740
-2582,Placer,2019,Male,Unsentenced,Misdemeanor,128
-2583,Plumas,2019,Male,Unsentenced,Misdemeanor,12
-2584,Riverside,2019,Male,Unsentenced,Misdemeanor,174
-2585,Sacramento,2019,Male,Unsentenced,Misdemeanor,259
-2586,San Benito,2019,Male,Unsentenced,Misdemeanor,17
-2587,San Bernardino,2019,Male,Unsentenced,Misdemeanor,947
-2588,San Diego,2019,Male,Unsentenced,Misdemeanor,174
-2589,San Francisco,2019,Male,Unsentenced,Misdemeanor,0
-2590,San Joaquin,2019,Male,Unsentenced,Misdemeanor,91
-2591,San Luis Obispo,2019,Male,Unsentenced,Misdemeanor,279
-2592,San Mateo,2019,Male,Unsentenced,Misdemeanor,29
-2593,Santa Barbara,2019,Male,Unsentenced,Misdemeanor,98
-2594,Santa Clara,2019,Male,Unsentenced,Misdemeanor,84
-2595,Santa Cruz,2019,Male,Unsentenced,Misdemeanor,1998
-2596,Shasta,2019,Male,Unsentenced,Misdemeanor,21
-2597,Sierra,2019,Male,Unsentenced,Misdemeanor,0
-2598,Siskiyou,2019,Male,Unsentenced,Misdemeanor,0
-2599,Solano,2019,Male,Unsentenced,Misdemeanor,56
-2600,Sonoma,2019,Male,Unsentenced,Misdemeanor,105
-2601,Stanislaus,2019,Male,Unsentenced,Misdemeanor,85
-2602,Sutter,2019,Male,Unsentenced,Misdemeanor,20
-2603,Tehama,2019,Male,Unsentenced,Misdemeanor,0
-2604,Trinity,2019,Male,Unsentenced,Misdemeanor,8
-2605,Tulare,2019,Male,Unsentenced,Misdemeanor,77
-2606,Tuolumne,2019,Male,Unsentenced,Misdemeanor,4
-2607,Ventura,2019,Male,Unsentenced,Misdemeanor,174
-2608,Yolo,2019,Male,Unsentenced,Misdemeanor,21
-2609,Yuba,2019,Male,Unsentenced,Misdemeanor,24
-2610,Alameda,2020,Male,Unsentenced,Misdemeanor,123
-2611,Alpine,2020,Male,Unsentenced,Misdemeanor,0
-2612,Amador,2020,Male,Unsentenced,Misdemeanor,2
-2613,Butte,2020,Male,Unsentenced,Misdemeanor,16
-2614,Calaveras,2020,Male,Unsentenced,Misdemeanor,4
-2615,Colusa,2020,Male,Unsentenced,Misdemeanor,10
-2616,Contra Costa,2020,Male,Unsentenced,Misdemeanor,98
-2617,Del Norte,2020,Male,Unsentenced,Misdemeanor,3
-2618,El Dorado,2020,Male,Unsentenced,Misdemeanor,8
-2619,Fresno,2020,Male,Unsentenced,Misdemeanor,65
-2620,Glenn,2020,Male,Unsentenced,Misdemeanor,6
-2621,Humboldt,2020,Male,Unsentenced,Misdemeanor,12
-2622,Imperial,2020,Male,Unsentenced,Misdemeanor,2
-2623,Inyo,2020,Male,Unsentenced,Misdemeanor,3
-2624,Kern,2020,Male,Unsentenced,Misdemeanor,41
-2625,Kings,2020,Male,Unsentenced,Misdemeanor,16
-2626,Lake,2020,Male,Unsentenced,Misdemeanor,21
-2627,Lassen,2020,Male,Unsentenced,Misdemeanor,0
-2628,Los Angeles,2020,Male,Unsentenced,Misdemeanor,498
-2629,Madera,2020,Male,Unsentenced,Misdemeanor,23
-2630,Marin,2020,Male,Unsentenced,Misdemeanor,17
-2631,Mariposa,2020,Male,Unsentenced,Misdemeanor,2
-2632,Mendocino,2020,Male,Unsentenced,Misdemeanor,0
-2633,Merced,2020,Male,Unsentenced,Misdemeanor,0
-2634,Modoc,2020,Male,Unsentenced,Misdemeanor,2
-2635,Mono,2020,Male,Unsentenced,Misdemeanor,3
-2636,Monterey,2020,Male,Unsentenced,Misdemeanor,25
-2637,Napa,2020,Male,Unsentenced,Misdemeanor,9
-2638,Nevada,2020,Male,Unsentenced,Misdemeanor,6
-2639,Orange,2020,Male,Unsentenced,Misdemeanor,478
-2640,Placer,2020,Male,Unsentenced,Misdemeanor,133
-2641,Plumas,2020,Male,Unsentenced,Misdemeanor,2
-2642,Riverside,2020,Male,Unsentenced,Misdemeanor,60
-2643,Sacramento,2020,Male,Unsentenced,Misdemeanor,117
-2644,San Benito,2020,Male,Unsentenced,Misdemeanor,7
-2645,San Bernardino,2020,Male,Unsentenced,Misdemeanor,1019
-2646,San Diego,2020,Male,Unsentenced,Misdemeanor,59
-2647,San Francisco,2020,Male,Unsentenced,Misdemeanor,1
-2648,San Joaquin,2020,Male,Unsentenced,Misdemeanor,37
-2649,San Luis Obispo,2020,Male,Unsentenced,Misdemeanor,199
-2650,San Mateo,2020,Male,Unsentenced,Misdemeanor,8
-2651,Santa Barbara,2020,Male,Unsentenced,Misdemeanor,54
-2652,Santa Clara,2020,Male,Unsentenced,Misdemeanor,29
-2653,Santa Cruz,2020,Male,Unsentenced,Misdemeanor,1481
-2654,Shasta,2020,Male,Unsentenced,Misdemeanor,9
-2655,Sierra,2020,Male,Unsentenced,Misdemeanor,0
-2656,Siskiyou,2020,Male,Unsentenced,Misdemeanor,0
-2657,Solano,2020,Male,Unsentenced,Misdemeanor,45
-2658,Sonoma,2020,Male,Unsentenced,Misdemeanor,49
-2659,Stanislaus,2020,Male,Unsentenced,Misdemeanor,40
-2660,Sutter,2020,Male,Unsentenced,Misdemeanor,16
-2661,Tehama,2020,Male,Unsentenced,Misdemeanor,0
-2662,Trinity,2020,Male,Unsentenced,Misdemeanor,6
-2663,Tulare,2020,Male,Unsentenced,Misdemeanor,43
-2664,Tuolumne,2020,Male,Unsentenced,Misdemeanor,1
-2665,Ventura,2020,Male,Unsentenced,Misdemeanor,80
-2666,Yolo,2020,Male,Unsentenced,Misdemeanor,10
-2667,Yuba,2020,Male,Unsentenced,Misdemeanor,9
-2668,Alameda,2021,Male,Unsentenced,Misdemeanor,130
-2669,Alpine,2021,Male,Unsentenced,Misdemeanor,0
-2670,Amador,2021,Male,Unsentenced,Misdemeanor,6
-2671,Butte,2021,Male,Unsentenced,Misdemeanor,24
-2672,Calaveras,2021,Male,Unsentenced,Misdemeanor,5
-2673,Colusa,2021,Male,Unsentenced,Misdemeanor,11
-2674,Contra Costa,2021,Male,Unsentenced,Misdemeanor,63
-2675,Del Norte,2021,Male,Unsentenced,Misdemeanor,0
-2676,El Dorado,2021,Male,Unsentenced,Misdemeanor,0
-2677,Fresno,2021,Male,Unsentenced,Misdemeanor,83
-2678,Glenn,2021,Male,Unsentenced,Misdemeanor,8
-2679,Humboldt,2021,Male,Unsentenced,Misdemeanor,11
-2680,Imperial,2021,Male,Unsentenced,Misdemeanor,5
-2681,Inyo,2021,Male,Unsentenced,Misdemeanor,3
-2682,Kern,2021,Male,Unsentenced,Misdemeanor,63
-2683,Kings,2021,Male,Unsentenced,Misdemeanor,33
-2684,Lake,2021,Male,Unsentenced,Misdemeanor,21
-2685,Lassen,2021,Male,Unsentenced,Misdemeanor,6
-2686,Los Angeles,2021,Male,Unsentenced,Misdemeanor,620
-2687,Madera,2021,Male,Unsentenced,Misdemeanor,37
-2688,Marin,2021,Male,Unsentenced,Misdemeanor,14
-2689,Mariposa,2021,Male,Unsentenced,Misdemeanor,1
-2690,Mendocino,2021,Male,Unsentenced,Misdemeanor,0
-2691,Merced,2021,Male,Unsentenced,Misdemeanor,0
-2692,Modoc,2021,Male,Unsentenced,Misdemeanor,1
-2693,Mono,2021,Male,Unsentenced,Misdemeanor,4
-2694,Monterey,2021,Male,Unsentenced,Misdemeanor,0
-2695,Napa,2021,Male,Unsentenced,Misdemeanor,6
-2696,Nevada,2021,Male,Unsentenced,Misdemeanor,5
-2697,Orange,2021,Male,Unsentenced,Misdemeanor,487
-2698,Placer,2021,Male,Unsentenced,Misdemeanor,138
-2699,Plumas,2021,Male,Unsentenced,Misdemeanor,4
-2700,Riverside,2021,Male,Unsentenced,Misdemeanor,90
-2701,Sacramento,2021,Male,Unsentenced,Misdemeanor,146
-2702,San Benito,2021,Male,Unsentenced,Misdemeanor,5
-2703,San Bernardino,2021,Male,Unsentenced,Misdemeanor,1077
-2704,San Diego,2021,Male,Unsentenced,Misdemeanor,75
-2705,San Francisco,2021,Male,Unsentenced,Misdemeanor,49
-2706,San Joaquin,2021,Male,Unsentenced,Misdemeanor,70
-2707,San Luis Obispo,2021,Male,Unsentenced,Misdemeanor,45
-2708,San Mateo,2021,Male,Unsentenced,Misdemeanor,35
-2709,Santa Barbara,2021,Male,Unsentenced,Misdemeanor,400
-2710,Santa Clara,2021,Male,Unsentenced,Misdemeanor,191
-2711,Santa Cruz,2021,Male,Unsentenced,Misdemeanor,200
-2712,Shasta,2021,Male,Unsentenced,Misdemeanor,10
-2713,Sierra,2021,Male,Unsentenced,Misdemeanor,0
-2714,Siskiyou,2021,Male,Unsentenced,Misdemeanor,0
-2715,Solano,2021,Male,Unsentenced,Misdemeanor,29
-2716,Sonoma,2021,Male,Unsentenced,Misdemeanor,48
-2717,Stanislaus,2021,Male,Unsentenced,Misdemeanor,55
-2718,Sutter,2021,Male,Unsentenced,Misdemeanor,20
-2719,Tehama,2021,Male,Unsentenced,Misdemeanor,0
-2720,Trinity,2021,Male,Unsentenced,Misdemeanor,4
-2721,Tulare,2021,Male,Unsentenced,Misdemeanor,65
-2722,Tuolumne,2021,Male,Unsentenced,Misdemeanor,2
-2723,Ventura,2021,Male,Unsentenced,Misdemeanor,91
-2724,Yolo,2021,Male,Unsentenced,Misdemeanor,19
-2725,Yuba,2021,Male,Unsentenced,Misdemeanor,15
-2726,Alameda,2022,Male,Unsentenced,Misdemeanor,142
-2727,Alpine,2022,Male,Unsentenced,Misdemeanor,0
-2728,Amador,2022,Male,Unsentenced,Misdemeanor,7
-2729,Butte,2022,Male,Unsentenced,Misdemeanor,16
-2730,Calaveras,2022,Male,Unsentenced,Misdemeanor,7
-2731,Colusa,2022,Male,Unsentenced,Misdemeanor,4
-2732,Contra Costa,2022,Male,Unsentenced,Misdemeanor,69
-2733,Del Norte,2022,Male,Unsentenced,Misdemeanor,6
-2734,El Dorado,2022,Male,Unsentenced,Misdemeanor,43
-2735,Fresno,2022,Male,Unsentenced,Misdemeanor,93
-2736,Glenn,2022,Male,Unsentenced,Misdemeanor,9
-2737,Humboldt,2022,Male,Unsentenced,Misdemeanor,8
-2738,Imperial,2022,Male,Unsentenced,Misdemeanor,8
-2739,Inyo,2022,Male,Unsentenced,Misdemeanor,3
-2740,Kern,2022,Male,Unsentenced,Misdemeanor,67
-2741,Kings,2022,Male,Unsentenced,Misdemeanor,29
-2742,Lake,2022,Male,Unsentenced,Misdemeanor,20
-2743,Lassen,2022,Male,Unsentenced,Misdemeanor,14
-2744,Los Angeles,2022,Male,Unsentenced,Misdemeanor,678
-2745,Madera,2022,Male,Unsentenced,Misdemeanor,7
-2746,Marin,2022,Male,Unsentenced,Misdemeanor,22
-2747,Mariposa,2022,Male,Unsentenced,Misdemeanor,3
-2748,Mendocino,2022,Male,Unsentenced,Misdemeanor,108
-2749,Merced,2022,Male,Unsentenced,Misdemeanor,0
-2750,Modoc,2022,Male,Unsentenced,Misdemeanor,1
-2751,Mono,2022,Male,Unsentenced,Misdemeanor,4
-2752,Monterey,2022,Male,Unsentenced,Misdemeanor,34
-2753,Napa,2022,Male,Unsentenced,Misdemeanor,12
-2754,Nevada,2022,Male,Unsentenced,Misdemeanor,10
-2755,Orange,2022,Male,Unsentenced,Misdemeanor,452
-2756,Placer,2022,Male,Unsentenced,Misdemeanor,197
-2757,Plumas,2022,Male,Unsentenced,Misdemeanor,4
-2758,Riverside,2022,Male,Unsentenced,Misdemeanor,77
-2759,Sacramento,2022,Male,Unsentenced,Misdemeanor,136
-2760,San Benito,2022,Male,Unsentenced,Misdemeanor,15
-2761,San Bernardino,2022,Male,Unsentenced,Misdemeanor,1026
-2762,San Diego,2022,Male,Unsentenced,Misdemeanor,63
-2763,San Francisco,2022,Male,Unsentenced,Misdemeanor,0
-2764,San Joaquin,2022,Male,Unsentenced,Misdemeanor,37
-2765,San Luis Obispo,2022,Male,Unsentenced,Misdemeanor,47
-2766,San Mateo,2022,Male,Unsentenced,Misdemeanor,19
-2767,Santa Barbara,2022,Male,Unsentenced,Misdemeanor,81
-2768,Santa Clara,2022,Male,Unsentenced,Misdemeanor,57
-2769,Santa Cruz,2022,Male,Unsentenced,Misdemeanor,2161
-2770,Shasta,2022,Male,Unsentenced,Misdemeanor,3
-2771,Sierra,2022,Male,Unsentenced,Misdemeanor,0
-2772,Siskiyou,2022,Male,Unsentenced,Misdemeanor,0
-2773,Solano,2022,Male,Unsentenced,Misdemeanor,42
-2774,Sonoma,2022,Male,Unsentenced,Misdemeanor,64
-2775,Stanislaus,2022,Male,Unsentenced,Misdemeanor,51
-2776,Sutter,2022,Male,Unsentenced,Misdemeanor,52
-2777,Tehama,2022,Male,Unsentenced,Misdemeanor,0
-2778,Trinity,2022,Male,Unsentenced,Misdemeanor,4
-2779,Tulare,2022,Male,Unsentenced,Misdemeanor,52
-2780,Tuolumne,2022,Male,Unsentenced,Misdemeanor,3
-2781,Ventura,2022,Male,Unsentenced,Misdemeanor,107
-2782,Yolo,2022,Male,Unsentenced,Misdemeanor,50
-2783,Yuba,2022,Male,Unsentenced,Misdemeanor,17
-2784,Alameda,2023,Male,Unsentenced,Misdemeanor,135
-2785,Alpine,2023,Male,Unsentenced,Misdemeanor,0
-2786,Amador,2023,Male,Unsentenced,Misdemeanor,6
-2787,Butte,2023,Male,Unsentenced,Misdemeanor,22
-2788,Calaveras,2023,Male,Unsentenced,Misdemeanor,8
-2789,Colusa,2023,Male,Unsentenced,Misdemeanor,6
-2790,Contra Costa,2023,Male,Unsentenced,Misdemeanor,64
-2791,Del Norte,2023,Male,Unsentenced,Misdemeanor,8
-2792,El Dorado,2023,Male,Unsentenced,Misdemeanor,27
-2793,Fresno,2023,Male,Unsentenced,Misdemeanor,127
-2794,Glenn,2023,Male,Unsentenced,Misdemeanor,6
-2795,Humboldt,2023,Male,Unsentenced,Misdemeanor,12
-2796,Imperial,2023,Male,Unsentenced,Misdemeanor,14
-2797,Inyo,2023,Male,Unsentenced,Misdemeanor,5
-2798,Kern,2023,Male,Unsentenced,Misdemeanor,80
-2799,Kings,2023,Male,Unsentenced,Misdemeanor,33
-2800,Lake,2023,Male,Unsentenced,Misdemeanor,16
-2801,Lassen,2023,Male,Unsentenced,Misdemeanor,20
-2802,Los Angeles,2023,Male,Unsentenced,Misdemeanor,685
-2803,Madera,2023,Male,Unsentenced,Misdemeanor,1
-2804,Marin,2023,Male,Unsentenced,Misdemeanor,24
-2805,Mariposa,2023,Male,Unsentenced,Misdemeanor,1
-2806,Mendocino,2023,Male,Unsentenced,Misdemeanor,84
-2807,Merced,2023,Male,Unsentenced,Misdemeanor,0
-2808,Modoc,2023,Male,Unsentenced,Misdemeanor,3
-2809,Mono,2023,Male,Unsentenced,Misdemeanor,4
-2810,Monterey,2023,Male,Unsentenced,Misdemeanor,38
-2811,Napa,2023,Male,Unsentenced,Misdemeanor,6
-2812,Nevada,2023,Male,Unsentenced,Misdemeanor,9
-2813,Orange,2023,Male,Unsentenced,Misdemeanor,512
-2814,Placer,2023,Male,Unsentenced,Misdemeanor,235
-2815,Plumas,2023,Male,Unsentenced,Misdemeanor,4
-2816,Riverside,2023,Male,Unsentenced,Misdemeanor,95
-2817,Sacramento,2023,Male,Unsentenced,Misdemeanor,96
-2818,San Benito,2023,Male,Unsentenced,Misdemeanor,6
-2819,San Bernardino,2023,Male,Unsentenced,Misdemeanor,891
-2820,San Diego,2023,Male,Unsentenced,Misdemeanor,86
-2821,San Francisco,2023,Male,Unsentenced,Misdemeanor,63
-2822,San Joaquin,2023,Male,Unsentenced,Misdemeanor,60
-2823,San Luis Obispo,2023,Male,Unsentenced,Misdemeanor,10
-2824,San Mateo,2023,Male,Unsentenced,Misdemeanor,42
-2825,Santa Barbara,2023,Male,Unsentenced,Misdemeanor,77
-2826,Santa Clara,2023,Male,Unsentenced,Misdemeanor,206
-2827,Santa Cruz,2023,Male,Unsentenced,Misdemeanor,167
-2828,Shasta,2023,Male,Unsentenced,Misdemeanor,6
-2829,Sierra,2023,Male,Unsentenced,Misdemeanor,0
-2830,Siskiyou,2023,Male,Unsentenced,Misdemeanor,0
-2831,Solano,2023,Male,Unsentenced,Misdemeanor,56
-2832,Sonoma,2023,Male,Unsentenced,Misdemeanor,36
-2833,Stanislaus,2023,Male,Unsentenced,Misdemeanor,56
-2834,Sutter,2023,Male,Unsentenced,Misdemeanor,67
-2835,Tehama,2023,Male,Unsentenced,Misdemeanor,0
-2836,Trinity,2023,Male,Unsentenced,Misdemeanor,4
-2837,Tulare,2023,Male,Unsentenced,Misdemeanor,47
-2838,Tuolumne,2023,Male,Unsentenced,Misdemeanor,4
-2839,Ventura,2023,Male,Unsentenced,Misdemeanor,100
-2840,Yolo,2023,Male,Unsentenced,Misdemeanor,16
-2841,Yuba,2023,Male,Unsentenced,Misdemeanor,26
-2842,Alameda,2017,Male,Sentenced,Misdemeanor,23
-2843,Alpine,2017,Male,Sentenced,Misdemeanor,0
-2844,Amador,2017,Male,Sentenced,Misdemeanor,5
-2845,Butte,2017,Male,Sentenced,Misdemeanor,24
-2846,Calaveras,2017,Male,Sentenced,Misdemeanor,3
-2847,Colusa,2017,Male,Sentenced,Misdemeanor,13
-2848,Contra Costa,2017,Male,Sentenced,Misdemeanor,49
-2849,Del Norte,2017,Male,Sentenced,Misdemeanor,10
-2850,El Dorado,2017,Male,Sentenced,Misdemeanor,24
-2851,Fresno,2017,Male,Sentenced,Misdemeanor,64
-2852,Glenn,2017,Male,Sentenced,Misdemeanor,6
-2853,Humboldt,2017,Male,Sentenced,Misdemeanor,9
-2854,Imperial,2017,Male,Sentenced,Misdemeanor,24
-2855,Inyo,2017,Male,Sentenced,Misdemeanor,5
-2856,Kern,2017,Male,Sentenced,Misdemeanor,86
-2857,Kings,2017,Male,Sentenced,Misdemeanor,14
-2858,Lake,2017,Male,Sentenced,Misdemeanor,16
-2859,Lassen,2017,Male,Sentenced,Misdemeanor,6
-2860,Los Angeles,2017,Male,Sentenced,Misdemeanor,633
-2861,Madera,2017,Male,Sentenced,Misdemeanor,11
-2862,Marin,2017,Male,Sentenced,Misdemeanor,9
-2863,Mariposa,2017,Male,Sentenced,Misdemeanor,7
-2864,Mendocino,2017,Male,Sentenced,Misdemeanor,60
-2865,Merced,2017,Male,Sentenced,Misdemeanor,2
-2866,Modoc,2017,Male,Sentenced,Misdemeanor,1
-2867,Mono,2017,Male,Sentenced,Misdemeanor,4
-2868,Monterey,2017,Male,Sentenced,Misdemeanor,20
-2869,Napa,2017,Male,Sentenced,Misdemeanor,6
-2870,Nevada,2017,Male,Sentenced,Misdemeanor,6
-2871,Orange,2017,Male,Sentenced,Misdemeanor,608
-2872,Placer,2017,Male,Sentenced,Misdemeanor,63
-2873,Plumas,2017,Male,Sentenced,Misdemeanor,1
-2874,Riverside,2017,Male,Sentenced,Misdemeanor,74
-2875,Sacramento,2017,Male,Sentenced,Misdemeanor,165
-2876,San Benito,2017,Male,Sentenced,Misdemeanor,7
-2877,San Bernardino,2017,Male,Sentenced,Misdemeanor,322
-2878,San Diego,2017,Male,Sentenced,Misdemeanor,215
-2879,San Francisco,2017,Male,Sentenced,Misdemeanor,9
-2880,San Joaquin,2017,Male,Sentenced,Misdemeanor,17
-2881,San Luis Obispo,2017,Male,Sentenced,Misdemeanor,116
-2882,San Mateo,2017,Male,Sentenced,Misdemeanor,26
-2883,Santa Barbara,2017,Male,Sentenced,Misdemeanor,0
-2884,Santa Clara,2017,Male,Sentenced,Misdemeanor,33
-2885,Santa Cruz,2017,Male,Sentenced,Misdemeanor,473
-2886,Shasta,2017,Male,Sentenced,Misdemeanor,13
-2887,Sierra,2017,Male,Sentenced,Misdemeanor,0
-2888,Siskiyou,2017,Male,Sentenced,Misdemeanor,0
-2889,Solano,2017,Male,Sentenced,Misdemeanor,22
-2890,Sonoma,2017,Male,Sentenced,Misdemeanor,128
-2891,Stanislaus,2017,Male,Sentenced,Misdemeanor,33
-2892,Sutter,2017,Male,Sentenced,Misdemeanor,4
-2893,Tehama,2017,Male,Sentenced,Misdemeanor,0
-2894,Trinity,2017,Male,Sentenced,Misdemeanor,0
-2895,Tulare,2017,Male,Sentenced,Misdemeanor,54
-2896,Tuolumne,2017,Male,Sentenced,Misdemeanor,0
-2897,Ventura,2017,Male,Sentenced,Misdemeanor,97
-2898,Yolo,2017,Male,Sentenced,Misdemeanor,7
-2899,Yuba,2017,Male,Sentenced,Misdemeanor,2
-2900,Alameda,2018,Male,Sentenced,Misdemeanor,23
-2901,Alpine,2018,Male,Sentenced,Misdemeanor,0
-2902,Amador,2018,Male,Sentenced,Misdemeanor,4
-2903,Butte,2018,Male,Sentenced,Misdemeanor,20
-2904,Calaveras,2018,Male,Sentenced,Misdemeanor,4
-2905,Colusa,2018,Male,Sentenced,Misdemeanor,9
-2906,Contra Costa,2018,Male,Sentenced,Misdemeanor,42
-2907,Del Norte,2018,Male,Sentenced,Misdemeanor,12
-2908,El Dorado,2018,Male,Sentenced,Misdemeanor,20
-2909,Fresno,2018,Male,Sentenced,Misdemeanor,44
-2910,Glenn,2018,Male,Sentenced,Misdemeanor,4
-2911,Humboldt,2018,Male,Sentenced,Misdemeanor,10
-2912,Imperial,2018,Male,Sentenced,Misdemeanor,12
-2913,Inyo,2018,Male,Sentenced,Misdemeanor,6
-2914,Kern,2018,Male,Sentenced,Misdemeanor,35
-2915,Kings,2018,Male,Sentenced,Misdemeanor,37
-2916,Lake,2018,Male,Sentenced,Misdemeanor,28
-2917,Lassen,2018,Male,Sentenced,Misdemeanor,9
-2918,Los Angeles,2018,Male,Sentenced,Misdemeanor,575
-2919,Madera,2018,Male,Sentenced,Misdemeanor,13
-2920,Marin,2018,Male,Sentenced,Misdemeanor,22
-2921,Mariposa,2018,Male,Sentenced,Misdemeanor,4
-2922,Mendocino,2018,Male,Sentenced,Misdemeanor,62
-2923,Merced,2018,Male,Sentenced,Misdemeanor,0
-2924,Modoc,2018,Male,Sentenced,Misdemeanor,1
-2925,Mono,2018,Male,Sentenced,Misdemeanor,3
-2926,Monterey,2018,Male,Sentenced,Misdemeanor,23
-2927,Napa,2018,Male,Sentenced,Misdemeanor,12
-2928,Nevada,2018,Male,Sentenced,Misdemeanor,4
-2929,Orange,2018,Male,Sentenced,Misdemeanor,654
-2930,Placer,2018,Male,Sentenced,Misdemeanor,50
-2931,Plumas,2018,Male,Sentenced,Misdemeanor,5
-2932,Riverside,2018,Male,Sentenced,Misdemeanor,57
-2933,Sacramento,2018,Male,Sentenced,Misdemeanor,190
-2934,San Benito,2018,Male,Sentenced,Misdemeanor,9
-2935,San Bernardino,2018,Male,Sentenced,Misdemeanor,350
-2936,San Diego,2018,Male,Sentenced,Misdemeanor,202
-2937,San Francisco,2018,Male,Sentenced,Misdemeanor,14
-2938,San Joaquin,2018,Male,Sentenced,Misdemeanor,31
-2939,San Luis Obispo,2018,Male,Sentenced,Misdemeanor,73
-2940,San Mateo,2018,Male,Sentenced,Misdemeanor,34
-2941,Santa Barbara,2018,Male,Sentenced,Misdemeanor,54
-2942,Santa Clara,2018,Male,Sentenced,Misdemeanor,108
-2943,Santa Cruz,2018,Male,Sentenced,Misdemeanor,84
-2944,Shasta,2018,Male,Sentenced,Misdemeanor,8
-2945,Sierra,2018,Male,Sentenced,Misdemeanor,0
-2946,Siskiyou,2018,Male,Sentenced,Misdemeanor,0
-2947,Solano,2018,Male,Sentenced,Misdemeanor,14
-2948,Sonoma,2018,Male,Sentenced,Misdemeanor,88
-2949,Stanislaus,2018,Male,Sentenced,Misdemeanor,24
-2950,Sutter,2018,Male,Sentenced,Misdemeanor,2
-2951,Tehama,2018,Male,Sentenced,Misdemeanor,0
-2952,Trinity,2018,Male,Sentenced,Misdemeanor,0
-2953,Tulare,2018,Male,Sentenced,Misdemeanor,48
-2954,Tuolumne,2018,Male,Sentenced,Misdemeanor,2
-2955,Ventura,2018,Male,Sentenced,Misdemeanor,0
-2956,Yolo,2018,Male,Sentenced,Misdemeanor,12
-2957,Yuba,2018,Male,Sentenced,Misdemeanor,3
-2958,Alameda,2019,Male,Sentenced,Misdemeanor,26
-2959,Alpine,2019,Male,Sentenced,Misdemeanor,0
-2960,Amador,2019,Male,Sentenced,Misdemeanor,6
-2961,Butte,2019,Male,Sentenced,Misdemeanor,18
-2962,Calaveras,2019,Male,Sentenced,Misdemeanor,3
-2963,Colusa,2019,Male,Sentenced,Misdemeanor,7
-2964,Contra Costa,2019,Male,Sentenced,Misdemeanor,33
-2965,Del Norte,2019,Male,Sentenced,Misdemeanor,9
-2966,El Dorado,2019,Male,Sentenced,Misdemeanor,11
-2967,Fresno,2019,Male,Sentenced,Misdemeanor,35
-2968,Glenn,2019,Male,Sentenced,Misdemeanor,8
-2969,Humboldt,2019,Male,Sentenced,Misdemeanor,8
-2970,Imperial,2019,Male,Sentenced,Misdemeanor,6
-2971,Inyo,2019,Male,Sentenced,Misdemeanor,4
-2972,Kern,2019,Male,Sentenced,Misdemeanor,9
-2973,Kings,2019,Male,Sentenced,Misdemeanor,24
-2974,Lake,2019,Male,Sentenced,Misdemeanor,16
-2975,Lassen,2019,Male,Sentenced,Misdemeanor,4
-2976,Los Angeles,2019,Male,Sentenced,Misdemeanor,640
-2977,Madera,2019,Male,Sentenced,Misdemeanor,15
-2978,Marin,2019,Male,Sentenced,Misdemeanor,12
-2979,Mariposa,2019,Male,Sentenced,Misdemeanor,3
-2980,Mendocino,2019,Male,Sentenced,Misdemeanor,50
-2981,Merced,2019,Male,Sentenced,Misdemeanor,0
-2982,Modoc,2019,Male,Sentenced,Misdemeanor,1
-2983,Mono,2019,Male,Sentenced,Misdemeanor,2
-2984,Monterey,2019,Male,Sentenced,Misdemeanor,25
-2985,Napa,2019,Male,Sentenced,Misdemeanor,12
-2986,Nevada,2019,Male,Sentenced,Misdemeanor,2
-2987,Orange,2019,Male,Sentenced,Misdemeanor,509
-2988,Placer,2019,Male,Sentenced,Misdemeanor,49
-2989,Plumas,2019,Male,Sentenced,Misdemeanor,7
-2990,Riverside,2019,Male,Sentenced,Misdemeanor,65
-2991,Sacramento,2019,Male,Sentenced,Misdemeanor,151
-2992,San Benito,2019,Male,Sentenced,Misdemeanor,8
-2993,San Bernardino,2019,Male,Sentenced,Misdemeanor,316
-2994,San Diego,2019,Male,Sentenced,Misdemeanor,140
-2995,San Francisco,2019,Male,Sentenced,Misdemeanor,20
-2996,San Joaquin,2019,Male,Sentenced,Misdemeanor,16
-2997,San Luis Obispo,2019,Male,Sentenced,Misdemeanor,108
-2998,San Mateo,2019,Male,Sentenced,Misdemeanor,19
-2999,Santa Barbara,2019,Male,Sentenced,Misdemeanor,53
-3000,Santa Clara,2019,Male,Sentenced,Misdemeanor,48
-3001,Santa Cruz,2019,Male,Sentenced,Misdemeanor,482
-3002,Shasta,2019,Male,Sentenced,Misdemeanor,6
-3003,Sierra,2019,Male,Sentenced,Misdemeanor,0
-3004,Siskiyou,2019,Male,Sentenced,Misdemeanor,0
-3005,Solano,2019,Male,Sentenced,Misdemeanor,14
-3006,Sonoma,2019,Male,Sentenced,Misdemeanor,59
-3007,Stanislaus,2019,Male,Sentenced,Misdemeanor,25
-3008,Sutter,2019,Male,Sentenced,Misdemeanor,11
-3009,Tehama,2019,Male,Sentenced,Misdemeanor,0
-3010,Trinity,2019,Male,Sentenced,Misdemeanor,1
-3011,Tulare,2019,Male,Sentenced,Misdemeanor,41
-3012,Tuolumne,2019,Male,Sentenced,Misdemeanor,2
-3013,Ventura,2019,Male,Sentenced,Misdemeanor,107
-3014,Yolo,2019,Male,Sentenced,Misdemeanor,7
-3015,Yuba,2019,Male,Sentenced,Misdemeanor,4
-3016,Alameda,2020,Male,Sentenced,Misdemeanor,8
-3017,Alpine,2020,Male,Sentenced,Misdemeanor,0
-3018,Amador,2020,Male,Sentenced,Misdemeanor,2
-3019,Butte,2020,Male,Sentenced,Misdemeanor,6
-3020,Calaveras,2020,Male,Sentenced,Misdemeanor,1
-3021,Colusa,2020,Male,Sentenced,Misdemeanor,8
-3022,Contra Costa,2020,Male,Sentenced,Misdemeanor,16
-3023,Del Norte,2020,Male,Sentenced,Misdemeanor,1
-3024,El Dorado,2020,Male,Sentenced,Misdemeanor,4
-3025,Fresno,2020,Male,Sentenced,Misdemeanor,3
-3026,Glenn,2020,Male,Sentenced,Misdemeanor,2
-3027,Humboldt,2020,Male,Sentenced,Misdemeanor,1
-3028,Imperial,2020,Male,Sentenced,Misdemeanor,2
-3029,Inyo,2020,Male,Sentenced,Misdemeanor,1
-3030,Kern,2020,Male,Sentenced,Misdemeanor,2
-3031,Kings,2020,Male,Sentenced,Misdemeanor,5
-3032,Lake,2020,Male,Sentenced,Misdemeanor,6
-3033,Lassen,2020,Male,Sentenced,Misdemeanor,0
-3034,Los Angeles,2020,Male,Sentenced,Misdemeanor,301
-3035,Madera,2020,Male,Sentenced,Misdemeanor,7
-3036,Marin,2020,Male,Sentenced,Misdemeanor,3
-3037,Mariposa,2020,Male,Sentenced,Misdemeanor,2
-3038,Mendocino,2020,Male,Sentenced,Misdemeanor,0
-3039,Merced,2020,Male,Sentenced,Misdemeanor,0
-3040,Modoc,2020,Male,Sentenced,Misdemeanor,1
-3041,Mono,2020,Male,Sentenced,Misdemeanor,2
-3042,Monterey,2020,Male,Sentenced,Misdemeanor,13
-3043,Napa,2020,Male,Sentenced,Misdemeanor,3
-3044,Nevada,2020,Male,Sentenced,Misdemeanor,1
-3045,Orange,2020,Male,Sentenced,Misdemeanor,213
-3046,Placer,2020,Male,Sentenced,Misdemeanor,38
-3047,Plumas,2020,Male,Sentenced,Misdemeanor,1
-3048,Riverside,2020,Male,Sentenced,Misdemeanor,20
-3049,Sacramento,2020,Male,Sentenced,Misdemeanor,52
-3050,San Benito,2020,Male,Sentenced,Misdemeanor,3
-3051,San Bernardino,2020,Male,Sentenced,Misdemeanor,212
-3052,San Diego,2020,Male,Sentenced,Misdemeanor,27
-3053,San Francisco,2020,Male,Sentenced,Misdemeanor,12
-3054,San Joaquin,2020,Male,Sentenced,Misdemeanor,6
-3055,San Luis Obispo,2020,Male,Sentenced,Misdemeanor,40
-3056,San Mateo,2020,Male,Sentenced,Misdemeanor,3
-3057,Santa Barbara,2020,Male,Sentenced,Misdemeanor,13
-3058,Santa Clara,2020,Male,Sentenced,Misdemeanor,11
-3059,Santa Cruz,2020,Male,Sentenced,Misdemeanor,286
-3060,Shasta,2020,Male,Sentenced,Misdemeanor,2
-3061,Sierra,2020,Male,Sentenced,Misdemeanor,0
-3062,Siskiyou,2020,Male,Sentenced,Misdemeanor,0
-3063,Solano,2020,Male,Sentenced,Misdemeanor,7
-3064,Sonoma,2020,Male,Sentenced,Misdemeanor,25
-3065,Stanislaus,2020,Male,Sentenced,Misdemeanor,8
-3066,Sutter,2020,Male,Sentenced,Misdemeanor,4
-3067,Tehama,2020,Male,Sentenced,Misdemeanor,0
-3068,Trinity,2020,Male,Sentenced,Misdemeanor,2
-3069,Tulare,2020,Male,Sentenced,Misdemeanor,16
-3070,Tuolumne,2020,Male,Sentenced,Misdemeanor,0
-3071,Ventura,2020,Male,Sentenced,Misdemeanor,53
-3072,Yolo,2020,Male,Sentenced,Misdemeanor,3
-3073,Yuba,2020,Male,Sentenced,Misdemeanor,2
-3074,Alameda,2021,Male,Sentenced,Misdemeanor,9
-3075,Alpine,2021,Male,Sentenced,Misdemeanor,0
-3076,Amador,2021,Male,Sentenced,Misdemeanor,2
-3077,Butte,2021,Male,Sentenced,Misdemeanor,10
-3078,Calaveras,2021,Male,Sentenced,Misdemeanor,2
-3079,Colusa,2021,Male,Sentenced,Misdemeanor,6
-3080,Contra Costa,2021,Male,Sentenced,Misdemeanor,10
-3081,Del Norte,2021,Male,Sentenced,Misdemeanor,0
-3082,El Dorado,2021,Male,Sentenced,Misdemeanor,0
-3083,Fresno,2021,Male,Sentenced,Misdemeanor,8
-3084,Glenn,2021,Male,Sentenced,Misdemeanor,1
-3085,Humboldt,2021,Male,Sentenced,Misdemeanor,1
-3086,Imperial,2021,Male,Sentenced,Misdemeanor,4
-3087,Inyo,2021,Male,Sentenced,Misdemeanor,1
-3088,Kern,2021,Male,Sentenced,Misdemeanor,4
-3089,Kings,2021,Male,Sentenced,Misdemeanor,6
-3090,Lake,2021,Male,Sentenced,Misdemeanor,8
-3091,Lassen,2021,Male,Sentenced,Misdemeanor,2
-3092,Los Angeles,2021,Male,Sentenced,Misdemeanor,246
-3093,Madera,2021,Male,Sentenced,Misdemeanor,6
-3094,Marin,2021,Male,Sentenced,Misdemeanor,2
-3095,Mariposa,2021,Male,Sentenced,Misdemeanor,0
-3096,Mendocino,2021,Male,Sentenced,Misdemeanor,0
-3097,Merced,2021,Male,Sentenced,Misdemeanor,0
-3098,Modoc,2021,Male,Sentenced,Misdemeanor,1
-3099,Mono,2021,Male,Sentenced,Misdemeanor,1
-3100,Monterey,2021,Male,Sentenced,Misdemeanor,0
-3101,Napa,2021,Male,Sentenced,Misdemeanor,2
-3102,Nevada,2021,Male,Sentenced,Misdemeanor,1
-3103,Orange,2021,Male,Sentenced,Misdemeanor,225
-3104,Placer,2021,Male,Sentenced,Misdemeanor,35
-3105,Plumas,2021,Male,Sentenced,Misdemeanor,1
-3106,Riverside,2021,Male,Sentenced,Misdemeanor,13
-3107,Sacramento,2021,Male,Sentenced,Misdemeanor,62
-3108,San Benito,2021,Male,Sentenced,Misdemeanor,1
-3109,San Bernardino,2021,Male,Sentenced,Misdemeanor,158
-3110,San Diego,2021,Male,Sentenced,Misdemeanor,36
-3111,San Francisco,2021,Male,Sentenced,Misdemeanor,9
-3112,San Joaquin,2021,Male,Sentenced,Misdemeanor,14
-3113,San Luis Obispo,2021,Male,Sentenced,Misdemeanor,21
-3114,San Mateo,2021,Male,Sentenced,Misdemeanor,10
-3115,Santa Barbara,2021,Male,Sentenced,Misdemeanor,150
-3116,Santa Clara,2021,Male,Sentenced,Misdemeanor,20
-3117,Santa Cruz,2021,Male,Sentenced,Misdemeanor,33
-3118,Shasta,2021,Male,Sentenced,Misdemeanor,5
-3119,Sierra,2021,Male,Sentenced,Misdemeanor,0
-3120,Siskiyou,2021,Male,Sentenced,Misdemeanor,0
-3121,Solano,2021,Male,Sentenced,Misdemeanor,4
-3122,Sonoma,2021,Male,Sentenced,Misdemeanor,24
-3123,Stanislaus,2021,Male,Sentenced,Misdemeanor,15
-3124,Sutter,2021,Male,Sentenced,Misdemeanor,3
-3125,Tehama,2021,Male,Sentenced,Misdemeanor,0
-3126,Trinity,2021,Male,Sentenced,Misdemeanor,0
-3127,Tulare,2021,Male,Sentenced,Misdemeanor,18
-3128,Tuolumne,2021,Male,Sentenced,Misdemeanor,0
-3129,Ventura,2021,Male,Sentenced,Misdemeanor,43
-3130,Yolo,2021,Male,Sentenced,Misdemeanor,2
-3131,Yuba,2021,Male,Sentenced,Misdemeanor,4
-3132,Alameda,2022,Male,Sentenced,Misdemeanor,14
-3133,Alpine,2022,Male,Sentenced,Misdemeanor,0
-3134,Amador,2022,Male,Sentenced,Misdemeanor,1
-3135,Butte,2022,Male,Sentenced,Misdemeanor,6
-3136,Calaveras,2022,Male,Sentenced,Misdemeanor,1
-3137,Colusa,2022,Male,Sentenced,Misdemeanor,6
-3138,Contra Costa,2022,Male,Sentenced,Misdemeanor,11
-3139,Del Norte,2022,Male,Sentenced,Misdemeanor,3
-3140,El Dorado,2022,Male,Sentenced,Misdemeanor,27
-3141,Fresno,2022,Male,Sentenced,Misdemeanor,16
-3142,Glenn,2022,Male,Sentenced,Misdemeanor,3
-3143,Humboldt,2022,Male,Sentenced,Misdemeanor,2
-3144,Imperial,2022,Male,Sentenced,Misdemeanor,8
-3145,Inyo,2022,Male,Sentenced,Misdemeanor,2
-3146,Kern,2022,Male,Sentenced,Misdemeanor,12
-3147,Kings,2022,Male,Sentenced,Misdemeanor,5
-3148,Lake,2022,Male,Sentenced,Misdemeanor,10
-3149,Lassen,2022,Male,Sentenced,Misdemeanor,4
-3150,Los Angeles,2022,Male,Sentenced,Misdemeanor,341
-3151,Madera,2022,Male,Sentenced,Misdemeanor,0
-3152,Marin,2022,Male,Sentenced,Misdemeanor,3
-3153,Mariposa,2022,Male,Sentenced,Misdemeanor,1
-3154,Mendocino,2022,Male,Sentenced,Misdemeanor,39
-3155,Merced,2022,Male,Sentenced,Misdemeanor,0
-3156,Modoc,2022,Male,Sentenced,Misdemeanor,1
-3157,Mono,2022,Male,Sentenced,Misdemeanor,1
-3158,Monterey,2022,Male,Sentenced,Misdemeanor,19
-3159,Napa,2022,Male,Sentenced,Misdemeanor,6
-3160,Nevada,2022,Male,Sentenced,Misdemeanor,2
-3161,Orange,2022,Male,Sentenced,Misdemeanor,167
-3162,Placer,2022,Male,Sentenced,Misdemeanor,50
-3163,Plumas,2022,Male,Sentenced,Misdemeanor,3
-3164,Riverside,2022,Male,Sentenced,Misdemeanor,10
-3165,Sacramento,2022,Male,Sentenced,Misdemeanor,52
-3166,San Benito,2022,Male,Sentenced,Misdemeanor,4
-3167,San Bernardino,2022,Male,Sentenced,Misdemeanor,151
-3168,San Diego,2022,Male,Sentenced,Misdemeanor,35
-3169,San Francisco,2022,Male,Sentenced,Misdemeanor,20
-3170,San Joaquin,2022,Male,Sentenced,Misdemeanor,6
-3171,San Luis Obispo,2022,Male,Sentenced,Misdemeanor,11
-3172,San Mateo,2022,Male,Sentenced,Misdemeanor,11
-3173,Santa Barbara,2022,Male,Sentenced,Misdemeanor,28
-3174,Santa Clara,2022,Male,Sentenced,Misdemeanor,18
-3175,Santa Cruz,2022,Male,Sentenced,Misdemeanor,208
-3176,Shasta,2022,Male,Sentenced,Misdemeanor,1
-3177,Sierra,2022,Male,Sentenced,Misdemeanor,0
-3178,Siskiyou,2022,Male,Sentenced,Misdemeanor,0
-3179,Solano,2022,Male,Sentenced,Misdemeanor,7
-3180,Sonoma,2022,Male,Sentenced,Misdemeanor,27
-3181,Stanislaus,2022,Male,Sentenced,Misdemeanor,20
-3182,Sutter,2022,Male,Sentenced,Misdemeanor,5
-3183,Tehama,2022,Male,Sentenced,Misdemeanor,0
-3184,Trinity,2022,Male,Sentenced,Misdemeanor,0
-3185,Tulare,2022,Male,Sentenced,Misdemeanor,18
-3186,Tuolumne,2022,Male,Sentenced,Misdemeanor,1
-3187,Ventura,2022,Male,Sentenced,Misdemeanor,46
-3188,Yolo,2022,Male,Sentenced,Misdemeanor,10
-3189,Yuba,2022,Male,Sentenced,Misdemeanor,5
-3190,Alameda,2023,Male,Sentenced,Misdemeanor,12
-3191,Alpine,2023,Male,Sentenced,Misdemeanor,0
-3192,Amador,2023,Male,Sentenced,Misdemeanor,3
-3193,Butte,2023,Male,Sentenced,Misdemeanor,12
-3194,Calaveras,2023,Male,Sentenced,Misdemeanor,1
-3195,Colusa,2023,Male,Sentenced,Misdemeanor,1
-3196,Contra Costa,2023,Male,Sentenced,Misdemeanor,15
-3197,Del Norte,2023,Male,Sentenced,Misdemeanor,4
-3198,El Dorado,2023,Male,Sentenced,Misdemeanor,2
-3199,Fresno,2023,Male,Sentenced,Misdemeanor,24
-3200,Glenn,2023,Male,Sentenced,Misdemeanor,3
-3201,Humboldt,2023,Male,Sentenced,Misdemeanor,3
-3202,Imperial,2023,Male,Sentenced,Misdemeanor,12
-3203,Inyo,2023,Male,Sentenced,Misdemeanor,0
-3204,Kern,2023,Male,Sentenced,Misdemeanor,11
-3205,Kings,2023,Male,Sentenced,Misdemeanor,10
-3206,Lake,2023,Male,Sentenced,Misdemeanor,10
-3207,Lassen,2023,Male,Sentenced,Misdemeanor,3
-3208,Los Angeles,2023,Male,Sentenced,Misdemeanor,230
-3209,Madera,2023,Male,Sentenced,Misdemeanor,0
-3210,Marin,2023,Male,Sentenced,Misdemeanor,3
-3211,Mariposa,2023,Male,Sentenced,Misdemeanor,0
-3212,Mendocino,2023,Male,Sentenced,Misdemeanor,40
-3213,Merced,2023,Male,Sentenced,Misdemeanor,0
-3214,Modoc,2023,Male,Sentenced,Misdemeanor,2
-3215,Mono,2023,Male,Sentenced,Misdemeanor,3
-3216,Monterey,2023,Male,Sentenced,Misdemeanor,21
-3217,Napa,2023,Male,Sentenced,Misdemeanor,2
-3218,Nevada,2023,Male,Sentenced,Misdemeanor,1
-3219,Orange,2023,Male,Sentenced,Misdemeanor,209
-3220,Placer,2023,Male,Sentenced,Misdemeanor,68
-3221,Plumas,2023,Male,Sentenced,Misdemeanor,3
-3222,Riverside,2023,Male,Sentenced,Misdemeanor,15
-3223,Sacramento,2023,Male,Sentenced,Misdemeanor,38
-3224,San Benito,2023,Male,Sentenced,Misdemeanor,2
-3225,San Bernardino,2023,Male,Sentenced,Misdemeanor,105
-3226,San Diego,2023,Male,Sentenced,Misdemeanor,55
-3227,San Francisco,2023,Male,Sentenced,Misdemeanor,11
-3228,San Joaquin,2023,Male,Sentenced,Misdemeanor,14
-3229,San Luis Obispo,2023,Male,Sentenced,Misdemeanor,7
-3230,San Mateo,2023,Male,Sentenced,Misdemeanor,16
-3231,Santa Barbara,2023,Male,Sentenced,Misdemeanor,25
-3232,Santa Clara,2023,Male,Sentenced,Misdemeanor,21
-3233,Santa Cruz,2023,Male,Sentenced,Misdemeanor,47
-3234,Shasta,2023,Male,Sentenced,Misdemeanor,2
-3235,Sierra,2023,Male,Sentenced,Misdemeanor,0
-3236,Siskiyou,2023,Male,Sentenced,Misdemeanor,0
-3237,Solano,2023,Male,Sentenced,Misdemeanor,10
-3238,Sonoma,2023,Male,Sentenced,Misdemeanor,14
-3239,Stanislaus,2023,Male,Sentenced,Misdemeanor,25
-3240,Sutter,2023,Male,Sentenced,Misdemeanor,5
-3241,Tehama,2023,Male,Sentenced,Misdemeanor,0
-3242,Trinity,2023,Male,Sentenced,Misdemeanor,0
-3243,Tulare,2023,Male,Sentenced,Misdemeanor,19
-3244,Tuolumne,2023,Male,Sentenced,Misdemeanor,2
-3245,Ventura,2023,Male,Sentenced,Misdemeanor,44
-3246,Yolo,2023,Male,Sentenced,Misdemeanor,5
-3247,Yuba,2023,Male,Sentenced,Misdemeanor,6
+1624,Alameda,2017,Female,Unsentenced,Misdemeanors,12
+1625,Alpine,2017,Female,Unsentenced,Misdemeanors,0
+1626,Amador,2017,Female,Unsentenced,Misdemeanors,1
+1627,Butte,2017,Female,Unsentenced,Misdemeanors,6
+1628,Calaveras,2017,Female,Unsentenced,Misdemeanors,1
+1629,Colusa,2017,Female,Unsentenced,Misdemeanors,4
+1630,Contra Costa,2017,Female,Unsentenced,Misdemeanors,24
+1631,Del Norte,2017,Female,Unsentenced,Misdemeanors,3
+1632,El Dorado,2017,Female,Unsentenced,Misdemeanors,5
+1633,Fresno,2017,Female,Unsentenced,Misdemeanors,19
+1634,Glenn,2017,Female,Unsentenced,Misdemeanors,3
+1635,Humboldt,2017,Female,Unsentenced,Misdemeanors,4
+1636,Imperial,2017,Female,Unsentenced,Misdemeanors,4
+1637,Inyo,2017,Female,Unsentenced,Misdemeanors,2
+1638,Kern,2017,Female,Unsentenced,Misdemeanors,27
+1639,Kings,2017,Female,Unsentenced,Misdemeanors,13
+1640,Lake,2017,Female,Unsentenced,Misdemeanors,5
+1641,Lassen,2017,Female,Unsentenced,Misdemeanors,2
+1642,Los Angeles,2017,Female,Unsentenced,Misdemeanors,158
+1643,Madera,2017,Female,Unsentenced,Misdemeanors,10
+1644,Marin,2017,Female,Unsentenced,Misdemeanors,8
+1645,Mariposa,2017,Female,Unsentenced,Misdemeanors,2
+1646,Mendocino,2017,Female,Unsentenced,Misdemeanors,12
+1647,Merced,2017,Female,Unsentenced,Misdemeanors,7
+1648,Modoc,2017,Female,Unsentenced,Misdemeanors,0
+1649,Mono,2017,Female,Unsentenced,Misdemeanors,1
+1650,Monterey,2017,Female,Unsentenced,Misdemeanors,4
+1651,Napa,2017,Female,Unsentenced,Misdemeanors,4
+1652,Nevada,2017,Female,Unsentenced,Misdemeanors,4
+1653,Orange,2017,Female,Unsentenced,Misdemeanors,82
+1654,Placer,2017,Female,Unsentenced,Misdemeanors,13
+1655,Plumas,2017,Female,Unsentenced,Misdemeanors,2
+1656,Riverside,2017,Female,Unsentenced,Misdemeanors,20
+1657,Sacramento,2017,Female,Unsentenced,Misdemeanors,24
+1658,San Benito,2017,Female,Unsentenced,Misdemeanors,3
+1659,San Bernardino,2017,Female,Unsentenced,Misdemeanors,152
+1660,San Diego,2017,Female,Unsentenced,Misdemeanors,39
+1661,San Francisco,2017,Female,Unsentenced,Misdemeanors,0
+1662,San Joaquin,2017,Female,Unsentenced,Misdemeanors,9
+1663,San Luis Obispo,2017,Female,Unsentenced,Misdemeanors,40
+1664,San Mateo,2017,Female,Unsentenced,Misdemeanors,5
+1665,Santa Barbara,2017,Female,Unsentenced,Misdemeanors,0
+1666,Santa Clara,2017,Female,Unsentenced,Misdemeanors,15
+1667,Santa Cruz,2017,Female,Unsentenced,Misdemeanors,162
+1668,Shasta,2017,Female,Unsentenced,Misdemeanors,3
+1669,Sierra,2017,Female,Unsentenced,Misdemeanors,0
+1670,Siskiyou,2017,Female,Unsentenced,Misdemeanors,0
+1671,Solano,2017,Female,Unsentenced,Misdemeanors,9
+1672,Sonoma,2017,Female,Unsentenced,Misdemeanors,28
+1673,Stanislaus,2017,Female,Unsentenced,Misdemeanors,10
+1674,Sutter,2017,Female,Unsentenced,Misdemeanors,1
+1675,Tehama,2017,Female,Unsentenced,Misdemeanors,0
+1676,Trinity,2017,Female,Unsentenced,Misdemeanors,0
+1677,Tulare,2017,Female,Unsentenced,Misdemeanors,14
+1678,Tuolumne,2017,Female,Unsentenced,Misdemeanors,1
+1679,Ventura,2017,Female,Unsentenced,Misdemeanors,25
+1680,Yolo,2017,Female,Unsentenced,Misdemeanors,2
+1681,Yuba,2017,Female,Unsentenced,Misdemeanors,2
+1682,Alameda,2018,Female,Unsentenced,Misdemeanors,12
+1683,Alpine,2018,Female,Unsentenced,Misdemeanors,0
+1684,Amador,2018,Female,Unsentenced,Misdemeanors,1
+1685,Butte,2018,Female,Unsentenced,Misdemeanors,7
+1686,Calaveras,2018,Female,Unsentenced,Misdemeanors,2
+1687,Colusa,2018,Female,Unsentenced,Misdemeanors,2
+1688,Contra Costa,2018,Female,Unsentenced,Misdemeanors,24
+1689,Del Norte,2018,Female,Unsentenced,Misdemeanors,4
+1690,El Dorado,2018,Female,Unsentenced,Misdemeanors,3
+1691,Fresno,2018,Female,Unsentenced,Misdemeanors,14
+1692,Glenn,2018,Female,Unsentenced,Misdemeanors,3
+1693,Humboldt,2018,Female,Unsentenced,Misdemeanors,4
+1694,Imperial,2018,Female,Unsentenced,Misdemeanors,11
+1695,Inyo,2018,Female,Unsentenced,Misdemeanors,2
+1696,Kern,2018,Female,Unsentenced,Misdemeanors,22
+1697,Kings,2018,Female,Unsentenced,Misdemeanors,10
+1698,Lake,2018,Female,Unsentenced,Misdemeanors,4
+1699,Lassen,2018,Female,Unsentenced,Misdemeanors,2
+1700,Los Angeles,2018,Female,Unsentenced,Misdemeanors,148
+1701,Madera,2018,Female,Unsentenced,Misdemeanors,10
+1702,Marin,2018,Female,Unsentenced,Misdemeanors,8
+1703,Mariposa,2018,Female,Unsentenced,Misdemeanors,2
+1704,Mendocino,2018,Female,Unsentenced,Misdemeanors,19
+1705,Merced,2018,Female,Unsentenced,Misdemeanors,0
+1706,Modoc,2018,Female,Unsentenced,Misdemeanors,0
+1707,Mono,2018,Female,Unsentenced,Misdemeanors,1
+1708,Monterey,2018,Female,Unsentenced,Misdemeanors,6
+1709,Napa,2018,Female,Unsentenced,Misdemeanors,2
+1710,Nevada,2018,Female,Unsentenced,Misdemeanors,2
+1711,Orange,2018,Female,Unsentenced,Misdemeanors,77
+1712,Placer,2018,Female,Unsentenced,Misdemeanors,11
+1713,Plumas,2018,Female,Unsentenced,Misdemeanors,3
+1714,Riverside,2018,Female,Unsentenced,Misdemeanors,20
+1715,Sacramento,2018,Female,Unsentenced,Misdemeanors,33
+1716,San Benito,2018,Female,Unsentenced,Misdemeanors,2
+1717,San Bernardino,2018,Female,Unsentenced,Misdemeanors,150
+1718,San Diego,2018,Female,Unsentenced,Misdemeanors,38
+1719,San Francisco,2018,Female,Unsentenced,Misdemeanors,10
+1720,San Joaquin,2018,Female,Unsentenced,Misdemeanors,12
+1721,San Luis Obispo,2018,Female,Unsentenced,Misdemeanors,14
+1722,San Mateo,2018,Female,Unsentenced,Misdemeanors,8
+1723,Santa Barbara,2018,Female,Unsentenced,Misdemeanors,19
+1724,Santa Clara,2018,Female,Unsentenced,Misdemeanors,45
+1725,Santa Cruz,2018,Female,Unsentenced,Misdemeanors,27
+1726,Shasta,2018,Female,Unsentenced,Misdemeanors,4
+1727,Sierra,2018,Female,Unsentenced,Misdemeanors,0
+1728,Siskiyou,2018,Female,Unsentenced,Misdemeanors,0
+1729,Solano,2018,Female,Unsentenced,Misdemeanors,7
+1730,Sonoma,2018,Female,Unsentenced,Misdemeanors,23
+1731,Stanislaus,2018,Female,Unsentenced,Misdemeanors,11
+1732,Sutter,2018,Female,Unsentenced,Misdemeanors,0
+1733,Tehama,2018,Female,Unsentenced,Misdemeanors,0
+1734,Trinity,2018,Female,Unsentenced,Misdemeanors,1
+1735,Tulare,2018,Female,Unsentenced,Misdemeanors,12
+1736,Tuolumne,2018,Female,Unsentenced,Misdemeanors,2
+1737,Ventura,2018,Female,Unsentenced,Misdemeanors,0
+1738,Yolo,2018,Female,Unsentenced,Misdemeanors,4
+1739,Yuba,2018,Female,Unsentenced,Misdemeanors,2
+1740,Alameda,2019,Female,Unsentenced,Misdemeanors,12
+1741,Alpine,2019,Female,Unsentenced,Misdemeanors,0
+1742,Amador,2019,Female,Unsentenced,Misdemeanors,1
+1743,Butte,2019,Female,Unsentenced,Misdemeanors,6
+1744,Calaveras,2019,Female,Unsentenced,Misdemeanors,2
+1745,Colusa,2019,Female,Unsentenced,Misdemeanors,2
+1746,Contra Costa,2019,Female,Unsentenced,Misdemeanors,21
+1747,Del Norte,2019,Female,Unsentenced,Misdemeanors,3
+1748,El Dorado,2019,Female,Unsentenced,Misdemeanors,3
+1749,Fresno,2019,Female,Unsentenced,Misdemeanors,11
+1750,Glenn,2019,Female,Unsentenced,Misdemeanors,4
+1751,Humboldt,2019,Female,Unsentenced,Misdemeanors,4
+1752,Imperial,2019,Female,Unsentenced,Misdemeanors,2
+1753,Inyo,2019,Female,Unsentenced,Misdemeanors,0
+1754,Kern,2019,Female,Unsentenced,Misdemeanors,13
+1755,Kings,2019,Female,Unsentenced,Misdemeanors,10
+1756,Lake,2019,Female,Unsentenced,Misdemeanors,5
+1757,Lassen,2019,Female,Unsentenced,Misdemeanors,1
+1758,Los Angeles,2019,Female,Unsentenced,Misdemeanors,161
+1759,Madera,2019,Female,Unsentenced,Misdemeanors,7
+1760,Marin,2019,Female,Unsentenced,Misdemeanors,8
+1761,Mariposa,2019,Female,Unsentenced,Misdemeanors,1
+1762,Mendocino,2019,Female,Unsentenced,Misdemeanors,13
+1763,Merced,2019,Female,Unsentenced,Misdemeanors,0
+1764,Modoc,2019,Female,Unsentenced,Misdemeanors,0
+1765,Mono,2019,Female,Unsentenced,Misdemeanors,1
+1766,Monterey,2019,Female,Unsentenced,Misdemeanors,5
+1767,Napa,2019,Female,Unsentenced,Misdemeanors,3
+1768,Nevada,2019,Female,Unsentenced,Misdemeanors,3
+1769,Orange,2019,Female,Unsentenced,Misdemeanors,88
+1770,Placer,2019,Female,Unsentenced,Misdemeanors,13
+1771,Plumas,2019,Female,Unsentenced,Misdemeanors,4
+1772,Riverside,2019,Female,Unsentenced,Misdemeanors,21
+1773,Sacramento,2019,Female,Unsentenced,Misdemeanors,32
+1774,San Benito,2019,Female,Unsentenced,Misdemeanors,4
+1775,San Bernardino,2019,Female,Unsentenced,Misdemeanors,110
+1776,San Diego,2019,Female,Unsentenced,Misdemeanors,28
+1777,San Francisco,2019,Female,Unsentenced,Misdemeanors,0
+1778,San Joaquin,2019,Female,Unsentenced,Misdemeanors,10
+1779,San Luis Obispo,2019,Female,Unsentenced,Misdemeanors,38
+1780,San Mateo,2019,Female,Unsentenced,Misdemeanors,4
+1781,Santa Barbara,2019,Female,Unsentenced,Misdemeanors,11
+1782,Santa Clara,2019,Female,Unsentenced,Misdemeanors,13
+1783,Santa Cruz,2019,Female,Unsentenced,Misdemeanors,229
+1784,Shasta,2019,Female,Unsentenced,Misdemeanors,3
+1785,Sierra,2019,Female,Unsentenced,Misdemeanors,0
+1786,Siskiyou,2019,Female,Unsentenced,Misdemeanors,0
+1787,Solano,2019,Female,Unsentenced,Misdemeanors,7
+1788,Sonoma,2019,Female,Unsentenced,Misdemeanors,16
+1789,Stanislaus,2019,Female,Unsentenced,Misdemeanors,13
+1790,Sutter,2019,Female,Unsentenced,Misdemeanors,4
+1791,Tehama,2019,Female,Unsentenced,Misdemeanors,0
+1792,Trinity,2019,Female,Unsentenced,Misdemeanors,2
+1793,Tulare,2019,Female,Unsentenced,Misdemeanors,10
+1794,Tuolumne,2019,Female,Unsentenced,Misdemeanors,2
+1795,Ventura,2019,Female,Unsentenced,Misdemeanors,29
+1796,Yolo,2019,Female,Unsentenced,Misdemeanors,3
+1797,Yuba,2019,Female,Unsentenced,Misdemeanors,2
+1798,Alameda,2020,Female,Unsentenced,Misdemeanors,9
+1799,Alpine,2020,Female,Unsentenced,Misdemeanors,0
+1800,Amador,2020,Female,Unsentenced,Misdemeanors,0
+1801,Butte,2020,Female,Unsentenced,Misdemeanors,3
+1802,Calaveras,2020,Female,Unsentenced,Misdemeanors,1
+1803,Colusa,2020,Female,Unsentenced,Misdemeanors,2
+1804,Contra Costa,2020,Female,Unsentenced,Misdemeanors,10
+1805,Del Norte,2020,Female,Unsentenced,Misdemeanors,0
+1806,El Dorado,2020,Female,Unsentenced,Misdemeanors,1
+1807,Fresno,2020,Female,Unsentenced,Misdemeanors,6
+1808,Glenn,2020,Female,Unsentenced,Misdemeanors,2
+1809,Humboldt,2020,Female,Unsentenced,Misdemeanors,2
+1810,Imperial,2020,Female,Unsentenced,Misdemeanors,0
+1811,Inyo,2020,Female,Unsentenced,Misdemeanors,1
+1812,Kern,2020,Female,Unsentenced,Misdemeanors,5
+1813,Kings,2020,Female,Unsentenced,Misdemeanors,2
+1814,Lake,2020,Female,Unsentenced,Misdemeanors,3
+1815,Lassen,2020,Female,Unsentenced,Misdemeanors,0
+1816,Los Angeles,2020,Female,Unsentenced,Misdemeanors,59
+1817,Madera,2020,Female,Unsentenced,Misdemeanors,3
+1818,Marin,2020,Female,Unsentenced,Misdemeanors,2
+1819,Mariposa,2020,Female,Unsentenced,Misdemeanors,0
+1820,Mendocino,2020,Female,Unsentenced,Misdemeanors,0
+1821,Merced,2020,Female,Unsentenced,Misdemeanors,0
+1822,Modoc,2020,Female,Unsentenced,Misdemeanors,0
+1823,Mono,2020,Female,Unsentenced,Misdemeanors,0
+1824,Monterey,2020,Female,Unsentenced,Misdemeanors,2
+1825,Napa,2020,Female,Unsentenced,Misdemeanors,1
+1826,Nevada,2020,Female,Unsentenced,Misdemeanors,1
+1827,Orange,2020,Female,Unsentenced,Misdemeanors,44
+1828,Placer,2020,Female,Unsentenced,Misdemeanors,11
+1829,Plumas,2020,Female,Unsentenced,Misdemeanors,1
+1830,Riverside,2020,Female,Unsentenced,Misdemeanors,5
+1831,Sacramento,2020,Female,Unsentenced,Misdemeanors,11
+1832,San Benito,2020,Female,Unsentenced,Misdemeanors,1
+1833,San Bernardino,2020,Female,Unsentenced,Misdemeanors,114
+1834,San Diego,2020,Female,Unsentenced,Misdemeanors,7
+1835,San Francisco,2020,Female,Unsentenced,Misdemeanors,0
+1836,San Joaquin,2020,Female,Unsentenced,Misdemeanors,2
+1837,San Luis Obispo,2020,Female,Unsentenced,Misdemeanors,22
+1838,San Mateo,2020,Female,Unsentenced,Misdemeanors,1
+1839,Santa Barbara,2020,Female,Unsentenced,Misdemeanors,5
+1840,Santa Clara,2020,Female,Unsentenced,Misdemeanors,3
+1841,Santa Cruz,2020,Female,Unsentenced,Misdemeanors,101
+1842,Shasta,2020,Female,Unsentenced,Misdemeanors,1
+1843,Sierra,2020,Female,Unsentenced,Misdemeanors,0
+1844,Siskiyou,2020,Female,Unsentenced,Misdemeanors,0
+1845,Solano,2020,Female,Unsentenced,Misdemeanors,5
+1846,Sonoma,2020,Female,Unsentenced,Misdemeanors,6
+1847,Stanislaus,2020,Female,Unsentenced,Misdemeanors,4
+1848,Sutter,2020,Female,Unsentenced,Misdemeanors,2
+1849,Tehama,2020,Female,Unsentenced,Misdemeanors,0
+1850,Trinity,2020,Female,Unsentenced,Misdemeanors,1
+1851,Tulare,2020,Female,Unsentenced,Misdemeanors,5
+1852,Tuolumne,2020,Female,Unsentenced,Misdemeanors,0
+1853,Ventura,2020,Female,Unsentenced,Misdemeanors,12
+1854,Yolo,2020,Female,Unsentenced,Misdemeanors,1
+1855,Yuba,2020,Female,Unsentenced,Misdemeanors,1
+1856,Alameda,2021,Female,Unsentenced,Misdemeanors,9
+1857,Alpine,2021,Female,Unsentenced,Misdemeanors,0
+1858,Amador,2021,Female,Unsentenced,Misdemeanors,1
+1859,Butte,2021,Female,Unsentenced,Misdemeanors,4
+1860,Calaveras,2021,Female,Unsentenced,Misdemeanors,1
+1861,Colusa,2021,Female,Unsentenced,Misdemeanors,2
+1862,Contra Costa,2021,Female,Unsentenced,Misdemeanors,5
+1863,Del Norte,2021,Female,Unsentenced,Misdemeanors,0
+1864,El Dorado,2021,Female,Unsentenced,Misdemeanors,0
+1865,Fresno,2021,Female,Unsentenced,Misdemeanors,8
+1866,Glenn,2021,Female,Unsentenced,Misdemeanors,1
+1867,Humboldt,2021,Female,Unsentenced,Misdemeanors,2
+1868,Imperial,2021,Female,Unsentenced,Misdemeanors,1
+1869,Inyo,2021,Female,Unsentenced,Misdemeanors,0
+1870,Kern,2021,Female,Unsentenced,Misdemeanors,8
+1871,Kings,2021,Female,Unsentenced,Misdemeanors,3
+1872,Lake,2021,Female,Unsentenced,Misdemeanors,6
+1873,Lassen,2021,Female,Unsentenced,Misdemeanors,1
+1874,Los Angeles,2021,Female,Unsentenced,Misdemeanors,74
+1875,Madera,2021,Female,Unsentenced,Misdemeanors,5
+1876,Marin,2021,Female,Unsentenced,Misdemeanors,2
+1877,Mariposa,2021,Female,Unsentenced,Misdemeanors,0
+1878,Mendocino,2021,Female,Unsentenced,Misdemeanors,0
+1879,Merced,2021,Female,Unsentenced,Misdemeanors,0
+1880,Modoc,2021,Female,Unsentenced,Misdemeanors,0
+1881,Mono,2021,Female,Unsentenced,Misdemeanors,1
+1882,Monterey,2021,Female,Unsentenced,Misdemeanors,0
+1883,Napa,2021,Female,Unsentenced,Misdemeanors,1
+1884,Nevada,2021,Female,Unsentenced,Misdemeanors,1
+1885,Orange,2021,Female,Unsentenced,Misdemeanors,47
+1886,Placer,2021,Female,Unsentenced,Misdemeanors,13
+1887,Plumas,2021,Female,Unsentenced,Misdemeanors,1
+1888,Riverside,2021,Female,Unsentenced,Misdemeanors,10
+1889,Sacramento,2021,Female,Unsentenced,Misdemeanors,14
+1890,San Benito,2021,Female,Unsentenced,Misdemeanors,0
+1891,San Bernardino,2021,Female,Unsentenced,Misdemeanors,80
+1892,San Diego,2021,Female,Unsentenced,Misdemeanors,8
+1893,San Francisco,2021,Female,Unsentenced,Misdemeanors,3
+1894,San Joaquin,2021,Female,Unsentenced,Misdemeanors,7
+1895,San Luis Obispo,2021,Female,Unsentenced,Misdemeanors,5
+1896,San Mateo,2021,Female,Unsentenced,Misdemeanors,3
+1897,Santa Barbara,2021,Female,Unsentenced,Misdemeanors,40
+1898,Santa Clara,2021,Female,Unsentenced,Misdemeanors,14
+1899,Santa Cruz,2021,Female,Unsentenced,Misdemeanors,24
+1900,Shasta,2021,Female,Unsentenced,Misdemeanors,1
+1901,Sierra,2021,Female,Unsentenced,Misdemeanors,0
+1902,Siskiyou,2021,Female,Unsentenced,Misdemeanors,0
+1903,Solano,2021,Female,Unsentenced,Misdemeanors,3
+1904,Sonoma,2021,Female,Unsentenced,Misdemeanors,5
+1905,Stanislaus,2021,Female,Unsentenced,Misdemeanors,8
+1906,Sutter,2021,Female,Unsentenced,Misdemeanors,3
+1907,Tehama,2021,Female,Unsentenced,Misdemeanors,0
+1908,Trinity,2021,Female,Unsentenced,Misdemeanors,1
+1909,Tulare,2021,Female,Unsentenced,Misdemeanors,8
+1910,Tuolumne,2021,Female,Unsentenced,Misdemeanors,0
+1911,Ventura,2021,Female,Unsentenced,Misdemeanors,12
+1912,Yolo,2021,Female,Unsentenced,Misdemeanors,2
+1913,Yuba,2021,Female,Unsentenced,Misdemeanors,2
+1914,Alameda,2022,Female,Unsentenced,Misdemeanors,12
+1915,Alpine,2022,Female,Unsentenced,Misdemeanors,0
+1916,Amador,2022,Female,Unsentenced,Misdemeanors,1
+1917,Butte,2022,Female,Unsentenced,Misdemeanors,3
+1918,Calaveras,2022,Female,Unsentenced,Misdemeanors,2
+1919,Colusa,2022,Female,Unsentenced,Misdemeanors,0
+1920,Contra Costa,2022,Female,Unsentenced,Misdemeanors,8
+1921,Del Norte,2022,Female,Unsentenced,Misdemeanors,1
+1922,El Dorado,2022,Female,Unsentenced,Misdemeanors,9
+1923,Fresno,2022,Female,Unsentenced,Misdemeanors,11
+1924,Glenn,2022,Female,Unsentenced,Misdemeanors,2
+1925,Humboldt,2022,Female,Unsentenced,Misdemeanors,1
+1926,Imperial,2022,Female,Unsentenced,Misdemeanors,1
+1927,Inyo,2022,Female,Unsentenced,Misdemeanors,1
+1928,Kern,2022,Female,Unsentenced,Misdemeanors,8
+1929,Kings,2022,Female,Unsentenced,Misdemeanors,4
+1930,Lake,2022,Female,Unsentenced,Misdemeanors,4
+1931,Lassen,2022,Female,Unsentenced,Misdemeanors,3
+1932,Los Angeles,2022,Female,Unsentenced,Misdemeanors,82
+1933,Madera,2022,Female,Unsentenced,Misdemeanors,1
+1934,Marin,2022,Female,Unsentenced,Misdemeanors,1
+1935,Mariposa,2022,Female,Unsentenced,Misdemeanors,1
+1936,Mendocino,2022,Female,Unsentenced,Misdemeanors,18
+1937,Merced,2022,Female,Unsentenced,Misdemeanors,0
+1938,Modoc,2022,Female,Unsentenced,Misdemeanors,0
+1939,Mono,2022,Female,Unsentenced,Misdemeanors,1
+1940,Monterey,2022,Female,Unsentenced,Misdemeanors,4
+1941,Napa,2022,Female,Unsentenced,Misdemeanors,2
+1942,Nevada,2022,Female,Unsentenced,Misdemeanors,2
+1943,Orange,2022,Female,Unsentenced,Misdemeanors,41
+1944,Placer,2022,Female,Unsentenced,Misdemeanors,21
+1945,Plumas,2022,Female,Unsentenced,Misdemeanors,0
+1946,Riverside,2022,Female,Unsentenced,Misdemeanors,9
+1947,Sacramento,2022,Female,Unsentenced,Misdemeanors,14
+1948,San Benito,2022,Female,Unsentenced,Misdemeanors,1
+1949,San Bernardino,2022,Female,Unsentenced,Misdemeanors,136
+1950,San Diego,2022,Female,Unsentenced,Misdemeanors,9
+1951,San Francisco,2022,Female,Unsentenced,Misdemeanors,0
+1952,San Joaquin,2022,Female,Unsentenced,Misdemeanors,2
+1953,San Luis Obispo,2022,Female,Unsentenced,Misdemeanors,6
+1954,San Mateo,2022,Female,Unsentenced,Misdemeanors,3
+1955,Santa Barbara,2022,Female,Unsentenced,Misdemeanors,8
+1956,Santa Clara,2022,Female,Unsentenced,Misdemeanors,9
+1957,Santa Cruz,2022,Female,Unsentenced,Misdemeanors,215
+1958,Shasta,2022,Female,Unsentenced,Misdemeanors,0
+1959,Sierra,2022,Female,Unsentenced,Misdemeanors,0
+1960,Siskiyou,2022,Female,Unsentenced,Misdemeanors,0
+1961,Solano,2022,Female,Unsentenced,Misdemeanors,5
+1962,Sonoma,2022,Female,Unsentenced,Misdemeanors,8
+1963,Stanislaus,2022,Female,Unsentenced,Misdemeanors,7
+1964,Sutter,2022,Female,Unsentenced,Misdemeanors,9
+1965,Tehama,2022,Female,Unsentenced,Misdemeanors,0
+1966,Trinity,2022,Female,Unsentenced,Misdemeanors,1
+1967,Tulare,2022,Female,Unsentenced,Misdemeanors,5
+1968,Tuolumne,2022,Female,Unsentenced,Misdemeanors,1
+1969,Ventura,2022,Female,Unsentenced,Misdemeanors,15
+1970,Yolo,2022,Female,Unsentenced,Misdemeanors,5
+1971,Yuba,2022,Female,Unsentenced,Misdemeanors,3
+1972,Alameda,2023,Female,Unsentenced,Misdemeanors,11
+1973,Alpine,2023,Female,Unsentenced,Misdemeanors,0
+1974,Amador,2023,Female,Unsentenced,Misdemeanors,1
+1975,Butte,2023,Female,Unsentenced,Misdemeanors,4
+1976,Calaveras,2023,Female,Unsentenced,Misdemeanors,2
+1977,Colusa,2023,Female,Unsentenced,Misdemeanors,1
+1978,Contra Costa,2023,Female,Unsentenced,Misdemeanors,6
+1979,Del Norte,2023,Female,Unsentenced,Misdemeanors,2
+1980,El Dorado,2023,Female,Unsentenced,Misdemeanors,5
+1981,Fresno,2023,Female,Unsentenced,Misdemeanors,15
+1982,Glenn,2023,Female,Unsentenced,Misdemeanors,1
+1983,Humboldt,2023,Female,Unsentenced,Misdemeanors,2
+1984,Imperial,2023,Female,Unsentenced,Misdemeanors,2
+1985,Inyo,2023,Female,Unsentenced,Misdemeanors,2
+1986,Kern,2023,Female,Unsentenced,Misdemeanors,9
+1987,Kings,2023,Female,Unsentenced,Misdemeanors,4
+1988,Lake,2023,Female,Unsentenced,Misdemeanors,4
+1989,Lassen,2023,Female,Unsentenced,Misdemeanors,5
+1990,Los Angeles,2023,Female,Unsentenced,Misdemeanors,81
+1991,Madera,2023,Female,Unsentenced,Misdemeanors,0
+1992,Marin,2023,Female,Unsentenced,Misdemeanors,2
+1993,Mariposa,2023,Female,Unsentenced,Misdemeanors,0
+1994,Mendocino,2023,Female,Unsentenced,Misdemeanors,13
+1995,Merced,2023,Female,Unsentenced,Misdemeanors,0
+1996,Modoc,2023,Female,Unsentenced,Misdemeanors,1
+1997,Mono,2023,Female,Unsentenced,Misdemeanors,0
+1998,Monterey,2023,Female,Unsentenced,Misdemeanors,4
+1999,Napa,2023,Female,Unsentenced,Misdemeanors,1
+2000,Nevada,2023,Female,Unsentenced,Misdemeanors,1
+2001,Orange,2023,Female,Unsentenced,Misdemeanors,46
+2002,Placer,2023,Female,Unsentenced,Misdemeanors,31
+2003,Plumas,2023,Female,Unsentenced,Misdemeanors,0
+2004,Riverside,2023,Female,Unsentenced,Misdemeanors,11
+2005,Sacramento,2023,Female,Unsentenced,Misdemeanors,12
+2006,San Benito,2023,Female,Unsentenced,Misdemeanors,1
+2007,San Bernardino,2023,Female,Unsentenced,Misdemeanors,119
+2008,San Diego,2023,Female,Unsentenced,Misdemeanors,12
+2009,San Francisco,2023,Female,Unsentenced,Misdemeanors,5
+2010,San Joaquin,2023,Female,Unsentenced,Misdemeanors,7
+2011,San Luis Obispo,2023,Female,Unsentenced,Misdemeanors,2
+2012,San Mateo,2023,Female,Unsentenced,Misdemeanors,5
+2013,Santa Barbara,2023,Female,Unsentenced,Misdemeanors,10
+2014,Santa Clara,2023,Female,Unsentenced,Misdemeanors,22
+2015,Santa Cruz,2023,Female,Unsentenced,Misdemeanors,17
+2016,Shasta,2023,Female,Unsentenced,Misdemeanors,1
+2017,Sierra,2023,Female,Unsentenced,Misdemeanors,0
+2018,Siskiyou,2023,Female,Unsentenced,Misdemeanors,0
+2019,Solano,2023,Female,Unsentenced,Misdemeanors,6
+2020,Sonoma,2023,Female,Unsentenced,Misdemeanors,4
+2021,Stanislaus,2023,Female,Unsentenced,Misdemeanors,9
+2022,Sutter,2023,Female,Unsentenced,Misdemeanors,13
+2023,Tehama,2023,Female,Unsentenced,Misdemeanors,0
+2024,Trinity,2023,Female,Unsentenced,Misdemeanors,1
+2025,Tulare,2023,Female,Unsentenced,Misdemeanors,5
+2026,Tuolumne,2023,Female,Unsentenced,Misdemeanors,1
+2027,Ventura,2023,Female,Unsentenced,Misdemeanors,16
+2028,Yolo,2023,Female,Unsentenced,Misdemeanors,2
+2029,Yuba,2023,Female,Unsentenced,Misdemeanors,3
+2030,Alameda,2017,Female,Sentenced,Misdemeanors,3
+2031,Alpine,2017,Female,Sentenced,Misdemeanors,0
+2032,Amador,2017,Female,Sentenced,Misdemeanors,1
+2033,Butte,2017,Female,Sentenced,Misdemeanors,4
+2034,Calaveras,2017,Female,Sentenced,Misdemeanors,1
+2035,Colusa,2017,Female,Sentenced,Misdemeanors,3
+2036,Contra Costa,2017,Female,Sentenced,Misdemeanors,12
+2037,Del Norte,2017,Female,Sentenced,Misdemeanors,4
+2038,El Dorado,2017,Female,Sentenced,Misdemeanors,5
+2039,Fresno,2017,Female,Sentenced,Misdemeanors,10
+2040,Glenn,2017,Female,Sentenced,Misdemeanors,2
+2041,Humboldt,2017,Female,Sentenced,Misdemeanors,1
+2042,Imperial,2017,Female,Sentenced,Misdemeanors,2
+2043,Inyo,2017,Female,Sentenced,Misdemeanors,1
+2044,Kern,2017,Female,Sentenced,Misdemeanors,12
+2045,Kings,2017,Female,Sentenced,Misdemeanors,4
+2046,Lake,2017,Female,Sentenced,Misdemeanors,6
+2047,Lassen,2017,Female,Sentenced,Misdemeanors,1
+2048,Los Angeles,2017,Female,Sentenced,Misdemeanors,109
+2049,Madera,2017,Female,Sentenced,Misdemeanors,2
+2050,Marin,2017,Female,Sentenced,Misdemeanors,2
+2051,Mariposa,2017,Female,Sentenced,Misdemeanors,2
+2052,Mendocino,2017,Female,Sentenced,Misdemeanors,13
+2053,Merced,2017,Female,Sentenced,Misdemeanors,0
+2054,Modoc,2017,Female,Sentenced,Misdemeanors,0
+2055,Mono,2017,Female,Sentenced,Misdemeanors,0
+2056,Monterey,2017,Female,Sentenced,Misdemeanors,4
+2057,Napa,2017,Female,Sentenced,Misdemeanors,1
+2058,Nevada,2017,Female,Sentenced,Misdemeanors,1
+2059,Orange,2017,Female,Sentenced,Misdemeanors,104
+2060,Placer,2017,Female,Sentenced,Misdemeanors,19
+2061,Plumas,2017,Female,Sentenced,Misdemeanors,0
+2062,Riverside,2017,Female,Sentenced,Misdemeanors,12
+2063,Sacramento,2017,Female,Sentenced,Misdemeanors,32
+2064,San Benito,2017,Female,Sentenced,Misdemeanors,2
+2065,San Bernardino,2017,Female,Sentenced,Misdemeanors,68
+2066,San Diego,2017,Female,Sentenced,Misdemeanors,41
+2067,San Francisco,2017,Female,Sentenced,Misdemeanors,3
+2068,San Joaquin,2017,Female,Sentenced,Misdemeanors,2
+2069,San Luis Obispo,2017,Female,Sentenced,Misdemeanors,17
+2070,San Mateo,2017,Female,Sentenced,Misdemeanors,5
+2071,Santa Barbara,2017,Female,Sentenced,Misdemeanors,0
+2072,Santa Clara,2017,Female,Sentenced,Misdemeanors,5
+2073,Santa Cruz,2017,Female,Sentenced,Misdemeanors,93
+2074,Shasta,2017,Female,Sentenced,Misdemeanors,2
+2075,Sierra,2017,Female,Sentenced,Misdemeanors,0
+2076,Siskiyou,2017,Female,Sentenced,Misdemeanors,0
+2077,Solano,2017,Female,Sentenced,Misdemeanors,4
+2078,Sonoma,2017,Female,Sentenced,Misdemeanors,18
+2079,Stanislaus,2017,Female,Sentenced,Misdemeanors,5
+2080,Sutter,2017,Female,Sentenced,Misdemeanors,2
+2081,Tehama,2017,Female,Sentenced,Misdemeanors,0
+2082,Trinity,2017,Female,Sentenced,Misdemeanors,0
+2083,Tulare,2017,Female,Sentenced,Misdemeanors,11
+2084,Tuolumne,2017,Female,Sentenced,Misdemeanors,0
+2085,Ventura,2017,Female,Sentenced,Misdemeanors,16
+2086,Yolo,2017,Female,Sentenced,Misdemeanors,1
+2087,Yuba,2017,Female,Sentenced,Misdemeanors,1
+2088,Alameda,2018,Female,Sentenced,Misdemeanors,3
+2089,Alpine,2018,Female,Sentenced,Misdemeanors,0
+2090,Amador,2018,Female,Sentenced,Misdemeanors,1
+2091,Butte,2018,Female,Sentenced,Misdemeanors,5
+2092,Calaveras,2018,Female,Sentenced,Misdemeanors,2
+2093,Colusa,2018,Female,Sentenced,Misdemeanors,2
+2094,Contra Costa,2018,Female,Sentenced,Misdemeanors,7
+2095,Del Norte,2018,Female,Sentenced,Misdemeanors,3
+2096,El Dorado,2018,Female,Sentenced,Misdemeanors,6
+2097,Fresno,2018,Female,Sentenced,Misdemeanors,7
+2098,Glenn,2018,Female,Sentenced,Misdemeanors,1
+2099,Humboldt,2018,Female,Sentenced,Misdemeanors,2
+2100,Imperial,2018,Female,Sentenced,Misdemeanors,2
+2101,Inyo,2018,Female,Sentenced,Misdemeanors,2
+2102,Kern,2018,Female,Sentenced,Misdemeanors,5
+2103,Kings,2018,Female,Sentenced,Misdemeanors,11
+2104,Lake,2018,Female,Sentenced,Misdemeanors,7
+2105,Lassen,2018,Female,Sentenced,Misdemeanors,2
+2106,Los Angeles,2018,Female,Sentenced,Misdemeanors,103
+2107,Madera,2018,Female,Sentenced,Misdemeanors,2
+2108,Marin,2018,Female,Sentenced,Misdemeanors,5
+2109,Mariposa,2018,Female,Sentenced,Misdemeanors,1
+2110,Mendocino,2018,Female,Sentenced,Misdemeanors,10
+2111,Merced,2018,Female,Sentenced,Misdemeanors,0
+2112,Modoc,2018,Female,Sentenced,Misdemeanors,0
+2113,Mono,2018,Female,Sentenced,Misdemeanors,0
+2114,Monterey,2018,Female,Sentenced,Misdemeanors,5
+2115,Napa,2018,Female,Sentenced,Misdemeanors,3
+2116,Nevada,2018,Female,Sentenced,Misdemeanors,1
+2117,Orange,2018,Female,Sentenced,Misdemeanors,104
+2118,Placer,2018,Female,Sentenced,Misdemeanors,12
+2119,Plumas,2018,Female,Sentenced,Misdemeanors,2
+2120,Riverside,2018,Female,Sentenced,Misdemeanors,8
+2121,Sacramento,2018,Female,Sentenced,Misdemeanors,35
+2122,San Benito,2018,Female,Sentenced,Misdemeanors,2
+2123,San Bernardino,2018,Female,Sentenced,Misdemeanors,61
+2124,San Diego,2018,Female,Sentenced,Misdemeanors,39
+2125,San Francisco,2018,Female,Sentenced,Misdemeanors,2
+2126,San Joaquin,2018,Female,Sentenced,Misdemeanors,7
+2127,San Luis Obispo,2018,Female,Sentenced,Misdemeanors,12
+2128,San Mateo,2018,Female,Sentenced,Misdemeanors,7
+2129,Santa Barbara,2018,Female,Sentenced,Misdemeanors,10
+2130,Santa Clara,2018,Female,Sentenced,Misdemeanors,20
+2131,Santa Cruz,2018,Female,Sentenced,Misdemeanors,13
+2132,Shasta,2018,Female,Sentenced,Misdemeanors,1
+2133,Sierra,2018,Female,Sentenced,Misdemeanors,0
+2134,Siskiyou,2018,Female,Sentenced,Misdemeanors,0
+2135,Solano,2018,Female,Sentenced,Misdemeanors,2
+2136,Sonoma,2018,Female,Sentenced,Misdemeanors,16
+2137,Stanislaus,2018,Female,Sentenced,Misdemeanors,3
+2138,Sutter,2018,Female,Sentenced,Misdemeanors,0
+2139,Tehama,2018,Female,Sentenced,Misdemeanors,0
+2140,Trinity,2018,Female,Sentenced,Misdemeanors,0
+2141,Tulare,2018,Female,Sentenced,Misdemeanors,12
+2142,Tuolumne,2018,Female,Sentenced,Misdemeanors,1
+2143,Ventura,2018,Female,Sentenced,Misdemeanors,0
+2144,Yolo,2018,Female,Sentenced,Misdemeanors,2
+2145,Yuba,2018,Female,Sentenced,Misdemeanors,0
+2146,Alameda,2019,Female,Sentenced,Misdemeanors,3
+2147,Alpine,2019,Female,Sentenced,Misdemeanors,0
+2148,Amador,2019,Female,Sentenced,Misdemeanors,1
+2149,Butte,2019,Female,Sentenced,Misdemeanors,4
+2150,Calaveras,2019,Female,Sentenced,Misdemeanors,1
+2151,Colusa,2019,Female,Sentenced,Misdemeanors,1
+2152,Contra Costa,2019,Female,Sentenced,Misdemeanors,4
+2153,Del Norte,2019,Female,Sentenced,Misdemeanors,2
+2154,El Dorado,2019,Female,Sentenced,Misdemeanors,3
+2155,Fresno,2019,Female,Sentenced,Misdemeanors,4
+2156,Glenn,2019,Female,Sentenced,Misdemeanors,1
+2157,Humboldt,2019,Female,Sentenced,Misdemeanors,2
+2158,Imperial,2019,Female,Sentenced,Misdemeanors,2
+2159,Inyo,2019,Female,Sentenced,Misdemeanors,1
+2160,Kern,2019,Female,Sentenced,Misdemeanors,2
+2161,Kings,2019,Female,Sentenced,Misdemeanors,6
+2162,Lake,2019,Female,Sentenced,Misdemeanors,4
+2163,Lassen,2019,Female,Sentenced,Misdemeanors,2
+2164,Los Angeles,2019,Female,Sentenced,Misdemeanors,97
+2165,Madera,2019,Female,Sentenced,Misdemeanors,2
+2166,Marin,2019,Female,Sentenced,Misdemeanors,4
+2167,Mariposa,2019,Female,Sentenced,Misdemeanors,1
+2168,Mendocino,2019,Female,Sentenced,Misdemeanors,13
+2169,Merced,2019,Female,Sentenced,Misdemeanors,0
+2170,Modoc,2019,Female,Sentenced,Misdemeanors,0
+2171,Mono,2019,Female,Sentenced,Misdemeanors,0
+2172,Monterey,2019,Female,Sentenced,Misdemeanors,4
+2173,Napa,2019,Female,Sentenced,Misdemeanors,3
+2174,Nevada,2019,Female,Sentenced,Misdemeanors,1
+2175,Orange,2019,Female,Sentenced,Misdemeanors,88
+2176,Placer,2019,Female,Sentenced,Misdemeanors,16
+2177,Plumas,2019,Female,Sentenced,Misdemeanors,1
+2178,Riverside,2019,Female,Sentenced,Misdemeanors,10
+2179,Sacramento,2019,Female,Sentenced,Misdemeanors,25
+2180,San Benito,2019,Female,Sentenced,Misdemeanors,2
+2181,San Bernardino,2019,Female,Sentenced,Misdemeanors,52
+2182,San Diego,2019,Female,Sentenced,Misdemeanors,29
+2183,San Francisco,2019,Female,Sentenced,Misdemeanors,4
+2184,San Joaquin,2019,Female,Sentenced,Misdemeanors,2
+2185,San Luis Obispo,2019,Female,Sentenced,Misdemeanors,22
+2186,San Mateo,2019,Female,Sentenced,Misdemeanors,4
+2187,Santa Barbara,2019,Female,Sentenced,Misdemeanors,8
+2188,Santa Clara,2019,Female,Sentenced,Misdemeanors,8
+2189,Santa Cruz,2019,Female,Sentenced,Misdemeanors,71
+2190,Shasta,2019,Female,Sentenced,Misdemeanors,1
+2191,Sierra,2019,Female,Sentenced,Misdemeanors,0
+2192,Siskiyou,2019,Female,Sentenced,Misdemeanors,0
+2193,Solano,2019,Female,Sentenced,Misdemeanors,2
+2194,Sonoma,2019,Female,Sentenced,Misdemeanors,11
+2195,Stanislaus,2019,Female,Sentenced,Misdemeanors,4
+2196,Sutter,2019,Female,Sentenced,Misdemeanors,2
+2197,Tehama,2019,Female,Sentenced,Misdemeanors,0
+2198,Trinity,2019,Female,Sentenced,Misdemeanors,0
+2199,Tulare,2019,Female,Sentenced,Misdemeanors,10
+2200,Tuolumne,2019,Female,Sentenced,Misdemeanors,0
+2201,Ventura,2019,Female,Sentenced,Misdemeanors,19
+2202,Yolo,2019,Female,Sentenced,Misdemeanors,1
+2203,Yuba,2019,Female,Sentenced,Misdemeanors,1
+2204,Alameda,2020,Female,Sentenced,Misdemeanors,1
+2205,Alpine,2020,Female,Sentenced,Misdemeanors,0
+2206,Amador,2020,Female,Sentenced,Misdemeanors,0
+2207,Butte,2020,Female,Sentenced,Misdemeanors,1
+2208,Calaveras,2020,Female,Sentenced,Misdemeanors,0
+2209,Colusa,2020,Female,Sentenced,Misdemeanors,0
+2210,Contra Costa,2020,Female,Sentenced,Misdemeanors,2
+2211,Del Norte,2020,Female,Sentenced,Misdemeanors,0
+2212,El Dorado,2020,Female,Sentenced,Misdemeanors,1
+2213,Fresno,2020,Female,Sentenced,Misdemeanors,0
+2214,Glenn,2020,Female,Sentenced,Misdemeanors,1
+2215,Humboldt,2020,Female,Sentenced,Misdemeanors,0
+2216,Imperial,2020,Female,Sentenced,Misdemeanors,0
+2217,Inyo,2020,Female,Sentenced,Misdemeanors,0
+2218,Kern,2020,Female,Sentenced,Misdemeanors,0
+2219,Kings,2020,Female,Sentenced,Misdemeanors,1
+2220,Lake,2020,Female,Sentenced,Misdemeanors,1
+2221,Lassen,2020,Female,Sentenced,Misdemeanors,0
+2222,Los Angeles,2020,Female,Sentenced,Misdemeanors,25
+2223,Madera,2020,Female,Sentenced,Misdemeanors,1
+2224,Marin,2020,Female,Sentenced,Misdemeanors,1
+2225,Mariposa,2020,Female,Sentenced,Misdemeanors,0
+2226,Mendocino,2020,Female,Sentenced,Misdemeanors,0
+2227,Merced,2020,Female,Sentenced,Misdemeanors,0
+2228,Modoc,2020,Female,Sentenced,Misdemeanors,0
+2229,Mono,2020,Female,Sentenced,Misdemeanors,0
+2230,Monterey,2020,Female,Sentenced,Misdemeanors,2
+2231,Napa,2020,Female,Sentenced,Misdemeanors,0
+2232,Nevada,2020,Female,Sentenced,Misdemeanors,0
+2233,Orange,2020,Female,Sentenced,Misdemeanors,21
+2234,Placer,2020,Female,Sentenced,Misdemeanors,7
+2235,Plumas,2020,Female,Sentenced,Misdemeanors,0
+2236,Riverside,2020,Female,Sentenced,Misdemeanors,1
+2237,Sacramento,2020,Female,Sentenced,Misdemeanors,7
+2238,San Benito,2020,Female,Sentenced,Misdemeanors,1
+2239,San Bernardino,2020,Female,Sentenced,Misdemeanors,28
+2240,San Diego,2020,Female,Sentenced,Misdemeanors,4
+2241,San Francisco,2020,Female,Sentenced,Misdemeanors,4
+2242,San Joaquin,2020,Female,Sentenced,Misdemeanors,0
+2243,San Luis Obispo,2020,Female,Sentenced,Misdemeanors,4
+2244,San Mateo,2020,Female,Sentenced,Misdemeanors,1
+2245,Santa Barbara,2020,Female,Sentenced,Misdemeanors,2
+2246,Santa Clara,2020,Female,Sentenced,Misdemeanors,2
+2247,Santa Cruz,2020,Female,Sentenced,Misdemeanors,19
+2248,Shasta,2020,Female,Sentenced,Misdemeanors,0
+2249,Sierra,2020,Female,Sentenced,Misdemeanors,0
+2250,Siskiyou,2020,Female,Sentenced,Misdemeanors,0
+2251,Solano,2020,Female,Sentenced,Misdemeanors,0
+2252,Sonoma,2020,Female,Sentenced,Misdemeanors,3
+2253,Stanislaus,2020,Female,Sentenced,Misdemeanors,1
+2254,Sutter,2020,Female,Sentenced,Misdemeanors,1
+2255,Tehama,2020,Female,Sentenced,Misdemeanors,0
+2256,Trinity,2020,Female,Sentenced,Misdemeanors,1
+2257,Tulare,2020,Female,Sentenced,Misdemeanors,2
+2258,Tuolumne,2020,Female,Sentenced,Misdemeanors,0
+2259,Ventura,2020,Female,Sentenced,Misdemeanors,7
+2260,Yolo,2020,Female,Sentenced,Misdemeanors,0
+2261,Yuba,2020,Female,Sentenced,Misdemeanors,0
+2262,Alameda,2021,Female,Sentenced,Misdemeanors,1
+2263,Alpine,2021,Female,Sentenced,Misdemeanors,0
+2264,Amador,2021,Female,Sentenced,Misdemeanors,1
+2265,Butte,2021,Female,Sentenced,Misdemeanors,2
+2266,Calaveras,2021,Female,Sentenced,Misdemeanors,0
+2267,Colusa,2021,Female,Sentenced,Misdemeanors,0
+2268,Contra Costa,2021,Female,Sentenced,Misdemeanors,0
+2269,Del Norte,2021,Female,Sentenced,Misdemeanors,0
+2270,El Dorado,2021,Female,Sentenced,Misdemeanors,0
+2271,Fresno,2021,Female,Sentenced,Misdemeanors,1
+2272,Glenn,2021,Female,Sentenced,Misdemeanors,1
+2273,Humboldt,2021,Female,Sentenced,Misdemeanors,0
+2274,Imperial,2021,Female,Sentenced,Misdemeanors,1
+2275,Inyo,2021,Female,Sentenced,Misdemeanors,0
+2276,Kern,2021,Female,Sentenced,Misdemeanors,1
+2277,Kings,2021,Female,Sentenced,Misdemeanors,1
+2278,Lake,2021,Female,Sentenced,Misdemeanors,1
+2279,Lassen,2021,Female,Sentenced,Misdemeanors,0
+2280,Los Angeles,2021,Female,Sentenced,Misdemeanors,28
+2281,Madera,2021,Female,Sentenced,Misdemeanors,1
+2282,Marin,2021,Female,Sentenced,Misdemeanors,1
+2283,Mariposa,2021,Female,Sentenced,Misdemeanors,0
+2284,Mendocino,2021,Female,Sentenced,Misdemeanors,0
+2285,Merced,2021,Female,Sentenced,Misdemeanors,0
+2286,Modoc,2021,Female,Sentenced,Misdemeanors,0
+2287,Mono,2021,Female,Sentenced,Misdemeanors,0
+2288,Monterey,2021,Female,Sentenced,Misdemeanors,0
+2289,Napa,2021,Female,Sentenced,Misdemeanors,0
+2290,Nevada,2021,Female,Sentenced,Misdemeanors,0
+2291,Orange,2021,Female,Sentenced,Misdemeanors,31
+2292,Placer,2021,Female,Sentenced,Misdemeanors,7
+2293,Plumas,2021,Female,Sentenced,Misdemeanors,1
+2294,Riverside,2021,Female,Sentenced,Misdemeanors,1
+2295,Sacramento,2021,Female,Sentenced,Misdemeanors,8
+2296,San Benito,2021,Female,Sentenced,Misdemeanors,0
+2297,San Bernardino,2021,Female,Sentenced,Misdemeanors,6
+2298,San Diego,2021,Female,Sentenced,Misdemeanors,5
+2299,San Francisco,2021,Female,Sentenced,Misdemeanors,1
+2300,San Joaquin,2021,Female,Sentenced,Misdemeanors,3
+2301,San Luis Obispo,2021,Female,Sentenced,Misdemeanors,3
+2302,San Mateo,2021,Female,Sentenced,Misdemeanors,2
+2303,Santa Barbara,2021,Female,Sentenced,Misdemeanors,11
+2304,Santa Clara,2021,Female,Sentenced,Misdemeanors,2
+2305,Santa Cruz,2021,Female,Sentenced,Misdemeanors,5
+2306,Shasta,2021,Female,Sentenced,Misdemeanors,0
+2307,Sierra,2021,Female,Sentenced,Misdemeanors,0
+2308,Siskiyou,2021,Female,Sentenced,Misdemeanors,0
+2309,Solano,2021,Female,Sentenced,Misdemeanors,0
+2310,Sonoma,2021,Female,Sentenced,Misdemeanors,3
+2311,Stanislaus,2021,Female,Sentenced,Misdemeanors,2
+2312,Sutter,2021,Female,Sentenced,Misdemeanors,1
+2313,Tehama,2021,Female,Sentenced,Misdemeanors,0
+2314,Trinity,2021,Female,Sentenced,Misdemeanors,0
+2315,Tulare,2021,Female,Sentenced,Misdemeanors,3
+2316,Tuolumne,2021,Female,Sentenced,Misdemeanors,0
+2317,Ventura,2021,Female,Sentenced,Misdemeanors,7
+2318,Yolo,2021,Female,Sentenced,Misdemeanors,0
+2319,Yuba,2021,Female,Sentenced,Misdemeanors,1
+2320,Alameda,2022,Female,Sentenced,Misdemeanors,1
+2321,Alpine,2022,Female,Sentenced,Misdemeanors,0
+2322,Amador,2022,Female,Sentenced,Misdemeanors,0
+2323,Butte,2022,Female,Sentenced,Misdemeanors,1
+2324,Calaveras,2022,Female,Sentenced,Misdemeanors,1
+2325,Colusa,2022,Female,Sentenced,Misdemeanors,1
+2326,Contra Costa,2022,Female,Sentenced,Misdemeanors,2
+2327,Del Norte,2022,Female,Sentenced,Misdemeanors,1
+2328,El Dorado,2022,Female,Sentenced,Misdemeanors,2
+2329,Fresno,2022,Female,Sentenced,Misdemeanors,1
+2330,Glenn,2022,Female,Sentenced,Misdemeanors,0
+2331,Humboldt,2022,Female,Sentenced,Misdemeanors,0
+2332,Imperial,2022,Female,Sentenced,Misdemeanors,2
+2333,Inyo,2022,Female,Sentenced,Misdemeanors,0
+2334,Kern,2022,Female,Sentenced,Misdemeanors,0
+2335,Kings,2022,Female,Sentenced,Misdemeanors,1
+2336,Lake,2022,Female,Sentenced,Misdemeanors,2
+2337,Lassen,2022,Female,Sentenced,Misdemeanors,2
+2338,Los Angeles,2022,Female,Sentenced,Misdemeanors,37
+2339,Madera,2022,Female,Sentenced,Misdemeanors,0
+2340,Marin,2022,Female,Sentenced,Misdemeanors,1
+2341,Mariposa,2022,Female,Sentenced,Misdemeanors,0
+2342,Mendocino,2022,Female,Sentenced,Misdemeanors,7
+2343,Merced,2022,Female,Sentenced,Misdemeanors,0
+2344,Modoc,2022,Female,Sentenced,Misdemeanors,1
+2345,Mono,2022,Female,Sentenced,Misdemeanors,0
+2346,Monterey,2022,Female,Sentenced,Misdemeanors,3
+2347,Napa,2022,Female,Sentenced,Misdemeanors,1
+2348,Nevada,2022,Female,Sentenced,Misdemeanors,0
+2349,Orange,2022,Female,Sentenced,Misdemeanors,24
+2350,Placer,2022,Female,Sentenced,Misdemeanors,16
+2351,Plumas,2022,Female,Sentenced,Misdemeanors,1
+2352,Riverside,2022,Female,Sentenced,Misdemeanors,1
+2353,Sacramento,2022,Female,Sentenced,Misdemeanors,8
+2354,San Benito,2022,Female,Sentenced,Misdemeanors,0
+2355,San Bernardino,2022,Female,Sentenced,Misdemeanors,23
+2356,San Diego,2022,Female,Sentenced,Misdemeanors,6
+2357,San Francisco,2022,Female,Sentenced,Misdemeanors,4
+2358,San Joaquin,2022,Female,Sentenced,Misdemeanors,0
+2359,San Luis Obispo,2022,Female,Sentenced,Misdemeanors,1
+2360,San Mateo,2022,Female,Sentenced,Misdemeanors,1
+2361,Santa Barbara,2022,Female,Sentenced,Misdemeanors,2
+2362,Santa Clara,2022,Female,Sentenced,Misdemeanors,3
+2363,Santa Cruz,2022,Female,Sentenced,Misdemeanors,20
+2364,Shasta,2022,Female,Sentenced,Misdemeanors,0
+2365,Sierra,2022,Female,Sentenced,Misdemeanors,0
+2366,Siskiyou,2022,Female,Sentenced,Misdemeanors,0
+2367,Solano,2022,Female,Sentenced,Misdemeanors,1
+2368,Sonoma,2022,Female,Sentenced,Misdemeanors,3
+2369,Stanislaus,2022,Female,Sentenced,Misdemeanors,3
+2370,Sutter,2022,Female,Sentenced,Misdemeanors,1
+2371,Tehama,2022,Female,Sentenced,Misdemeanors,0
+2372,Trinity,2022,Female,Sentenced,Misdemeanors,0
+2373,Tulare,2022,Female,Sentenced,Misdemeanors,3
+2374,Tuolumne,2022,Female,Sentenced,Misdemeanors,1
+2375,Ventura,2022,Female,Sentenced,Misdemeanors,10
+2376,Yolo,2022,Female,Sentenced,Misdemeanors,1
+2377,Yuba,2022,Female,Sentenced,Misdemeanors,1
+2378,Alameda,2023,Female,Sentenced,Misdemeanors,1
+2379,Alpine,2023,Female,Sentenced,Misdemeanors,0
+2380,Amador,2023,Female,Sentenced,Misdemeanors,1
+2381,Butte,2023,Female,Sentenced,Misdemeanors,2
+2382,Calaveras,2023,Female,Sentenced,Misdemeanors,0
+2383,Colusa,2023,Female,Sentenced,Misdemeanors,0
+2384,Contra Costa,2023,Female,Sentenced,Misdemeanors,2
+2385,Del Norte,2023,Female,Sentenced,Misdemeanors,1
+2386,El Dorado,2023,Female,Sentenced,Misdemeanors,0
+2387,Fresno,2023,Female,Sentenced,Misdemeanors,3
+2388,Glenn,2023,Female,Sentenced,Misdemeanors,1
+2389,Humboldt,2023,Female,Sentenced,Misdemeanors,0
+2390,Imperial,2023,Female,Sentenced,Misdemeanors,2
+2391,Inyo,2023,Female,Sentenced,Misdemeanors,0
+2392,Kern,2023,Female,Sentenced,Misdemeanors,1
+2393,Kings,2023,Female,Sentenced,Misdemeanors,2
+2394,Lake,2023,Female,Sentenced,Misdemeanors,2
+2395,Lassen,2023,Female,Sentenced,Misdemeanors,2
+2396,Los Angeles,2023,Female,Sentenced,Misdemeanors,31
+2397,Madera,2023,Female,Sentenced,Misdemeanors,0
+2398,Marin,2023,Female,Sentenced,Misdemeanors,0
+2399,Mariposa,2023,Female,Sentenced,Misdemeanors,0
+2400,Mendocino,2023,Female,Sentenced,Misdemeanors,5
+2401,Merced,2023,Female,Sentenced,Misdemeanors,0
+2402,Modoc,2023,Female,Sentenced,Misdemeanors,1
+2403,Mono,2023,Female,Sentenced,Misdemeanors,0
+2404,Monterey,2023,Female,Sentenced,Misdemeanors,4
+2405,Napa,2023,Female,Sentenced,Misdemeanors,0
+2406,Nevada,2023,Female,Sentenced,Misdemeanors,0
+2407,Orange,2023,Female,Sentenced,Misdemeanors,32
+2408,Placer,2023,Female,Sentenced,Misdemeanors,13
+2409,Plumas,2023,Female,Sentenced,Misdemeanors,1
+2410,Riverside,2023,Female,Sentenced,Misdemeanors,2
+2411,Sacramento,2023,Female,Sentenced,Misdemeanors,5
+2412,San Benito,2023,Female,Sentenced,Misdemeanors,0
+2413,San Bernardino,2023,Female,Sentenced,Misdemeanors,21
+2414,San Diego,2023,Female,Sentenced,Misdemeanors,10
+2415,San Francisco,2023,Female,Sentenced,Misdemeanors,1
+2416,San Joaquin,2023,Female,Sentenced,Misdemeanors,2
+2417,San Luis Obispo,2023,Female,Sentenced,Misdemeanors,1
+2418,San Mateo,2023,Female,Sentenced,Misdemeanors,2
+2419,Santa Barbara,2023,Female,Sentenced,Misdemeanors,4
+2420,Santa Clara,2023,Female,Sentenced,Misdemeanors,2
+2421,Santa Cruz,2023,Female,Sentenced,Misdemeanors,2
+2422,Shasta,2023,Female,Sentenced,Misdemeanors,0
+2423,Sierra,2023,Female,Sentenced,Misdemeanors,0
+2424,Siskiyou,2023,Female,Sentenced,Misdemeanors,0
+2425,Solano,2023,Female,Sentenced,Misdemeanors,1
+2426,Sonoma,2023,Female,Sentenced,Misdemeanors,2
+2427,Stanislaus,2023,Female,Sentenced,Misdemeanors,4
+2428,Sutter,2023,Female,Sentenced,Misdemeanors,1
+2429,Tehama,2023,Female,Sentenced,Misdemeanors,0
+2430,Trinity,2023,Female,Sentenced,Misdemeanors,0
+2431,Tulare,2023,Female,Sentenced,Misdemeanors,4
+2432,Tuolumne,2023,Female,Sentenced,Misdemeanors,1
+2433,Ventura,2023,Female,Sentenced,Misdemeanors,9
+2434,Yolo,2023,Female,Sentenced,Misdemeanors,1
+2435,Yuba,2023,Female,Sentenced,Misdemeanors,2
+2436,Alameda,2017,Male,Unsentenced,Misdemeanors,134
+2437,Alpine,2017,Male,Unsentenced,Misdemeanors,0
+2438,Amador,2017,Male,Unsentenced,Misdemeanors,4
+2439,Butte,2017,Male,Unsentenced,Misdemeanors,40
+2440,Calaveras,2017,Male,Unsentenced,Misdemeanors,7
+2441,Colusa,2017,Male,Unsentenced,Misdemeanors,19
+2442,Contra Costa,2017,Male,Unsentenced,Misdemeanors,174
+2443,Del Norte,2017,Male,Unsentenced,Misdemeanors,21
+2444,El Dorado,2017,Male,Unsentenced,Misdemeanors,23
+2445,Fresno,2017,Male,Unsentenced,Misdemeanors,160
+2446,Glenn,2017,Male,Unsentenced,Misdemeanors,13
+2447,Humboldt,2017,Male,Unsentenced,Misdemeanors,22
+2448,Imperial,2017,Male,Unsentenced,Misdemeanors,28
+2449,Inyo,2017,Male,Unsentenced,Misdemeanors,4
+2450,Kern,2017,Male,Unsentenced,Misdemeanors,174
+2451,Kings,2017,Male,Unsentenced,Misdemeanors,69
+2452,Lake,2017,Male,Unsentenced,Misdemeanors,33
+2453,Lassen,2017,Male,Unsentenced,Misdemeanors,9
+2454,Los Angeles,2017,Male,Unsentenced,Misdemeanors,1026
+2455,Madera,2017,Male,Unsentenced,Misdemeanors,58
+2456,Marin,2017,Male,Unsentenced,Misdemeanors,42
+2457,Mariposa,2017,Male,Unsentenced,Misdemeanors,8
+2458,Mendocino,2017,Male,Unsentenced,Misdemeanors,113
+2459,Merced,2017,Male,Unsentenced,Misdemeanors,56
+2460,Modoc,2017,Male,Unsentenced,Misdemeanors,1
+2461,Mono,2017,Male,Unsentenced,Misdemeanors,4
+2462,Monterey,2017,Male,Unsentenced,Misdemeanors,33
+2463,Napa,2017,Male,Unsentenced,Misdemeanors,15
+2464,Nevada,2017,Male,Unsentenced,Misdemeanors,21
+2465,Orange,2017,Male,Unsentenced,Misdemeanors,622
+2466,Placer,2017,Male,Unsentenced,Misdemeanors,155
+2467,Plumas,2017,Male,Unsentenced,Misdemeanors,7
+2468,Riverside,2017,Male,Unsentenced,Misdemeanors,171
+2469,Sacramento,2017,Male,Unsentenced,Misdemeanors,281
+2470,San Benito,2017,Male,Unsentenced,Misdemeanors,18
+2471,San Bernardino,2017,Male,Unsentenced,Misdemeanors,863
+2472,San Diego,2017,Male,Unsentenced,Misdemeanors,223
+2473,San Francisco,2017,Male,Unsentenced,Misdemeanors,0
+2474,San Joaquin,2017,Male,Unsentenced,Misdemeanors,96
+2475,San Luis Obispo,2017,Male,Unsentenced,Misdemeanors,301
+2476,San Mateo,2017,Male,Unsentenced,Misdemeanors,28
+2477,Santa Barbara,2017,Male,Unsentenced,Misdemeanors,0
+2478,Santa Clara,2017,Male,Unsentenced,Misdemeanors,93
+2479,Santa Cruz,2017,Male,Unsentenced,Misdemeanors,1358
+2480,Shasta,2017,Male,Unsentenced,Misdemeanors,29
+2481,Sierra,2017,Male,Unsentenced,Misdemeanors,0
+2482,Siskiyou,2017,Male,Unsentenced,Misdemeanors,0
+2483,Solano,2017,Male,Unsentenced,Misdemeanors,60
+2484,Sonoma,2017,Male,Unsentenced,Misdemeanors,142
+2485,Stanislaus,2017,Male,Unsentenced,Misdemeanors,74
+2486,Sutter,2017,Male,Unsentenced,Misdemeanors,10
+2487,Tehama,2017,Male,Unsentenced,Misdemeanors,0
+2488,Trinity,2017,Male,Unsentenced,Misdemeanors,0
+2489,Tulare,2017,Male,Unsentenced,Misdemeanors,114
+2490,Tuolumne,2017,Male,Unsentenced,Misdemeanors,2
+2491,Ventura,2017,Male,Unsentenced,Misdemeanors,151
+2492,Yolo,2017,Male,Unsentenced,Misdemeanors,17
+2493,Yuba,2017,Male,Unsentenced,Misdemeanors,21
+2494,Alameda,2018,Male,Unsentenced,Misdemeanors,127
+2495,Alpine,2018,Male,Unsentenced,Misdemeanors,0
+2496,Amador,2018,Male,Unsentenced,Misdemeanors,4
+2497,Butte,2018,Male,Unsentenced,Misdemeanors,41
+2498,Calaveras,2018,Male,Unsentenced,Misdemeanors,10
+2499,Colusa,2018,Male,Unsentenced,Misdemeanors,15
+2500,Contra Costa,2018,Male,Unsentenced,Misdemeanors,130
+2501,Del Norte,2018,Male,Unsentenced,Misdemeanors,16
+2502,El Dorado,2018,Male,Unsentenced,Misdemeanors,25
+2503,Fresno,2018,Male,Unsentenced,Misdemeanors,120
+2504,Glenn,2018,Male,Unsentenced,Misdemeanors,16
+2505,Humboldt,2018,Male,Unsentenced,Misdemeanors,22
+2506,Imperial,2018,Male,Unsentenced,Misdemeanors,51
+2507,Inyo,2018,Male,Unsentenced,Misdemeanors,6
+2508,Kern,2018,Male,Unsentenced,Misdemeanors,154
+2509,Kings,2018,Male,Unsentenced,Misdemeanors,70
+2510,Lake,2018,Male,Unsentenced,Misdemeanors,31
+2511,Lassen,2018,Male,Unsentenced,Misdemeanors,5
+2512,Los Angeles,2018,Male,Unsentenced,Misdemeanors,1099
+2513,Madera,2018,Male,Unsentenced,Misdemeanors,63
+2514,Marin,2018,Male,Unsentenced,Misdemeanors,54
+2515,Mariposa,2018,Male,Unsentenced,Misdemeanors,5
+2516,Mendocino,2018,Male,Unsentenced,Misdemeanors,96
+2517,Merced,2018,Male,Unsentenced,Misdemeanors,0
+2518,Modoc,2018,Male,Unsentenced,Misdemeanors,2
+2519,Mono,2018,Male,Unsentenced,Misdemeanors,3
+2520,Monterey,2018,Male,Unsentenced,Misdemeanors,39
+2521,Napa,2018,Male,Unsentenced,Misdemeanors,21
+2522,Nevada,2018,Male,Unsentenced,Misdemeanors,17
+2523,Orange,2018,Male,Unsentenced,Misdemeanors,680
+2524,Placer,2018,Male,Unsentenced,Misdemeanors,124
+2525,Plumas,2018,Male,Unsentenced,Misdemeanors,10
+2526,Riverside,2018,Male,Unsentenced,Misdemeanors,162
+2527,Sacramento,2018,Male,Unsentenced,Misdemeanors,286
+2528,San Benito,2018,Male,Unsentenced,Misdemeanors,16
+2529,San Bernardino,2018,Male,Unsentenced,Misdemeanors,890
+2530,San Diego,2018,Male,Unsentenced,Misdemeanors,208
+2531,San Francisco,2018,Male,Unsentenced,Misdemeanors,77
+2532,San Joaquin,2018,Male,Unsentenced,Misdemeanors,83
+2533,San Luis Obispo,2018,Male,Unsentenced,Misdemeanors,103
+2534,San Mateo,2018,Male,Unsentenced,Misdemeanors,75
+2535,Santa Barbara,2018,Male,Unsentenced,Misdemeanors,98
+2536,Santa Clara,2018,Male,Unsentenced,Misdemeanors,352
+2537,Santa Cruz,2018,Male,Unsentenced,Misdemeanors,242
+2538,Shasta,2018,Male,Unsentenced,Misdemeanors,17
+2539,Sierra,2018,Male,Unsentenced,Misdemeanors,0
+2540,Siskiyou,2018,Male,Unsentenced,Misdemeanors,0
+2541,Solano,2018,Male,Unsentenced,Misdemeanors,50
+2542,Sonoma,2018,Male,Unsentenced,Misdemeanors,128
+2543,Stanislaus,2018,Male,Unsentenced,Misdemeanors,77
+2544,Sutter,2018,Male,Unsentenced,Misdemeanors,5
+2545,Tehama,2018,Male,Unsentenced,Misdemeanors,0
+2546,Trinity,2018,Male,Unsentenced,Misdemeanors,4
+2547,Tulare,2018,Male,Unsentenced,Misdemeanors,94
+2548,Tuolumne,2018,Male,Unsentenced,Misdemeanors,7
+2549,Ventura,2018,Male,Unsentenced,Misdemeanors,0
+2550,Yolo,2018,Male,Unsentenced,Misdemeanors,28
+2551,Yuba,2018,Male,Unsentenced,Misdemeanors,19
+2552,Alameda,2019,Male,Unsentenced,Misdemeanors,135
+2553,Alpine,2019,Male,Unsentenced,Misdemeanors,0
+2554,Amador,2019,Male,Unsentenced,Misdemeanors,9
+2555,Butte,2019,Male,Unsentenced,Misdemeanors,36
+2556,Calaveras,2019,Male,Unsentenced,Misdemeanors,9
+2557,Colusa,2019,Male,Unsentenced,Misdemeanors,11
+2558,Contra Costa,2019,Male,Unsentenced,Misdemeanors,110
+2559,Del Norte,2019,Male,Unsentenced,Misdemeanors,13
+2560,El Dorado,2019,Male,Unsentenced,Misdemeanors,19
+2561,Fresno,2019,Male,Unsentenced,Misdemeanors,109
+2562,Glenn,2019,Male,Unsentenced,Misdemeanors,17
+2563,Humboldt,2019,Male,Unsentenced,Misdemeanors,22
+2564,Imperial,2019,Male,Unsentenced,Misdemeanors,9
+2565,Inyo,2019,Male,Unsentenced,Misdemeanors,4
+2566,Kern,2019,Male,Unsentenced,Misdemeanors,103
+2567,Kings,2019,Male,Unsentenced,Misdemeanors,68
+2568,Lake,2019,Male,Unsentenced,Misdemeanors,23
+2569,Lassen,2019,Male,Unsentenced,Misdemeanors,4
+2570,Los Angeles,2019,Male,Unsentenced,Misdemeanors,1090
+2571,Madera,2019,Male,Unsentenced,Misdemeanors,39
+2572,Marin,2019,Male,Unsentenced,Misdemeanors,45
+2573,Mariposa,2019,Male,Unsentenced,Misdemeanors,3
+2574,Mendocino,2019,Male,Unsentenced,Misdemeanors,96
+2575,Merced,2019,Male,Unsentenced,Misdemeanors,0
+2576,Modoc,2019,Male,Unsentenced,Misdemeanors,3
+2577,Mono,2019,Male,Unsentenced,Misdemeanors,5
+2578,Monterey,2019,Male,Unsentenced,Misdemeanors,50
+2579,Napa,2019,Male,Unsentenced,Misdemeanors,17
+2580,Nevada,2019,Male,Unsentenced,Misdemeanors,11
+2581,Orange,2019,Male,Unsentenced,Misdemeanors,740
+2582,Placer,2019,Male,Unsentenced,Misdemeanors,128
+2583,Plumas,2019,Male,Unsentenced,Misdemeanors,12
+2584,Riverside,2019,Male,Unsentenced,Misdemeanors,174
+2585,Sacramento,2019,Male,Unsentenced,Misdemeanors,259
+2586,San Benito,2019,Male,Unsentenced,Misdemeanors,17
+2587,San Bernardino,2019,Male,Unsentenced,Misdemeanors,947
+2588,San Diego,2019,Male,Unsentenced,Misdemeanors,174
+2589,San Francisco,2019,Male,Unsentenced,Misdemeanors,0
+2590,San Joaquin,2019,Male,Unsentenced,Misdemeanors,91
+2591,San Luis Obispo,2019,Male,Unsentenced,Misdemeanors,279
+2592,San Mateo,2019,Male,Unsentenced,Misdemeanors,29
+2593,Santa Barbara,2019,Male,Unsentenced,Misdemeanors,98
+2594,Santa Clara,2019,Male,Unsentenced,Misdemeanors,84
+2595,Santa Cruz,2019,Male,Unsentenced,Misdemeanors,1998
+2596,Shasta,2019,Male,Unsentenced,Misdemeanors,21
+2597,Sierra,2019,Male,Unsentenced,Misdemeanors,0
+2598,Siskiyou,2019,Male,Unsentenced,Misdemeanors,0
+2599,Solano,2019,Male,Unsentenced,Misdemeanors,56
+2600,Sonoma,2019,Male,Unsentenced,Misdemeanors,105
+2601,Stanislaus,2019,Male,Unsentenced,Misdemeanors,85
+2602,Sutter,2019,Male,Unsentenced,Misdemeanors,20
+2603,Tehama,2019,Male,Unsentenced,Misdemeanors,0
+2604,Trinity,2019,Male,Unsentenced,Misdemeanors,8
+2605,Tulare,2019,Male,Unsentenced,Misdemeanors,77
+2606,Tuolumne,2019,Male,Unsentenced,Misdemeanors,4
+2607,Ventura,2019,Male,Unsentenced,Misdemeanors,174
+2608,Yolo,2019,Male,Unsentenced,Misdemeanors,21
+2609,Yuba,2019,Male,Unsentenced,Misdemeanors,24
+2610,Alameda,2020,Male,Unsentenced,Misdemeanors,123
+2611,Alpine,2020,Male,Unsentenced,Misdemeanors,0
+2612,Amador,2020,Male,Unsentenced,Misdemeanors,2
+2613,Butte,2020,Male,Unsentenced,Misdemeanors,16
+2614,Calaveras,2020,Male,Unsentenced,Misdemeanors,4
+2615,Colusa,2020,Male,Unsentenced,Misdemeanors,10
+2616,Contra Costa,2020,Male,Unsentenced,Misdemeanors,98
+2617,Del Norte,2020,Male,Unsentenced,Misdemeanors,3
+2618,El Dorado,2020,Male,Unsentenced,Misdemeanors,8
+2619,Fresno,2020,Male,Unsentenced,Misdemeanors,65
+2620,Glenn,2020,Male,Unsentenced,Misdemeanors,6
+2621,Humboldt,2020,Male,Unsentenced,Misdemeanors,12
+2622,Imperial,2020,Male,Unsentenced,Misdemeanors,2
+2623,Inyo,2020,Male,Unsentenced,Misdemeanors,3
+2624,Kern,2020,Male,Unsentenced,Misdemeanors,41
+2625,Kings,2020,Male,Unsentenced,Misdemeanors,16
+2626,Lake,2020,Male,Unsentenced,Misdemeanors,21
+2627,Lassen,2020,Male,Unsentenced,Misdemeanors,0
+2628,Los Angeles,2020,Male,Unsentenced,Misdemeanors,498
+2629,Madera,2020,Male,Unsentenced,Misdemeanors,23
+2630,Marin,2020,Male,Unsentenced,Misdemeanors,17
+2631,Mariposa,2020,Male,Unsentenced,Misdemeanors,2
+2632,Mendocino,2020,Male,Unsentenced,Misdemeanors,0
+2633,Merced,2020,Male,Unsentenced,Misdemeanors,0
+2634,Modoc,2020,Male,Unsentenced,Misdemeanors,2
+2635,Mono,2020,Male,Unsentenced,Misdemeanors,3
+2636,Monterey,2020,Male,Unsentenced,Misdemeanors,25
+2637,Napa,2020,Male,Unsentenced,Misdemeanors,9
+2638,Nevada,2020,Male,Unsentenced,Misdemeanors,6
+2639,Orange,2020,Male,Unsentenced,Misdemeanors,478
+2640,Placer,2020,Male,Unsentenced,Misdemeanors,133
+2641,Plumas,2020,Male,Unsentenced,Misdemeanors,2
+2642,Riverside,2020,Male,Unsentenced,Misdemeanors,60
+2643,Sacramento,2020,Male,Unsentenced,Misdemeanors,117
+2644,San Benito,2020,Male,Unsentenced,Misdemeanors,7
+2645,San Bernardino,2020,Male,Unsentenced,Misdemeanors,1019
+2646,San Diego,2020,Male,Unsentenced,Misdemeanors,59
+2647,San Francisco,2020,Male,Unsentenced,Misdemeanors,1
+2648,San Joaquin,2020,Male,Unsentenced,Misdemeanors,37
+2649,San Luis Obispo,2020,Male,Unsentenced,Misdemeanors,199
+2650,San Mateo,2020,Male,Unsentenced,Misdemeanors,8
+2651,Santa Barbara,2020,Male,Unsentenced,Misdemeanors,54
+2652,Santa Clara,2020,Male,Unsentenced,Misdemeanors,29
+2653,Santa Cruz,2020,Male,Unsentenced,Misdemeanors,1481
+2654,Shasta,2020,Male,Unsentenced,Misdemeanors,9
+2655,Sierra,2020,Male,Unsentenced,Misdemeanors,0
+2656,Siskiyou,2020,Male,Unsentenced,Misdemeanors,0
+2657,Solano,2020,Male,Unsentenced,Misdemeanors,45
+2658,Sonoma,2020,Male,Unsentenced,Misdemeanors,49
+2659,Stanislaus,2020,Male,Unsentenced,Misdemeanors,40
+2660,Sutter,2020,Male,Unsentenced,Misdemeanors,16
+2661,Tehama,2020,Male,Unsentenced,Misdemeanors,0
+2662,Trinity,2020,Male,Unsentenced,Misdemeanors,6
+2663,Tulare,2020,Male,Unsentenced,Misdemeanors,43
+2664,Tuolumne,2020,Male,Unsentenced,Misdemeanors,1
+2665,Ventura,2020,Male,Unsentenced,Misdemeanors,80
+2666,Yolo,2020,Male,Unsentenced,Misdemeanors,10
+2667,Yuba,2020,Male,Unsentenced,Misdemeanors,9
+2668,Alameda,2021,Male,Unsentenced,Misdemeanors,130
+2669,Alpine,2021,Male,Unsentenced,Misdemeanors,0
+2670,Amador,2021,Male,Unsentenced,Misdemeanors,6
+2671,Butte,2021,Male,Unsentenced,Misdemeanors,24
+2672,Calaveras,2021,Male,Unsentenced,Misdemeanors,5
+2673,Colusa,2021,Male,Unsentenced,Misdemeanors,11
+2674,Contra Costa,2021,Male,Unsentenced,Misdemeanors,63
+2675,Del Norte,2021,Male,Unsentenced,Misdemeanors,0
+2676,El Dorado,2021,Male,Unsentenced,Misdemeanors,0
+2677,Fresno,2021,Male,Unsentenced,Misdemeanors,83
+2678,Glenn,2021,Male,Unsentenced,Misdemeanors,8
+2679,Humboldt,2021,Male,Unsentenced,Misdemeanors,11
+2680,Imperial,2021,Male,Unsentenced,Misdemeanors,5
+2681,Inyo,2021,Male,Unsentenced,Misdemeanors,3
+2682,Kern,2021,Male,Unsentenced,Misdemeanors,63
+2683,Kings,2021,Male,Unsentenced,Misdemeanors,33
+2684,Lake,2021,Male,Unsentenced,Misdemeanors,21
+2685,Lassen,2021,Male,Unsentenced,Misdemeanors,6
+2686,Los Angeles,2021,Male,Unsentenced,Misdemeanors,620
+2687,Madera,2021,Male,Unsentenced,Misdemeanors,37
+2688,Marin,2021,Male,Unsentenced,Misdemeanors,14
+2689,Mariposa,2021,Male,Unsentenced,Misdemeanors,1
+2690,Mendocino,2021,Male,Unsentenced,Misdemeanors,0
+2691,Merced,2021,Male,Unsentenced,Misdemeanors,0
+2692,Modoc,2021,Male,Unsentenced,Misdemeanors,1
+2693,Mono,2021,Male,Unsentenced,Misdemeanors,4
+2694,Monterey,2021,Male,Unsentenced,Misdemeanors,0
+2695,Napa,2021,Male,Unsentenced,Misdemeanors,6
+2696,Nevada,2021,Male,Unsentenced,Misdemeanors,5
+2697,Orange,2021,Male,Unsentenced,Misdemeanors,487
+2698,Placer,2021,Male,Unsentenced,Misdemeanors,138
+2699,Plumas,2021,Male,Unsentenced,Misdemeanors,4
+2700,Riverside,2021,Male,Unsentenced,Misdemeanors,90
+2701,Sacramento,2021,Male,Unsentenced,Misdemeanors,146
+2702,San Benito,2021,Male,Unsentenced,Misdemeanors,5
+2703,San Bernardino,2021,Male,Unsentenced,Misdemeanors,1077
+2704,San Diego,2021,Male,Unsentenced,Misdemeanors,75
+2705,San Francisco,2021,Male,Unsentenced,Misdemeanors,49
+2706,San Joaquin,2021,Male,Unsentenced,Misdemeanors,70
+2707,San Luis Obispo,2021,Male,Unsentenced,Misdemeanors,45
+2708,San Mateo,2021,Male,Unsentenced,Misdemeanors,35
+2709,Santa Barbara,2021,Male,Unsentenced,Misdemeanors,400
+2710,Santa Clara,2021,Male,Unsentenced,Misdemeanors,191
+2711,Santa Cruz,2021,Male,Unsentenced,Misdemeanors,200
+2712,Shasta,2021,Male,Unsentenced,Misdemeanors,10
+2713,Sierra,2021,Male,Unsentenced,Misdemeanors,0
+2714,Siskiyou,2021,Male,Unsentenced,Misdemeanors,0
+2715,Solano,2021,Male,Unsentenced,Misdemeanors,29
+2716,Sonoma,2021,Male,Unsentenced,Misdemeanors,48
+2717,Stanislaus,2021,Male,Unsentenced,Misdemeanors,55
+2718,Sutter,2021,Male,Unsentenced,Misdemeanors,20
+2719,Tehama,2021,Male,Unsentenced,Misdemeanors,0
+2720,Trinity,2021,Male,Unsentenced,Misdemeanors,4
+2721,Tulare,2021,Male,Unsentenced,Misdemeanors,65
+2722,Tuolumne,2021,Male,Unsentenced,Misdemeanors,2
+2723,Ventura,2021,Male,Unsentenced,Misdemeanors,91
+2724,Yolo,2021,Male,Unsentenced,Misdemeanors,19
+2725,Yuba,2021,Male,Unsentenced,Misdemeanors,15
+2726,Alameda,2022,Male,Unsentenced,Misdemeanors,142
+2727,Alpine,2022,Male,Unsentenced,Misdemeanors,0
+2728,Amador,2022,Male,Unsentenced,Misdemeanors,7
+2729,Butte,2022,Male,Unsentenced,Misdemeanors,16
+2730,Calaveras,2022,Male,Unsentenced,Misdemeanors,7
+2731,Colusa,2022,Male,Unsentenced,Misdemeanors,4
+2732,Contra Costa,2022,Male,Unsentenced,Misdemeanors,69
+2733,Del Norte,2022,Male,Unsentenced,Misdemeanors,6
+2734,El Dorado,2022,Male,Unsentenced,Misdemeanors,43
+2735,Fresno,2022,Male,Unsentenced,Misdemeanors,93
+2736,Glenn,2022,Male,Unsentenced,Misdemeanors,9
+2737,Humboldt,2022,Male,Unsentenced,Misdemeanors,8
+2738,Imperial,2022,Male,Unsentenced,Misdemeanors,8
+2739,Inyo,2022,Male,Unsentenced,Misdemeanors,3
+2740,Kern,2022,Male,Unsentenced,Misdemeanors,67
+2741,Kings,2022,Male,Unsentenced,Misdemeanors,29
+2742,Lake,2022,Male,Unsentenced,Misdemeanors,20
+2743,Lassen,2022,Male,Unsentenced,Misdemeanors,14
+2744,Los Angeles,2022,Male,Unsentenced,Misdemeanors,678
+2745,Madera,2022,Male,Unsentenced,Misdemeanors,7
+2746,Marin,2022,Male,Unsentenced,Misdemeanors,22
+2747,Mariposa,2022,Male,Unsentenced,Misdemeanors,3
+2748,Mendocino,2022,Male,Unsentenced,Misdemeanors,108
+2749,Merced,2022,Male,Unsentenced,Misdemeanors,0
+2750,Modoc,2022,Male,Unsentenced,Misdemeanors,1
+2751,Mono,2022,Male,Unsentenced,Misdemeanors,4
+2752,Monterey,2022,Male,Unsentenced,Misdemeanors,34
+2753,Napa,2022,Male,Unsentenced,Misdemeanors,12
+2754,Nevada,2022,Male,Unsentenced,Misdemeanors,10
+2755,Orange,2022,Male,Unsentenced,Misdemeanors,452
+2756,Placer,2022,Male,Unsentenced,Misdemeanors,197
+2757,Plumas,2022,Male,Unsentenced,Misdemeanors,4
+2758,Riverside,2022,Male,Unsentenced,Misdemeanors,77
+2759,Sacramento,2022,Male,Unsentenced,Misdemeanors,136
+2760,San Benito,2022,Male,Unsentenced,Misdemeanors,15
+2761,San Bernardino,2022,Male,Unsentenced,Misdemeanors,1026
+2762,San Diego,2022,Male,Unsentenced,Misdemeanors,63
+2763,San Francisco,2022,Male,Unsentenced,Misdemeanors,0
+2764,San Joaquin,2022,Male,Unsentenced,Misdemeanors,37
+2765,San Luis Obispo,2022,Male,Unsentenced,Misdemeanors,47
+2766,San Mateo,2022,Male,Unsentenced,Misdemeanors,19
+2767,Santa Barbara,2022,Male,Unsentenced,Misdemeanors,81
+2768,Santa Clara,2022,Male,Unsentenced,Misdemeanors,57
+2769,Santa Cruz,2022,Male,Unsentenced,Misdemeanors,2161
+2770,Shasta,2022,Male,Unsentenced,Misdemeanors,3
+2771,Sierra,2022,Male,Unsentenced,Misdemeanors,0
+2772,Siskiyou,2022,Male,Unsentenced,Misdemeanors,0
+2773,Solano,2022,Male,Unsentenced,Misdemeanors,42
+2774,Sonoma,2022,Male,Unsentenced,Misdemeanors,64
+2775,Stanislaus,2022,Male,Unsentenced,Misdemeanors,51
+2776,Sutter,2022,Male,Unsentenced,Misdemeanors,52
+2777,Tehama,2022,Male,Unsentenced,Misdemeanors,0
+2778,Trinity,2022,Male,Unsentenced,Misdemeanors,4
+2779,Tulare,2022,Male,Unsentenced,Misdemeanors,52
+2780,Tuolumne,2022,Male,Unsentenced,Misdemeanors,3
+2781,Ventura,2022,Male,Unsentenced,Misdemeanors,107
+2782,Yolo,2022,Male,Unsentenced,Misdemeanors,50
+2783,Yuba,2022,Male,Unsentenced,Misdemeanors,17
+2784,Alameda,2023,Male,Unsentenced,Misdemeanors,135
+2785,Alpine,2023,Male,Unsentenced,Misdemeanors,0
+2786,Amador,2023,Male,Unsentenced,Misdemeanors,6
+2787,Butte,2023,Male,Unsentenced,Misdemeanors,22
+2788,Calaveras,2023,Male,Unsentenced,Misdemeanors,8
+2789,Colusa,2023,Male,Unsentenced,Misdemeanors,6
+2790,Contra Costa,2023,Male,Unsentenced,Misdemeanors,64
+2791,Del Norte,2023,Male,Unsentenced,Misdemeanors,8
+2792,El Dorado,2023,Male,Unsentenced,Misdemeanors,27
+2793,Fresno,2023,Male,Unsentenced,Misdemeanors,127
+2794,Glenn,2023,Male,Unsentenced,Misdemeanors,6
+2795,Humboldt,2023,Male,Unsentenced,Misdemeanors,12
+2796,Imperial,2023,Male,Unsentenced,Misdemeanors,14
+2797,Inyo,2023,Male,Unsentenced,Misdemeanors,5
+2798,Kern,2023,Male,Unsentenced,Misdemeanors,80
+2799,Kings,2023,Male,Unsentenced,Misdemeanors,33
+2800,Lake,2023,Male,Unsentenced,Misdemeanors,16
+2801,Lassen,2023,Male,Unsentenced,Misdemeanors,20
+2802,Los Angeles,2023,Male,Unsentenced,Misdemeanors,685
+2803,Madera,2023,Male,Unsentenced,Misdemeanors,1
+2804,Marin,2023,Male,Unsentenced,Misdemeanors,24
+2805,Mariposa,2023,Male,Unsentenced,Misdemeanors,1
+2806,Mendocino,2023,Male,Unsentenced,Misdemeanors,84
+2807,Merced,2023,Male,Unsentenced,Misdemeanors,0
+2808,Modoc,2023,Male,Unsentenced,Misdemeanors,3
+2809,Mono,2023,Male,Unsentenced,Misdemeanors,4
+2810,Monterey,2023,Male,Unsentenced,Misdemeanors,38
+2811,Napa,2023,Male,Unsentenced,Misdemeanors,6
+2812,Nevada,2023,Male,Unsentenced,Misdemeanors,9
+2813,Orange,2023,Male,Unsentenced,Misdemeanors,512
+2814,Placer,2023,Male,Unsentenced,Misdemeanors,235
+2815,Plumas,2023,Male,Unsentenced,Misdemeanors,4
+2816,Riverside,2023,Male,Unsentenced,Misdemeanors,95
+2817,Sacramento,2023,Male,Unsentenced,Misdemeanors,96
+2818,San Benito,2023,Male,Unsentenced,Misdemeanors,6
+2819,San Bernardino,2023,Male,Unsentenced,Misdemeanors,891
+2820,San Diego,2023,Male,Unsentenced,Misdemeanors,86
+2821,San Francisco,2023,Male,Unsentenced,Misdemeanors,63
+2822,San Joaquin,2023,Male,Unsentenced,Misdemeanors,60
+2823,San Luis Obispo,2023,Male,Unsentenced,Misdemeanors,10
+2824,San Mateo,2023,Male,Unsentenced,Misdemeanors,42
+2825,Santa Barbara,2023,Male,Unsentenced,Misdemeanors,77
+2826,Santa Clara,2023,Male,Unsentenced,Misdemeanors,206
+2827,Santa Cruz,2023,Male,Unsentenced,Misdemeanors,167
+2828,Shasta,2023,Male,Unsentenced,Misdemeanors,6
+2829,Sierra,2023,Male,Unsentenced,Misdemeanors,0
+2830,Siskiyou,2023,Male,Unsentenced,Misdemeanors,0
+2831,Solano,2023,Male,Unsentenced,Misdemeanors,56
+2832,Sonoma,2023,Male,Unsentenced,Misdemeanors,36
+2833,Stanislaus,2023,Male,Unsentenced,Misdemeanors,56
+2834,Sutter,2023,Male,Unsentenced,Misdemeanors,67
+2835,Tehama,2023,Male,Unsentenced,Misdemeanors,0
+2836,Trinity,2023,Male,Unsentenced,Misdemeanors,4
+2837,Tulare,2023,Male,Unsentenced,Misdemeanors,47
+2838,Tuolumne,2023,Male,Unsentenced,Misdemeanors,4
+2839,Ventura,2023,Male,Unsentenced,Misdemeanors,100
+2840,Yolo,2023,Male,Unsentenced,Misdemeanors,16
+2841,Yuba,2023,Male,Unsentenced,Misdemeanors,26
+2842,Alameda,2017,Male,Sentenced,Misdemeanors,23
+2843,Alpine,2017,Male,Sentenced,Misdemeanors,0
+2844,Amador,2017,Male,Sentenced,Misdemeanors,5
+2845,Butte,2017,Male,Sentenced,Misdemeanors,24
+2846,Calaveras,2017,Male,Sentenced,Misdemeanors,3
+2847,Colusa,2017,Male,Sentenced,Misdemeanors,13
+2848,Contra Costa,2017,Male,Sentenced,Misdemeanors,49
+2849,Del Norte,2017,Male,Sentenced,Misdemeanors,10
+2850,El Dorado,2017,Male,Sentenced,Misdemeanors,24
+2851,Fresno,2017,Male,Sentenced,Misdemeanors,64
+2852,Glenn,2017,Male,Sentenced,Misdemeanors,6
+2853,Humboldt,2017,Male,Sentenced,Misdemeanors,9
+2854,Imperial,2017,Male,Sentenced,Misdemeanors,24
+2855,Inyo,2017,Male,Sentenced,Misdemeanors,5
+2856,Kern,2017,Male,Sentenced,Misdemeanors,86
+2857,Kings,2017,Male,Sentenced,Misdemeanors,14
+2858,Lake,2017,Male,Sentenced,Misdemeanors,16
+2859,Lassen,2017,Male,Sentenced,Misdemeanors,6
+2860,Los Angeles,2017,Male,Sentenced,Misdemeanors,633
+2861,Madera,2017,Male,Sentenced,Misdemeanors,11
+2862,Marin,2017,Male,Sentenced,Misdemeanors,9
+2863,Mariposa,2017,Male,Sentenced,Misdemeanors,7
+2864,Mendocino,2017,Male,Sentenced,Misdemeanors,60
+2865,Merced,2017,Male,Sentenced,Misdemeanors,2
+2866,Modoc,2017,Male,Sentenced,Misdemeanors,1
+2867,Mono,2017,Male,Sentenced,Misdemeanors,4
+2868,Monterey,2017,Male,Sentenced,Misdemeanors,20
+2869,Napa,2017,Male,Sentenced,Misdemeanors,6
+2870,Nevada,2017,Male,Sentenced,Misdemeanors,6
+2871,Orange,2017,Male,Sentenced,Misdemeanors,608
+2872,Placer,2017,Male,Sentenced,Misdemeanors,63
+2873,Plumas,2017,Male,Sentenced,Misdemeanors,1
+2874,Riverside,2017,Male,Sentenced,Misdemeanors,74
+2875,Sacramento,2017,Male,Sentenced,Misdemeanors,165
+2876,San Benito,2017,Male,Sentenced,Misdemeanors,7
+2877,San Bernardino,2017,Male,Sentenced,Misdemeanors,322
+2878,San Diego,2017,Male,Sentenced,Misdemeanors,215
+2879,San Francisco,2017,Male,Sentenced,Misdemeanors,9
+2880,San Joaquin,2017,Male,Sentenced,Misdemeanors,17
+2881,San Luis Obispo,2017,Male,Sentenced,Misdemeanors,116
+2882,San Mateo,2017,Male,Sentenced,Misdemeanors,26
+2883,Santa Barbara,2017,Male,Sentenced,Misdemeanors,0
+2884,Santa Clara,2017,Male,Sentenced,Misdemeanors,33
+2885,Santa Cruz,2017,Male,Sentenced,Misdemeanors,473
+2886,Shasta,2017,Male,Sentenced,Misdemeanors,13
+2887,Sierra,2017,Male,Sentenced,Misdemeanors,0
+2888,Siskiyou,2017,Male,Sentenced,Misdemeanors,0
+2889,Solano,2017,Male,Sentenced,Misdemeanors,22
+2890,Sonoma,2017,Male,Sentenced,Misdemeanors,128
+2891,Stanislaus,2017,Male,Sentenced,Misdemeanors,33
+2892,Sutter,2017,Male,Sentenced,Misdemeanors,4
+2893,Tehama,2017,Male,Sentenced,Misdemeanors,0
+2894,Trinity,2017,Male,Sentenced,Misdemeanors,0
+2895,Tulare,2017,Male,Sentenced,Misdemeanors,54
+2896,Tuolumne,2017,Male,Sentenced,Misdemeanors,0
+2897,Ventura,2017,Male,Sentenced,Misdemeanors,97
+2898,Yolo,2017,Male,Sentenced,Misdemeanors,7
+2899,Yuba,2017,Male,Sentenced,Misdemeanors,2
+2900,Alameda,2018,Male,Sentenced,Misdemeanors,23
+2901,Alpine,2018,Male,Sentenced,Misdemeanors,0
+2902,Amador,2018,Male,Sentenced,Misdemeanors,4
+2903,Butte,2018,Male,Sentenced,Misdemeanors,20
+2904,Calaveras,2018,Male,Sentenced,Misdemeanors,4
+2905,Colusa,2018,Male,Sentenced,Misdemeanors,9
+2906,Contra Costa,2018,Male,Sentenced,Misdemeanors,42
+2907,Del Norte,2018,Male,Sentenced,Misdemeanors,12
+2908,El Dorado,2018,Male,Sentenced,Misdemeanors,20
+2909,Fresno,2018,Male,Sentenced,Misdemeanors,44
+2910,Glenn,2018,Male,Sentenced,Misdemeanors,4
+2911,Humboldt,2018,Male,Sentenced,Misdemeanors,10
+2912,Imperial,2018,Male,Sentenced,Misdemeanors,12
+2913,Inyo,2018,Male,Sentenced,Misdemeanors,6
+2914,Kern,2018,Male,Sentenced,Misdemeanors,35
+2915,Kings,2018,Male,Sentenced,Misdemeanors,37
+2916,Lake,2018,Male,Sentenced,Misdemeanors,28
+2917,Lassen,2018,Male,Sentenced,Misdemeanors,9
+2918,Los Angeles,2018,Male,Sentenced,Misdemeanors,575
+2919,Madera,2018,Male,Sentenced,Misdemeanors,13
+2920,Marin,2018,Male,Sentenced,Misdemeanors,22
+2921,Mariposa,2018,Male,Sentenced,Misdemeanors,4
+2922,Mendocino,2018,Male,Sentenced,Misdemeanors,62
+2923,Merced,2018,Male,Sentenced,Misdemeanors,0
+2924,Modoc,2018,Male,Sentenced,Misdemeanors,1
+2925,Mono,2018,Male,Sentenced,Misdemeanors,3
+2926,Monterey,2018,Male,Sentenced,Misdemeanors,23
+2927,Napa,2018,Male,Sentenced,Misdemeanors,12
+2928,Nevada,2018,Male,Sentenced,Misdemeanors,4
+2929,Orange,2018,Male,Sentenced,Misdemeanors,654
+2930,Placer,2018,Male,Sentenced,Misdemeanors,50
+2931,Plumas,2018,Male,Sentenced,Misdemeanors,5
+2932,Riverside,2018,Male,Sentenced,Misdemeanors,57
+2933,Sacramento,2018,Male,Sentenced,Misdemeanors,190
+2934,San Benito,2018,Male,Sentenced,Misdemeanors,9
+2935,San Bernardino,2018,Male,Sentenced,Misdemeanors,350
+2936,San Diego,2018,Male,Sentenced,Misdemeanors,202
+2937,San Francisco,2018,Male,Sentenced,Misdemeanors,14
+2938,San Joaquin,2018,Male,Sentenced,Misdemeanors,31
+2939,San Luis Obispo,2018,Male,Sentenced,Misdemeanors,73
+2940,San Mateo,2018,Male,Sentenced,Misdemeanors,34
+2941,Santa Barbara,2018,Male,Sentenced,Misdemeanors,54
+2942,Santa Clara,2018,Male,Sentenced,Misdemeanors,108
+2943,Santa Cruz,2018,Male,Sentenced,Misdemeanors,84
+2944,Shasta,2018,Male,Sentenced,Misdemeanors,8
+2945,Sierra,2018,Male,Sentenced,Misdemeanors,0
+2946,Siskiyou,2018,Male,Sentenced,Misdemeanors,0
+2947,Solano,2018,Male,Sentenced,Misdemeanors,14
+2948,Sonoma,2018,Male,Sentenced,Misdemeanors,88
+2949,Stanislaus,2018,Male,Sentenced,Misdemeanors,24
+2950,Sutter,2018,Male,Sentenced,Misdemeanors,2
+2951,Tehama,2018,Male,Sentenced,Misdemeanors,0
+2952,Trinity,2018,Male,Sentenced,Misdemeanors,0
+2953,Tulare,2018,Male,Sentenced,Misdemeanors,48
+2954,Tuolumne,2018,Male,Sentenced,Misdemeanors,2
+2955,Ventura,2018,Male,Sentenced,Misdemeanors,0
+2956,Yolo,2018,Male,Sentenced,Misdemeanors,12
+2957,Yuba,2018,Male,Sentenced,Misdemeanors,3
+2958,Alameda,2019,Male,Sentenced,Misdemeanors,26
+2959,Alpine,2019,Male,Sentenced,Misdemeanors,0
+2960,Amador,2019,Male,Sentenced,Misdemeanors,6
+2961,Butte,2019,Male,Sentenced,Misdemeanors,18
+2962,Calaveras,2019,Male,Sentenced,Misdemeanors,3
+2963,Colusa,2019,Male,Sentenced,Misdemeanors,7
+2964,Contra Costa,2019,Male,Sentenced,Misdemeanors,33
+2965,Del Norte,2019,Male,Sentenced,Misdemeanors,9
+2966,El Dorado,2019,Male,Sentenced,Misdemeanors,11
+2967,Fresno,2019,Male,Sentenced,Misdemeanors,35
+2968,Glenn,2019,Male,Sentenced,Misdemeanors,8
+2969,Humboldt,2019,Male,Sentenced,Misdemeanors,8
+2970,Imperial,2019,Male,Sentenced,Misdemeanors,6
+2971,Inyo,2019,Male,Sentenced,Misdemeanors,4
+2972,Kern,2019,Male,Sentenced,Misdemeanors,9
+2973,Kings,2019,Male,Sentenced,Misdemeanors,24
+2974,Lake,2019,Male,Sentenced,Misdemeanors,16
+2975,Lassen,2019,Male,Sentenced,Misdemeanors,4
+2976,Los Angeles,2019,Male,Sentenced,Misdemeanors,640
+2977,Madera,2019,Male,Sentenced,Misdemeanors,15
+2978,Marin,2019,Male,Sentenced,Misdemeanors,12
+2979,Mariposa,2019,Male,Sentenced,Misdemeanors,3
+2980,Mendocino,2019,Male,Sentenced,Misdemeanors,50
+2981,Merced,2019,Male,Sentenced,Misdemeanors,0
+2982,Modoc,2019,Male,Sentenced,Misdemeanors,1
+2983,Mono,2019,Male,Sentenced,Misdemeanors,2
+2984,Monterey,2019,Male,Sentenced,Misdemeanors,25
+2985,Napa,2019,Male,Sentenced,Misdemeanors,12
+2986,Nevada,2019,Male,Sentenced,Misdemeanors,2
+2987,Orange,2019,Male,Sentenced,Misdemeanors,509
+2988,Placer,2019,Male,Sentenced,Misdemeanors,49
+2989,Plumas,2019,Male,Sentenced,Misdemeanors,7
+2990,Riverside,2019,Male,Sentenced,Misdemeanors,65
+2991,Sacramento,2019,Male,Sentenced,Misdemeanors,151
+2992,San Benito,2019,Male,Sentenced,Misdemeanors,8
+2993,San Bernardino,2019,Male,Sentenced,Misdemeanors,316
+2994,San Diego,2019,Male,Sentenced,Misdemeanors,140
+2995,San Francisco,2019,Male,Sentenced,Misdemeanors,20
+2996,San Joaquin,2019,Male,Sentenced,Misdemeanors,16
+2997,San Luis Obispo,2019,Male,Sentenced,Misdemeanors,108
+2998,San Mateo,2019,Male,Sentenced,Misdemeanors,19
+2999,Santa Barbara,2019,Male,Sentenced,Misdemeanors,53
+3000,Santa Clara,2019,Male,Sentenced,Misdemeanors,48
+3001,Santa Cruz,2019,Male,Sentenced,Misdemeanors,482
+3002,Shasta,2019,Male,Sentenced,Misdemeanors,6
+3003,Sierra,2019,Male,Sentenced,Misdemeanors,0
+3004,Siskiyou,2019,Male,Sentenced,Misdemeanors,0
+3005,Solano,2019,Male,Sentenced,Misdemeanors,14
+3006,Sonoma,2019,Male,Sentenced,Misdemeanors,59
+3007,Stanislaus,2019,Male,Sentenced,Misdemeanors,25
+3008,Sutter,2019,Male,Sentenced,Misdemeanors,11
+3009,Tehama,2019,Male,Sentenced,Misdemeanors,0
+3010,Trinity,2019,Male,Sentenced,Misdemeanors,1
+3011,Tulare,2019,Male,Sentenced,Misdemeanors,41
+3012,Tuolumne,2019,Male,Sentenced,Misdemeanors,2
+3013,Ventura,2019,Male,Sentenced,Misdemeanors,107
+3014,Yolo,2019,Male,Sentenced,Misdemeanors,7
+3015,Yuba,2019,Male,Sentenced,Misdemeanors,4
+3016,Alameda,2020,Male,Sentenced,Misdemeanors,8
+3017,Alpine,2020,Male,Sentenced,Misdemeanors,0
+3018,Amador,2020,Male,Sentenced,Misdemeanors,2
+3019,Butte,2020,Male,Sentenced,Misdemeanors,6
+3020,Calaveras,2020,Male,Sentenced,Misdemeanors,1
+3021,Colusa,2020,Male,Sentenced,Misdemeanors,8
+3022,Contra Costa,2020,Male,Sentenced,Misdemeanors,16
+3023,Del Norte,2020,Male,Sentenced,Misdemeanors,1
+3024,El Dorado,2020,Male,Sentenced,Misdemeanors,4
+3025,Fresno,2020,Male,Sentenced,Misdemeanors,3
+3026,Glenn,2020,Male,Sentenced,Misdemeanors,2
+3027,Humboldt,2020,Male,Sentenced,Misdemeanors,1
+3028,Imperial,2020,Male,Sentenced,Misdemeanors,2
+3029,Inyo,2020,Male,Sentenced,Misdemeanors,1
+3030,Kern,2020,Male,Sentenced,Misdemeanors,2
+3031,Kings,2020,Male,Sentenced,Misdemeanors,5
+3032,Lake,2020,Male,Sentenced,Misdemeanors,6
+3033,Lassen,2020,Male,Sentenced,Misdemeanors,0
+3034,Los Angeles,2020,Male,Sentenced,Misdemeanors,301
+3035,Madera,2020,Male,Sentenced,Misdemeanors,7
+3036,Marin,2020,Male,Sentenced,Misdemeanors,3
+3037,Mariposa,2020,Male,Sentenced,Misdemeanors,2
+3038,Mendocino,2020,Male,Sentenced,Misdemeanors,0
+3039,Merced,2020,Male,Sentenced,Misdemeanors,0
+3040,Modoc,2020,Male,Sentenced,Misdemeanors,1
+3041,Mono,2020,Male,Sentenced,Misdemeanors,2
+3042,Monterey,2020,Male,Sentenced,Misdemeanors,13
+3043,Napa,2020,Male,Sentenced,Misdemeanors,3
+3044,Nevada,2020,Male,Sentenced,Misdemeanors,1
+3045,Orange,2020,Male,Sentenced,Misdemeanors,213
+3046,Placer,2020,Male,Sentenced,Misdemeanors,38
+3047,Plumas,2020,Male,Sentenced,Misdemeanors,1
+3048,Riverside,2020,Male,Sentenced,Misdemeanors,20
+3049,Sacramento,2020,Male,Sentenced,Misdemeanors,52
+3050,San Benito,2020,Male,Sentenced,Misdemeanors,3
+3051,San Bernardino,2020,Male,Sentenced,Misdemeanors,212
+3052,San Diego,2020,Male,Sentenced,Misdemeanors,27
+3053,San Francisco,2020,Male,Sentenced,Misdemeanors,12
+3054,San Joaquin,2020,Male,Sentenced,Misdemeanors,6
+3055,San Luis Obispo,2020,Male,Sentenced,Misdemeanors,40
+3056,San Mateo,2020,Male,Sentenced,Misdemeanors,3
+3057,Santa Barbara,2020,Male,Sentenced,Misdemeanors,13
+3058,Santa Clara,2020,Male,Sentenced,Misdemeanors,11
+3059,Santa Cruz,2020,Male,Sentenced,Misdemeanors,286
+3060,Shasta,2020,Male,Sentenced,Misdemeanors,2
+3061,Sierra,2020,Male,Sentenced,Misdemeanors,0
+3062,Siskiyou,2020,Male,Sentenced,Misdemeanors,0
+3063,Solano,2020,Male,Sentenced,Misdemeanors,7
+3064,Sonoma,2020,Male,Sentenced,Misdemeanors,25
+3065,Stanislaus,2020,Male,Sentenced,Misdemeanors,8
+3066,Sutter,2020,Male,Sentenced,Misdemeanors,4
+3067,Tehama,2020,Male,Sentenced,Misdemeanors,0
+3068,Trinity,2020,Male,Sentenced,Misdemeanors,2
+3069,Tulare,2020,Male,Sentenced,Misdemeanors,16
+3070,Tuolumne,2020,Male,Sentenced,Misdemeanors,0
+3071,Ventura,2020,Male,Sentenced,Misdemeanors,53
+3072,Yolo,2020,Male,Sentenced,Misdemeanors,3
+3073,Yuba,2020,Male,Sentenced,Misdemeanors,2
+3074,Alameda,2021,Male,Sentenced,Misdemeanors,9
+3075,Alpine,2021,Male,Sentenced,Misdemeanors,0
+3076,Amador,2021,Male,Sentenced,Misdemeanors,2
+3077,Butte,2021,Male,Sentenced,Misdemeanors,10
+3078,Calaveras,2021,Male,Sentenced,Misdemeanors,2
+3079,Colusa,2021,Male,Sentenced,Misdemeanors,6
+3080,Contra Costa,2021,Male,Sentenced,Misdemeanors,10
+3081,Del Norte,2021,Male,Sentenced,Misdemeanors,0
+3082,El Dorado,2021,Male,Sentenced,Misdemeanors,0
+3083,Fresno,2021,Male,Sentenced,Misdemeanors,8
+3084,Glenn,2021,Male,Sentenced,Misdemeanors,1
+3085,Humboldt,2021,Male,Sentenced,Misdemeanors,1
+3086,Imperial,2021,Male,Sentenced,Misdemeanors,4
+3087,Inyo,2021,Male,Sentenced,Misdemeanors,1
+3088,Kern,2021,Male,Sentenced,Misdemeanors,4
+3089,Kings,2021,Male,Sentenced,Misdemeanors,6
+3090,Lake,2021,Male,Sentenced,Misdemeanors,8
+3091,Lassen,2021,Male,Sentenced,Misdemeanors,2
+3092,Los Angeles,2021,Male,Sentenced,Misdemeanors,246
+3093,Madera,2021,Male,Sentenced,Misdemeanors,6
+3094,Marin,2021,Male,Sentenced,Misdemeanors,2
+3095,Mariposa,2021,Male,Sentenced,Misdemeanors,0
+3096,Mendocino,2021,Male,Sentenced,Misdemeanors,0
+3097,Merced,2021,Male,Sentenced,Misdemeanors,0
+3098,Modoc,2021,Male,Sentenced,Misdemeanors,1
+3099,Mono,2021,Male,Sentenced,Misdemeanors,1
+3100,Monterey,2021,Male,Sentenced,Misdemeanors,0
+3101,Napa,2021,Male,Sentenced,Misdemeanors,2
+3102,Nevada,2021,Male,Sentenced,Misdemeanors,1
+3103,Orange,2021,Male,Sentenced,Misdemeanors,225
+3104,Placer,2021,Male,Sentenced,Misdemeanors,35
+3105,Plumas,2021,Male,Sentenced,Misdemeanors,1
+3106,Riverside,2021,Male,Sentenced,Misdemeanors,13
+3107,Sacramento,2021,Male,Sentenced,Misdemeanors,62
+3108,San Benito,2021,Male,Sentenced,Misdemeanors,1
+3109,San Bernardino,2021,Male,Sentenced,Misdemeanors,158
+3110,San Diego,2021,Male,Sentenced,Misdemeanors,36
+3111,San Francisco,2021,Male,Sentenced,Misdemeanors,9
+3112,San Joaquin,2021,Male,Sentenced,Misdemeanors,14
+3113,San Luis Obispo,2021,Male,Sentenced,Misdemeanors,21
+3114,San Mateo,2021,Male,Sentenced,Misdemeanors,10
+3115,Santa Barbara,2021,Male,Sentenced,Misdemeanors,150
+3116,Santa Clara,2021,Male,Sentenced,Misdemeanors,20
+3117,Santa Cruz,2021,Male,Sentenced,Misdemeanors,33
+3118,Shasta,2021,Male,Sentenced,Misdemeanors,5
+3119,Sierra,2021,Male,Sentenced,Misdemeanors,0
+3120,Siskiyou,2021,Male,Sentenced,Misdemeanors,0
+3121,Solano,2021,Male,Sentenced,Misdemeanors,4
+3122,Sonoma,2021,Male,Sentenced,Misdemeanors,24
+3123,Stanislaus,2021,Male,Sentenced,Misdemeanors,15
+3124,Sutter,2021,Male,Sentenced,Misdemeanors,3
+3125,Tehama,2021,Male,Sentenced,Misdemeanors,0
+3126,Trinity,2021,Male,Sentenced,Misdemeanors,0
+3127,Tulare,2021,Male,Sentenced,Misdemeanors,18
+3128,Tuolumne,2021,Male,Sentenced,Misdemeanors,0
+3129,Ventura,2021,Male,Sentenced,Misdemeanors,43
+3130,Yolo,2021,Male,Sentenced,Misdemeanors,2
+3131,Yuba,2021,Male,Sentenced,Misdemeanors,4
+3132,Alameda,2022,Male,Sentenced,Misdemeanors,14
+3133,Alpine,2022,Male,Sentenced,Misdemeanors,0
+3134,Amador,2022,Male,Sentenced,Misdemeanors,1
+3135,Butte,2022,Male,Sentenced,Misdemeanors,6
+3136,Calaveras,2022,Male,Sentenced,Misdemeanors,1
+3137,Colusa,2022,Male,Sentenced,Misdemeanors,6
+3138,Contra Costa,2022,Male,Sentenced,Misdemeanors,11
+3139,Del Norte,2022,Male,Sentenced,Misdemeanors,3
+3140,El Dorado,2022,Male,Sentenced,Misdemeanors,27
+3141,Fresno,2022,Male,Sentenced,Misdemeanors,16
+3142,Glenn,2022,Male,Sentenced,Misdemeanors,3
+3143,Humboldt,2022,Male,Sentenced,Misdemeanors,2
+3144,Imperial,2022,Male,Sentenced,Misdemeanors,8
+3145,Inyo,2022,Male,Sentenced,Misdemeanors,2
+3146,Kern,2022,Male,Sentenced,Misdemeanors,12
+3147,Kings,2022,Male,Sentenced,Misdemeanors,5
+3148,Lake,2022,Male,Sentenced,Misdemeanors,10
+3149,Lassen,2022,Male,Sentenced,Misdemeanors,4
+3150,Los Angeles,2022,Male,Sentenced,Misdemeanors,341
+3151,Madera,2022,Male,Sentenced,Misdemeanors,0
+3152,Marin,2022,Male,Sentenced,Misdemeanors,3
+3153,Mariposa,2022,Male,Sentenced,Misdemeanors,1
+3154,Mendocino,2022,Male,Sentenced,Misdemeanors,39
+3155,Merced,2022,Male,Sentenced,Misdemeanors,0
+3156,Modoc,2022,Male,Sentenced,Misdemeanors,1
+3157,Mono,2022,Male,Sentenced,Misdemeanors,1
+3158,Monterey,2022,Male,Sentenced,Misdemeanors,19
+3159,Napa,2022,Male,Sentenced,Misdemeanors,6
+3160,Nevada,2022,Male,Sentenced,Misdemeanors,2
+3161,Orange,2022,Male,Sentenced,Misdemeanors,167
+3162,Placer,2022,Male,Sentenced,Misdemeanors,50
+3163,Plumas,2022,Male,Sentenced,Misdemeanors,3
+3164,Riverside,2022,Male,Sentenced,Misdemeanors,10
+3165,Sacramento,2022,Male,Sentenced,Misdemeanors,52
+3166,San Benito,2022,Male,Sentenced,Misdemeanors,4
+3167,San Bernardino,2022,Male,Sentenced,Misdemeanors,151
+3168,San Diego,2022,Male,Sentenced,Misdemeanors,35
+3169,San Francisco,2022,Male,Sentenced,Misdemeanors,20
+3170,San Joaquin,2022,Male,Sentenced,Misdemeanors,6
+3171,San Luis Obispo,2022,Male,Sentenced,Misdemeanors,11
+3172,San Mateo,2022,Male,Sentenced,Misdemeanors,11
+3173,Santa Barbara,2022,Male,Sentenced,Misdemeanors,28
+3174,Santa Clara,2022,Male,Sentenced,Misdemeanors,18
+3175,Santa Cruz,2022,Male,Sentenced,Misdemeanors,208
+3176,Shasta,2022,Male,Sentenced,Misdemeanors,1
+3177,Sierra,2022,Male,Sentenced,Misdemeanors,0
+3178,Siskiyou,2022,Male,Sentenced,Misdemeanors,0
+3179,Solano,2022,Male,Sentenced,Misdemeanors,7
+3180,Sonoma,2022,Male,Sentenced,Misdemeanors,27
+3181,Stanislaus,2022,Male,Sentenced,Misdemeanors,20
+3182,Sutter,2022,Male,Sentenced,Misdemeanors,5
+3183,Tehama,2022,Male,Sentenced,Misdemeanors,0
+3184,Trinity,2022,Male,Sentenced,Misdemeanors,0
+3185,Tulare,2022,Male,Sentenced,Misdemeanors,18
+3186,Tuolumne,2022,Male,Sentenced,Misdemeanors,1
+3187,Ventura,2022,Male,Sentenced,Misdemeanors,46
+3188,Yolo,2022,Male,Sentenced,Misdemeanors,10
+3189,Yuba,2022,Male,Sentenced,Misdemeanors,5
+3190,Alameda,2023,Male,Sentenced,Misdemeanors,12
+3191,Alpine,2023,Male,Sentenced,Misdemeanors,0
+3192,Amador,2023,Male,Sentenced,Misdemeanors,3
+3193,Butte,2023,Male,Sentenced,Misdemeanors,12
+3194,Calaveras,2023,Male,Sentenced,Misdemeanors,1
+3195,Colusa,2023,Male,Sentenced,Misdemeanors,1
+3196,Contra Costa,2023,Male,Sentenced,Misdemeanors,15
+3197,Del Norte,2023,Male,Sentenced,Misdemeanors,4
+3198,El Dorado,2023,Male,Sentenced,Misdemeanors,2
+3199,Fresno,2023,Male,Sentenced,Misdemeanors,24
+3200,Glenn,2023,Male,Sentenced,Misdemeanors,3
+3201,Humboldt,2023,Male,Sentenced,Misdemeanors,3
+3202,Imperial,2023,Male,Sentenced,Misdemeanors,12
+3203,Inyo,2023,Male,Sentenced,Misdemeanors,0
+3204,Kern,2023,Male,Sentenced,Misdemeanors,11
+3205,Kings,2023,Male,Sentenced,Misdemeanors,10
+3206,Lake,2023,Male,Sentenced,Misdemeanors,10
+3207,Lassen,2023,Male,Sentenced,Misdemeanors,3
+3208,Los Angeles,2023,Male,Sentenced,Misdemeanors,230
+3209,Madera,2023,Male,Sentenced,Misdemeanors,0
+3210,Marin,2023,Male,Sentenced,Misdemeanors,3
+3211,Mariposa,2023,Male,Sentenced,Misdemeanors,0
+3212,Mendocino,2023,Male,Sentenced,Misdemeanors,40
+3213,Merced,2023,Male,Sentenced,Misdemeanors,0
+3214,Modoc,2023,Male,Sentenced,Misdemeanors,2
+3215,Mono,2023,Male,Sentenced,Misdemeanors,3
+3216,Monterey,2023,Male,Sentenced,Misdemeanors,21
+3217,Napa,2023,Male,Sentenced,Misdemeanors,2
+3218,Nevada,2023,Male,Sentenced,Misdemeanors,1
+3219,Orange,2023,Male,Sentenced,Misdemeanors,209
+3220,Placer,2023,Male,Sentenced,Misdemeanors,68
+3221,Plumas,2023,Male,Sentenced,Misdemeanors,3
+3222,Riverside,2023,Male,Sentenced,Misdemeanors,15
+3223,Sacramento,2023,Male,Sentenced,Misdemeanors,38
+3224,San Benito,2023,Male,Sentenced,Misdemeanors,2
+3225,San Bernardino,2023,Male,Sentenced,Misdemeanors,105
+3226,San Diego,2023,Male,Sentenced,Misdemeanors,55
+3227,San Francisco,2023,Male,Sentenced,Misdemeanors,11
+3228,San Joaquin,2023,Male,Sentenced,Misdemeanors,14
+3229,San Luis Obispo,2023,Male,Sentenced,Misdemeanors,7
+3230,San Mateo,2023,Male,Sentenced,Misdemeanors,16
+3231,Santa Barbara,2023,Male,Sentenced,Misdemeanors,25
+3232,Santa Clara,2023,Male,Sentenced,Misdemeanors,21
+3233,Santa Cruz,2023,Male,Sentenced,Misdemeanors,47
+3234,Shasta,2023,Male,Sentenced,Misdemeanors,2
+3235,Sierra,2023,Male,Sentenced,Misdemeanors,0
+3236,Siskiyou,2023,Male,Sentenced,Misdemeanors,0
+3237,Solano,2023,Male,Sentenced,Misdemeanors,10
+3238,Sonoma,2023,Male,Sentenced,Misdemeanors,14
+3239,Stanislaus,2023,Male,Sentenced,Misdemeanors,25
+3240,Sutter,2023,Male,Sentenced,Misdemeanors,5
+3241,Tehama,2023,Male,Sentenced,Misdemeanors,0
+3242,Trinity,2023,Male,Sentenced,Misdemeanors,0
+3243,Tulare,2023,Male,Sentenced,Misdemeanors,19
+3244,Tuolumne,2023,Male,Sentenced,Misdemeanors,2
+3245,Ventura,2023,Male,Sentenced,Misdemeanors,44
+3246,Yolo,2023,Male,Sentenced,Misdemeanors,5
+3247,Yuba,2023,Male,Sentenced,Misdemeanors,6
