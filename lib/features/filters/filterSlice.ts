@@ -26,7 +26,7 @@ export enum MetricType {
 export const DataSourceMetrics: Record<DataSourceType, string[]> = {
     young_adult: ['Count'], // Represents arrests for the combined file
     jail: ['Jail_ADP'], // Average Daily Population
-    county_prison: ['Imprisonments', 'Cost_per_prisoner', 'Population'], // Population might need clarification
+    county_prison: ['Imprisonments', 'Total_Cost'], // Renamed Cost metric
     //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
 };
 
@@ -264,7 +264,7 @@ export const filterSlice = createSlice({
                 // Set default metric for the new source
                 state.selectedMetric = DataSourceMetrics[action.payload][0];
                 // Reset Age filter if switching to a source without it (e.g., jail)
-                if (!DataSourceMetrics[action.payload]?.includes('Count') && action.payload !== 'demographic') { // Heuristic: Count implies Age might be relevant
+                if (action.payload !== 'young_adult') {
                     state.filters.age.forEach(f => f.isActive = false);
                     state.activeFilters.age = [];
                 }
