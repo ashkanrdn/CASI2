@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import filterReducer from './features/filters/filterSlice';
 import mapReducer from './features/map/mapSlice';
-import { logger } from 'redux-logger'
+import logger from 'redux-logger';
 
 const defaultMiddlewareConfig = {
   serializableCheck: {
