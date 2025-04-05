@@ -3,7 +3,7 @@ import type { CsvRow } from '@/app/types/shared'; // Import the updated type
 import Papa from 'papaparse';
 
 // Define supported data sources
-export type DataSourceType = 'young_adult' | 'jail' | 'county_prison' | 'demographic'; // Updated sources
+export type DataSourceType = 'young_adult' | 'jail' | 'county_prison' //|'demographic'; // Updated sources
 
 
 export interface Filter {
@@ -27,7 +27,7 @@ export const DataSourceMetrics: Record<DataSourceType, string[]> = {
     young_adult: ['Count'], // Represents arrests for the combined file
     jail: ['Jail_ADP'], // Average Daily Population
     county_prison: ['Imprisonments', 'Cost_per_prisoner', 'Population'], // Population might need clarification
-    demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
+    //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
 };
 
 export interface FilterState {

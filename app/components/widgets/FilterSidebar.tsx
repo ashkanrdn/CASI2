@@ -26,21 +26,29 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCategory, string[]>>> = {
     young_adult: {
         crime: ['Violent', 'Property', 'Drug', 'Other', 'Misdemeanors', 'StatusOffense', 'PublicOrder'],
-        // Assume all gender, age, race filters are valid for young_adult
+        // Gender, Age, Race assumed valid
     },
     jail: {
         crime: ['Felony', 'Misdemeanors'],
         sentencing: ['Unsentenced', 'Sentenced'],
-        // Assume gender and race are valid (Sex, Race columns)
-        // Age filter is likely not applicable directly to jail data columns
+        // Gender (Sex column) assumed valid
+        race: [], // Explicitly disable race filters for jail
+        age: [], // Explicitly disable age filters for jail
     },
     county_prison: {
-        // Define valid filters if applicable. Assume none for crime/age/gender/race/sentencing based on its columns.
+        // Explicitly disable all standard filter categories
+        gender: [],
+        age: [],
+        crime: [],
+        race: [],
+        sentencing: [],
     },
-    demographic: {
-        // Define valid filters. Assume gender, race, age (implied 10-17) are valid.
-        // Crime/Sentencing likely not applicable.
-    },
+    // demographic: {
+    //     // Gender, Race, Age assumed valid
+    //     // Explicitly disable crime and sentencing for demographic
+    //     crime: [],
+    //     sentencing: [],
+    // },
 };
 
 const formatDataSourceLabel = (source: DataSourceType) => {
@@ -51,8 +59,8 @@ const formatDataSourceLabel = (source: DataSourceType) => {
             return 'Jail Population';
         case 'county_prison':
             return 'County Prison Stats';
-        case 'demographic':
-            return 'Demographics';
+        // case 'demographic':
+        //     return 'Demographics';
         default:
             return source;
     }
@@ -99,8 +107,15 @@ export default function FiltersSidebar() {
     };
 
     const FilterGroup = ({ title, category }: { title: string; category: FilterCategory }) => {
-        // Get the valid filter IDs for the current category and source, if defined
-        const validFilterIds = VALID_FILTERS_PER_SOURCE[selectedDataSource]?.[category];
+        // Existing check for sentencing group visibility (still useful)
+        if (category === 'sentencing' && selectedDataSource !== 'jail') {
+            return null;
+        }
+
+        // Hide Age group unless relevant source is selected
+        if (category === 'age' && selectedDataSource !== 'young_adult') {
+            return null; // Optionally hide instead of just disabling buttons
+        }
 
         return (
             <div className='mb-4 p-2'>
@@ -110,37 +125,23 @@ export default function FiltersSidebar() {
                         // Get the valid filter IDs for the current category and source, if defined
                         const validFilterIds = VALID_FILTERS_PER_SOURCE[selectedDataSource]?.[category];
 
-                        // Determine if the current filter button should be disabled
                         let isDisabled = false;
-                        // 1. Check specific category/source overrides
-                        if (category === 'sentencing' && selectedDataSource !== 'jail') {
-                            isDisabled = true;
-                        } else if (
-                            category === 'age' &&
-                            selectedDataSource !== 'young_adult' &&
-                            selectedDataSource !== 'demographic'
-                        ) {
-                            isDisabled = true;
-                        } else if (
-                            category === 'crime' &&
-                            (selectedDataSource === 'county_prison' || selectedDataSource === 'demographic')
-                        ) {
-                            isDisabled = true;
-                            // 2. Check against the defined valid list for the category, if it exists
-                        } else if (validFilterIds !== undefined) {
-                            // If a list is defined for this category, the filter ID must be in it
+                        // Check against the defined valid list for the category, if it exists
+                        if (validFilterIds !== undefined) {
+                            // If a list is defined (even if empty), the filter ID must be in it to be enabled
                             isDisabled = !validFilterIds.includes(filter.id);
                         }
-                        // Otherwise (no specific overrides, no defined list), the filter is enabled by default.
+                        // Note: Specific overrides removed as the map now handles all cases explicitly.
+                        // If validFilterIds is undefined (category not listed for the source in the map),
+                        // it implies the category *is* valid, so isDisabled remains false.
 
                         return (
                             <Button
                                 key={filter.id}
                                 variant={filter.isActive ? 'default' : 'outline'}
-                                // className='h-8 text-xs'
                                 className={`h-8 text-xs ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                onClick={() => handleToggleFilter(category, filter.id)}
-                                disabled={isDisabled} // Add disabled prop
+                                onClick={() => !isDisabled && handleToggleFilter(category, filter.id)} // Prevent click if disabled
+                                disabled={isDisabled}
                             >
                                 {filter.label}
                             </Button>
@@ -160,7 +161,7 @@ export default function FiltersSidebar() {
                         <SelectValue placeholder='Select data source' />
                     </SelectTrigger>
                     <SelectContent>
-                        {(['young_adult', 'jail', 'county_prison', 'demographic'] as DataSourceType[]).map((source) => (
+                        {(['young_adult', 'jail', 'county_prison'] as DataSourceType[]).map((source) => (
                             <SelectItem key={source} value={source}>
                                 {formatDataSourceLabel(source)}
                             </SelectItem>
@@ -172,7 +173,7 @@ export default function FiltersSidebar() {
 
             <FilterGroup title='Gender' category='gender' />
             <Separator className='my-4' />
-            {(selectedDataSource === 'young_adult' || selectedDataSource === 'demographic') && (
+            {selectedDataSource === 'young_adult' && (
                 <>
                     <FilterGroup title='Age' category='age' />
                     <Separator className='my-4' />
