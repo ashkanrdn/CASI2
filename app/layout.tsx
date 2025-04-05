@@ -47,11 +47,11 @@ export default function RootLayout({ children }: Props) {
 
                         {/* Footer */}
                         <footer className='bg-gray-800 text-white p-4'>
-                            <div className=' mx-auto px-4'>
-                                <div className='flex flex-col md:flex-row justify-between items-center gap-4 '>
+                            <div className='mx-auto px-4'>
+                                <div className='flex justify-between items-center gap-4'>
                                     <div className='text-left'>
-                                        <h3 className='text-xl font-bold mb-2'>Data Story</h3>
-                                        <p className='text-gray-400'>Visualizing data in meaningful ways</p>
+                                        <h3 className='text-xl font-bold'>Data Story</h3>
+                                        {/* <p className='text-gray-400'>Visualizing data in meaningful ways</p> */}
                                     </div>
 
                                     <div className='flex gap-6'>
@@ -66,11 +66,9 @@ export default function RootLayout({ children }: Props) {
                                         </a>
                                     </div>
 
-                                    <div className='border-t border-neutral-800 pt-4 mt-4'>
-                                        <p className='text-center text-sm text-gray-400'>
-                                            © {new Date().getFullYear()} Data Story. All rights reserved.
-                                        </p>
-                                    </div>
+                                    <p className='text-sm text-gray-400'>
+                                        © {new Date().getFullYear()} Data Story. All rights reserved.
+                                    </p>
                                 </div>
                             </div>
                         </footer>
