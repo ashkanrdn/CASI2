@@ -10,9 +10,9 @@ import CountyRank from './CountyRank';
 export default function BarChartWidget() {
     const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
     const temp = useSelector((state: RootState) => state.map.barChartData);
-    const barChartData = [...temp].sort((a, b) => {
-        return a.value - b.value;
-    });
+    const validBarChartData = [...temp]
+        .filter((d): d is { county: string; value: number } => d && typeof d.value === 'number' && isFinite(d.value))
+        .sort((a, b) => a.value - b.value);
     const colorScaleValues = useSelector((state: RootState) => state.map.colorScaleValues);
 
     const colorScale = d3
@@ -20,7 +20,8 @@ export default function BarChartWidget() {
         .domain([0, d3.max(colorScaleValues as number[]) || 0])
         .interpolator(d3.interpolateOranges);
 
-    const maxValue = Math.max(...barChartData.map((d: { value: number }) => d.value));
+    const validValues = validBarChartData.map((d) => d.value);
+    const maxValue = validValues.length > 0 ? Math.max(...validValues) : 0;
 
     return (
         <motion.div
@@ -42,7 +43,7 @@ export default function BarChartWidget() {
                             <motion.div className='flex-1 overflow-y-auto' layout>
                                 <div className='w-full' style={{ height: '1200px' }}>
                                     <ResponsiveBar
-                                        data={barChartData}
+                                        data={validBarChartData}
                                         keys={['value']}
                                         indexBy='county'
                                         margin={{ top: 10, right: 20, bottom: 0, left: 90 }}

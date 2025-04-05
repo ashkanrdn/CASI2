@@ -403,7 +403,7 @@ export default function MapStory() {
                 transitionInterpolator: new FlyToInterpolator(),
             });
         }
-    }, [selectedCounty, enhancedGeojson, viewState, dispatch]);
+    }, [selectedCounty, viewState]);
 
     const layers = [
         new GeoJsonLayer({

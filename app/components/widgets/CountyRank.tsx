@@ -6,6 +6,7 @@ import type { RootState } from '@/lib/store';
 import { MetricType } from '@/lib/features/filters/filterSlice';
 import { setSelectedCounty } from '@/lib/features/map/mapSlice';
 import { motion, AnimatePresence } from 'motion/react';
+import { COUNTY_POPULATION } from './MapStory';
 
 // Helper to format Metric string for display (same as in MapStory)
 function formatMetricLabel(metric: string) {
@@ -47,7 +48,7 @@ export default function CountyRank() {
                         className={`bg-white rounded-lg shadow p-4 mx-2 hover:shadow-md transition-shadow cursor-pointer ${
                             selectedCounty === county.name ? 'ring-2 ring-blue-500' : ''
                         }`}
-                        onClick={() => dispatch(setSelectedCounty(county.name))}
+                        // onClick={() => dispatch(setSelectedCounty(county.name))}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                     >
@@ -63,6 +64,12 @@ export default function CountyRank() {
                                     <motion.h3 className='font-semibold' layoutId={`name-${county.name}`}>
                                         {county.name}
                                     </motion.h3>
+                                    <motion.p className='text-gray-500 text-xs' layoutId={`population-${county.name}`}>
+                                        Pop:{' '}
+                                        {COUNTY_POPULATION[
+                                            county.name as keyof typeof COUNTY_POPULATION
+                                        ]?.toLocaleString() ?? 'N/A'}
+                                    </motion.p>
                                     <motion.p className='text-gray-600 text-sm' layoutId={`value-${county.name}`}>
                                         {formatMetricLabel(selectedMetric)}
                                         {isPerCapita ? ' (Per Capita): ' : ': '}
