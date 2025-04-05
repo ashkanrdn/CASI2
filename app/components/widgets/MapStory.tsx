@@ -122,6 +122,30 @@ export const COUNTY_POPULATION = {
     Yuba: 87469,
 };
 
+// Mock data structure for descriptions
+const dataDescriptions = {
+    county_prison: {
+        name: 'County Prison Data',
+        description:
+            'This dataset contains information about imprisonments and associated costs aggregated at the county level.',
+        metrics: {
+            Imprisonments: 'Total number of imprisonments recorded for the county.',
+            Cost_per_prisoner: 'Average cost per prisoner for the county.',
+            Total_Cost: 'Calculated total cost based on imprisonments and cost per prisoner.',
+        },
+    },
+    jdp_data: {
+        // Placeholder for another data source
+        name: 'Juvenile Detention Profile Data',
+        description: 'Information regarding juvenile detention profiles across counties.',
+        metrics: {
+            MetricA: 'Description for Metric A in JDP data.',
+            MetricB: 'Description for Metric B in JDP data.',
+        },
+    },
+    // Add other data sources as needed
+};
+
 function enhanceGeoJsonWithData(
     geojsonFeatures: Feature[],
     filteredData: CsvRow[],
@@ -452,6 +476,16 @@ export default function MapStory() {
 
     const availableMetrics = DataSourceMetrics[selectedDataSource] || [];
 
+    // Get descriptions based on selected data source and metric
+    const currentDataSourceInfo = dataDescriptions[selectedDataSource as keyof typeof dataDescriptions] || {
+        name: 'Unknown Data',
+        description: 'No description available.',
+        metrics: {},
+    };
+    const currentMetricInfo =
+        currentDataSourceInfo.metrics[selectedMetric as keyof typeof currentDataSourceInfo.metrics] ||
+        'No metric description available.';
+
     return (
         <div className='relative w-full h-full overflow-hidden'>
             <div className='absolute top-4 left-4 z-10 p-2 max-w-[calc(100%-2rem)]'>
@@ -566,13 +600,14 @@ export default function MapStory() {
                     </div>
                 )}
 
+                {/* Legend Box */}
                 <div className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10'>
                     <h4 className='text-sm font-bold mb-2 break-words'>
                         {formatMetricLabel(selectedMetric)}
                         {isPerCapita && <span className='font-normal text-xs'> (Per Capita)</span>}
                     </h4>
                     <div
-                        className='w-48 max-w-full h-4 relative'
+                        className='w-full h-4 relative' // Changed w-48 to w-full
                         style={{
                             background:
                                 colorScale.domain()[1] > 0
@@ -594,6 +629,15 @@ export default function MapStory() {
                                 : Math.round(colorScale.domain()[1]).toLocaleString()}
                         </span>
                     </div>
+                </div>
+
+                {/* Data Description Box */}
+                <div className='absolute w-64 bottom-8 right-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10 text-xs'>
+                    <h4 className='text-sm font-bold mb-1 break-words'>{currentDataSourceInfo.name}</h4>
+                    <p className='mb-2'>{currentDataSourceInfo.description}</p>
+                    <p>
+                        <span className='font-semibold'>{formatMetricLabel(selectedMetric)}:</span> {currentMetricInfo}
+                    </p>
                 </div>
             </div>
         </div>
