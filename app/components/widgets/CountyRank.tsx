@@ -7,10 +7,25 @@ import { MetricType } from '@/lib/features/filters/filterSlice';
 import { setSelectedCounty } from '@/lib/features/map/mapSlice';
 import { motion, AnimatePresence } from 'motion/react';
 
+// Helper to format Metric string for display (same as in MapStory)
+function formatMetricLabel(metric: string) {
+    if (metric === 'Total_Cost') return 'Total Cost';
+    // Add formatting for other specific metrics if needed
+    if (metric === 'Jail_ADP') return 'Avg Daily Population';
+    if (metric === 'Count') return 'Arrests'; // Assuming Count means Arrests here
+
+    return metric
+        .replace(/_/g, ' ')
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, (str) => str.toUpperCase())
+        .trim();
+}
+
 export default function CountyRank() {
     const dispatch = useDispatch();
     const counties = useSelector((state: RootState) => state.filters.rankedCounties);
     const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
+    const isPerCapita = useSelector((state: RootState) => state.filters.isPerCapita);
     const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
 
     return (
@@ -49,9 +64,17 @@ export default function CountyRank() {
                                         {county.name}
                                     </motion.h3>
                                     <motion.p className='text-gray-600 text-sm' layoutId={`value-${county.name}`}>
-                                        {selectedMetric === MetricType.Cost
-                                            ? `$${county.value.toLocaleString()}`
-                                            : county.value.toLocaleString()}
+                                        {formatMetricLabel(selectedMetric)}
+                                        {isPerCapita ? ' (Per Capita): ' : ': '}
+                                        {isPerCapita
+                                            ? Number(county.value).toLocaleString(undefined, {
+                                                  maximumSignificantDigits: 4,
+                                              })
+                                            : selectedMetric === 'Total_Cost'
+                                            ? `$${Number(county.value).toLocaleString(undefined, {
+                                                  maximumFractionDigits: 0,
+                                              })}`
+                                            : Number(county.value).toLocaleString()}
                                     </motion.p>
                                 </div>
                             </div>
