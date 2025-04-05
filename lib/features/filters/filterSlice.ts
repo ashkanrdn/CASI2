@@ -49,6 +49,7 @@ export interface FilterState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     selectedDataSource: DataSourceType; // Add selected data source
+    isPerCapita: boolean; // Add per capita toggle state
 }
 
 const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
@@ -102,6 +103,7 @@ const initialState: FilterState = {
     status: 'idle',
     error: null,
     selectedDataSource: 'young_adult', // Default to the combined source
+    isPerCapita: false, // Default to false
 };
 
 // Helper function to get the correct column name based on data source
@@ -279,6 +281,12 @@ export const filterSlice = createSlice({
                 state.selectedCounty = '';
             }
         },
+        // Add reducer for toggling per capita mode
+        togglePerCapita: (state) => {
+            state.isPerCapita = !state.isPerCapita;
+            // Note: We don't need to refilter data here.
+            // The per capita calculation happens during visualization processing.
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -333,6 +341,7 @@ export const {
     removeFilter,
     setSelectedMetric,
     setSelectedDataSource,
+    togglePerCapita, // Export the new action
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

@@ -14,12 +14,15 @@ import {
     setRankedCounties,
     DataSourceMetrics,
     DataSourceType,
+    togglePerCapita,
 } from '@/lib/features/filters/filterSlice';
 import { FlyToInterpolator } from '@deck.gl/core';
 import type { ViewStateChangeParameters } from '@deck.gl/core';
 
 import { setBarChartData, setColorScaleValues } from '@/lib/features/map/mapSlice';
 import { Button } from '@/app/components/ui/button';
+import { Switch } from '@/app/components/ui/switch';
+import { Label } from '@/app/components/ui/label';
 
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
 
@@ -50,13 +53,15 @@ interface EnhancedFeature extends Feature {
     properties: {
         name: string;
         [metricKey: string]: any;
+        rawValue: number;
+        perCapitaValue?: number;
         rowCount: number;
         totalCostValue?: number;
         avgCostPerPrisonerValue?: number;
     };
 }
 
-const COUNTY_POPULATION = {
+export const COUNTY_POPULATION = {
     Alameda: 1649060,
     Alpine: 1099,
     Amador: 42026,
@@ -121,14 +126,20 @@ function enhanceGeoJsonWithData(
     geojsonFeatures: Feature[],
     filteredData: CsvRow[],
     selectedMetric: string,
-    dataSource: DataSourceType
+    dataSource: DataSourceType,
+    isPerCapita: boolean
 ): EnhancedFeature[] {
     const countyData: Record<
         string,
-        { value: number; rowCount: number; totalCost?: number; costSum?: number; costCount?: number }
+        {
+            value: number;
+            rowCount: number;
+            totalCost?: number;
+            costSum?: number;
+            costCount?: number;
+        }
     > = {};
 
-    // Pre-calculate total cost and sum/count for average cost per prisoner for the county_prison source
     const totalCostPerCounty: Record<string, number> = {};
     const costDataPerCounty: Record<string, { sum: number; count: number }> = {};
 
@@ -139,39 +150,44 @@ function enhanceGeoJsonWithData(
             const imprisonments = Number(row.Imprisonments) || 0;
             const rowTotalCost = cost * imprisonments;
 
-            // Accumulate total cost
             if (!totalCostPerCounty[county]) {
                 totalCostPerCounty[county] = 0;
             }
             totalCostPerCounty[county] += rowTotalCost;
 
-            // Accumulate sum and count for average cost calculation
             if (!costDataPerCounty[county]) {
                 costDataPerCounty[county] = { sum: 0, count: 0 };
             }
-            // Only include rows where cost is non-zero in the average calculation?
-            // Or include all rows? Let's include all for now.
             costDataPerCounty[county].sum += cost;
-            costDataPerCounty[county].count += 1; // Count all rows for the county
+            costDataPerCounty[county].count += 1;
         });
     }
 
     filteredData.forEach((row) => {
         const county = row.County;
-
-        // Handle Total_Cost metric (value comes from pre-calculation)
         if (dataSource === 'county_prison' && selectedMetric === 'Total_Cost') {
             if (!countyData[county]) {
-                countyData[county] = {
-                    value: 0, // Placeholder, set later
-                    rowCount: 1,
-                    totalCost: totalCostPerCounty[county] || 0,
-                    costSum: costDataPerCounty[county]?.sum || 0,
-                    costCount: costDataPerCounty[county]?.count || 0,
-                };
+                countyData[county] = { value: 0, rowCount: 1 };
             } else {
                 countyData[county].rowCount += 1;
-                // Ensure other pre-calculated values are present
+            }
+            return;
+        }
+
+        const metricValueForAggregation = Number(row[selectedMetric]) || 0;
+
+        if (!countyData[county]) {
+            countyData[county] = {
+                value: metricValueForAggregation,
+                rowCount: 1,
+                totalCost: dataSource === 'county_prison' ? totalCostPerCounty[county] || 0 : undefined,
+                costSum: dataSource === 'county_prison' ? costDataPerCounty[county]?.sum || 0 : undefined,
+                costCount: dataSource === 'county_prison' ? costDataPerCounty[county]?.count || 0 : undefined,
+            };
+        } else {
+            countyData[county].value += metricValueForAggregation;
+            countyData[county].rowCount += 1;
+            if (dataSource === 'county_prison') {
                 if (countyData[county].totalCost === undefined)
                     countyData[county].totalCost = totalCostPerCounty[county] || 0;
                 if (countyData[county].costSum === undefined)
@@ -179,66 +195,58 @@ function enhanceGeoJsonWithData(
                 if (countyData[county].costCount === undefined)
                     countyData[county].costCount = costDataPerCounty[county]?.count || 0;
             }
-            return; // Skip standard aggregation
-        }
-
-        // Standard aggregation for other metrics
-        const value = Number(row[selectedMetric]) || 0;
-
-        if (!countyData[county]) {
-            countyData[county] = {
-                value,
-                rowCount: 1,
-                // Store pre-calculated values if county_prison source
-                totalCost: dataSource === 'county_prison' ? totalCostPerCounty[county] || 0 : undefined,
-                costSum: dataSource === 'county_prison' ? costDataPerCounty[county]?.sum || 0 : undefined,
-                costCount: dataSource === 'county_prison' ? costDataPerCounty[county]?.count || 0 : undefined,
-            };
-        } else {
-            countyData[county] = {
-                value: countyData[county].value + value,
-                rowCount: countyData[county].rowCount + 1,
-                // Ensure pre-calculated values are present if county_prison source
-                totalCost:
-                    dataSource === 'county_prison'
-                        ? countyData[county].totalCost ?? (totalCostPerCounty[county] || 0)
-                        : undefined,
-                costSum:
-                    dataSource === 'county_prison'
-                        ? countyData[county].costSum ?? (costDataPerCounty[county]?.sum || 0)
-                        : undefined,
-                costCount:
-                    dataSource === 'county_prison'
-                        ? countyData[county].costCount ?? (costDataPerCounty[county]?.count || 0)
-                        : undefined,
-            };
         }
     });
 
     return geojsonFeatures.map((feature) => {
-        const countyName = feature.properties?.name;
-        let data = countyData[countyName] || { value: 0, rowCount: 0 };
-        let metricValue = data.value;
+        const countyName = feature.properties?.name as keyof typeof COUNTY_POPULATION;
+        if (!countyName || !COUNTY_POPULATION.hasOwnProperty(countyName)) {
+            return {
+                ...feature,
+                properties: {
+                    ...feature.properties,
+                    [selectedMetric]: 0,
+                    rawValue: 0,
+                    perCapitaValue: 0,
+                    rowCount: 0,
+                    totalCostValue: 0,
+                    avgCostPerPrisonerValue: 0,
+                },
+            } as EnhancedFeature;
+        }
+
+        const population = COUNTY_POPULATION[countyName] || 0;
+        let data = countyData[countyName] || { value: 0, rowCount: 0, totalCost: 0, costSum: 0, costCount: 0 };
+
+        let rawValue = 0;
+        if (dataSource === 'county_prison' && selectedMetric === 'Total_Cost') {
+            rawValue = data.totalCost ?? 0;
+        } else {
+            rawValue = data.value;
+        }
+
+        let perCapitaValue: number | undefined = undefined;
+
+        if (isPerCapita && population > 0) {
+            perCapitaValue = rawValue / population;
+        }
+
+        const displayValue = isPerCapita && perCapitaValue !== undefined ? perCapitaValue : rawValue;
+
         const calculatedTotalCost = dataSource === 'county_prison' ? data.totalCost ?? 0 : undefined;
-        // Calculate average cost per prisoner more safely
         const costSum = data.costSum ?? 0;
         const costCount = data.costCount ?? 0;
         const avgCostPerPrisoner = dataSource === 'county_prison' && costCount > 0 ? costSum / costCount : undefined;
-
-        // If the metric is Total_Cost, use the pre-calculated value from totalCost property
-        if (dataSource === 'county_prison' && selectedMetric === 'Total_Cost') {
-            metricValue = calculatedTotalCost ?? 0;
-        }
 
         return {
             ...feature,
             properties: {
                 ...feature.properties,
-                [selectedMetric]: metricValue, // Store the value for the selected metric
+                [selectedMetric]: displayValue,
+                rawValue: rawValue,
+                perCapitaValue: perCapitaValue,
                 rowCount: data.rowCount,
-                // Store the calculated total cost separately if applicable
                 totalCostValue: calculatedTotalCost,
-                // Store the calculated average cost separately if applicable
                 avgCostPerPrisonerValue: avgCostPerPrisoner,
             },
         } as EnhancedFeature;
@@ -247,9 +255,9 @@ function enhanceGeoJsonWithData(
 
 export default function MapStory() {
     const dispatch = useDispatch<AppDispatch>();
-    const filteredData = useSelector((state: RootState) => state.filters.filteredData);
-    const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
-    const selectedDataSource = useSelector((state: RootState) => state.filters.selectedDataSource);
+    const { filteredData, selectedMetric, selectedDataSource, isPerCapita } = useSelector(
+        (state: RootState) => state.filters
+    );
     const [geojsonData, setGeojsonData] = useState<Feature[]>([]);
     const [hoverInfo, setHoverInfo] = useState<{
         x: number;
@@ -277,8 +285,8 @@ export default function MapStory() {
     }, []);
 
     const enhancedGeojson = useMemo(
-        () => enhanceGeoJsonWithData(geojsonData, filteredData, selectedMetric, selectedDataSource),
-        [geojsonData, filteredData, selectedMetric, selectedDataSource]
+        () => enhanceGeoJsonWithData(geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita),
+        [geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita]
     );
 
     const colorScale = useMemo(() => {
@@ -403,7 +411,7 @@ export default function MapStory() {
                 }
             },
             updateTriggers: {
-                getFillColor: [selectedMetric, enhancedGeojson],
+                getFillColor: [selectedMetric, enhancedGeojson, isPerCapita],
             },
         }),
     ];
@@ -412,11 +420,14 @@ export default function MapStory() {
         const data = enhancedGeojson
             .map((feature) => ({
                 county: feature.properties.name,
-                value: feature.properties[selectedMetric],
+                value:
+                    isPerCapita && feature.properties.perCapitaValue !== undefined
+                        ? feature.properties.perCapitaValue
+                        : feature.properties.rawValue,
             }))
             .sort((a, b) => b.value - a.value);
         return data;
-    }, [enhancedGeojson, selectedMetric]);
+    }, [enhancedGeojson, selectedMetric, isPerCapita]);
 
     useEffect(() => {
         dispatch(setBarChartData(barChartData));
@@ -443,18 +454,30 @@ export default function MapStory() {
 
     return (
         <div className='relative w-full h-full overflow-hidden'>
-            <div className='absolute top-4 left-4 z-10  p-2   max-w-[calc(100%-2rem)]'>
-                <div className='flex flex-wrap gap-2'>
-                    {availableMetrics.map((metric) => (
-                        <Button
-                            key={metric}
-                            onClick={() => dispatch(setSelectedMetric(metric))}
-                            className={`h-8 text-xs ${selectedMetric === metric ? ' text-white' : ''}`}
-                            variant={selectedMetric === metric ? 'default' : 'outline'}
-                        >
-                            {formatMetricLabel(metric)}
-                        </Button>
-                    ))}
+            <div className='absolute top-4 left-4 z-10 p-2 max-w-[calc(100%-2rem)]'>
+                <div className='flex flex-wrap items-center gap-4'>
+                    <div className='flex flex-wrap gap-2'>
+                        {availableMetrics.map((metric) => (
+                            <Button
+                                key={metric}
+                                onClick={() => dispatch(setSelectedMetric(metric))}
+                                className={`h-8 text-xs ${selectedMetric === metric ? 'text-white' : ''}`}
+                                variant={selectedMetric === metric ? 'default' : 'outline'}
+                            >
+                                {formatMetricLabel(metric)}
+                            </Button>
+                        ))}
+                    </div>
+                    <div className='flex items-center space-x-2 bg-white/50 backdrop-blur-sm p-2 rounded'>
+                        <Switch
+                            id='per-capita-toggle'
+                            checked={isPerCapita}
+                            onCheckedChange={() => dispatch(togglePerCapita())}
+                        />
+                        <Label htmlFor='per-capita-toggle' className='text-xs font-medium'>
+                            Per Capita
+                        </Label>
+                    </div>
                 </div>
             </div>
 
@@ -479,14 +502,29 @@ export default function MapStory() {
                     >
                         <h3 className='font-bold'>{hoverInfo.object?.properties.name}</h3>
                         <p>
-                            {formatMetricLabel(selectedMetric)}:{' '}
-                            {selectedMetric === 'Total_Cost'
+                            {formatMetricLabel(selectedMetric)}
+                            {isPerCapita ? ' (Per Capita)' : ''}:{' '}
+                            {isPerCapita
+                                ? Number(hoverInfo.object?.properties[selectedMetric] ?? 0).toLocaleString(undefined, {
+                                      maximumSignificantDigits: 4,
+                                  })
+                                : selectedMetric === 'Total_Cost'
                                 ? `$${Number(hoverInfo.object?.properties[selectedMetric] ?? 0).toLocaleString(
                                       undefined,
                                       { maximumFractionDigits: 0 }
                                   )}`
                                 : Number(hoverInfo.object?.properties[selectedMetric] ?? 0).toLocaleString()}
                         </p>
+                        {isPerCapita && (
+                            <p>
+                                Raw Value:{' '}
+                                {selectedMetric === 'Total_Cost'
+                                    ? `$${Number(hoverInfo.object?.properties.rawValue ?? 0).toLocaleString(undefined, {
+                                          maximumFractionDigits: 0,
+                                      })}`
+                                    : Number(hoverInfo.object?.properties.rawValue ?? 0).toLocaleString()}
+                            </p>
+                        )}
                         {selectedDataSource === 'county_prison' &&
                             selectedMetric !== 'Total_Cost' &&
                             hoverInfo.object?.properties.totalCostValue !== undefined && (
@@ -507,6 +545,19 @@ export default function MapStory() {
                                     ).toLocaleString(undefined, { maximumFractionDigits: 0 })}`}
                                 </p>
                             )}
+                        {/* Display Population */}
+                        {hoverInfo.object?.properties.name &&
+                            COUNTY_POPULATION[hoverInfo.object?.properties.name as keyof typeof COUNTY_POPULATION] && (
+                                <p>
+                                    Population:{' '}
+                                    {Number(
+                                        COUNTY_POPULATION[
+                                            hoverInfo.object.properties.name as keyof typeof COUNTY_POPULATION
+                                        ]
+                                    ).toLocaleString()}
+                                </p>
+                            )}
+                        {/* Display row count (maybe less relevant now?) */}
                         {selectedMetric !== 'Total_Cost' && (
                             <p>
                                 Number of Records: {Number(hoverInfo.object?.properties.rowCount ?? 0).toLocaleString()}
@@ -516,7 +567,10 @@ export default function MapStory() {
                 )}
 
                 <div className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10'>
-                    <h4 className='text-sm font-bold mb-2 break-words'>{formatMetricLabel(selectedMetric)}</h4>
+                    <h4 className='text-sm font-bold mb-2 break-words'>
+                        {formatMetricLabel(selectedMetric)}
+                        {isPerCapita && <span className='font-normal text-xs'> (Per Capita)</span>}
+                    </h4>
                     <div
                         className='w-48 max-w-full h-4 relative'
                         style={{
@@ -531,7 +585,11 @@ export default function MapStory() {
                     <div className='flex justify-between text-xs mt-1'>
                         <span>0</span>
                         <span>
-                            {selectedMetric === 'Total_Cost'
+                            {isPerCapita
+                                ? Number(colorScale.domain()[1]).toLocaleString(undefined, {
+                                      maximumSignificantDigits: 2,
+                                  })
+                                : selectedMetric === 'Total_Cost'
                                 ? `$${Math.round(colorScale.domain()[1]).toLocaleString()}`
                                 : Math.round(colorScale.domain()[1]).toLocaleString()}
                         </span>
