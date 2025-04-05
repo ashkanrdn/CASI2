@@ -48,7 +48,7 @@ export default function CountyRank() {
                         className={`bg-white rounded-lg shadow p-4 mx-2 hover:shadow-md transition-shadow cursor-pointer ${
                             selectedCounty === county.name ? 'ring-2 ring-blue-500' : ''
                         }`}
-                        // onClick={() => dispatch(setSelectedCounty(county.name))}
+                        onClick={() => dispatch(setSelectedCounty(county.name))}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                     >

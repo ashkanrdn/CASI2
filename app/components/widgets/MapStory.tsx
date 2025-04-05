@@ -394,16 +394,16 @@ export default function MapStory() {
     useEffect(() => {
         if (selectedCounty) {
             const polygonCentroid = getCountyCoordinates(selectedCounty);
-            setViewState({
-                ...viewState,
+            setViewState((prevState) => ({
+                ...prevState,
                 longitude: polygonCentroid.longitude,
                 latitude: polygonCentroid.latitude,
                 zoom: 10,
                 transitionDuration: 1000,
                 transitionInterpolator: new FlyToInterpolator(),
-            });
+            }));
         }
-    }, [selectedCounty, viewState]);
+    }, [selectedCounty]);
 
     const layers = [
         new GeoJsonLayer({
