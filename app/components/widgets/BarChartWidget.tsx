@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
 import { MetricType } from '@/lib/features/filters/filterSlice';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
 import CountyRank from './CountyRank';
 
 export default function BarChartWidget() {

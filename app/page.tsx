@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Progress } from '@/components/ui/progress';
+import { Progress } from '@/app/components/ui/progress';
 import DataStory from './components/widgets/DataStory';
 export default function MapComponent() {
     const [progress, setProgress] = useState(13);
