@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import DeckGL from '@deck.gl/react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import Map from 'react-map-gl';
@@ -26,6 +26,20 @@ import { Label } from '@/app/components/ui/label';
 
 // Mapbox access token for using Mapbox services.
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
+
+/**
+ * Define the geographic boundaries for map constraint (Roughly North/South America).
+ * [ [minLongitude, minLatitude], [maxLongitude, maxLatitude] ]
+ */
+const MAP_BOUNDS: [[number, number], [number, number]] = [
+    [-117.595944, 33.386416], // Southwest corner
+    [-120.999866, 42.183974], // Northeast corner
+];
+
+/**
+ * Minimum zoom level allowed. Prevents zooming out too far.
+ */
+const MIN_ZOOM = 5;
 
 /**
  * Interface defining the structure for the map's view state.
@@ -607,10 +621,10 @@ export default function MapStory() {
 
     /**
      * Callback function to handle changes in the DeckGL view state (e.g., panning, zooming).
-     * Updates the local `viewState`.
+     * Updates the local `viewState` after applying constraints.
      * @param params Object containing the new view state information.
      */
-    const onViewStateChange = (params: ViewStateChangeParameters) => {
+    const handleViewStateChange = (params: ViewStateChangeParameters) => {
         const newViewState: ViewState = {
             longitude: params.viewState.longitude,
             latitude: params.viewState.latitude,
@@ -625,8 +639,22 @@ export default function MapStory() {
                   }
                 : {}),
         };
-        setViewState(newViewState);
+        // Apply constraints before setting the state
+        setViewState(applyViewStateConstraints(newViewState));
     };
+
+    /**
+     * Applies constraints to the view state, preventing panning outside defined bounds
+     * and zooming out too much.
+     */
+    const applyViewStateConstraints = useCallback((viewState: ViewState): ViewState => {
+        return {
+            ...viewState,
+            longitude: Math.min(MAP_BOUNDS[1][0], Math.max(MAP_BOUNDS[0][0], viewState.longitude)),
+            latitude: Math.min(MAP_BOUNDS[1][1], Math.max(MAP_BOUNDS[0][1], viewState.latitude)),
+            zoom: Math.max(MIN_ZOOM, viewState.zoom),
+        };
+    }, []); // No dependencies as MAP_BOUNDS and MIN_ZOOM are constant
 
     // Determine the available metrics based on the currently selected data source.
     const availableMetrics = DataSourceMetrics[selectedDataSource] || [];
@@ -676,7 +704,12 @@ export default function MapStory() {
 
             {/* Map Container */}
             <div className='absolute inset-0'>
-                <DeckGL layers={layers} viewState={viewState} onViewStateChange={onViewStateChange} controller={true}>
+                <DeckGL
+                    layers={layers}
+                    viewState={viewState}
+                    onViewStateChange={handleViewStateChange}
+                    controller={true}
+                >
                     <Map
                         mapboxAccessToken={MAP_BOX_TOKEN}
                         mapStyle='mapbox://styles/mapbox/light-v11'
@@ -814,7 +847,7 @@ export default function MapStory() {
                 </div>
 
                 {/* Data Description Box */}
-                <div className='absolute w-64 bottom-8 right-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10 text-xs'>
+                <div className='absolute w-64 bottom-8 right-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10 text-xs hidden md:block'>
                     <h4 className='text-sm font-bold mb-1 break-words'>{currentDataSourceInfo.name}</h4>
                     <p className='mb-2'>{currentDataSourceInfo.description}</p>
                     <p>

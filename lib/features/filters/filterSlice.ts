@@ -184,6 +184,27 @@ export const filterSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
+        resetFilters: (state) => {
+            // Iterate over all keys in activeFilters
+            Object.keys(state.activeFilters).forEach(key => {
+                // Skip the 'year' key
+                if (key === 'year') return;
+
+                const category = key as FilterCategory;
+
+                // Check if the category exists in the main filters state
+                if (state.filters[category]) {
+                    // Set all filters in this category to inactive
+                    state.filters[category].forEach(filter => {
+                        filter.isActive = false;
+                    });
+                    // Clear the active filters list for this category
+                    state.activeFilters[category] = [];
+                }
+            });
+            // Re-apply filters after resetting (which should now just be the year filter)
+            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
+        },
         setRankedCounties: (state, action: PayloadAction<{ name: string; value: number; rank: number }[]>) => {
             state.rankedCounties = action.payload;
         },
@@ -342,6 +363,7 @@ export const {
     setSelectedMetric,
     setSelectedDataSource,
     togglePerCapita, // Export the new action
+    resetFilters, // Export the new reset action
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

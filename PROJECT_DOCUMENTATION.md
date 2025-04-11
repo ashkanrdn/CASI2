@@ -96,24 +96,34 @@ Redux Toolkit (`@reduxjs/toolkit`) is used for managing the application state. T
 
 ### Data Flow
 
-1.  The main page (`app/page.tsx`) dynamically loads the `MapStory` component.
-2.  `MapStory` mounts and triggers the `fetchDataForSource` thunk (in `filterSlice`) to load the default data source (`young_adult.csv`). It also fetches the base GeoJSON for county boundaries.
-3.  `filterSlice` fetches, parses, and stores the CSV data (`csvData`), calculates the initial `filteredData`, and updates the Redux store.
-4.  `MapStory` subscribes to the Redux store using `useSelector` to get `filteredData`, `selectedMetric`, `isPerCapita`, etc.
-5.  The `enhanceGeoJsonWithData` function within `MapStory` processes the `filteredData`:
+1.  The root layout (`app/layout.tsx`) sets up the overall page structure including header, footer, and positioning for the sidebars and main content area. It also manages the open/close state for the sidebars on mobile views.
+2.  The main page (`app/page.tsx`) dynamically loads the `MapStory` component.
+3.  `MapStory` mounts and triggers the `fetchDataForSource` thunk (in `filterSlice`) to load the default data source (`young_adult.csv`). It also fetches the base GeoJSON for county boundaries.
+4.  `filterSlice` fetches, parses, and stores the CSV data (`csvData`), calculates the initial `filteredData`, and updates the Redux store.
+5.  `MapStory` subscribes to the Redux store using `useSelector` to get `filteredData`, `selectedMetric`, `isPerCapita`, etc.
+6.  The `enhanceGeoJsonWithData` function within `MapStory` processes the `filteredData`:
     -   Aggregates data per county based on the `selectedMetric`.
     -   Performs per capita calculations if `isPerCapita` is true (using hardcoded population data).
     -   Handles special calculations (e.g., total cost) for specific data sources.
     -   Merges the results into the properties of the GeoJSON features.
-6.  A color scale (`d3.scaleQuantile`) is generated based on the processed data values.
-7.  `DeckGL` renders the `GeoJsonLayer` using the enhanced GeoJSON features and the color scale for the choropleth effect.
-8.  `MapStory` dispatches actions to update `mapSlice` (`colorScaleValues`, `barChartData`) and `filterSlice` (`rankedCounties`).
-9.  User interactions (changing data source, toggling filters/year/metric/per capita, clicking counties) dispatch actions to `filterSlice`.
-10. `filterSlice` updates its state (potentially re-fetching data) and recalculates `filteredData`.
-11. `MapStory` receives the updated state from Redux, re-runs `enhanceGeoJsonWithData`, recalculates the color scale, and re-renders the map. Map-related state (`mapSlice`) is updated accordingly.
+7.  A color scale (`d3.scaleQuantile`) is generated based on the processed data values.
+8.  `DeckGL` renders the `GeoJsonLayer` using the enhanced GeoJSON features and the color scale for the choropleth effect.
+9.  `MapStory` dispatches actions to update `mapSlice` (`colorScaleValues`, `barChartData`) and `filterSlice` (`rankedCounties`).
+10. User interactions (changing data source, toggling filters/year/metric/per capita, clicking counties) dispatch actions to `filterSlice`.
+11. `filterSlice` updates its state (potentially re-fetching data) and recalculates `filteredData`.
+12. `MapStory` receives the updated state from Redux, re-runs `enhanceGeoJsonWithData`, recalculates the color scale, and re-renders the map. Map-related state (`mapSlice`) is updated accordingly.
 
 ## Main Functions and Components
 
+-   **`app/layout.tsx`**:
+    -   Defines the root HTML structure, includes the Redux `Provider`.
+    -   Sets up the main application layout with a header, footer, and three columns (left sidebar, main content, right sidebar) for desktop views.
+    -   Implements **mobile responsiveness**:
+        -   Uses `useState` to manage the open/closed state of both sidebars (`isLeftSidebarOpen`, `isRightSidebarOpen`) on mobile.
+        -   Includes mobile-only toggle buttons (`Button` components with icons) in the header using `md:hidden`.
+        -   Applies Tailwind CSS classes (`fixed`, `transform`, `transition-transform`, `-translate-x-full`, `translate-x-full`, `md:relative`, `md:translate-x-0`) to the `aside` elements to make them slide in as overlays on mobile and be statically positioned on medium screens and up.
+        -   Renders a backdrop overlay (`div` with `fixed`, `z-30`, `bg-black/30`, `md:hidden`) when a sidebar is open on mobile.
+        -   Hides the `footer` on mobile screens using `hidden md:block`.
 -   **`app/page.tsx`**:
     -   Entry point for the map visualization UI.
     -   Dynamically loads `MapStory` to enable client-side rendering for map interactions.
@@ -126,6 +136,7 @@ Redux Toolkit (`@reduxjs/toolkit`) is used for managing the application state. T
     -   Calculates color scales using `d3`.
     -   Handles map interactions (hover, click, zoom).
     -   Renders UI controls (metric selection, per capita switch).
+    -   Hides the Data Description Box on mobile screens using `hidden md:block` Tailwind classes.
 -   **`lib/features/filters/filterSlice.ts`**:
     -   Defines the state structure and logic for data filtering and selection.
     -   Includes the `fetchDataForSource` async thunk for data loading.

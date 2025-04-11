@@ -14,6 +14,7 @@ import {
     toggleFilter,
     setSelectedDataSource,
     DataSourceType,
+    resetFilters,
 } from '@/lib/features/filters/filterSlice';
 import Papa from 'papaparse';
 
@@ -104,6 +105,7 @@ export default function FiltersSidebar() {
     };
 
     const handleDataSourceChange = (value: string) => {
+        dispatch(resetFilters());
         dispatch(setSelectedDataSource(value as DataSourceType));
     };
 
