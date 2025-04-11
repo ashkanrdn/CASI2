@@ -169,13 +169,20 @@ const dataDescriptions = {
             Total_Cost: 'Calculated total cost based on imprisonments and cost per prisoner.',
         },
     },
-    jdp_data: {
+    jail: {
         // Placeholder for another data source
         name: 'Juvenile Detention Profile Data',
         description: 'Information regarding juvenile detention profiles across counties.',
         metrics: {
-            MetricA: 'Description for Metric A in JDP data.',
-            MetricB: 'Description for Metric B in JDP data.',
+            Jail_ADP: 'Description for Metric A in JDP data.',
+        },
+    },
+
+    young_adult: {
+        name: 'Young Adult Data',
+        description: 'Information regarding young adult data across counties.',
+        metrics: {
+            Count: 'Description for count A in Young_Adult data.',
         },
     },
     // Add other data sources as needed
