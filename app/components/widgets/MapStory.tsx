@@ -5,10 +5,10 @@ import Map from 'react-map-gl';
 import * as d3 from 'd3';
 import type { PickingInfo } from '@deck.gl/core';
 import type { Feature } from 'geojson';
-import type { CsvRow } from '@/app/types/shared';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '@/lib/store';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     setSelectedMetric,
     setRankedCounties,
@@ -522,11 +522,11 @@ export default function MapStory() {
             // Add color transitions - smooth animation when colors change
             transitions: {
                 getFillColor: {
-                    duration: 800, // Animation duration in milliseconds
+                    duration: 400, // Animation duration in milliseconds
                     easing: (t: number) => -(Math.cos(Math.PI * t) - 1) / 2, // ease-in-out-sine for smooth transition
                 },
                 getLineColor: {
-                    duration: 800,
+                    duration: 400,
                     easing: (t: number) => -(Math.cos(Math.PI * t) - 1) / 2,
                 },
             },
@@ -619,20 +619,46 @@ export default function MapStory() {
                 <div className='flex flex-wrap items-center gap-4'>
                     {/* Metric Buttons */}
                     <div className='flex flex-wrap gap-2'>
-                        {availableMetrics.map((metric) => (
-                            <Button
-                                key={metric}
-                                onClick={() => dispatch(setSelectedMetric(metric))}
-                                className={`h-8 text-xs ${selectedMetric === metric ? 'text-white' : ''}`}
-                                variant={selectedMetric === metric ? 'default' : 'outline'}
-                                disabled={processing} // Disable when processing
-                            >
-                                {formatMetricLabel(metric)}
-                            </Button>
-                        ))}
+                        <AnimatePresence>
+                            {availableMetrics.map((metric) => (
+                                <motion.div
+                                    key={metric}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 500,
+                                        damping: 40,
+                                    }}
+                                >
+                                    <Button
+                                        onClick={() => dispatch(setSelectedMetric(metric))}
+                                        className={`h-8 text-xs ${selectedMetric === metric ? 'text-white' : ''}`}
+                                        variant={selectedMetric === metric ? 'default' : 'outline'}
+                                        disabled={processing} // Disable when processing
+                                    >
+                                        <motion.span
+                                            animate={{
+                                                scale: selectedMetric === metric ? 1.05 : 1,
+                                            }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            {formatMetricLabel(metric)}
+                                        </motion.span>
+                                    </Button>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
                     </div>
                     {/* Per Capita Toggle Switch */}
-                    <div className='flex items-center space-x-2 bg-white/50 backdrop-blur-sm p-2 rounded'>
+                    <motion.div
+                        className='flex items-center space-x-2 bg-white/50 backdrop-blur-sm p-2 rounded'
+                        whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
+                        whileTap={{ scale: 0.98 }}
+                        layout
+                    >
                         <Switch
                             id='per-capita-toggle'
                             checked={isPerCapita}
@@ -640,9 +666,17 @@ export default function MapStory() {
                             disabled={processing} // Disable when processing
                         />
                         <Label htmlFor='per-capita-toggle' className='text-xs font-medium'>
-                            Per Capita
+                            <motion.span
+                                animate={{
+                                    fontWeight: isPerCapita ? 700 : 500,
+                                    scale: isPerCapita ? 1.05 : 1,
+                                }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                Per Capita
+                            </motion.span>
                         </Label>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
@@ -662,9 +696,13 @@ export default function MapStory() {
                 </DeckGL>
 
                 {/* Tooltip displayed on hover */}
-                {hoverInfo &&
-                    hoverInfo.object && ( // Ensure hoverInfo and object exist
-                        <div
+                <AnimatePresence>
+                    {hoverInfo && hoverInfo.object && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.2 }}
                             className='absolute z-10 pointer-events-none bg-white p-2 rounded shadow-lg text-xs' // Added text-xs for smaller font
                             style={{
                                 left: hoverInfo.x + 10, // Position slightly offset from cursor
@@ -673,9 +711,14 @@ export default function MapStory() {
                                 wordWrap: 'break-word',
                             }}
                         >
-                            <h3 className='font-bold text-sm mb-1'>{hoverInfo.object.properties.name}</h3>
+                            <motion.h3
+                                className='font-bold text-sm mb-1'
+                                layoutId={`tooltip-county-${hoverInfo.object.properties.name}`}
+                            >
+                                {hoverInfo.object.properties.name}
+                            </motion.h3>
                             {/* Display selected metric value (formatted) */}
-                            <p>
+                            <motion.p layoutId={`tooltip-metric-${selectedMetric}`}>
                                 {formatMetricLabel(selectedMetric)}
                                 {isPerCapita ? ' (Per Capita)' : ''}:{' '}
                                 {isPerCapita
@@ -694,10 +737,10 @@ export default function MapStory() {
                                       )}`
                                     : // Format other raw values
                                       Number(hoverInfo.object.properties[selectedMetric] ?? 0).toLocaleString()}
-                            </p>
+                            </motion.p>
                             {/* Display raw value if Per Capita is active */}
                             {isPerCapita && (
-                                <p>
+                                <motion.p layoutId={`tooltip-raw-${hoverInfo.object.properties.name}`}>
                                     Raw Value:{' '}
                                     {selectedMetric === 'Total_Cost'
                                         ? `$${Number(hoverInfo.object.properties.rawValue ?? 0).toLocaleString(
@@ -707,97 +750,139 @@ export default function MapStory() {
                                               }
                                           )}`
                                         : Number(hoverInfo.object.properties.rawValue ?? 0).toLocaleString()}
-                                </p>
+                                </motion.p>
                             )}
                             {/* Display Total Cost if applicable and not the primary metric */}
                             {selectedDataSource === 'county_prison' &&
                                 selectedMetric !== 'Total_Cost' &&
                                 hoverInfo.object.properties.totalCostValue !== undefined && (
-                                    <p>
+                                    <motion.p layoutId={`tooltip-total-${hoverInfo.object.properties.name}`}>
                                         Total Cost:{' '}
                                         {`$${Number(hoverInfo.object.properties.totalCostValue ?? 0).toLocaleString(
                                             undefined,
                                             { maximumFractionDigits: 0 }
                                         )}`}
-                                    </p>
+                                    </motion.p>
                                 )}
                             {/* Display Average Cost/Prisoner if applicable */}
                             {selectedDataSource === 'county_prison' &&
                                 hoverInfo.object.properties.avgCostPerPrisonerValue !== undefined && (
-                                    <p>
+                                    <motion.p layoutId={`tooltip-avg-${hoverInfo.object.properties.name}`}>
                                         Avg Cost/Prisoner:{' '}
                                         {`$${Number(
                                             hoverInfo.object.properties.avgCostPerPrisonerValue ?? 0
                                         ).toLocaleString(undefined, { maximumFractionDigits: 0 })}`}
-                                    </p>
+                                    </motion.p>
                                 )}
                             {/* Display Population */}
                             {hoverInfo.object.properties.name &&
                                 COUNTY_POPULATION[
                                     hoverInfo.object.properties.name as keyof typeof COUNTY_POPULATION
                                 ] && (
-                                    <p>
+                                    <motion.p layoutId={`tooltip-pop-${hoverInfo.object.properties.name}`}>
                                         Population:{' '}
                                         {Number(
                                             COUNTY_POPULATION[
                                                 hoverInfo.object.properties.name as keyof typeof COUNTY_POPULATION
                                             ]
                                         ).toLocaleString()}
-                                    </p>
+                                    </motion.p>
                                 )}
                             {/* Display number of aggregated records (if not Total_Cost) */}
                             {selectedMetric !== 'Total_Cost' && (
-                                <p>
+                                <motion.p layoutId={`tooltip-records-${hoverInfo.object.properties.name}`}>
                                     Number of Records:{' '}
                                     {Number(hoverInfo.object.properties.rowCount ?? 0).toLocaleString()}
-                                </p>
+                                </motion.p>
                             )}
-                        </div>
+                        </motion.div>
                     )}
+                </AnimatePresence>
 
                 {/* Legend Box */}
-                <div className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10'>
-                    <h4 className='text-sm font-bold mb-2 break-words'>
-                        {formatMetricLabel(selectedMetric)}
-                        {isPerCapita && <span className='font-normal text-xs'> (Per Capita)</span>}
-                    </h4>
-                    {/* Color Gradient Bar */}
-                    <div
-                        className='w-full h-4 relative'
-                        style={{
-                            background:
-                                colorScale.domain()[1] > 0 // Check if max value is > 0 to avoid invalid gradient
-                                    ? `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
-                                          colorScale.domain()[1] // Max value of the domain
-                                      )})`
-                                    : '#ccc', // Default grey if max value is 0
+                <AnimatePresence mode='wait'>
+                    <motion.div
+                        key={`legend-${selectedMetric}-${isPerCapita}`}
+                        className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10'
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 500,
+                            damping: 50,
                         }}
-                    ></div>
-                    {/* Min and Max Labels */}
-                    <div className='flex justify-between text-xs mt-1'>
-                        <span>0</span>
-                        <span>
-                            {/* Format max value based on metric and per capita */}
-                            {isPerCapita
-                                ? Number(colorScale.domain()[1]).toLocaleString(undefined, {
-                                      maximumSignificantDigits: 2, // Use significant digits for per capita
-                                  })
-                                : selectedMetric === 'Total_Cost'
-                                ? `$${Math.round(colorScale.domain()[1]).toLocaleString()}` // Format as currency
-                                : Math.round(colorScale.domain()[1]).toLocaleString()}{' '}
-                            {/* Format as integer */}
-                        </span>
-                    </div>
-                </div>
+                    >
+                        <motion.h4
+                            className='text-sm font-bold mb-2 break-words'
+                            layoutId={`legend-title-${selectedMetric}`}
+                        >
+                            {formatMetricLabel(selectedMetric)}
+                            {isPerCapita && <span className='font-normal text-xs'> (Per Capita)</span>}
+                        </motion.h4>
+                        {/* Color Gradient Bar */}
+                        <motion.div
+                            className='w-full h-4 relative'
+                            layoutId={`legend-gradient-${selectedMetric}`}
+                            style={{
+                                background:
+                                    colorScale.domain()[1] > 0 // Check if max value is > 0 to avoid invalid gradient
+                                        ? `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
+                                              colorScale.domain()[1] // Max value of the domain
+                                          )})`
+                                        : '#ccc', // Default grey if max value is 0
+                            }}
+                        ></motion.div>
+                        {/* Min and Max Labels */}
+                        <motion.div
+                            className='flex justify-between text-xs mt-1'
+                            layoutId={`legend-labels-${selectedMetric}`}
+                        >
+                            <span>0</span>
+                            <span>
+                                {/* Format max value based on metric and per capita */}
+                                {isPerCapita
+                                    ? Number(colorScale.domain()[1]).toLocaleString(undefined, {
+                                          maximumSignificantDigits: 2, // Use significant digits for per capita
+                                      })
+                                    : selectedMetric === 'Total_Cost'
+                                    ? `$${Math.round(colorScale.domain()[1]).toLocaleString()}` // Format as currency
+                                    : Math.round(colorScale.domain()[1]).toLocaleString()}{' '}
+                                {/* Format as integer */}
+                            </span>
+                        </motion.div>
+                    </motion.div>
+                </AnimatePresence>
 
                 {/* Data Description Box */}
-                <div className='absolute w-64 bottom-8 right-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10 text-xs hidden md:block'>
-                    <h4 className='text-sm font-bold mb-1 break-words'>{currentDataSourceInfo.name}</h4>
-                    <p className='mb-2'>{currentDataSourceInfo.description}</p>
-                    <p>
-                        <span className='font-semibold'>{formatMetricLabel(selectedMetric)}:</span> {currentMetricInfo}
-                    </p>
-                </div>
+                <AnimatePresence mode='wait'>
+                    <motion.div
+                        key={`description-${selectedDataSource}-${selectedMetric}`}
+                        className='absolute w-64 bottom-8 right-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10 text-xs hidden md:block'
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 500,
+                            damping: 50,
+                        }}
+                    >
+                        <motion.h4
+                            className='text-sm font-bold mb-1 break-words'
+                            layoutId={`description-title-${currentDataSourceInfo.name}`}
+                        >
+                            {currentDataSourceInfo.name}
+                        </motion.h4>
+                        <motion.p className='mb-2' layoutId={`description-text-${currentDataSourceInfo.name}`}>
+                            {currentDataSourceInfo.description}
+                        </motion.p>
+                        <motion.p layoutId={`description-metric-${selectedMetric}`}>
+                            <span className='font-semibold'>{formatMetricLabel(selectedMetric)}:</span>{' '}
+                            {currentMetricInfo}
+                        </motion.p>
+                    </motion.div>
+                </AnimatePresence>
             </div>
         </div>
     );

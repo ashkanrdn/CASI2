@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
 import { MetricType } from '@/lib/features/filters/filterSlice';
 import { setSelectedCounty } from '@/lib/features/map/mapSlice';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { COUNTY_POPULATION } from './MapStory';
 
 // Helper to format Metric string for display (same as in MapStory)
