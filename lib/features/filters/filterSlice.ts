@@ -26,7 +26,7 @@ export enum MetricType {
 export const DataSourceMetrics: Record<DataSourceType, string[]> = {
     young_adult: ['Count'], // Represents arrests for the combined file
     jail: ['Jail_ADP'], // Average Daily Population
-    county_prison: ['Imprisonments'], // Renamed Cost metric
+    county_prison: ['Imprisonments', 'Total_Cost'], // Renamed Cost metric
     //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
 };
 

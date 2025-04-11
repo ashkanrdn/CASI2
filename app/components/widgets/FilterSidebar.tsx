@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { X } from 'lucide-react';
+import { X, Download } from 'lucide-react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/lib/store';
@@ -15,6 +15,7 @@ import {
     setSelectedDataSource,
     DataSourceType,
 } from '@/lib/features/filters/filterSlice';
+import Papa from 'papaparse';
 
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
@@ -104,6 +105,29 @@ export default function FiltersSidebar() {
 
     const handleDataSourceChange = (value: string) => {
         dispatch(setSelectedDataSource(value as DataSourceType));
+    };
+
+    // Download Handler
+    const handleDownloadCsv = () => {
+        if (!filteredData || filteredData.length === 0) {
+            console.log('No data to download.');
+            // Optionally, provide user feedback (e.g., disable button, show alert)
+            return;
+        }
+
+        const csv = Papa.unparse(filteredData);
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        // Create a dynamic filename
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        link.setAttribute('download', `filtered_data_${selectedDataSource}_${timestamp}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     };
 
     const FilterGroup = ({ title, category }: { title: string; category: FilterCategory }) => {
@@ -229,6 +253,13 @@ export default function FiltersSidebar() {
                         </Badge>
                     ))}
                 </div>
+            </div>
+
+            {/* Add Download Button Here */}
+            <div className='mt-4'>
+                <Button onClick={handleDownloadCsv} disabled={filteredData.length === 0} className='w-full'>
+                    <Download className=' h-4 w-4' /> Download Data
+                </Button>
             </div>
 
             <div className='mt-4 sticky bottom-0 text-sm text-gray-600'>
