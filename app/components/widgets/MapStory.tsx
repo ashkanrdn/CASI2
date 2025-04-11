@@ -619,64 +619,31 @@ export default function MapStory() {
                 <div className='flex flex-wrap items-center gap-4'>
                     {/* Metric Buttons */}
                     <div className='flex flex-wrap gap-2'>
-                        <AnimatePresence>
-                            {availableMetrics.map((metric) => (
-                                <motion.div
-                                    key={metric}
-                                    layout
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 500,
-                                        damping: 40,
-                                    }}
+                        {availableMetrics.map((metric) => (
+                            <div key={metric}>
+                                <Button
+                                    onClick={() => dispatch(setSelectedMetric(metric))}
+                                    className={`h-8 text-xs ${selectedMetric === metric ? 'text-white' : ''}`}
+                                    variant={selectedMetric === metric ? 'default' : 'outline'}
+                                    disabled={processing}
                                 >
-                                    <Button
-                                        onClick={() => dispatch(setSelectedMetric(metric))}
-                                        className={`h-8 text-xs ${selectedMetric === metric ? 'text-white' : ''}`}
-                                        variant={selectedMetric === metric ? 'default' : 'outline'}
-                                        disabled={processing} // Disable when processing
-                                    >
-                                        <motion.span
-                                            animate={{
-                                                scale: selectedMetric === metric ? 1.05 : 1,
-                                            }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            {formatMetricLabel(metric)}
-                                        </motion.span>
-                                    </Button>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
+                                    {formatMetricLabel(metric)}
+                                </Button>
+                            </div>
+                        ))}
                     </div>
                     {/* Per Capita Toggle Switch */}
-                    <motion.div
-                        className='flex items-center space-x-2 bg-white/50 backdrop-blur-sm p-2 rounded'
-                        whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
-                        whileTap={{ scale: 0.98 }}
-                        layout
-                    >
+                    <div className='flex items-center space-x-2 bg-white/50 backdrop-blur-sm p-2 rounded'>
                         <Switch
                             id='per-capita-toggle'
                             checked={isPerCapita}
                             onCheckedChange={() => dispatch(togglePerCapita())}
-                            disabled={processing} // Disable when processing
+                            disabled={processing}
                         />
                         <Label htmlFor='per-capita-toggle' className='text-xs font-medium'>
-                            <motion.span
-                                animate={{
-                                    fontWeight: isPerCapita ? 700 : 500,
-                                    scale: isPerCapita ? 1.05 : 1,
-                                }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                Per Capita
-                            </motion.span>
+                            Per Capita
                         </Label>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
 
@@ -696,108 +663,88 @@ export default function MapStory() {
                 </DeckGL>
 
                 {/* Tooltip displayed on hover */}
-                <AnimatePresence>
-                    {hoverInfo && hoverInfo.object && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.2 }}
-                            className='absolute z-10 pointer-events-none bg-white p-2 rounded shadow-lg text-xs' // Added text-xs for smaller font
-                            style={{
-                                left: hoverInfo.x + 10, // Position slightly offset from cursor
-                                top: hoverInfo.y + 10,
-                                maxWidth: '250px', // Limit tooltip width
-                                wordWrap: 'break-word',
-                            }}
-                        >
-                            <motion.h3
-                                className='font-bold text-sm mb-1'
-                                layoutId={`tooltip-county-${hoverInfo.object.properties.name}`}
-                            >
-                                {hoverInfo.object.properties.name}
-                            </motion.h3>
-                            {/* Display selected metric value (formatted) */}
-                            <motion.p layoutId={`tooltip-metric-${selectedMetric}`}>
-                                {formatMetricLabel(selectedMetric)}
-                                {isPerCapita ? ' (Per Capita)' : ''}:{' '}
-                                {isPerCapita
-                                    ? // Format per capita value with significant digits
-                                      Number(hoverInfo.object.properties[selectedMetric] ?? 0).toLocaleString(
-                                          undefined,
-                                          {
-                                              maximumSignificantDigits: 4,
-                                          }
-                                      )
-                                    : selectedMetric === 'Total_Cost'
-                                    ? // Format Total Cost as currency
-                                      `$${Number(hoverInfo.object.properties[selectedMetric] ?? 0).toLocaleString(
-                                          undefined,
-                                          { maximumFractionDigits: 0 }
-                                      )}`
-                                    : // Format other raw values
-                                      Number(hoverInfo.object.properties[selectedMetric] ?? 0).toLocaleString()}
-                            </motion.p>
-                            {/* Display raw value if Per Capita is active */}
-                            {isPerCapita && (
-                                <motion.p layoutId={`tooltip-raw-${hoverInfo.object.properties.name}`}>
-                                    Raw Value:{' '}
-                                    {selectedMetric === 'Total_Cost'
-                                        ? `$${Number(hoverInfo.object.properties.rawValue ?? 0).toLocaleString(
-                                              undefined,
-                                              {
-                                                  maximumFractionDigits: 0,
-                                              }
-                                          )}`
-                                        : Number(hoverInfo.object.properties.rawValue ?? 0).toLocaleString()}
-                                </motion.p>
+                {hoverInfo && hoverInfo.object && (
+                    <div
+                        className='absolute z-10 pointer-events-none bg-white p-2 rounded shadow-lg text-xs'
+                        style={{
+                            left: hoverInfo.x + 10,
+                            top: hoverInfo.y + 10,
+                            maxWidth: '250px',
+                            wordWrap: 'break-word',
+                        }}
+                    >
+                        <h3 className='font-bold text-sm mb-1'>{hoverInfo.object.properties.name}</h3>
+                        {/* Display selected metric value (formatted) */}
+                        <p>
+                            {formatMetricLabel(selectedMetric)}
+                            {isPerCapita ? ' (Per Capita)' : ''}:{' '}
+                            {isPerCapita
+                                ? // Format per capita value with significant digits
+                                  Number(hoverInfo.object.properties[selectedMetric] ?? 0).toLocaleString(undefined, {
+                                      maximumSignificantDigits: 4,
+                                  })
+                                : selectedMetric === 'Total_Cost'
+                                ? // Format Total Cost as currency
+                                  `$${Number(hoverInfo.object.properties[selectedMetric] ?? 0).toLocaleString(
+                                      undefined,
+                                      { maximumFractionDigits: 0 }
+                                  )}`
+                                : // Format other raw values
+                                  Number(hoverInfo.object.properties[selectedMetric] ?? 0).toLocaleString()}
+                        </p>
+                        {/* Display raw value if Per Capita is active */}
+                        {isPerCapita && (
+                            <p>
+                                Raw Value:{' '}
+                                {selectedMetric === 'Total_Cost'
+                                    ? `$${Number(hoverInfo.object.properties.rawValue ?? 0).toLocaleString(undefined, {
+                                          maximumFractionDigits: 0,
+                                      })}`
+                                    : Number(hoverInfo.object.properties.rawValue ?? 0).toLocaleString()}
+                            </p>
+                        )}
+                        {/* Display Total Cost if applicable and not the primary metric */}
+                        {selectedDataSource === 'county_prison' &&
+                            selectedMetric !== 'Total_Cost' &&
+                            hoverInfo.object.properties.totalCostValue !== undefined && (
+                                <p>
+                                    Total Cost:{' '}
+                                    {`$${Number(hoverInfo.object.properties.totalCostValue ?? 0).toLocaleString(
+                                        undefined,
+                                        { maximumFractionDigits: 0 }
+                                    )}`}
+                                </p>
                             )}
-                            {/* Display Total Cost if applicable and not the primary metric */}
-                            {selectedDataSource === 'county_prison' &&
-                                selectedMetric !== 'Total_Cost' &&
-                                hoverInfo.object.properties.totalCostValue !== undefined && (
-                                    <motion.p layoutId={`tooltip-total-${hoverInfo.object.properties.name}`}>
-                                        Total Cost:{' '}
-                                        {`$${Number(hoverInfo.object.properties.totalCostValue ?? 0).toLocaleString(
-                                            undefined,
-                                            { maximumFractionDigits: 0 }
-                                        )}`}
-                                    </motion.p>
-                                )}
-                            {/* Display Average Cost/Prisoner if applicable */}
-                            {selectedDataSource === 'county_prison' &&
-                                hoverInfo.object.properties.avgCostPerPrisonerValue !== undefined && (
-                                    <motion.p layoutId={`tooltip-avg-${hoverInfo.object.properties.name}`}>
-                                        Avg Cost/Prisoner:{' '}
-                                        {`$${Number(
-                                            hoverInfo.object.properties.avgCostPerPrisonerValue ?? 0
-                                        ).toLocaleString(undefined, { maximumFractionDigits: 0 })}`}
-                                    </motion.p>
-                                )}
-                            {/* Display Population */}
-                            {hoverInfo.object.properties.name &&
-                                COUNTY_POPULATION[
-                                    hoverInfo.object.properties.name as keyof typeof COUNTY_POPULATION
-                                ] && (
-                                    <motion.p layoutId={`tooltip-pop-${hoverInfo.object.properties.name}`}>
-                                        Population:{' '}
-                                        {Number(
-                                            COUNTY_POPULATION[
-                                                hoverInfo.object.properties.name as keyof typeof COUNTY_POPULATION
-                                            ]
-                                        ).toLocaleString()}
-                                    </motion.p>
-                                )}
-                            {/* Display number of aggregated records (if not Total_Cost) */}
-                            {selectedMetric !== 'Total_Cost' && (
-                                <motion.p layoutId={`tooltip-records-${hoverInfo.object.properties.name}`}>
-                                    Number of Records:{' '}
-                                    {Number(hoverInfo.object.properties.rowCount ?? 0).toLocaleString()}
-                                </motion.p>
+                        {/* Display Average Cost/Prisoner if applicable */}
+                        {selectedDataSource === 'county_prison' &&
+                            hoverInfo.object.properties.avgCostPerPrisonerValue !== undefined && (
+                                <p>
+                                    Avg Cost/Prisoner:{' '}
+                                    {`$${Number(
+                                        hoverInfo.object.properties.avgCostPerPrisonerValue ?? 0
+                                    ).toLocaleString(undefined, { maximumFractionDigits: 0 })}`}
+                                </p>
                             )}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                        {/* Display Population */}
+                        {hoverInfo.object.properties.name &&
+                            COUNTY_POPULATION[hoverInfo.object.properties.name as keyof typeof COUNTY_POPULATION] && (
+                                <p>
+                                    Population:{' '}
+                                    {Number(
+                                        COUNTY_POPULATION[
+                                            hoverInfo.object.properties.name as keyof typeof COUNTY_POPULATION
+                                        ]
+                                    ).toLocaleString()}
+                                </p>
+                            )}
+                        {/* Display number of aggregated records (if not Total_Cost) */}
+                        {selectedMetric !== 'Total_Cost' && (
+                            <p>
+                                Number of Records: {Number(hoverInfo.object.properties.rowCount ?? 0).toLocaleString()}
+                            </p>
+                        )}
+                    </div>
+                )}
 
                 {/* Legend Box */}
                 <AnimatePresence mode='wait'>
