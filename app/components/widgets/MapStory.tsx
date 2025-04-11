@@ -23,6 +23,7 @@ import { setBarChartData, setColorScaleValues } from '@/lib/features/map/mapSlic
 import { Button } from '@/app/components/ui/button';
 import { Switch } from '@/app/components/ui/switch';
 import { Label } from '@/app/components/ui/label';
+import { Progress } from '@/app/components/ui/progress';
 
 // Mapbox access token for using Mapbox services.
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
@@ -218,8 +219,10 @@ export default function MapStory() {
     // --- NEW Worker Related State ---
     const workerRef = useRef<Worker | null>(null);
     const [processing, setProcessing] = useState(false); // Loading state
+    const [showLoading, setShowLoading] = useState(false); // Whether to show loading UI
     // State to hold the results from the worker
     const [enhancedGeojson, setEnhancedGeojson] = useState<EnhancedFeature[]>([]);
+    const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     // --- Effect to Initialize Worker ---
     useEffect(() => {
@@ -239,19 +242,38 @@ export default function MapStory() {
                 setEnhancedGeojson(event.data); // Update state with the computed features
             }
             setProcessing(false); // Calculation finished (or errored)
+            setShowLoading(false); // Hide loading indicator
+
+            // Clear any pending timer
+            if (loadingTimerRef.current) {
+                clearTimeout(loadingTimerRef.current);
+                loadingTimerRef.current = null;
+            }
         };
 
         // Listener for errors occurring in the worker itself
         workerRef.current.onerror = (error) => {
             console.error('Worker error:', error);
             setProcessing(false); // Stop loading indicator on error
-            // Optionally set an error state to show in the UI
+            setShowLoading(false); // Hide loading indicator
+
+            // Clear any pending timer
+            if (loadingTimerRef.current) {
+                clearTimeout(loadingTimerRef.current);
+                loadingTimerRef.current = null;
+            }
         };
 
         // Cleanup function: Terminate the worker when the component unmounts
         return () => {
             console.log('Terminating worker');
             workerRef.current?.terminate();
+
+            // Clear any pending timer
+            if (loadingTimerRef.current) {
+                clearTimeout(loadingTimerRef.current);
+                loadingTimerRef.current = null;
+            }
         };
     }, []); // Empty dependency array ensures this runs only on mount and unmount
 
@@ -283,6 +305,21 @@ export default function MapStory() {
 
         console.log('Triggering worker calculation...');
         setProcessing(true); // Set loading state
+        setShowLoading(false); // Reset loading visibility initially
+
+        // Clear any existing timeout
+        if (loadingTimerRef.current) {
+            clearTimeout(loadingTimerRef.current);
+        }
+
+        // Set a timeout to show loading indicator after 0.5 seconds
+        loadingTimerRef.current = setTimeout(() => {
+            if (processing) {
+                // Only show if still processing
+                setShowLoading(true);
+            }
+            loadingTimerRef.current = null;
+        }, 500);
 
         // Send data needed for calculation to the worker
         workerRef.current.postMessage({
@@ -482,6 +519,17 @@ export default function MapStory() {
             pickable: true, // Allow features to be hovered/clicked.
             autoHighlight: true, // Automatically highlight hovered feature.
             highlightColor: [255, 255, 255, 50], // Semi-transparent white highlight.
+            // Add color transitions - smooth animation when colors change
+            transitions: {
+                getFillColor: {
+                    duration: 800, // Animation duration in milliseconds
+                    easing: (t: number) => -(Math.cos(Math.PI * t) - 1) / 2, // ease-in-out-sine for smooth transition
+                },
+                getLineColor: {
+                    duration: 800,
+                    easing: (t: number) => -(Math.cos(Math.PI * t) - 1) / 2,
+                },
+            },
             // Callback function when a feature is hovered.
             onHover: (info: PickingInfo) => {
                 if (info.object) {
@@ -556,14 +604,12 @@ export default function MapStory() {
     // Render the component UI.
     return (
         <div className='relative w-full h-full overflow-hidden'>
-            {/* Loading Overlay */}
-            {processing && (
+            {/* Loading Overlay - Only shown after delay */}
+            {processing && showLoading && (
                 <div className='absolute inset-0 bg-black/30 flex items-center justify-center z-50'>
                     <div className='bg-white/90 p-4 rounded-lg shadow-lg text-center'>
                         <div className='mb-2 text-lg font-semibold'>Processing Data...</div>
-                        <div className='w-full h-2 bg-gray-200 rounded-full overflow-hidden'>
-                            <div className='h-full bg-blue-500 animate-pulse rounded-full'></div>
-                        </div>
+                        <Progress value={100} className='w-[60%]' />
                     </div>
                 </div>
             )}
