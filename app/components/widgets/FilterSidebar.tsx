@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { X, Download } from 'lucide-react';
+import { X, Download, Check, CheckIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/lib/store';
@@ -15,6 +15,7 @@ import {
     setSelectedDataSource,
     DataSourceType,
     resetFilters,
+    setSelectedCounties,
 } from '@/lib/features/filters/filterSlice';
 import Papa from 'papaparse';
 
@@ -22,7 +23,78 @@ import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { Separator } from '@/app/components/ui/separator';
 import { Slider } from '@/app/components/ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+    SelectGroup,
+    SelectLabel,
+} from '@/app/components/ui/select';
+import { ScrollArea } from '@/app/components/ui/scroll-area';
+
+// California county names
+const COUNTY_NAMES = [
+    'Alameda',
+    'Alpine',
+    'Amador',
+    'Butte',
+    'Calaveras',
+    'Colusa',
+    'Contra Costa',
+    'Del Norte',
+    'El Dorado',
+    'Fresno',
+    'Glenn',
+    'Humboldt',
+    'Imperial',
+    'Inyo',
+    'Kern',
+    'Kings',
+    'Lake',
+    'Lassen',
+    'Los Angeles',
+    'Madera',
+    'Marin',
+    'Mariposa',
+    'Mendocino',
+    'Merced',
+    'Modoc',
+    'Mono',
+    'Monterey',
+    'Napa',
+    'Nevada',
+    'Orange',
+    'Placer',
+    'Plumas',
+    'Riverside',
+    'Sacramento',
+    'San Benito',
+    'San Bernardino',
+    'San Diego',
+    'San Francisco',
+    'San Joaquin',
+    'San Luis Obispo',
+    'San Mateo',
+    'Santa Barbara',
+    'Santa Clara',
+    'Santa Cruz',
+    'Shasta',
+    'Sierra',
+    'Siskiyou',
+    'Solano',
+    'Sonoma',
+    'Stanislaus',
+    'Sutter',
+    'Tehama',
+    'Trinity',
+    'Tulare',
+    'Tuolumne',
+    'Ventura',
+    'Yolo',
+    'Yuba',
+];
 
 // Define valid filter IDs per data source and category
 const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCategory, string[]>>> = {
@@ -70,9 +142,20 @@ const formatDataSourceLabel = (source: DataSourceType) => {
 
 export default function FiltersSidebar() {
     const dispatch = useDispatch<AppDispatch>();
-    const { filters, activeFilters, csvData, filteredData, status, error, selectedDataSource, yearRange } = useSelector(
-        (state: RootState) => state.filters
-    );
+    const {
+        filters,
+        activeFilters,
+        csvData,
+        filteredData,
+        status,
+        error,
+        selectedDataSource,
+        yearRange,
+        selectedCounties = [], // Default to empty array if not defined
+    } = useSelector((state: RootState) => state.filters);
+
+    // Sort county names alphabetically (memoized)
+    const sortedCountyNames = React.useMemo(() => [...COUNTY_NAMES].sort(), []);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -107,6 +190,19 @@ export default function FiltersSidebar() {
     const handleDataSourceChange = (value: string) => {
         dispatch(resetFilters());
         dispatch(setSelectedDataSource(value as DataSourceType));
+    };
+
+    // New handler for county selection
+    const handleCountySelectionChange = (countyName: string) => {
+        const newSelectedCounties = selectedCounties.includes(countyName)
+            ? selectedCounties.filter((name: string) => name !== countyName) // Remove if already selected
+            : [...selectedCounties, countyName]; // Add if not selected
+        dispatch(setSelectedCounties(newSelectedCounties));
+    };
+
+    // Handler to remove a selected county
+    const handleRemoveCounty = (countyName: string) => {
+        dispatch(setSelectedCounties(selectedCounties.filter((name: string) => name !== countyName)));
     };
 
     // Download Handler
@@ -181,6 +277,7 @@ export default function FiltersSidebar() {
     return (
         <div className='h-full overflow-y-auto p-2'>
             <div className='mb-4 p-2'>
+                {/* Data Source Dropdown */}
                 <h3 className='font-semibold mb-2'>Data Source</h3>
                 <Select value={selectedDataSource} onValueChange={handleDataSourceChange}>
                     <SelectTrigger>
@@ -192,6 +289,65 @@ export default function FiltersSidebar() {
                                 {formatDataSourceLabel(source)}
                             </SelectItem>
                         ))}
+                    </SelectContent>
+                </Select>
+            </div>
+            <Separator className='my-4' />
+
+            {/* County Multi-Select Dropdown */}
+            <div className='mb-4 p-2'>
+                <h3 className='font-semibold mb-2'>Counties</h3>
+                <Select
+                    value='_' // Use dummy value to prevent auto-closing on select
+                    onValueChange={(value) => {
+                        if (value !== '_' && value !== 'all') {
+                            handleCountySelectionChange(value);
+                        } else if (value === 'all') {
+                            // Toggle between all counties and none
+                            dispatch(
+                                setSelectedCounties(
+                                    selectedCounties.length === sortedCountyNames.length ? [] : [...sortedCountyNames]
+                                )
+                            );
+                        }
+                    }}
+                >
+                    <SelectTrigger>
+                        <SelectValue placeholder='Select counties'>
+                            {selectedCounties.length > 0
+                                ? `${selectedCounties.length} ${
+                                      selectedCounties.length === 1 ? 'county' : 'counties'
+                                  } selected`
+                                : 'Select counties'}
+                        </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                        <ScrollArea className='h-60 overflow-y-auto'>
+                            <SelectGroup>
+                                <SelectItem value='all'>
+                                    {selectedCounties.length === sortedCountyNames.length
+                                        ? 'Deselect All Counties'
+                                        : 'Select All Counties'}
+                                </SelectItem>
+                                <SelectItem value='_' disabled className='border-b mb-2 pb-2'>
+                                    <span className='opacity-50'>Select individual counties</span>
+                                </SelectItem>
+                                {sortedCountyNames.map((countyName) => (
+                                    <SelectItem key={countyName} value={countyName}>
+                                        <div className='flex items-center gap-2'>
+                                            {selectedCounties.includes(countyName) && (
+                                                <CheckIcon className='h-4 w-4 mr-2 inline-block flex-shrink-0' />
+                                            )}
+                                            <span
+                                                className={selectedCounties.includes(countyName) ? 'font-medium' : ''}
+                                            >
+                                                {countyName}
+                                            </span>
+                                        </div>
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </ScrollArea>
                     </SelectContent>
                 </Select>
             </div>
@@ -216,7 +372,7 @@ export default function FiltersSidebar() {
                 </>
             )}
 
-            <div className='mb-4'>
+            <div className='mb-4 p-2'>
                 <h3 className='font-semibold mb-2'>Year</h3>
                 <div className='space-y-4'>
                     <Slider
@@ -254,6 +410,21 @@ export default function FiltersSidebar() {
                             </Button>
                         </Badge>
                     ))}
+
+                    {/* Show selected counties as badges */}
+                    {selectedCounties.map((county: string) => (
+                        <Badge key={`county-${county}`} variant='secondary' className='flex items-center gap-1 text-xs'>
+                            {county}
+                            <Button
+                                variant='ghost'
+                                size='icon'
+                                className='h-4 w-4 p-0 hover:bg-transparent'
+                                onClick={() => handleRemoveCounty(county)}
+                            >
+                                <X className='h-3 w-3' />
+                            </Button>
+                        </Badge>
+                    ))}
                 </div>
             </div>
 
@@ -266,6 +437,8 @@ export default function FiltersSidebar() {
 
             <div className='mt-4 sticky bottom-0 text-sm text-gray-600'>
                 Showing {filteredData.length} out of {csvData.length} records
+                {selectedCounties.length > 0 &&
+                    ` in ${selectedCounties.length} selected ${selectedCounties.length === 1 ? 'county' : 'counties'}`}
             </div>
         </div>
     );

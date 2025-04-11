@@ -198,9 +198,13 @@ const dataDescriptions = {
 export default function MapStory() {
     const dispatch = useDispatch<AppDispatch>();
     // Selectors to get relevant data and settings from the Redux store.
-    const { filteredData, selectedMetric, selectedDataSource, isPerCapita } = useSelector(
-        (state: RootState) => state.filters
-    );
+    const {
+        filteredData,
+        selectedMetric,
+        selectedDataSource,
+        isPerCapita,
+        selectedCounties = [],
+    } = useSelector((state: RootState) => state.filters);
     const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
 
     // State for storing the fetched GeoJSON data for California counties.
@@ -510,11 +514,32 @@ export default function MapStory() {
             // Function to determine the fill color based on the feature's metric value and the color scale.
             getFillColor: (feature) => {
                 const value = feature.properties[selectedMetric];
+                // Check if there are selected counties and this county is not among them
+                if (
+                    selectedCounties &&
+                    selectedCounties.length > 0 &&
+                    !selectedCounties.includes(feature.properties.name)
+                ) {
+                    // Return grey color for unselected counties
+                    return [200, 200, 200, 150]; // Light grey with some transparency
+                }
+
+                // Default coloring based on metric value for selected counties
                 const colorString = colorScale(value); // Get color from the scale
                 const rgb = d3.rgb(colorString); // Convert to RGB
                 return [rgb.r, rgb.g, rgb.b, 200]; // Return as [R, G, B, Alpha] array
             },
-            getLineColor: [255, 255, 255], // White borders.
+            getLineColor: (feature) => {
+                // Use lighter border for unselected counties when filtering is active
+                if (
+                    selectedCounties &&
+                    selectedCounties.length > 0 &&
+                    !selectedCounties.includes(feature.properties.name)
+                ) {
+                    return [180, 180, 180]; // Light grey for borders of unselected counties
+                }
+                return [255, 255, 255]; // White borders for selected or when no filtering
+            },
             getLineWidth: 1,
             pickable: true, // Allow features to be hovered/clicked.
             autoHighlight: true, // Automatically highlight hovered feature.
@@ -546,7 +571,8 @@ export default function MapStory() {
             },
             // Triggers update of the layer when these props change.
             updateTriggers: {
-                getFillColor: [selectedMetric, enhancedGeojson, isPerCapita], // Recolor when metric, data, or perCapita changes
+                getFillColor: [selectedMetric, enhancedGeojson, isPerCapita, selectedCounties], // Added selectedCounties
+                getLineColor: [selectedCounties], // Update line color when selected counties change
             },
         }),
     ];

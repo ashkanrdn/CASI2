@@ -50,6 +50,7 @@ export interface FilterState {
     error: string | null;
     selectedDataSource: DataSourceType; // Add selected data source
     isPerCapita: boolean; // Add per capita toggle state
+    selectedCounties: string[]; // Add selected counties for filtering
 }
 
 const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
@@ -104,6 +105,7 @@ const initialState: FilterState = {
     error: null,
     selectedDataSource: 'young_adult', // Default to the combined source
     isPerCapita: false, // Default to false
+    selectedCounties: [], // Initialize selected counties as empty array
 };
 
 // Helper function to get the correct column name based on data source
@@ -128,7 +130,8 @@ const getColumnName = (category: FilterCategory, source: DataSourceType): keyof 
 const applyFilters = (
     data: CsvRow[],
     activeFilters: FilterState['activeFilters'],
-    dataSource: DataSourceType // Pass the current data source
+    dataSource: DataSourceType, // Pass the current data source
+    selectedCounties: string[] = [] // Add selectedCounties parameter with default empty array
 ): CsvRow[] => {
     let filtered = data;
 
@@ -150,6 +153,11 @@ const applyFilters = (
 
     // Apply year filter
     filtered = filtered.filter(row => row.Year === activeFilters.year);
+
+    // Apply county filter if selectedCounties is not empty
+    if (selectedCounties.length > 0) {
+        filtered = filtered.filter(row => selectedCounties.includes(row.County));
+    }
 
     return filtered;
 };
@@ -202,8 +210,10 @@ export const filterSlice = createSlice({
                     state.activeFilters[category] = [];
                 }
             });
+            // Clear selected counties
+            state.selectedCounties = [];
             // Re-apply filters after resetting (which should now just be the year filter)
-            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
+            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource, state.selectedCounties);
         },
         setRankedCounties: (state, action: PayloadAction<{ name: string; value: number; rank: number }[]>) => {
             state.rankedCounties = action.payload;
@@ -213,7 +223,7 @@ export const filterSlice = createSlice({
         },
         setCsvData: (state, action: PayloadAction<CsvRow[]>) => {
             state.csvData = action.payload;
-            state.filteredData = applyFilters(action.payload, state.activeFilters, state.selectedDataSource);
+            state.filteredData = applyFilters(action.payload, state.activeFilters, state.selectedDataSource, state.selectedCounties);
 
             // // Get min and max years from the data
             // const years = action.payload.map(row => row.Year);
@@ -238,13 +248,13 @@ export const filterSlice = createSlice({
                     .map(f => f.id);
 
                 // Update filtered data using helper function
-                state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
+                state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource, state.selectedCounties);
             }
         },
         setYear: (state, action: PayloadAction<number>) => {
             state.activeFilters.year = action.payload;
             // Update filtered data using helper function
-            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
+            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource, state.selectedCounties);
         },
         removeFilter: (state, action: PayloadAction<string>) => {
             const filterId = action.payload;
@@ -268,7 +278,7 @@ export const filterSlice = createSlice({
             });
 
             // Update filtered data using helper function
-            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource);
+            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource, state.selectedCounties);
         },
         setSelectedMetric: (state, action: PayloadAction<string>) => {
             state.selectedMetric = action.payload;
@@ -292,6 +302,9 @@ export const filterSlice = createSlice({
                     state.activeFilters.age = [];
                 }
 
+                // Reset selected counties when changing data source
+                state.selectedCounties = [];
+
                 // Reset data and status before fetching new data
                 state.csvData = [];
                 state.filteredData = [];
@@ -308,6 +321,11 @@ export const filterSlice = createSlice({
             // Note: We don't need to refilter data here.
             // The per capita calculation happens during visualization processing.
         },
+        setSelectedCounties: (state, action: PayloadAction<string[]>) => {
+            state.selectedCounties = action.payload;
+            // Update filtered data using helper function
+            state.filteredData = applyFilters(state.csvData, state.activeFilters, state.selectedDataSource, state.selectedCounties);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -320,14 +338,12 @@ export const filterSlice = createSlice({
                 // Ensure data has Year, filter out rows without it or with invalid values
                 const validData = action.payload.filter(row => row && typeof row.Year === 'number' && !isNaN(row.Year));
                 state.csvData = validData;
-                // state.filteredData = applyFilters(action.payload, state.activeFilters);
-                state.filteredData = applyFilters(validData, state.activeFilters, state.selectedDataSource);
+                // Update to include selectedCounties in filtering
+                state.filteredData = applyFilters(validData, state.activeFilters, state.selectedDataSource, state.selectedCounties);
                 state.error = null;
 
                 // Get min and max years from the data if needed
-                // const years = action.payload.map(row => row.Year);
                 const years = validData.map(row => row.Year);
-                // const uniqueYears = Array.from(new Set(years)).sort();
                 const uniqueYears = Array.from(new Set(years)).filter(y => y != null).sort((a, b) => a - b); // Filter null/undefined and sort
                 if (uniqueYears.length >= 2) {
                     state.yearRange = [uniqueYears[0], uniqueYears[uniqueYears.length - 1]];
@@ -341,8 +357,7 @@ export const filterSlice = createSlice({
                 // Ensure the current selected year is within the new range
                 state.activeFilters.year = Math.max(state.yearRange[0], Math.min(state.yearRange[1], state.activeFilters.year));
                 // Re-apply filters with potentially adjusted year
-                state.filteredData = applyFilters(validData, state.activeFilters, state.selectedDataSource);
-
+                state.filteredData = applyFilters(validData, state.activeFilters, state.selectedDataSource, state.selectedCounties);
             })
             .addCase(fetchDataForSource.rejected, (state, action) => {
                 state.status = 'failed';
@@ -364,6 +379,7 @@ export const {
     setSelectedDataSource,
     togglePerCapita, // Export the new action
     resetFilters, // Export the new reset action
+    setSelectedCounties, // Export the new setSelectedCounties action
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
