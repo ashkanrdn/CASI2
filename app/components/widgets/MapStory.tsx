@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import DeckGL from '@deck.gl/react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import Map from 'react-map-gl';
@@ -189,179 +189,6 @@ const dataDescriptions = {
 };
 
 /**
- * Merges filtered CSV data with GeoJSON features for California counties.
- * Calculates aggregated values, per capita values (if applicable), and
- * special metrics like Total Cost and Average Cost per Prisoner for specific data sources.
- *
- * @param geojsonFeatures Array of base GeoJSON features for counties.
- * @param filteredData Array of filtered data rows based on user selections.
- * @param selectedMetric The metric currently selected by the user.
- * @param dataSource The data source currently selected by the user.
- * @param isPerCapita Flag indicating if data should be displayed per capita.
- * @returns An array of EnhancedFeature objects, ready for rendering on the map.
- */
-function enhanceGeoJsonWithData(
-    geojsonFeatures: Feature[],
-    filteredData: CsvRow[],
-    selectedMetric: string,
-    dataSource: DataSourceType,
-    isPerCapita: boolean
-): EnhancedFeature[] {
-    // Accumulator for county-level data aggregation.
-    const countyData: Record<
-        string,
-        {
-            value: number; // Accumulated value for the selected metric (excluding Total_Cost initially)
-            rowCount: number; // Number of data rows contributing to the county's data
-            totalCost?: number; // Sum of (Imprisonments * Cost_per_prisoner) for the county
-            costSum?: number; // Sum of Cost_per_prisoner for calculating the average later
-            costCount?: number; // Count of rows with Cost_per_prisoner for calculating the average later
-        }
-    > = {};
-
-    // Pre-calculate total cost and average cost components if the data source is 'county_prison'.
-    const totalCostPerCounty: Record<string, number> = {};
-    const costDataPerCounty: Record<string, { sum: number; count: number }> = {};
-
-    if (dataSource === 'county_prison') {
-        filteredData.forEach((row) => {
-            const county = row.County;
-            const cost = Number(row.Cost_per_prisoner) || 0;
-            const imprisonments = Number(row.Imprisonments) || 0;
-            const rowTotalCost = cost * imprisonments;
-
-            // Calculate total cost per county
-            if (!totalCostPerCounty[county]) {
-                totalCostPerCounty[county] = 0;
-            }
-            totalCostPerCounty[county] += rowTotalCost;
-
-            // Calculate sum and count for average cost per prisoner
-            if (!costDataPerCounty[county]) {
-                costDataPerCounty[county] = { sum: 0, count: 0 };
-            }
-            // Only include cost if it's a valid number > 0 for average calculation
-            if (cost > 0) {
-                costDataPerCounty[county].sum += cost;
-                costDataPerCounty[county].count += 1;
-            }
-        });
-    }
-
-    // Aggregate data per county based on the selected metric.
-    filteredData.forEach((row) => {
-        const county = row.County;
-
-        // Skip direct aggregation if the selected metric is Total_Cost for county_prison data,
-        // as it's pre-calculated. Just increment row count.
-        if (dataSource === 'county_prison' && selectedMetric === 'Total_Cost') {
-            if (!countyData[county]) {
-                countyData[county] = { value: 0, rowCount: 1 }; // Initialize with rowCount 1
-            } else {
-                countyData[county].rowCount += 1; // Increment row count
-            }
-            // Assign pre-calculated values
-            countyData[county].totalCost = totalCostPerCounty[county] || 0;
-            countyData[county].costSum = costDataPerCounty[county]?.sum || 0;
-            countyData[county].costCount = costDataPerCounty[county]?.count || 0;
-            return; // Skip further aggregation for this row
-        }
-
-        // Get the value for the selected metric from the current row.
-        const metricValueForAggregation = Number(row[selectedMetric]) || 0;
-
-        // Initialize or update the county's data in the accumulator.
-        if (!countyData[county]) {
-            countyData[county] = {
-                value: metricValueForAggregation,
-                rowCount: 1,
-                // Assign pre-calculated cost values if applicable
-                totalCost: dataSource === 'county_prison' ? totalCostPerCounty[county] || 0 : undefined,
-                costSum: dataSource === 'county_prison' ? costDataPerCounty[county]?.sum || 0 : undefined,
-                costCount: dataSource === 'county_prison' ? costDataPerCounty[county]?.count || 0 : undefined,
-            };
-        } else {
-            // Add the current row's metric value to the accumulated value.
-            countyData[county].value += metricValueForAggregation;
-            // Increment the row count for the county.
-            countyData[county].rowCount += 1;
-            // Ensure cost values are assigned if they haven't been already (e.g., if initialized above)
-            if (dataSource === 'county_prison') {
-                if (countyData[county].totalCost === undefined)
-                    countyData[county].totalCost = totalCostPerCounty[county] || 0;
-                if (countyData[county].costSum === undefined)
-                    countyData[county].costSum = costDataPerCounty[county]?.sum || 0;
-                if (countyData[county].costCount === undefined)
-                    countyData[county].costCount = costDataPerCounty[county]?.count || 0;
-            }
-        }
-    });
-
-    // Map over the GeoJSON features and enhance them with the aggregated data.
-    return geojsonFeatures.map((feature) => {
-        const countyName = feature.properties?.name as keyof typeof COUNTY_POPULATION;
-        // If the county name is missing or not in our population data, return a default structure.
-        if (!countyName || !COUNTY_POPULATION.hasOwnProperty(countyName)) {
-            return {
-                ...feature,
-                properties: {
-                    ...feature.properties,
-                    name: feature.properties?.name || 'Unknown', // Ensure name is present
-                    [selectedMetric]: 0,
-                    rawValue: 0,
-                    perCapitaValue: 0,
-                    rowCount: 0,
-                    totalCostValue: 0,
-                    avgCostPerPrisonerValue: 0,
-                },
-            } as EnhancedFeature;
-        }
-
-        // Retrieve population and aggregated data for the county.
-        const population = COUNTY_POPULATION[countyName] || 0;
-        let data = countyData[countyName] || { value: 0, rowCount: 0, totalCost: 0, costSum: 0, costCount: 0 };
-
-        // Determine the raw value based on the selected metric.
-        let rawValue = 0;
-        if (dataSource === 'county_prison' && selectedMetric === 'Total_Cost') {
-            rawValue = data.totalCost ?? 0; // Use pre-calculated total cost
-        } else {
-            rawValue = data.value; // Use the aggregated sum for other metrics
-        }
-
-        // Calculate per capita value if requested and population is available.
-        let perCapitaValue: number | undefined = undefined;
-        if (isPerCapita && population > 0) {
-            perCapitaValue = rawValue / population;
-        }
-
-        // Determine the value to display on the map (either raw or per capita).
-        const displayValue = isPerCapita && perCapitaValue !== undefined ? perCapitaValue : rawValue;
-
-        // Retrieve or calculate specific values for county_prison data.
-        const calculatedTotalCost = dataSource === 'county_prison' ? data.totalCost ?? 0 : undefined;
-        const costSum = data.costSum ?? 0;
-        const costCount = data.costCount ?? 0;
-        const avgCostPerPrisoner = dataSource === 'county_prison' && costCount > 0 ? costSum / costCount : undefined;
-
-        // Return the enhanced feature with all calculated properties.
-        return {
-            ...feature,
-            properties: {
-                ...feature.properties,
-                name: countyName, // Ensure name property is explicitly set
-                [selectedMetric]: displayValue, // The value used for coloring the map
-                rawValue: rawValue, // The original aggregated value
-                perCapitaValue: perCapitaValue, // The per capita value, if calculated
-                rowCount: data.rowCount, // The number of records aggregated
-                totalCostValue: calculatedTotalCost, // Total cost for tooltip
-                avgCostPerPrisonerValue: avgCostPerPrisoner, // Avg cost/prisoner for tooltip
-            },
-        } as EnhancedFeature;
-    });
-}
-
-/**
  * Main component for displaying the interactive map story.
  * It fetches GeoJSON data, merges it with filtered data from Redux state,
  * renders the map using DeckGL and Mapbox, and handles user interactions
@@ -388,6 +215,46 @@ export default function MapStory() {
     // State to hold the numerical values used for the color scale (for legend/potential analysis).
     const [colorValues, setColorValues] = useState<number[]>([]);
 
+    // --- NEW Worker Related State ---
+    const workerRef = useRef<Worker | null>(null);
+    const [processing, setProcessing] = useState(false); // Loading state
+    // State to hold the results from the worker
+    const [enhancedGeojson, setEnhancedGeojson] = useState<EnhancedFeature[]>([]);
+
+    // --- Effect to Initialize Worker ---
+    useEffect(() => {
+        // Create the worker instance
+        workerRef.current = new Worker(new URL('../workers/dataProcessor.worker.ts', import.meta.url), {
+            type: 'module', // Important for using modules in worker
+        });
+        console.log('Worker created');
+
+        // Listener for messages from the worker
+        workerRef.current.onmessage = (event: MessageEvent<EnhancedFeature[] | { error: string }>) => {
+            if ('error' in event.data) {
+                console.error('Error message from worker:', event.data.error);
+                // Handle worker error (e.g., show message to user)
+            } else {
+                console.log('Message received from worker:', event.data.length, 'features');
+                setEnhancedGeojson(event.data); // Update state with the computed features
+            }
+            setProcessing(false); // Calculation finished (or errored)
+        };
+
+        // Listener for errors occurring in the worker itself
+        workerRef.current.onerror = (error) => {
+            console.error('Worker error:', error);
+            setProcessing(false); // Stop loading indicator on error
+            // Optionally set an error state to show in the UI
+        };
+
+        // Cleanup function: Terminate the worker when the component unmounts
+        return () => {
+            console.log('Terminating worker');
+            workerRef.current?.terminate();
+        };
+    }, []); // Empty dependency array ensures this runs only on mount and unmount
+
     /**
      * Fetches the GeoJSON data for California counties on component mount.
      */
@@ -407,15 +274,25 @@ export default function MapStory() {
         fetchGeoJsonData();
     }, []); // Empty dependency array ensures this runs only once on mount.
 
-    /**
-     * Memoized calculation to enhance GeoJSON features with aggregated data.
-     * This recalculates only when the underlying GeoJSON data, filtered data,
-     * selected metric, data source, or per capita flag changes.
-     */
-    const enhancedGeojson = useMemo(
-        () => enhanceGeoJsonWithData(geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita),
-        [geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita]
-    );
+    // --- Effect to Trigger Worker Calculation ---
+    useEffect(() => {
+        // Don't proceed if worker isn't ready or we don't have base geojson yet
+        if (!workerRef.current || geojsonData.length === 0) {
+            return;
+        }
+
+        console.log('Triggering worker calculation...');
+        setProcessing(true); // Set loading state
+
+        // Send data needed for calculation to the worker
+        workerRef.current.postMessage({
+            geojsonFeatures: geojsonData,
+            filteredData,
+            selectedMetric,
+            dataSource: selectedDataSource,
+            isPerCapita,
+        });
+    }, [geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita]); // Dependencies that trigger recalculation
 
     /**
      * Memoized calculation for the D3 color scale used to color the map features.
@@ -480,6 +357,32 @@ export default function MapStory() {
     useEffect(() => {
         dispatch(setRankedCounties(rankedCounties));
     }, [rankedCounties, dispatch]); // Dispatch when ranks change.
+
+    /**
+     * Memoized calculation for data formatted for a potential bar chart component.
+     * Sorts counties based on the current display value (raw or per capita).
+     */
+    const barChartData = useMemo(() => {
+        const data = enhancedGeojson
+            .map((feature) => ({
+                county: feature.properties.name,
+                // Use perCapitaValue if available and toggled, otherwise use rawValue.
+                value:
+                    isPerCapita && feature.properties.perCapitaValue !== undefined
+                        ? feature.properties.perCapitaValue
+                        : feature.properties.rawValue,
+            }))
+            // Sort descending by value.
+            .sort((a, b) => b.value - a.value);
+        return data;
+    }, [enhancedGeojson, selectedMetric, isPerCapita]); // Recalculate when data, metric, or perCapita changes.
+
+    /**
+     * Effect to dispatch the formatted bar chart data to the Redux store.
+     */
+    useEffect(() => {
+        dispatch(setBarChartData(barChartData));
+    }, [barChartData, dispatch]); // Dispatch when bar chart data changes.
 
     /**
      * Calculates the approximate centroid coordinates for a given county polygon/multipolygon.
@@ -563,7 +466,7 @@ export default function MapStory() {
     const layers = [
         new GeoJsonLayer({
             id: 'counties',
-            data: enhancedGeojson, // Use the data enhanced with metric values.
+            data: enhancedGeojson, // Use the state that's updated from the worker
             stroked: true, // Draw county borders.
             filled: true, // Fill counties with color.
             lineWidthMinPixels: 1, // Ensure borders are visible.
@@ -599,32 +502,6 @@ export default function MapStory() {
             },
         }),
     ];
-
-    /**
-     * Memoized calculation for data formatted for a potential bar chart component.
-     * Sorts counties based on the current display value (raw or per capita).
-     */
-    const barChartData = useMemo(() => {
-        const data = enhancedGeojson
-            .map((feature) => ({
-                county: feature.properties.name,
-                // Use perCapitaValue if available and toggled, otherwise use rawValue.
-                value:
-                    isPerCapita && feature.properties.perCapitaValue !== undefined
-                        ? feature.properties.perCapitaValue
-                        : feature.properties.rawValue,
-            }))
-            // Sort descending by value.
-            .sort((a, b) => b.value - a.value);
-        return data;
-    }, [enhancedGeojson, selectedMetric, isPerCapita]); // Recalculate when data, metric, or perCapita changes.
-
-    /**
-     * Effect to dispatch the formatted bar chart data to the Redux store.
-     */
-    useEffect(() => {
-        dispatch(setBarChartData(barChartData));
-    }, [barChartData, dispatch]); // Dispatch when bar chart data changes.
 
     /**
      * Callback function to handle changes in the DeckGL view state (e.g., panning, zooming).
@@ -679,6 +556,18 @@ export default function MapStory() {
     // Render the component UI.
     return (
         <div className='relative w-full h-full overflow-hidden'>
+            {/* Loading Overlay */}
+            {processing && (
+                <div className='absolute inset-0 bg-black/30 flex items-center justify-center z-50'>
+                    <div className='bg-white/90 p-4 rounded-lg shadow-lg text-center'>
+                        <div className='mb-2 text-lg font-semibold'>Processing Data...</div>
+                        <div className='w-full h-2 bg-gray-200 rounded-full overflow-hidden'>
+                            <div className='h-full bg-blue-500 animate-pulse rounded-full'></div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Top Controls: Metric selection buttons and Per Capita toggle */}
             <div className='absolute top-4 left-4 z-10 p-2 max-w-[calc(100%-2rem)]'>
                 <div className='flex flex-wrap items-center gap-4'>
@@ -690,6 +579,7 @@ export default function MapStory() {
                                 onClick={() => dispatch(setSelectedMetric(metric))}
                                 className={`h-8 text-xs ${selectedMetric === metric ? 'text-white' : ''}`}
                                 variant={selectedMetric === metric ? 'default' : 'outline'}
+                                disabled={processing} // Disable when processing
                             >
                                 {formatMetricLabel(metric)}
                             </Button>
@@ -701,6 +591,7 @@ export default function MapStory() {
                             id='per-capita-toggle'
                             checked={isPerCapita}
                             onCheckedChange={() => dispatch(togglePerCapita())}
+                            disabled={processing} // Disable when processing
                         />
                         <Label htmlFor='per-capita-toggle' className='text-xs font-medium'>
                             Per Capita
