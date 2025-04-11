@@ -554,14 +554,14 @@ export default function MapStory() {
      * DeckGL layers configuration. Defines the GeoJsonLayer used to render counties.
      */
     const layers = [
-        new GeoJsonLayer<EnhancedFeature>({
+        new GeoJsonLayer({
             id: 'counties',
             data: enhancedGeojson, // Use the data enhanced with metric values.
             stroked: true, // Draw county borders.
             filled: true, // Fill counties with color.
             lineWidthMinPixels: 1, // Ensure borders are visible.
             // Function to determine the fill color based on the feature's metric value and the color scale.
-            getFillColor: (feature: EnhancedFeature) => {
+            getFillColor: (feature) => {
                 const value = feature.properties[selectedMetric];
                 const colorString = colorScale(value); // Get color from the scale
                 const rgb = d3.rgb(colorString); // Convert to RGB
@@ -573,13 +573,13 @@ export default function MapStory() {
             autoHighlight: true, // Automatically highlight hovered feature.
             highlightColor: [255, 255, 255, 50], // Semi-transparent white highlight.
             // Callback function when a feature is hovered.
-            onHover: (info: PickingInfo<EnhancedFeature>) => {
+            onHover: (info: PickingInfo) => {
                 if (info.object) {
                     // If hovering over a feature, update hoverInfo state for tooltip display.
                     setHoverInfo({
                         x: info.x,
                         y: info.y,
-                        object: info.object, // The enhanced feature data
+                        object: info.object as EnhancedFeature, // The enhanced feature data
                     });
                 } else {
                     // If not hovering over a feature, clear hoverInfo.
