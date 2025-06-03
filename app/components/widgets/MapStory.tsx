@@ -187,6 +187,10 @@ const dataDescriptions = {
             ADPtotal: 'Total Average Daily Population count for the county.',
             Felonyrate: 'Felony-related jail population rate per capita for the county.',
             Misdrate: 'Misdemeanor-related jail population rate per capita for the county.',
+            Felony: 'Total count of felony-related jail population for the county.',
+            Misd: 'Total count of misdemeanor-related jail population for the county.',
+            Postdisp: 'Post-disposition jail population count for the county.',
+            Predisp: 'Pre-disposition jail population count for the county.',
         },
     },
     // Add other data sources as needed
@@ -887,6 +891,14 @@ function formatMetricLabel(metric: string) {
             return 'Felony Rate';
         case 'Misdrate':
             return 'Misdemeanor Rate';
+        case 'Felony':
+            return 'Felony Count';
+        case 'Misd':
+            return 'Misdemeanor Count';
+        case 'Postdisp':
+            return 'Post-Disposition';
+        case 'Predisp':
+            return 'Pre-Disposition';
         default:
             // General formatting: replace underscores with spaces, add space before capitals, capitalize first letter.
             return metric
