@@ -25,7 +25,7 @@ export enum MetricType {
 // Using simple strings for metrics now, map component will handle display names
 export const DataSourceMetrics: Record<DataSourceType, string[]> = {
     arrest: ['Arrest_rate', 'Total_Arrests'], // New arrest data metrics
-    jail: ['ADPtotrate', 'ADPtotal', 'Felonyrate', 'Misdrate', 'Felony', 'Misd', 'Postdisp', 'Predisp'], // Actual jail data columns
+    jail: ['ADPtotal', 'Felony', 'Misd', 'Postdisp', 'Predisp'], // Removed rate metrics, keeping only count-based metrics
     county_prison: ['Imprisonments', 'Total_Cost'], // Renamed Cost metric
     //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
 };
