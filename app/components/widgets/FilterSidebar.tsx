@@ -98,9 +98,13 @@ const COUNTY_NAMES = [
 
 // Define valid filter IDs per data source and category
 const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCategory, string[]>>> = {
-    young_adult: {
-        crime: ['Violent', 'Property', 'Drug', 'Other', 'Misdemeanors', 'StatusOffense', 'PublicOrder'],
-        // Gender, Age, Race assumed valid
+    arrest: {
+        gender: ['Female', 'Male'],
+        race: ['Black', 'Hispanic', 'White', 'Asianother'],
+        crime: ['Violent', 'Property', 'Drug', 'Publicorder', 'Status', 'Misdemeanor'],
+        // Age and sentencing not available for arrest data
+        age: [],
+        sentencing: [],
     },
     jail: {
         crime: ['Felony', 'Misdemeanors'],
@@ -127,8 +131,8 @@ const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCate
 
 const formatDataSourceLabel = (source: DataSourceType) => {
     switch (source) {
-        case 'young_adult':
-            return 'Arrests (Youth & Adult)';
+        case 'arrest':
+            return 'Arrests Data';
         case 'jail':
             return 'Jail Population';
         case 'county_prison':
@@ -235,7 +239,7 @@ export default function FiltersSidebar() {
         }
 
         // Hide Age group unless relevant source is selected
-        if (category === 'age' && selectedDataSource !== 'young_adult') {
+        if (category === 'age' && selectedDataSource !== 'arrest') {
             return null; // Optionally hide instead of just disabling buttons
         }
 
@@ -284,7 +288,7 @@ export default function FiltersSidebar() {
                         <SelectValue placeholder='Select data source' />
                     </SelectTrigger>
                     <SelectContent>
-                        {(['young_adult', 'jail', 'county_prison'] as DataSourceType[]).map((source) => (
+                        {(['arrest', 'jail', 'county_prison'] as DataSourceType[]).map((source) => (
                             <SelectItem key={source} value={source}>
                                 {formatDataSourceLabel(source)}
                             </SelectItem>
@@ -355,7 +359,7 @@ export default function FiltersSidebar() {
 
             <FilterGroup title='Gender' category='gender' />
             <Separator className='my-4' />
-            {selectedDataSource === 'young_adult' && (
+            {selectedDataSource === 'arrest' && (
                 <>
                     <FilterGroup title='Age' category='age' />
                     <Separator className='my-4' />

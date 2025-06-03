@@ -160,6 +160,15 @@ export const COUNTY_POPULATION = {
  * Used to display information in the description box on the map.
  */
 const dataDescriptions = {
+    arrest: {
+        name: 'Arrest Data',
+        description:
+            'This dataset contains information about arrests across California counties, broken down by demographics and offense types.',
+        metrics: {
+            Arrest_rate: 'Rate of arrests per population for the selected filters and county.',
+            Total_Arrests: 'Total number of arrests recorded for the selected filters and county.',
+        },
+    },
     county_prison: {
         name: 'County Prison Data',
         description:
@@ -176,14 +185,6 @@ const dataDescriptions = {
         description: 'Information regarding juvenile detention profiles across counties.',
         metrics: {
             Jail_ADP: 'Description for Metric A in JDP data.',
-        },
-    },
-
-    young_adult: {
-        name: 'Young Adult Data',
-        description: 'Information regarding young adult data across counties.',
-        metrics: {
-            Count: 'Description for count A in Young_Adult data.',
         },
     },
     // Add other data sources as needed

@@ -3,7 +3,7 @@ import type { CsvRow } from '@/app/types/shared'; // Import the updated type
 import Papa from 'papaparse';
 
 // Define supported data sources
-export type DataSourceType = 'young_adult' | 'jail' | 'county_prison' //|'demographic'; // Updated sources
+export type DataSourceType = 'arrest' | 'jail' | 'county_prison' //|'demographic'; // Updated sources
 
 
 export interface Filter {
@@ -24,7 +24,7 @@ export enum MetricType {
 // Define available metrics for each data source
 // Using simple strings for metrics now, map component will handle display names
 export const DataSourceMetrics: Record<DataSourceType, string[]> = {
-    young_adult: ['Count'], // Represents arrests for the combined file
+    arrest: ['Arrest_rate', 'Total_Arrests'], // New arrest data metrics
     jail: ['Jail_ADP'], // Average Daily Population
     county_prison: ['Imprisonments', 'Total_Cost'], // Renamed Cost metric
     //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
@@ -66,19 +66,16 @@ const INITIAL_FILTERS: Record<FilterCategory, Filter[]> = {
         { id: 'Violent', label: 'Violent', isActive: false },
         { id: 'Property', label: 'Property', isActive: false },
         { id: 'Drug', label: 'Drug', isActive: false },
-        { id: 'PublicOrder', label: 'Public Order', isActive: false },
-        { id: 'StatusOffense', label: 'Status Offense', isActive: false },
-        { id: 'Misdemeanors', label: 'Misdemeanors', isActive: false },
-        { id: 'Felony', label: 'Felony', isActive: false },
-        { id: 'Other', label: 'Other', isActive: false },
+        { id: 'Publicorder', label: 'Public Order', isActive: false },
+        { id: 'Status', label: 'Status', isActive: false },
+        { id: 'Misdemeanor', label: 'Misdemeanor', isActive: false },
     ],
     race: [
         { id: 'Black', label: 'Black', isActive: false },
-        { id: 'Latinx', label: 'Latinx', isActive: false },
+        { id: 'Hispanic', label: 'Hispanic', isActive: false },
         { id: 'White', label: 'White', isActive: false },
-        { id: 'Asian/other', label: 'Asian/Other', isActive: false },
+        { id: 'Asianother', label: 'Asian/Other', isActive: false },
     ],
-    // Add sentencing status filters (relevant for jail.csv)
     sentencing: [
         { id: 'Unsentenced', label: 'Unsentenced', isActive: false },
         { id: 'Sentenced', label: 'Sentenced', isActive: false },
@@ -98,12 +95,12 @@ const initialState: FilterState = {
     csvData: [],
     filteredData: [],
     yearRange: [2017, 2023], // Default range, will be updated
-    selectedMetric: DataSourceMetrics['young_adult'][0], // Default metric for 'young_adult' source
+    selectedMetric: DataSourceMetrics['arrest'][0], // Default metric for 'arrest' source
     rankedCounties: [],
     selectedCounty: '',
     status: 'idle',
     error: null,
-    selectedDataSource: 'young_adult', // Default to the combined source
+    selectedDataSource: 'arrest', // Default to the arrest source
     isPerCapita: false, // Default to false
     selectedCounties: [], // Initialize selected counties as empty array
 };
@@ -116,7 +113,7 @@ const getColumnName = (category: FilterCategory, source: DataSourceType): keyof 
         case 'age':
             return 'Age' as keyof CsvRow;
         case 'crime':
-            return 'Offense_Category' as keyof CsvRow;
+            return (source === 'arrest' ? 'Offense category' : 'Offense_Category') as keyof CsvRow;
         case 'race':
             return 'Race' as keyof CsvRow;
         case 'sentencing':
@@ -167,7 +164,15 @@ export const fetchDataForSource = createAsyncThunk(
     'filters/fetchDataForSource',
     async (dataSource: DataSourceType, { rejectWithValue }) => {
         try {
-            const response = await fetch(`/cleaned/${dataSource}.csv`); // Fetch based on dataSource
+            // Map data source to the correct file name
+            const fileNameMap: Record<DataSourceType, string> = {
+                arrest: 'combined_arrest_df.csv',
+                jail: 'combined_jail_df.csv',
+                county_prison: 'county_prison.csv',
+            };
+            
+            const fileName = fileNameMap[dataSource];
+            const response = await fetch(`/cleaned/${fileName}`);
             const csvText = await response.text();
 
             return new Promise<CsvRow[]>((resolve, reject) => {
@@ -183,7 +188,7 @@ export const fetchDataForSource = createAsyncThunk(
                 });
             });
         } catch (error) {
-            return rejectWithValue(`Failed to fetch ${dataSource}.csv data`);
+            return rejectWithValue(`Failed to fetch ${dataSource} data`);
         }
     }
 );
@@ -297,7 +302,7 @@ export const filterSlice = createSlice({
                 // Set default metric for the new source
                 state.selectedMetric = DataSourceMetrics[action.payload][0];
                 // Reset Age filter if switching to a source without it (e.g., jail)
-                if (action.payload !== 'young_adult') {
+                if (action.payload !== 'arrest') {
                     state.filters.age.forEach(f => f.isActive = false);
                     state.activeFilters.age = [];
                 }
@@ -361,7 +366,7 @@ export const filterSlice = createSlice({
             })
             .addCase(fetchDataForSource.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload as string || `Failed to fetch ${state.selectedDataSource}.csv data`;
+                state.error = action.payload as string || `Failed to fetch ${state.selectedDataSource} data`;
                 state.csvData = []; // Clear data on failure
                 state.filteredData = [];
             });
