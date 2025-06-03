@@ -6,6 +6,7 @@ import type { RootState } from '@/lib/store';
 import { MetricType } from '@/lib/features/filters/filterSlice';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
 import CountyRank from './CountyRank';
+import MetricsCards from './MetricsCards';
 
 export default function BarChartWidget() {
     const selectedMetric = useSelector((state: RootState) => state.filters.selectedMetric);
@@ -32,9 +33,10 @@ export default function BarChartWidget() {
             transition={{ duration: 0.3 }}
         >
             <Tabs defaultValue='barchart' className='w-full h-full'>
-                <TabsList className='grid w-full grid-cols-2 mb-4 gap-4'>
+                <TabsList className='grid w-full grid-cols-3 mb-4 gap-4'>
                     <TabsTrigger value='barchart'>Chart</TabsTrigger>
                     <TabsTrigger value='ranking'>Ranking</TabsTrigger>
+                    <TabsTrigger value='metrics'>Metrics</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value='barchart' className='h-full'>
@@ -139,6 +141,14 @@ export default function BarChartWidget() {
                     <div className='bg-transparent h-full'>
                         <div className='p-0 pb-2 h-full overflow-auto'>
                             <CountyRank />
+                        </div>
+                    </div>
+                </TabsContent>
+
+                <TabsContent value='metrics' className='h-full'>
+                    <div className='bg-transparent h-full'>
+                        <div className='p-0 pb-2 h-full overflow-auto'>
+                            <MetricsCards />
                         </div>
                     </div>
                 </TabsContent>
