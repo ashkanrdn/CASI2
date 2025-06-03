@@ -89,7 +89,7 @@ export default function RootLayout({ children }: Props) {
                             {/* Right sidebar */}
                             <aside
                                 className={`
-                                    fixed inset-y-0 right-0 z-40 w-72 bg-gray-100 overflow-hidden pt-2 flex flex-col transform transition-transform duration-300 ease-in-out
+                                    fixed inset-y-0 right-0 z-40 w-72 bg-gray-100 overflow-auto pt-2 flex flex-col transform transition-transform duration-300 ease-in-out
                                     ${isRightSidebarOpen ? 'translate-x-0' : 'translate-x-full'}
                                     md:relative md:translate-x-0 md:inset-auto md:z-auto md:block
                                 `}
