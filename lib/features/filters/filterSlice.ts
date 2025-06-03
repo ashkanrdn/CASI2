@@ -25,7 +25,7 @@ export enum MetricType {
 // Using simple strings for metrics now, map component will handle display names
 export const DataSourceMetrics: Record<DataSourceType, string[]> = {
     arrest: ['Arrest_rate', 'Total_Arrests'], // New arrest data metrics
-    jail: ['Jail_ADP'], // Average Daily Population
+    jail: ['ADPtotrate', 'ADPtotal', 'Felonyrate', 'Misdrate'], // Actual jail data columns
     county_prison: ['Imprisonments', 'Total_Cost'], // Renamed Cost metric
     //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
 };
@@ -109,15 +109,15 @@ const initialState: FilterState = {
 const getColumnName = (category: FilterCategory, source: DataSourceType): keyof CsvRow | null => {
     switch (category) {
         case 'gender':
-            return (source === 'jail' ? 'Sex' : 'Gender') as keyof CsvRow;
+            return 'Gender' as keyof CsvRow; // Both sources use 'Gender'
         case 'age':
-            return 'Age' as keyof CsvRow;
+            return 'Age' as keyof CsvRow; // Both sources have 'Age'
         case 'crime':
-            return (source === 'arrest' ? 'Offense category' : 'Offense_Category') as keyof CsvRow;
+            return 'Offense_category' as keyof CsvRow; // Arrest data uses 'Offense_category'
         case 'race':
-            return 'Race' as keyof CsvRow;
+            return source === 'arrest' ? 'Race' as keyof CsvRow : null; // Only arrest data has Race
         case 'sentencing':
-            return source === 'jail' ? 'Sentencing status' as keyof CsvRow : null;
+            return null; // No sentencing data in either source based on column headers
         default:
             return null;
     }

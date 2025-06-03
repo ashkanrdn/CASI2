@@ -102,16 +102,15 @@ const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCate
         gender: ['Female', 'Male'],
         race: ['Black', 'Hispanic', 'White', 'Asianother'],
         crime: ['Violent', 'Property', 'Drug', 'Publicorder', 'Status', 'Misdemeanor'],
-        // Age and sentencing not available for arrest data
-        age: [],
-        sentencing: [],
+        age: ['Adult', 'Juvenile'], // Arrest data has Age column
+        sentencing: [], // Not available
     },
     jail: {
-        crime: ['Felony', 'Misdemeanors'],
-        sentencing: ['Unsentenced', 'Sentenced'],
-        // Gender (Sex column) assumed valid
-        race: [], // Explicitly disable race filters for jail
-        age: [], // Explicitly disable age filters for jail
+        gender: ['Female', 'Male'], // Jail has Gender column
+        age: ['Adult', 'Juvenile'], // Jail has Age column
+        crime: [], // No clear crime category mapping for jail data
+        race: [], // No Race column in jail data
+        sentencing: [], // No sentencing data found in columns
     },
     county_prison: {
         // Explicitly disable all standard filter categories
@@ -239,7 +238,7 @@ export default function FiltersSidebar() {
         }
 
         // Hide Age group unless relevant source is selected
-        if (category === 'age' && selectedDataSource !== 'arrest') {
+        if (category === 'age' && !['arrest', 'jail'].includes(selectedDataSource)) {
             return null; // Optionally hide instead of just disabling buttons
         }
 
@@ -359,7 +358,7 @@ export default function FiltersSidebar() {
 
             <FilterGroup title='Gender' category='gender' />
             <Separator className='my-4' />
-            {selectedDataSource === 'arrest' && (
+            {['arrest', 'jail'].includes(selectedDataSource) && (
                 <>
                     <FilterGroup title='Age' category='age' />
                     <Separator className='my-4' />

@@ -180,11 +180,13 @@ const dataDescriptions = {
         },
     },
     jail: {
-        // Placeholder for another data source
-        name: 'Juvenile Detention Profile Data',
-        description: 'Information regarding juvenile detention profiles across counties.',
+        name: 'Jail Data',
+        description: 'Information regarding jail population and rates across counties.',
         metrics: {
-            Jail_ADP: 'Description for Metric A in JDP data.',
+            ADPtotrate: 'Average Daily Population total rate per capita for the county.',
+            ADPtotal: 'Total Average Daily Population count for the county.',
+            Felonyrate: 'Felony-related jail population rate per capita for the county.',
+            Misdrate: 'Misdemeanor-related jail population rate per capita for the county.',
         },
     },
     // Add other data sources as needed
@@ -869,12 +871,28 @@ export default function MapStory() {
  * @returns A formatted string label.
  */
 function formatMetricLabel(metric: string) {
-    // Handle specific cases like 'Total_Cost'
-    if (metric === 'Total_Cost') return 'Total Cost';
-    // General formatting: replace underscores with spaces, add space before capitals, capitalize first letter.
-    return metric
-        .replace(/_/g, ' ') // Replace underscores with spaces
-        .replace(/([A-Z])/g, ' $1') // Add space before uppercase letters (for camelCase or PascalCase)
-        .replace(/^./, (str) => str.toUpperCase()) // Capitalize the first letter
-        .trim(); // Remove leading/trailing spaces
+    // Handle specific cases for better readability
+    switch (metric) {
+        case 'Total_Cost':
+            return 'Total Cost';
+        case 'Arrest_rate':
+            return 'Arrest Rate';
+        case 'Total_Arrests':
+            return 'Total Arrests';
+        case 'ADPtotrate':
+            return 'ADP Total Rate';
+        case 'ADPtotal':
+            return 'ADP Total';
+        case 'Felonyrate':
+            return 'Felony Rate';
+        case 'Misdrate':
+            return 'Misdemeanor Rate';
+        default:
+            // General formatting: replace underscores with spaces, add space before capitals, capitalize first letter.
+            return metric
+                .replace(/_/g, ' ') // Replace underscores with spaces
+                .replace(/([A-Z])/g, ' $1') // Add space before uppercase letters (for camelCase or PascalCase)
+                .replace(/^./, (str) => str.toUpperCase()) // Capitalize the first letter
+                .trim(); // Remove leading/trailing spaces
+    }
 }

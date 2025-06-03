@@ -1,4 +1,4 @@
-Year,County,Gender,Race,Offense category,Arrest rate,Total_Arrests,Population,Poverty_Rate,Age
+Year,County,Gender,Race,Offense_category,Arrest_rate,Total_Arrests,Population,Poverty_Rate,Age
 2017,Alameda,Female,Asianother,Drug,8.0,15.0,188249,0.09,Adult
 2017,Alpine,Female,Asianother,Drug,0.0,0.0,79,1.0,Adult
 2017,Amador,Female,Asianother,Drug,900.9,6.0,666,0.07,Adult
