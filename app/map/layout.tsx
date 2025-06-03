@@ -22,47 +22,6 @@ export default function MapLayout({ children }: Props) {
 
     return (
         <div className='h-full flex flex-col'>
-            {/* Map-specific header controls */}
-            <div className='bg-gray-500 text-white p-2 flex justify-between items-center'>
-                {/* Left side - Desktop home link, Mobile sidebar toggle */}
-                <div className='flex items-center gap-2'>
-                    <Link href="/" className='hidden md:flex items-center gap-2 text-white hover:text-gray-200 transition-colors'>
-                        <Home className='h-4 w-4' />
-                        <span className='text-sm'>Home</span>
-                    </Link>
-                    
-                    <Button
-                        variant='ghost'
-                        size='icon'
-                        className='md:hidden text-white'
-                        onClick={() => setIsLeftSidebarOpen(!isLeftSidebarOpen)}
-                    >
-                        <SlidersHorizontal className='h-6 w-6' />
-                    </Button>
-                </div>
-
-                {/* Center - Mobile home link */}
-                <Link href="/" className='md:hidden flex items-center gap-1 text-white hover:text-gray-200 transition-colors'>
-                    <Home className='h-4 w-4' />
-                    <span className='text-sm'>Home</span>
-                </Link>
-
-                {/* Right side - Mobile sidebar toggle, Desktop empty for symmetry */}
-                <div className='flex items-center'>
-                    <Button
-                        variant='ghost'
-                        size='icon'
-                        className='md:hidden text-white'
-                        onClick={() => setIsRightSidebarOpen(!isRightSidebarOpen)}
-                    >
-                        <BarChartHorizontal className='h-6 w-6' />
-                    </Button>
-                    
-                    {/* Invisible element for symmetry on desktop */}
-                    <div className='hidden md:block w-16'></div>
-                </div>
-            </div>
-
             {/* Backdrop Overlay (Mobile) */}
             {(isLeftSidebarOpen || isRightSidebarOpen) && (
                 <div
