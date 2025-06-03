@@ -108,9 +108,7 @@ const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCate
     jail: {
         gender: ['Female', 'Male'], // Jail has Gender column
         age: ['Adult', 'Juvenile'], // Jail has Age column
-        crime: [], // No clear crime category mapping for jail data
-        race: [], // No Race column in jail data
-        sentencing: [], // No sentencing data found in columns
+
     },
     county_prison: {
         // Explicitly disable all standard filter categories
@@ -120,12 +118,7 @@ const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCate
         race: [],
         sentencing: [],
     },
-    // demographic: {
-    //     // Gender, Race, Age assumed valid
-    //     // Explicitly disable crime and sentencing for demographic
-    //     crime: [],
-    //     sentencing: [],
-    // },
+
 };
 
 const formatDataSourceLabel = (source: DataSourceType) => {
@@ -364,13 +357,15 @@ export default function FiltersSidebar() {
                     <Separator className='my-4' />
                 </>
             )}
-            <FilterGroup title='Crime Type' category='crime' />
-            <Separator className='my-4' />
-            <FilterGroup title='Race/Ethnicity' category='race' />
-            <Separator className='my-4' />
-            {selectedDataSource === 'jail' && (
+            {selectedDataSource !== 'jail' && (
                 <>
-                    <FilterGroup title='Sentencing Status' category='sentencing' />
+                    <FilterGroup title='Crime Type' category='crime' />
+                    <Separator className='my-4' />
+                </>
+            )}
+            {selectedDataSource !== 'jail' && (
+                <>
+                    <FilterGroup title='Race/Ethnicity' category='race' />
                     <Separator className='my-4' />
                 </>
             )}
