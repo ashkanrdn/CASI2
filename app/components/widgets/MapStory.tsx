@@ -608,7 +608,7 @@ export default function MapStory() {
                 : {}),
         };
         // Apply constraints before setting the state
-        setViewState(applyViewStateConstraints(newViewState));
+        setViewState(newViewState);
     };
 
     /**
