@@ -38,7 +38,7 @@ export default function HomePage() {
                             <Card className="bg-white/10 backdrop-blur border-white/20">
                                 <CardHeader className="pb-3">
                                     <div className="flex items-center justify-between">
-                                        <DollarSign className="h-8 w-8 text-green-200" />
+                                        <DollarSign className="h-8 w-8 text-blue-200" />
                                         <Badge variant="secondary" className="bg-white/20 text-white">
                                             Annual
                                         </Badge>
@@ -53,7 +53,7 @@ export default function HomePage() {
                             <Card className="bg-white/10 backdrop-blur border-white/20">
                                 <CardHeader className="pb-3">
                                     <div className="flex items-center justify-between">
-                                        <TrendingDown className="h-8 w-8 text-red-200" />
+                                        <TrendingDown className="h-8 w-8 text-blue-200" />
                                         <Badge variant="secondary" className="bg-white/20 text-white">
                                             Since 2011
                                         </Badge>
@@ -68,7 +68,7 @@ export default function HomePage() {
                             <Card className="bg-white/10 backdrop-blur border-white/20">
                                 <CardHeader className="pb-3">
                                     <div className="flex items-center justify-between">
-                                        <Scale className="h-8 w-8 text-purple-200" />
+                                        <Scale className="h-8 w-8 text-blue-200" />
                                         <Badge variant="secondary" className="bg-white/20 text-white">
                                             Counties
                                         </Badge>
