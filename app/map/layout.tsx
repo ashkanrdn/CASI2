@@ -33,6 +33,33 @@ export default function MapLayout({ children }: Props) {
 
             {/* Main content area with sidebars */}
             <div className='flex flex-1 overflow-hidden relative'>
+                {/* Mobile toggle buttons - only show when sidebars are closed */}
+                <div className='md:hidden'>
+                    {/* Left sidebar toggle */}
+                    {!isLeftSidebarOpen && (
+                        <Button
+                            variant='default'
+                            size='icon'
+                            className='fixed top-4 left-4 z-50 bg-blue-600 hover:bg-blue-700 '
+                            onClick={() => setIsLeftSidebarOpen(true)}
+                        >
+                            <SlidersHorizontal className='h-5 w-5' />
+                        </Button>
+                    )}
+                    
+                    {/* Right sidebar toggle */}
+                    {!isRightSidebarOpen && (
+                        <Button
+                            variant='default'
+                            size='icon'
+                            className='fixed top-4 right-4 z-50 bg-blue-600 hover:bg-blue-700 '
+                            onClick={() => setIsRightSidebarOpen(true)}
+                        >
+                            <BarChartHorizontal className='h-5 w-5' />
+                        </Button>
+                    )}
+                </div>
+
                 {/* Left sidebar */}
                 <aside
                     className={`

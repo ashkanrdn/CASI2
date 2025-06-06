@@ -4,6 +4,7 @@ import { type ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '@/lib/store';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import './styles/globals.css';
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export default function RootLayout({ children }: Props) {
+    const pathname = usePathname();
+    
     return (
         <Provider store={store}>
             <html lang='en'>
@@ -20,26 +23,35 @@ export default function RootLayout({ children }: Props) {
                         <header className='bg-gray-600 text-white p-4'>
                             <nav className='flex justify-between items-center'>
                                 {/* Left side - Logo */}
-                                <div className='flex items-center'>
+                                <div className='hidden md:flex items-center'>
                                     <Link href="/" className='text-2xl font-bold hover:text-gray-200 transition-colors'>
                                         CASI
                                     </Link>
                                 </div>
 
                                 {/* Center - Navigation Links */}
-                                <div className='hidden md:flex items-center space-x-8'>
-                                    <Link href="/" className='hover:text-gray-200 transition-colors'>
+                                <div className='flex items-center space-x-8 mx-auto md:mx-0'>
+                                    <Link 
+                                        href="/" 
+                                        className={`transition-colors ${
+                                            pathname === '/' 
+                                                ? 'text-white border-b-2 border-white' 
+                                                : 'text-gray-200 hover:text-white'
+                                        }`}
+                                    >
                                         Home
                                     </Link>
-                                    <Link href="/map" className='hover:text-gray-200 transition-colors'>
+                                    <Link 
+                                        href="/map" 
+                                        className={`transition-colors ${
+                                            pathname === '/map' 
+                                                ? 'text-white border-b-2 border-white' 
+                                                : 'text-gray-200 hover:text-white'
+                                        }`}
+                                    >
                                         Map
                                     </Link>
-                                    {/* <Link href="/contact" className='hover:text-gray-200 transition-colors'>
-                                        Contact
-                                    </Link>
-                                    <Link href="/about" className='hover:text-gray-200 transition-colors'>
-                                        About
-                                    </Link> */}
+            
                                 </div>
 
                                 {/* Right side - Placeholder */}
