@@ -4,8 +4,6 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card";
-import { Badge } from "@/app/components/ui/badge";
-import { Users, DollarSign, TrendingDown, Search, FileText, Scale } from "lucide-react";
 
 interface MarkdownRendererProps {
   content: string;
