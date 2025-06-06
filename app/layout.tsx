@@ -55,7 +55,7 @@ export default function RootLayout({ children }: Props) {
                                 </div>
 
                                 {/* Right side - Placeholder */}
-                                <div className='flex items-center'>
+                                <div className='hidden md:flex items-center'>
                                     <div className='w-16 h-8'></div>
                                 </div>
                             </nav>
