@@ -349,21 +349,25 @@ export default function FiltersSidebar() {
             </div>
             <Separator className='my-4' />
 
-            <FilterGroup title='Gender' category='gender' />
-            <Separator className='my-4' />
+            {selectedDataSource !== 'county_prison' && (
+                <>
+                    <FilterGroup title='Gender' category='gender' />
+                    <Separator className='my-4' />
+                </>
+            )}
             {['arrest', 'jail'].includes(selectedDataSource) && (
                 <>
                     <FilterGroup title='Age' category='age' />
                     <Separator className='my-4' />
                 </>
             )}
-            {selectedDataSource !== 'jail' && (
+            {selectedDataSource !== 'jail' && selectedDataSource !== 'county_prison' && (
                 <>
                     <FilterGroup title='Crime Type' category='crime' />
                     <Separator className='my-4' />
                 </>
             )}
-            {selectedDataSource !== 'jail' && (
+            {selectedDataSource !== 'jail' && selectedDataSource !== 'county_prison' && (
                 <>
                     <FilterGroup title='Race/Ethnicity' category='race' />
                     <Separator className='my-4' />
