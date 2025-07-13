@@ -91,6 +91,8 @@ interface EnhancedFeature extends Feature {
     };
 }
 
+
+// TODO: need to hook this to demographic data so it updates with the year selected from filter slice 
 /**
  * Static population data for California counties.
  * Used for per capita calculations. from 2025

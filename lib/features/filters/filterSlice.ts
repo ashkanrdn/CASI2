@@ -24,7 +24,7 @@ export enum MetricType {
 // Define available metrics for each data source
 // Using simple strings for metrics now, map component will handle display names
 export const DataSourceMetrics: Record<DataSourceType, string[]> = {
-    arrest: ['Arrest_rate', 'Total_Arrests'], // New arrest data metrics
+    arrest: [ 'Total_Arrests'], // New arrest data metrics
     jail: ['ADPtotal', 'Felony', 'Misd', 'Postdisp', 'Predisp'], // Removed rate metrics, keeping only count-based metrics
     county_prison: ['Imprisonments', 'Total_Cost'], // Renamed Cost metric
     //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
@@ -101,7 +101,7 @@ const initialState: FilterState = {
     status: 'idle',
     error: null,
     selectedDataSource: 'arrest', // Default to the arrest source
-    isPerCapita: false, // Default to false
+    isPerCapita: true, // Default to true 
     selectedCounties: [], // Initialize selected counties as empty array
 };
 
