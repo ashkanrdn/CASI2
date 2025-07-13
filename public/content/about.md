@@ -5,7 +5,7 @@ visible: true
 section: "about"
 ---
 
-# About CASI
+
 
 The California Sentencing Institute (CASI) is a powerful tool for understanding how incarceration impacts communities across California. Developed by the Center on Juvenile and Criminal Justice (CJCJ), CASI offers interactive maps and data visualizations that allow users to examine crime and incarceration trends in all 58 California counties.
 
