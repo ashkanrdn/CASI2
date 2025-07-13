@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app
 import { Badge } from "@/app/components/ui/badge"
 import { Users, DollarSign, Building, Scale, Search, TrendingUp, MessageSquare } from "lucide-react"
 import { getAllContentSections } from '@/lib/content';
+import { MarkdownSectionCards } from '@/app/components/MarkdownSectionCards';
 
 interface ContentSection {
   title: string;
@@ -69,7 +70,7 @@ export default function HomePage() {
 
     return (
         <div className="w-full h-full overflow-auto">
-            <div className="min-h-screen bg-white">
+            <div className="min-h-screen bg-gray-50">
                 {/* Hero Section */}
                 <section className="bg-gradient-to-br from-[#AFEEEE] to-[#99CCFF] py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,7 +147,7 @@ export default function HomePage() {
                 </section>
 
                 {/* About CASI Section */}
-                <section id="about" className="py-16 bg-white">
+                <section id="about" className="py-16 bg-gray-50">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-12">
                             <h2 className="text-3xl font-bold text-[#0E2C49] mb-4">About CASI</h2>
@@ -165,93 +166,20 @@ export default function HomePage() {
 
                 {/* How to Use CASI Section */}
                 <section id="how-to-use" className="py-16 bg-gray-50">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-12">
-                            <h2 className="text-3xl font-bold text-[#0E2C49] mb-4">{howToUseSection?.title || 'How to Use CASI'}</h2>
-                            <div className="w-24 h-1 bg-[#1CBECA] mx-auto mb-6"></div>
-                            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-                                {howToUseSection?.subtitle || 'CASI is a tool to understand how incarceration and justice policies affect communities across California.'}
+                            <h2 className="text-3xl font-bold text-[#0E2C49] mb-4">
+                                {howToUseSection?.title || 'How to Use CASI'}
+                            </h2>
+                            <div className="w-24 h-1 bg-[#1CBECA] mx-auto mb-4"></div>
+                            <p className="text-lg text-[#174A7C]">
+                                {howToUseSection?.subtitle || 'A tool to understand how incarceration and justice policies affect communities across California'}
                             </p>
                         </div>
-                        <div className="space-y-8 mb-12">
-                            <Card className="border-0 shadow-lg">
-                                <CardHeader className="bg-[#99CCFF]/30">
-                                    <CardTitle className="flex items-center text-[#0E2C49]">
-                                        <Search className="h-6 w-6 mr-3 text-[#174A7C]" />
-                                        Explore Your County & Understand the Data
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent className="pt-6">
-                                    <div className="space-y-4 text-gray-700">
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>Use the interactive map to select one of California's 58 counties</p>
-                                        </div>
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>View incarceration rates, crime data, and demographic breakdowns over time</p>
-                                        </div>
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>Compare your county with others to understand disparities and trends</p>
-                                        </div>
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>Add layers to your research, such as poverty and education rates</p>
-                                        </div>
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>Access downloadable data for your own analysis or presentations</p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                            
-                            <Card className="border-0 shadow-lg">
-                                <CardHeader className="bg-[#AFEEEE]/30">
-                                    <CardTitle className="flex items-center text-[#0E2C49]">
-                                        <TrendingUp className="h-6 w-6 mr-3 text-[#174A7C]" />
-                                        Turn Insight into Action
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent className="pt-6">
-                                    <div className="space-y-4 text-gray-700">
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>Use CASI's data in meetings with elected officials, school boards, or community coalitions</p>
-                                        </div>
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>Support campaigns for alternatives to incarceration using real, local data</p>
-                                        </div>
-                                        <div className="flex items-start">
-                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                                            <p>Share findings on social media or in public forums to raise awareness and inspire change</p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                        <Card className="border-0 shadow-lg bg-blue-50">
-                            <CardHeader className="bg-[#99CCFF]/30">
-                                <CardTitle className="flex items-center text-[#0E2C49]">
-                                    <Users className="h-6 w-6 mr-3 text-[#174A7C]" />
-                                    Who Is CASI For?
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="pt-6">
-                                <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ p: ({children}) => <p className="text-gray-700 font-medium">{children}</p> }}>
-                                    {howToUseSection?.content.split('## Who Is CASI For?')[1] || ''}
-                                </ReactMarkdown>
-                            </CardContent>
-                        </Card>
+
+                        <MarkdownSectionCards markdown={howToUseSection?.content || ''} />
                     </div>
                 </section>
-
-
-
-
-
 
             </div>
         </div>

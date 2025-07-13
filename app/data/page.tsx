@@ -61,14 +61,12 @@ export default function DataPage() {
         );
     }
 
-    const howToUseSection = contentSections.find(s => s.section === 'how-to-use');
     const dataImportanceSection = contentSections.find(s => s.section === 'data-importance');
     const dataMetricsSection = contentSections.find(s => s.section === 'data-metrics');
 
     return (
         <div className="w-full h-full overflow-auto">
             <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
-                {/* How to Use CASI */}
 
 
                 {/* Importance of Data */}
