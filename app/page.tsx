@@ -77,7 +77,7 @@ export default function HomePage() {
                         <div className="text-center mb-12">
                             <h1 className="text-4xl md:text-5xl font-bold text-[#0E2C49] mb-4">{heroSection?.title || 'California Sentencing Institute'}</h1>
                             <p className="text-xl text-[#174A7C] max-w-3xl mx-auto">
-                                {heroSection?.subtitle || 'Interactive data visualizations and county-by-county insights to promote equity-focused, data-informed justice policies across California’s 58 counties.'}
+                                {heroSection?.subtitle }
                             </p>
                         </div>
 
@@ -173,7 +173,7 @@ export default function HomePage() {
                             </h2>
                             <div className="w-24 h-1 bg-[#1CBECA] mx-auto mb-4"></div>
                             <p className="text-lg text-[#174A7C]">
-                                {howToUseSection?.subtitle || 'A tool to understand how incarceration and justice policies affect communities across California'}
+                                {howToUseSection?.subtitle }
                             </p>
                         </div>
 
