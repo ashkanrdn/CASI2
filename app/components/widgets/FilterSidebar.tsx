@@ -335,12 +335,12 @@ export default function FiltersSidebar() {
                     }}
                 >
                     <SelectTrigger>
-                        <SelectValue placeholder='Select counties'>
+                        <SelectValue placeholder='Select Counties'>
                             {selectedCounties.length > 0
                                 ? `${selectedCounties.length} ${
-                                      selectedCounties.length === 1 ? 'county' : 'counties'
+                                      selectedCounties.length === 1 ? 'County' : 'Counties'
                                   } selected`
-                                : 'Select counties'}
+                                : 'Select Counties'}
                         </SelectValue>
                     </SelectTrigger>
                     <SelectContent>

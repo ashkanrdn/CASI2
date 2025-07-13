@@ -4,6 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
+import { Button } from '@/app/components/ui/button';
+import Link from 'next/link';
 import { 
     DollarSign, 
     Globe, 
@@ -13,7 +15,8 @@ import {
     Users,
     TrendingUp,
     TrendingDown,
-    Minus
+    Minus,
+    Info
 } from 'lucide-react';
 
 interface Metric {
@@ -95,28 +98,44 @@ const getTrendIcon = (trend?: string) => {
     }
 };
 
-const getTrendLabel = (trend?: string) => {
-    switch (trend) {
-        case 'up':
-            return 'Increasing';
-        case 'down':
-            return 'Decreasing';
-        default:
-            return 'Stable';
-    }
-};
 
 export default function MetricsCards() {
     return (
         <div className="p-4">
-            <motion.h2 
-                className="text-2xl font-bold text-gray-800 mb-6"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                County Metrics Overview
-            </motion.h2>
+            <div className="flex items-center gap-2 mb-6">
+                <motion.h2 
+                    className="text-2xl font-bold text-gray-800"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    County Metrics Overview 
+                </motion.h2>
+                
+                {/* Info Icon with Popover */}
+                <div className="relative group">
+                    <Button
+                        variant='ghost'
+                        size='sm'
+                        className='h-4 w-4 p-0 hover:bg-gray-100'
+                    >
+                        <Info className='h-3 w-3 text-gray-500' />
+                    </Button>
+                    
+                    {/* Info Popover */}
+                    <div className='absolute top-full right-0 mt-2 w-64 bg-white/95 backdrop-blur-sm p-3 rounded shadow-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 border'>
+                        <p className='mb-2 text-gray-700'>
+                            Learn more about the data metrics, their importance, and how they're calculated.
+                        </p>
+                        <Link 
+                            href="/data" 
+                            className='text-blue-600 hover:text-blue-800 font-medium underline pointer-events-auto'
+                        >
+                            View Data Information →
+                        </Link>
+                    </div>
+                </div>
+            </div>
             
             <div className="flex flex-col gap-4 items-center">
                 {MOCK_METRICS.map((metric, index) => {
@@ -135,14 +154,11 @@ export default function MetricsCards() {
                                 stiffness: 300,
                                 damping: 30
                             }}
-                            whileHover={{ 
-                                scale: 1.02,
-                                transition: { duration: 0.2 }
-                            }}
-                            whileTap={{ scale: 0.98 }}
+      
+         
                             className="w-full max-w-72"
                         >
-                            <Card className="hover:shadow-lg transition-shadow duration-200 cursor-pointer">
+                            <Card className="hover:shadow-lg transition-shadow duration-200">
                                 <CardHeader className="pb-3">
                                     <div className="flex items-center justify-between">
                                         <IconComponent className="h-8 w-8 text-blue-600" />

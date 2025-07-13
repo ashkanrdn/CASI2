@@ -19,7 +19,7 @@ export default function BarChartWidget() {
     const colorScale = d3
         .scaleSequential<string>()
         .domain([0, d3.max(colorScaleValues as number[]) || 0])
-        .interpolator(d3.interpolateOranges);
+        .interpolator(d3.interpolateBlues);
 
     const validValues = validBarChartData.map((d) => d.value);
     const maxValue = validValues.length > 0 ? Math.max(...validValues) : 0;

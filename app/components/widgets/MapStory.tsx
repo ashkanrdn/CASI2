@@ -24,7 +24,7 @@ import { Button } from '@/app/components/ui/button';
 import { Switch } from '@/app/components/ui/switch';
 import { Label } from '@/app/components/ui/label';
 import { Progress } from '@/app/components/ui/progress';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Info } from 'lucide-react';
 
 // Mapbox access token for using Mapbox services.
 const MAP_BOX_TOKEN = 'pk.eyJ1IjoiYXJhZG5pYSIsImEiOiJjanlhZDdienQwNGN0M212MHp3Z21mMXhvIn0.lPiKb_x0vr1H62G_jHgf7w';
@@ -60,9 +60,9 @@ interface ViewState {
  * Initial view state configuration for the DeckGL map.
  */
 const INITIAL_VIEW_STATE: ViewState = {
-    longitude: -122.41669,
-    latitude: 37.7853,
-    zoom: 7,
+    longitude: -118.41669,
+    latitude: 36.7860,
+    zoom: 5.5,
     pitch: 0,
     bearing: 0,
 };
@@ -164,7 +164,7 @@ const dataDescriptions = {
     arrest: {
         name: 'Arrest Data',
         description:
-            'This dataset contains information about arrests across California counties, broken down by demographics and offense types.',
+            'Explore how California counties use arrests as a response to crime, revealing justice system practices and community impacts across demographics and offense types.',
         metrics: {
             Arrest_rate: 'Rate of arrests per population for the selected filters and county.',
             Total_Arrests: 'Total number of arrests recorded for the selected filters and county.',
@@ -173,7 +173,7 @@ const dataDescriptions = {
     county_prison: {
         name: 'County Prison Data',
         description:
-            'This dataset contains information about imprisonments and associated costs aggregated at the county level.',
+            'Examine imprisonment patterns and associated costs to understand how local sentencing practices impact state resources and community safety outcomes.',
         metrics: {
             Imprisonments: 'Total number of imprisonments recorded for the county.',
             Cost_per_prisoner: 'Average cost per prisoner for the county.',
@@ -182,7 +182,7 @@ const dataDescriptions = {
     },
     jail: {
         name: 'Jail Data',
-        description: 'Information regarding jail population and rates across counties.',
+        description: 'Understand how counties rely on local incarceration and the extent of pretrial detention in California\'s justice system.',
         metrics: {
             ADPtotrate: 'Average Daily Population total rate per capita for the county.',
             ADPtotal: 'Total Average Daily Population count for the county.',
@@ -889,90 +889,66 @@ export default function MapStory() {
                     </div>
                 )}
 
-                {/* Legend Box */}
-                <AnimatePresence mode='wait'>
-                    <motion.div
-                        key={`legend-${selectedMetric}-${isPerCapita}`}
-                        className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10'
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{
-                            type: 'spring',
-                            stiffness: 500,
-                            damping: 50,
+                {/* Legend Box with Info Icon */}
+                <div className='absolute w-48 bottom-8 left-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10 group'>
+                    {/* Info Icon positioned with margin from top-left corner */}
+                    <div className='absolute -top-6 -left-1 group'>
+                        <Button
+                            variant='ghost'
+                            size='sm'
+                            className='h-4 w-4 p-0 hover:bg-gray-100'
+                        >
+                            <Info className='h-3 w-3 text-gray-500' />
+                        </Button>
+                        {/* Info Description Box - appears on hover above the legend */}
+                        <div className='absolute bottom-full left-0 mb-2 w-64 bg-white/10 backdrop-blur-sm p-4 rounded z-20 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none'>
+                            <h4 className='text-sm font-bold mb-1 break-words'>
+                                {currentDataSourceInfo.name}
+                            </h4>
+                            <p className='mb-2'>
+                                {currentDataSourceInfo.description}
+                            </p>
+                            <p>
+                                <span className='font-semibold'>{formatMetricLabel(selectedMetric)}:</span>{' '}
+                                {currentMetricInfo}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h4 className='text-sm font-bold mb-2 break-words'>
+                        {formatMetricLabel(selectedMetric)}
+                        {isPerCapita && <span className='font-normal text-xs'> (Per Capita)</span>}
+                    </h4>
+                    {/* Color Gradient Bar */}
+                    <div
+                        className='w-full h-4 relative'
+                        style={{
+                            background:
+                                colorScale.domain()[1] > 0 // Check if max value is > 0 to avoid invalid gradient
+                                    ? `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
+                                          colorScale.domain()[1] // Max value of the domain
+                                      )})`
+                                    : '#ccc', // Default grey if max value is 0
                         }}
-                    >
-                        <motion.h4
-                            className='text-sm font-bold mb-2 break-words'
-                            layoutId={`legend-title-${selectedMetric}`}
-                        >
-                            {formatMetricLabel(selectedMetric)}
-                            {isPerCapita && <span className='font-normal text-xs'> (Per Capita)</span>}
-                        </motion.h4>
-                        {/* Color Gradient Bar */}
-                        <motion.div
-                            className='w-full h-4 relative'
-                            layoutId={`legend-gradient-${selectedMetric}`}
-                            style={{
-                                background:
-                                    colorScale.domain()[1] > 0 // Check if max value is > 0 to avoid invalid gradient
-                                        ? `linear-gradient(to right, ${colorScale(0)}, ${colorScale(
-                                              colorScale.domain()[1] // Max value of the domain
-                                          )})`
-                                        : '#ccc', // Default grey if max value is 0
-                            }}
-                        ></motion.div>
-                        {/* Min and Max Labels */}
-                        <motion.div
-                            className='flex justify-between text-xs mt-1'
-                            layoutId={`legend-labels-${selectedMetric}`}
-                        >
-                            <span>0</span>
-                            <span>
-                                {/* Format max value based on metric and per capita */}
-                                {isPerCapita
-                                    ? Number(colorScale.domain()[1]).toLocaleString(undefined, {
-                                          maximumSignificantDigits: 2, // Use significant digits for per capita
-                                      })
-                                    : selectedMetric === 'Total_Cost'
-                                    ? `$${Math.round(colorScale.domain()[1]).toLocaleString()}` // Format as currency
-                                    : Math.round(colorScale.domain()[1]).toLocaleString()}{' '}
-                                {/* Format as integer */}
-                            </span>
-                        </motion.div>
-                    </motion.div>
-                </AnimatePresence>
+                    ></div>
+                    {/* Min and Max Labels */}
+                    <div className='flex justify-between text-xs mt-1'>
+                        <span>0</span>
+                        <span>
+                            {/* Format max value based on metric and per capita */}
+                            {isPerCapita
+                                ? Number(colorScale.domain()[1]).toLocaleString(undefined, {
+                                      maximumSignificantDigits: 2, // Use significant digits for per capita
+                                  })
+                                : selectedMetric === 'Total_Cost'
+                                ? `$${Math.round(colorScale.domain()[1]).toLocaleString()}` // Format as currency
+                                : Math.round(colorScale.domain()[1]).toLocaleString()}{' '}
+                            {/* Format as integer */}
+                        </span>
+                    </div>
+                </div>
 
-                {/* Data Description Box */}
-                <AnimatePresence mode='wait'>
-                    <motion.div
-                        key={`description-${selectedDataSource}-${selectedMetric}`}
-                        className='absolute w-64 bottom-8 right-8 bg-white/10 backdrop-blur-sm p-4 rounded z-10 text-xs hidden md:block'
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{
-                            type: 'spring',
-                            stiffness: 500,
-                            damping: 50,
-                        }}
-                    >
-                        <motion.h4
-                            className='text-sm font-bold mb-1 break-words'
-                            layoutId={`description-title-${currentDataSourceInfo.name}`}
-                        >
-                            {currentDataSourceInfo.name}
-                        </motion.h4>
-                        <motion.p className='mb-2' layoutId={`description-text-${currentDataSourceInfo.name}`}>
-                            {currentDataSourceInfo.description}
-                        </motion.p>
-                        <motion.p layoutId={`description-metric-${selectedMetric}`}>
-                            <span className='font-semibold'>{formatMetricLabel(selectedMetric)}:</span>{' '}
-                            {currentMetricInfo}
-                        </motion.p>
-                    </motion.div>
-                </AnimatePresence>
+
             </div>
         </div>
     );
@@ -994,9 +970,9 @@ function formatMetricLabel(metric: string) {
         case 'Total_Arrests':
             return 'Total Arrests';
         case 'ADPtotrate':
-            return 'ADP Total Rate';
+            return 'Average Daily Population';
         case 'ADPtotal':
-            return 'ADP Total';
+            return 'Average Daily Population Total';
         case 'Felonyrate':
             return 'Felony Rate';
         case 'Misdrate':

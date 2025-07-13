@@ -90,7 +90,7 @@ const initialState: FilterState = {
         crime: [],
         race: [],
         sentencing: [], // Initialize sentencing filters
-        year: 2017, // Default year
+        year: 2023, // Default year
     },
     csvData: [],
     filteredData: [],
