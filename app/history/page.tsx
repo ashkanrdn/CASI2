@@ -82,7 +82,17 @@ export default function HistoryPage() {
                                         remarkPlugins={[remarkGfm]}
                                         components={{
                                             h1: () => null,
-                                            p: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>
+                                            p: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>,
+                                            a: ({ href, children }) => (
+                                                <a 
+                                                    href={href} 
+                                                    className="text-[#174A7C] hover:text-[#1CBECA] underline transition-colors"
+                                                    target={href?.startsWith('http') ? '_blank' : undefined}
+                                                    rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                                >
+                                                    {children}
+                                                </a>
+                                            )
                                         }}
                                     >
                                         {historySection.content}
@@ -117,7 +127,17 @@ export default function HistoryPage() {
                                         remarkPlugins={[remarkGfm]}
                                         components={{
                                             h1: () => null,
-                                            p: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>
+                                            p: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>,
+                                            a: ({ href, children }) => (
+                                                <a 
+                                                    href={href} 
+                                                    className="text-[#174A7C] hover:text-[#1CBECA] underline transition-colors"
+                                                    target={href?.startsWith('http') ? '_blank' : undefined}
+                                                    rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                                >
+                                                    {children}
+                                                </a>
+                                            )
                                         }}
                                     >
                                         {juvenileSection.content}
