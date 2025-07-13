@@ -109,7 +109,7 @@ export default function DataPage() {
                                     />
                                 ))}
                             </div>
-                        </div>
+                        </div>s
                     </section>
                 )}
             </div>

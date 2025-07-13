@@ -1,11 +1,12 @@
 ---
-title: "The Importance of Data"
+title: "Why Data Matters "
 order: 6
 visible: true
 section: "data-importance"
 ---
 
-# Why Data Matters 
+
+
 
 Data-driven research is crucial to analyzing criminal and juvenile justice policy. In California, statewide appointed governmental bodies compile and maintain data that are regularly relied upon by local government, the legislature, state and federal agencies, and other criminal justice stakeholders.
 
