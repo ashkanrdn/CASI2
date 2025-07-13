@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { X, Download, Check, CheckIcon } from 'lucide-react';
+import { X, Download, Check, CheckIcon, Info } from 'lucide-react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/lib/store';
@@ -33,6 +33,11 @@ import {
     SelectLabel,
 } from '@/app/components/ui/select';
 import { ScrollArea } from '@/app/components/ui/scroll-area';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
+} from '@/app/components/ui/dropdown-menu';
 
 // California county names
 const COUNTY_NAMES = [
@@ -124,11 +129,11 @@ const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCate
 const formatDataSourceLabel = (source: DataSourceType) => {
     switch (source) {
         case 'arrest':
-            return 'Arrests Data';
+            return 'Arrests';
         case 'jail':
             return 'Jail Population';
         case 'county_prison':
-            return 'County Prison Stats';
+            return 'Prison Population';
         // case 'demographic':
         //     return 'Demographics';
         default:
@@ -224,7 +229,7 @@ export default function FiltersSidebar() {
         URL.revokeObjectURL(url);
     };
 
-    const FilterGroup = ({ title, category }: { title: string; category: FilterCategory }) => {
+    const FilterGroup = ({ title, category, showInfo = false, infoText = '' }: { title: string; category: FilterCategory; showInfo?: boolean; infoText?: string }) => {
         // Existing check for sentencing group visibility (still useful)
         if (category === 'sentencing' && selectedDataSource !== 'jail') {
             return null;
@@ -237,7 +242,28 @@ export default function FiltersSidebar() {
 
         return (
             <div className='mb-4 p-2'>
-                <h3 className='font-semibold mb-2'>{title}</h3>
+                <div className='flex items-center justify-between mb-2'>
+                    <h3 className='font-semibold'>{title}</h3>
+                    {showInfo && (
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button
+                                    variant='ghost'
+                                    size='sm'
+                                    className='h-4 w-4 p-0 hover:bg-gray-100'
+                                >
+                                    <Info className='h-3 w-3 text-gray-500' />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent 
+                                align='end' 
+                                className='w-64 p-3 text-sm text-gray-700'
+                            >
+                                {infoText}
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    )}
+                </div>
                 <div className='flex flex-wrap gap-2'>
                     {filters[category].map((filter: Filter) => {
                         // Get the valid filter IDs for the current category and source, if defined
@@ -357,7 +383,12 @@ export default function FiltersSidebar() {
             )}
             {['arrest', 'jail'].includes(selectedDataSource) && (
                 <>
-                    <FilterGroup title='Age' category='age' />
+                    <FilterGroup 
+                        title='Age' 
+                        category='age' 
+                        showInfo={true}
+                        infoText='Adult numbers are from local jail populations, Juvenile numbers are pulled from local juvenile halls.'
+                    />
                     <Separator className='my-4' />
                 </>
             )}
