@@ -368,7 +368,7 @@ export default function MapStory() {
                 // Domain is from 0 to the maximum valid value found.
                 .domain([0, d3.max(values.filter((v) => isFinite(v))) || 0])
                 // Use orange color interpolation.
-                .interpolator(d3.interpolateOranges)
+                .interpolator(d3.interpolateBlues)
         );
     }, [enhancedGeojson, selectedMetric]); // Recalculate when features or metric change.
 

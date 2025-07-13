@@ -39,7 +39,17 @@ export default function RootLayout({ children }: Props) {
                                                 : 'text-gray-200 hover:text-white'
                                         }`}
                                     >
-                                        Home
+                                        About CASI
+                                    </Link>
+                                    <Link 
+                                        href="/history" 
+                                        className={`transition-colors ${
+                                            pathname === '/history' 
+                                                ? 'text-white border-b-2 border-white' 
+                                                : 'text-gray-200 hover:text-white'
+                                        }`}
+                                    >
+                                        History
                                     </Link>
                                     <Link 
                                         href="/map" 
@@ -51,7 +61,16 @@ export default function RootLayout({ children }: Props) {
                                     >
                                         Map
                                     </Link>
-            
+                                    <Link 
+                                        href="/data" 
+                                        className={`transition-colors ${
+                                            pathname === '/data' 
+                                                ? 'text-white border-b-2 border-white' 
+                                                : 'text-gray-200 hover:text-white'
+                                        }`}
+                                    >
+                                        Data
+                                    </Link>
                                 </div>
 
                                 {/* Right side - Placeholder */}
