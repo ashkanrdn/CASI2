@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Button } from '@/app/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card"
-import { Badge } from "@/app/components/ui/badge"
-import { Users, Search, FileText } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card"
+
 import { getAllContentSections, parseDataMetrics } from '@/lib/content';
 
 interface ContentSection {
@@ -100,8 +99,10 @@ export default function DataPage() {
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 mb-4">{dataMetricsSection.title}</h2>
+                                <div className="w-24 h-1 bg-[#1CBECA] mx-auto"></div>
+
                                 {dataMetricsSection.subtitle && (
-                                    <p className="text-lg text-gray-600">{dataMetricsSection.subtitle}</p>
+                                    <p className="text-lg mt-2 text-gray-600">{dataMetricsSection.subtitle}</p>
                                 )}
                             </div>
 
@@ -133,6 +134,7 @@ function DataMetricCard({ title, content }: { title: string; content: string }) 
                     <ReactMarkdown 
                         remarkPlugins={[remarkGfm]}
                         components={{
+                            p: ({ children }) => <p className="mb-6 leading-relaxed">{children}</p>,
                             strong: ({ children }) => <strong className="text-[#174A7C] font-semibold">{children}</strong>
                         }}
                     >
