@@ -80,7 +80,12 @@ export default function DataPage() {
 
                             <div className="prose prose-lg max-w-none">
                                 <div className="bg-[#AFEEEE]/20 p-8 rounded-lg mb-8">
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                    <ReactMarkdown 
+                                        remarkPlugins={[remarkGfm]}
+                                        components={{
+                                            p: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>
+                                        }}
+                                    >
                                         {dataImportanceSection.content}
                                     </ReactMarkdown>
                                 </div>
@@ -100,7 +105,7 @@ export default function DataPage() {
                                 )}
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
                                 {parseDataMetrics(dataMetricsSection.content).map((metric, index) => (
                                     <DataMetricCard 
                                         key={index}
@@ -109,7 +114,7 @@ export default function DataPage() {
                                     />
                                 ))}
                             </div>
-                        </div>s
+                        </div>
                     </section>
                 )}
             </div>
@@ -119,14 +124,21 @@ export default function DataPage() {
 
 function DataMetricCard({ title, content }: { title: string; content: string }) {
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle className="text-lg">{title}</CardTitle>
+        <Card className="h-full">
+            <CardHeader className="bg-[#174A7C] text-white">
+                <CardTitle className="text-lg text-white">{title}</CardTitle>
             </CardHeader>
-            <CardContent>
-                <CardDescription>
-                    {content}
-                </CardDescription>
+            <CardContent className="p-6 flex-1">
+                <div className="prose prose-sm max-w-none text-gray-700 text-sm">
+                    <ReactMarkdown 
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                            strong: ({ children }) => <strong className="text-[#174A7C] font-semibold">{children}</strong>
+                        }}
+                    >
+                        {content}
+                    </ReactMarkdown>
+                </div>
             </CardContent>
         </Card>
     );

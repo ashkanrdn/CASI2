@@ -156,7 +156,12 @@ export default function HomePage() {
 
                         <div className="prose prose-lg max-w-none">
                             <div className="bg-[#AFEEEE]/20 p-8 rounded-lg mb-8">
-                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                <ReactMarkdown 
+                                    remarkPlugins={[remarkGfm]}
+                                    components={{
+                                        p: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>
+                                    }}
+                                >
                                     {aboutSection?.content}
                                 </ReactMarkdown>
                             </div>

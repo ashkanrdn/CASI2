@@ -177,18 +177,39 @@ export async function getCachedContentSection(filename: string): Promise<Content
  * Parse markdown content into individual metric cards
  */
 export function parseDataMetrics(markdownContent: string): Array<{title: string, content: string}> {
-  // Remove frontmatter and main title
+  // Remove frontmatter
   const contentWithoutFrontmatter = markdownContent.replace(/^---[\s\S]*?---\n/, '');
-  const contentWithoutMainTitle = contentWithoutFrontmatter.replace(/^#.*\n/, '');
   
-  // Split by ## headers
-  const sections = contentWithoutMainTitle.split(/^## /m).filter(section => section.trim());
+  // Find all sections that start with ##
+  const sectionRegex = /^## (.+)$/gm;
+  const sections: Array<{title: string, content: string}> = [];
+  let match;
+  const matches = [];
   
-  return sections.map(section => {
-    const lines = section.trim().split('\n');
-    const title = lines[0].trim();
-    const content = lines.slice(1).join('\n').trim();
+  // Collect all header matches
+  while ((match = sectionRegex.exec(contentWithoutFrontmatter)) !== null) {
+    matches.push({
+      title: match[1].trim(),
+      index: match.index,
+      fullMatch: match[0]
+    });
+  }
+  
+  // Extract content for each section
+  for (let i = 0; i < matches.length; i++) {
+    const currentMatch = matches[i];
+    const nextMatch = matches[i + 1];
     
-    return { title, content };
-  });
+    const startIndex = currentMatch.index + currentMatch.fullMatch.length;
+    const endIndex = nextMatch ? nextMatch.index : contentWithoutFrontmatter.length;
+    
+    const content = contentWithoutFrontmatter.substring(startIndex, endIndex).trim();
+    
+    sections.push({
+      title: currentMatch.title,
+      content: content
+    });
+  }
+  
+  return sections;
 }
