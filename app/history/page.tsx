@@ -76,8 +76,8 @@ export default function HistoryPage() {
 
                             </div>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                                <div className="prose prose-lg">
+                            <div className="max-w-4xl mx-auto">
+                                <div className="prose prose-lg mb-8">
                                     <ReactMarkdown 
                                         remarkPlugins={[remarkGfm]}
                                         components={{
@@ -111,16 +111,8 @@ export default function HistoryPage() {
 
                             </div>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                                <Card className="h-80 flex items-center justify-center bg-white">
-                                    <div className="text-center">
-                                        <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                                        <p className="text-gray-500 font-medium">Youth Incarceration Trends</p>
-                                        <p className="text-gray-400 text-sm">1858 - 2023</p>
-                                    </div>
-                                </Card>
-
-                                <div className="prose prose-lg">
+                            <div className="max-w-4xl mx-auto">
+                                <div className="prose prose-lg mb-8">
                                     <ReactMarkdown 
                                         remarkPlugins={[remarkGfm]}
                                         components={{
@@ -131,6 +123,14 @@ export default function HistoryPage() {
                                         {juvenileSection.content}
                                     </ReactMarkdown>
                                 </div>
+
+                                <Card className="h-80 flex items-center justify-center bg-white">
+                                    <div className="text-center">
+                                        <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                                        <p className="text-gray-500 font-medium">Youth Incarceration Trends</p>
+                                        <p className="text-gray-400 text-sm">1858 - 2023</p>
+                                    </div>
+                                </Card>
                             </div>
                         </div>
                     </section>
