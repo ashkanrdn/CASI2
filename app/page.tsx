@@ -7,7 +7,7 @@ import { Button } from '@/app/components/ui/button';
 import { ArrowRight, BarChart3 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card"
 import { Badge } from "@/app/components/ui/badge"
-import { Users, DollarSign, TrendingDown, Scale } from "lucide-react"
+import { Users, DollarSign, Building, Scale, Search, TrendingUp, MessageSquare } from "lucide-react"
 import { getAllContentSections } from '@/lib/content';
 
 interface ContentSection {
@@ -65,124 +65,194 @@ export default function HomePage() {
 
     const heroSection = contentSections.find(s => s.section === 'hero');
     const aboutSection = contentSections.find(s => s.section === 'about');
+    const howToUseSection = contentSections.find(s => s.section === 'how-to-use');
 
     return (
         <div className="w-full h-full overflow-auto">
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
-                {/* Hero Section with Key Stats */}
-                {heroSection && (
-                    <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-12">
-                                <h2 className="text-4xl font-bold mb-4">{heroSection.title}</h2>
-                                {heroSection.subtitle && (
-                                    <p className="text-xl text-blue-100">{heroSection.subtitle}</p>
-                                )}
-                            </div>
-
-                            {/* Key Statistics Cards */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                                <Card className="bg-white/10 backdrop-blur border-white/20">
-                                    <CardHeader className="pb-3">
-                                        <div className="flex items-center justify-between">
-                                            <Users className="h-8 w-8 text-blue-200" />
-                                            <Badge variant="secondary" className="bg-white/20 text-white">
-                                                Live
-                                            </Badge>
-                                        </div>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="text-3xl font-bold text-white mb-1">127,000</div>
-                                        <p className="text-blue-200 text-sm">Current Prison Population</p>
-                                    </CardContent>
-                                </Card>
-
-                                <Card className="bg-white/10 backdrop-blur border-white/20">
-                                    <CardHeader className="pb-3">
-                                        <div className="flex items-center justify-between">
-                                            <DollarSign className="h-8 w-8 text-blue-200" />
-                                            <Badge variant="secondary" className="bg-white/20 text-white">
-                                                Annual
-                                            </Badge>
-                                        </div>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="text-3xl font-bold text-white mb-1">$106,000</div>
-                                        <p className="text-blue-200 text-sm">Cost Per Inmate/Year</p>
-                                    </CardContent>
-                                </Card>
-
-                                <Card className="bg-white/10 backdrop-blur border-white/20">
-                                    <CardHeader className="pb-3">
-                                        <div className="flex items-center justify-between">
-                                            <TrendingDown className="h-8 w-8 text-blue-200" />
-                                            <Badge variant="secondary" className="bg-white/20 text-white">
-                                                Since 2011
-                                            </Badge>
-                                        </div>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="text-3xl font-bold text-white mb-1">-32%</div>
-                                        <p className="text-blue-200 text-sm">Population Reduction</p>
-                                    </CardContent>
-                                </Card>
-
-                                <Card className="bg-white/10 backdrop-blur border-white/20">
-                                    <CardHeader className="pb-3">
-                                        <div className="flex items-center justify-between">
-                                            <Scale className="h-8 w-8 text-blue-200" />
-                                            <Badge variant="secondary" className="bg-white/20 text-white">
-                                                Counties
-                                            </Badge>
-                                        </div>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="text-3xl font-bold text-white mb-1">58</div>
-                                        <p className="text-blue-200 text-sm">California Counties</p>
-                                    </CardContent>
-                                </Card>
-                            </div>
-
-                            <div className="text-center mt-12">
-                                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                                    <Link href="/map">
-                                        <Button size="lg" className="text-lg px-8 py-3 bg-white text-blue-700 hover:bg-gray-100 font-semibold">
-                                            Explore the Map
-                                            <ArrowRight className="ml-2 h-5 w-5" />
-                                        </Button>
-                                    </Link>
-                                </div>
-                                <p className="text-blue-100 mt-3 text-sm">
-                                    Interactive county-by-county data for all 58 California counties
-                                </p>
-                            </div>
+            <div className="min-h-screen bg-white">
+                {/* Hero Section */}
+                <section className="bg-gradient-to-br from-[#AFEEEE] to-[#99CCFF] py-16">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12">
+                            <h1 className="text-4xl md:text-5xl font-bold text-[#0E2C49] mb-4">{heroSection?.title || 'California Sentencing Institute'}</h1>
+                            <p className="text-xl text-[#174A7C] max-w-3xl mx-auto">
+                                {heroSection?.subtitle || 'Interactive data visualizations and county-by-county insights to promote equity-focused, data-informed justice policies across California’s 58 counties.'}
+                            </p>
                         </div>
-                    </section>
-                )}
 
-                {/* About Section */}
-                {aboutSection && (
-                    <section className="py-16">
-                        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-12">
-                                <h2 className="text-3xl font-bold text-gray-900 mb-4">{aboutSection.title}</h2>
-                                <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-                            </div>
+                        {/* Statistics Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="flex items-center text-[#0E2C49] text-sm font-medium">
+                                        <Users className="h-5 w-5 mr-2 text-[#174A7C]" />
+                                        Current Prison Population
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="text-2xl font-bold text-[#174A7C]">95,000+</div>
+                                    <p className="text-xs text-gray-600 mt-1">Statewide incarcerated individuals</p>
+                                </CardContent>
+                            </Card>
 
-                            <div className="prose prose-lg max-w-none">
-                                <ReactMarkdown 
-                                    remarkPlugins={[remarkGfm]}
-                                    components={{
-                                        h1: () => null, // Hide h1 since we use the title from frontmatter
-                                        p: ({ children }) => <p className="text-lg text-gray-700 leading-relaxed mb-6">{children}</p>
-                                    }}
-                                >
-                                    {aboutSection.content}
+                            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="flex items-center text-[#0E2C49] text-sm font-medium">
+                                        <DollarSign className="h-5 w-5 mr-2 text-[#174A7C]" />
+                                        Annual Cost Per Person
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="text-2xl font-bold text-[#174A7C]">$106,000</div>
+                                    <p className="text-xs text-gray-600 mt-1">Cost to incarcerate per year</p>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="flex items-center text-[#0E2C49] text-sm font-medium">
+                                        <Building className="h-5 w-5 mr-2 text-[#174A7C]" />
+                                        Local Jail Population
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="text-2xl font-bold text-[#174A7C]">65,000+</div>
+                                    <p className="text-xs text-gray-600 mt-1">County jail populations</p>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="flex items-center text-[#0E2C49] text-sm font-medium">
+                                        <BarChart3 className="h-5 w-5 mr-2 text-[#174A7C]" />
+                                        Juvenile Halls Population
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="text-2xl font-bold text-[#174A7C]">800+</div>
+                                    <p className="text-xs text-gray-600 mt-1">Youth in juvenile facilities</p>
+                                </CardContent>
+                            </Card>
+                        </div>
+
+                        <div className="text-center">
+                            <Link href="/map">
+                                <Button className="bg-[#174A7C] hover:bg-[#0E2C49] text-white px-8 py-3 text-lg">
+                                    Explore County Data
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
+                {/* About CASI Section */}
+                <section id="about" className="py-16 bg-white">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold text-[#0E2C49] mb-4">About CASI</h2>
+                            <div className="w-24 h-1 bg-[#1CBECA] mx-auto"></div>
+                        </div>
+
+                        <div className="prose prose-lg max-w-none">
+                            <div className="bg-[#AFEEEE]/20 p-8 rounded-lg mb-8">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                    {aboutSection?.content}
                                 </ReactMarkdown>
                             </div>
                         </div>
-                    </section>
-                )}
+                    </div>
+                </section>
+
+                {/* How to Use CASI Section */}
+                <section id="how-to-use" className="py-16 bg-gray-50">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold text-[#0E2C49] mb-4">{howToUseSection?.title || 'How to Use CASI'}</h2>
+                            <div className="w-24 h-1 bg-[#1CBECA] mx-auto mb-6"></div>
+                            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+                                {howToUseSection?.subtitle || 'CASI is a tool to understand how incarceration and justice policies affect communities across California.'}
+                            </p>
+                        </div>
+                        <div className="space-y-8 mb-12">
+                            <Card className="border-0 shadow-lg">
+                                <CardHeader className="bg-[#99CCFF]/30">
+                                    <CardTitle className="flex items-center text-[#0E2C49]">
+                                        <Search className="h-6 w-6 mr-3 text-[#174A7C]" />
+                                        Explore Your County & Understand the Data
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="pt-6">
+                                    <div className="space-y-4 text-gray-700">
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>Use the interactive map to select one of California's 58 counties</p>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>View incarceration rates, crime data, and demographic breakdowns over time</p>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>Compare your county with others to understand disparities and trends</p>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>Add layers to your research, such as poverty and education rates</p>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>Access downloadable data for your own analysis or presentations</p>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                            
+                            <Card className="border-0 shadow-lg">
+                                <CardHeader className="bg-[#AFEEEE]/30">
+                                    <CardTitle className="flex items-center text-[#0E2C49]">
+                                        <TrendingUp className="h-6 w-6 mr-3 text-[#174A7C]" />
+                                        Turn Insight into Action
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="pt-6">
+                                    <div className="space-y-4 text-gray-700">
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>Use CASI's data in meetings with elected officials, school boards, or community coalitions</p>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>Support campaigns for alternatives to incarceration using real, local data</p>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <div className="w-2 h-2 bg-[#1CBECA] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                                            <p>Share findings on social media or in public forums to raise awareness and inspire change</p>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        <Card className="border-0 shadow-lg bg-blue-50">
+                            <CardHeader className="bg-[#99CCFF]/30">
+                                <CardTitle className="flex items-center text-[#0E2C49]">
+                                    <Users className="h-6 w-6 mr-3 text-[#174A7C]" />
+                                    Who Is CASI For?
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="pt-6">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ p: ({children}) => <p className="text-gray-700 font-medium">{children}</p> }}>
+                                    {howToUseSection?.content.split('## Who Is CASI For?')[1] || ''}
+                                </ReactMarkdown>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </section>
+
+
+
+
+
+
             </div>
         </div>
     );

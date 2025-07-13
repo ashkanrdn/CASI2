@@ -72,7 +72,8 @@ export default function HistoryPage() {
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 mb-4">{historySection.title}</h2>
-                                <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+                                <div className="w-24 h-1 bg-[#1CBECA] mx-auto"></div>
+
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -106,7 +107,8 @@ export default function HistoryPage() {
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 mb-4">{juvenileSection.title}</h2>
-                                <div className="w-24 h-1 bg-green-600 mx-auto"></div>
+                            <div className="w-24 h-1 bg-[#1CBECA] mx-auto"></div>
+
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
