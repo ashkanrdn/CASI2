@@ -1,0 +1,84 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2024-01-01T00:00:00Z",
+  "dataSources": {
+    "arrest": {
+      "displayName": "Arrest Data",
+      "description": "California county-level arrest data with demographic and offense breakdowns",
+      "url": "https://drive.google.com/uc?export=download&id=1IamBejabehp8ELeMbWy6dngSqXNMyQRp",
+      "localFallback": "/cleaned/combined_arrest_df.csv",
+      "type": "csv"
+    },
+    "jail": {
+      "displayName": "Jail Data", 
+      "description": "Average daily population and sentencing status data for county jails",
+      "url": "https://drive.google.com/uc?export=download&id=1_na8kWhb8UaFuBxYNZryFvlA-fA6-p7E",
+      "localFallback": "/cleaned/combined_jail_df.csv",
+      "type": "csv"
+    },
+    "county_prison": {
+      "displayName": "County Prison Data",
+      "description": "County-level imprisonment numbers and associated costs",
+      "url": "https://drive.google.com/uc?export=download&id=PLACEHOLDER_PRISON_FILE_ID",
+      "localFallback": "/cleaned/county_prison.csv",
+      "type": "csv"
+    },
+    "demographic": {
+      "displayName": "Demographic Data",
+      "description": "Population and demographic data for California counties",
+      "url": "https://drive.google.com/uc?export=download&id=PLACEHOLDER_DEMO_FILE_ID",
+      "localFallback": "/cleaned/demographic.csv",
+      "type": "csv"
+    }
+  },
+  "content": {
+    "hero": {
+      "displayName": "Hero Section",
+      "url": "https://drive.google.com/uc?export=download&id=1ddIN5bL8bFaFrt_7NTtSimp1KHZZeRAb",
+      "localFallback": "/content/hero.md",
+      "type": "markdown"
+    },
+    "about": {
+      "displayName": "About CASI",
+      "url": "https://drive.google.com/uc?export=download&id=1uV10hg1EJUQeGiMMnC1CSAl6jB9ftu9u",
+      "localFallback": "/content/about.md",
+      "type": "markdown"
+    },
+    "how-to-use": {
+      "displayName": "How to Use",
+      "url": "https://drive.google.com/uc?export=download&id=1pwbYUoAV2VXFX6M2tIoBv9ORA6dQ3h68",
+      "localFallback": "/content/how-to-use.md",
+      "type": "markdown"
+    },
+    "history": {
+      "displayName": "History",
+      "url": "https://drive.google.com/uc?export=download&id=1bYPjWiTFLa5lJRiElFTyNNzmTA085VfK",
+      "localFallback": "/content/history.md",
+      "type": "markdown"
+    },
+    "juvenile": {
+      "displayName": "Juvenile Justice",
+      "url": "https://drive.google.com/uc?export=download&id=1Prhm9wlsZoTiefD_nmqCQCE-HRspsUuu",
+      "localFallback": "/content/juvenile.md",
+      "type": "markdown"
+    },
+    "data-importance": {
+      "displayName": "Data Importance",
+      "url": "https://drive.google.com/uc?export=download&id=1w6LeDpaM-jI5YwxLAxL0V1fata5_Np4S",
+      "localFallback": "/content/data-importance.md",
+      "type": "markdown"
+    },
+    "data-metrics": {
+      "displayName": "Data Metrics",
+      "url": "https://drive.google.com/uc?export=download&id=1FDku926HZB401LAKFEYtfP-7jiM_iUW1",
+      "localFallback": "/content/data-metrics.md",
+      "type": "markdown"
+    }
+  },
+  "settings": {
+    "retryAttempts": 2,
+    "retryDelay": 1000,
+    "cacheTimeout": 300000,
+    "fallbackEnabled": true
+  }
+}

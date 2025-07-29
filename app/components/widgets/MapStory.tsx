@@ -243,7 +243,7 @@ export default function MapStory() {
     // --- Effect to Initialize Worker ---
     useEffect(() => {
         // Create the worker instance
-        workerRef.current = new Worker(new URL('../workers/dataProcessor.worker.ts', import.meta.url), {
+        workerRef.current = new Worker(new URL('../../workers/dataProcessor.worker.ts', import.meta.url), {
             type: 'module', // Important for using modules in worker
         });
         console.log('Worker created');

@@ -65,34 +65,13 @@ function parseFrontmatter(markdownContent: string): ParsedContent {
  */
 export async function getContentSection(filename: string): Promise<ContentSection | null> {
   try {
-    // Check if we should use external source
-    const externalContentUrl = process.env.NEXT_PUBLIC_EXTERNAL_CONTENT_URL;
+    // Get content name without extension for data service
+    const contentName = filename.replace('.md', '');
     
-    let url: string;
-    if (externalContentUrl) {
-      // External source (e.g., GitHub raw URL)
-      url = `${externalContentUrl}/${filename}`;
-    } else {
-      // Local content
-      url = `/content/${filename}`;
-    }
-
-    const response = await fetch(url);
+    // Load content using the data service (handles Google Drive + fallback)
+    const { loadContent } = await import('@/lib/services/dataService');
+    const markdownContent = await loadContent(contentName);
     
-    if (!response.ok) {
-      // Fallback to local content if external fails
-      if (externalContentUrl) {
-        const fallbackResponse = await fetch(`/content/${filename}`);
-        if (!fallbackResponse.ok) {
-          throw new Error(`Failed to fetch content: ${filename}`);
-        }
-        const markdownContent = await fallbackResponse.text();
-        return parseContentSection(markdownContent, filename);
-      }
-      throw new Error(`Failed to fetch content: ${filename}`);
-    }
-
-    const markdownContent = await response.text();
     return parseContentSection(markdownContent, filename);
   } catch (error) {
     console.error(`Error loading content section ${filename}:`, error);

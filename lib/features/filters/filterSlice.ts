@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import type { CsvRow } from '@/app/types/shared'; // Import the updated type
 import Papa from 'papaparse';
+import { loadDataSource } from '@/lib/services/dataService';
 
 // Define supported data sources
 export type DataSourceType = 'arrest' | 'jail' | 'county_prison' //|'demographic'; // Updated sources
@@ -164,16 +165,8 @@ export const fetchDataForSource = createAsyncThunk(
     'filters/fetchDataForSource',
     async (dataSource: DataSourceType, { rejectWithValue }) => {
         try {
-            // Map data source to the correct file name
-            const fileNameMap: Record<DataSourceType, string> = {
-                arrest: 'combined_arrest_df.csv',
-                jail: 'combined_jail_df.csv',
-                county_prison: 'county_prison.csv',
-            };
-            
-            const fileName = fileNameMap[dataSource];
-            const response = await fetch(`/cleaned/${fileName}`);
-            const csvText = await response.text();
+            // Load CSV data using the data service (handles Google Drive + fallback)
+            const csvText = await loadDataSource(dataSource);
 
             return new Promise<CsvRow[]>((resolve, reject) => {
                 Papa.parse<CsvRow>(csvText, {
@@ -188,7 +181,7 @@ export const fetchDataForSource = createAsyncThunk(
                 });
             });
         } catch (error) {
-            return rejectWithValue(`Failed to fetch ${dataSource} data`);
+            return rejectWithValue(`Failed to fetch ${dataSource} data: ${error}`);
         }
     }
 );
