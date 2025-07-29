@@ -5,7 +5,7 @@
     "arrest": {
       "displayName": "Arrest Data",
       "description": "California county-level arrest data with demographic and offense breakdowns",
-      "url": "https://drive.google.com/uc?export=download&id=1IamBejabehp8ELeMbWy6dngSqXNMyQRp",
+      "url": "https://drive.google.com/uc?export=download&id=1IJXswKh4ZJKXrELMoq8EtNNRx9LerMt7",
       "localFallback": "/cleaned/combined_arrest_df.csv",
       "type": "csv"
     },

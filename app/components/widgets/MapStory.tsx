@@ -217,6 +217,7 @@ export default function MapStory() {
     } = useSelector((state: RootState) => state.filters);
     const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
 
+
     // State for storing the fetched GeoJSON data for California counties.
     const [geojsonData, setGeojsonData] = useState<Feature[]>([]);
     // State for storing information about the currently hovered county feature.

@@ -155,12 +155,17 @@ function isCacheValid(cacheKey: string, cacheTimeout: number): boolean {
 export async function loadDataSource(sourceType: DataSourceType): Promise<string> {
     console.log(`🚀 [DataService] Starting to load data source: ${sourceType}`);
     const config = await loadConfig();
+    
+
     const sourceConfig = config.dataSources[sourceType];
     
     if (!sourceConfig) {
         console.error(`❌ [DataService] Unknown data source type: ${sourceType}`);
+
         throw new Error(`Unknown data source type: ${sourceType}`);
     }
+    
+
 
     const cacheKey = `datasource_${sourceType}`;
     
