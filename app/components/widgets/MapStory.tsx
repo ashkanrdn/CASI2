@@ -319,7 +319,6 @@ export default function MapStory() {
             return;
         }
 
-        console.log('Triggering worker calculation...');
         setProcessing(true); // Set loading state
         setShowLoading(false); // Reset loading visibility initially
 
@@ -966,7 +965,7 @@ function formatMetricLabel(metric: string) {
     // Handle specific cases for better readability
     switch (metric) {
         case 'Total_Cost':
-            return 'Total Cost';
+            return 'Prison Cost';
         case 'Arrest_rate':
             return 'Arrest Rate';
         case 'Total_Arrests':
@@ -981,12 +980,14 @@ function formatMetricLabel(metric: string) {
             return 'Misdemeanor Rate';
         case 'Felony':
             return 'Felony Count';
+        case 'Imprisonments':
+            return 'Prison Population';
         case 'Misd':
-            return 'Misdemeanor Count';
+            return 'Misdemeanor Population';
         case 'Postdisp':
-            return 'Post-Disposition';
+            return 'Sentenced Population';
         case 'Predisp':
-            return 'Pre-Disposition';
+            return 'Unsentenced Population';
         default:
             // General formatting: replace underscores with spaces, add space before capitals, capitalize first letter.
             return metric
