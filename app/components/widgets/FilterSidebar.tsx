@@ -146,14 +146,19 @@ export default function FiltersSidebar() {
     const {
         filters,
         activeFilters,
-        csvData,
+        csvDataSources,
+        dataSourcesStatus,
+        dataSourcesErrors,
         filteredData,
-        status,
-        error,
         selectedDataSource,
         yearRange,
         selectedCounties = [], // Default to empty array if not defined
     } = useSelector((state: RootState) => state.filters);
+
+    // Get current source's data, status, and error
+    const csvData = csvDataSources[selectedDataSource] || [];
+    const status = dataSourcesStatus[selectedDataSource] || 'idle';
+    const error = dataSourcesErrors[selectedDataSource];
 
     // Sort county names alphabetically (memoized)
     const sortedCountyNames = React.useMemo(() => [...COUNTY_NAMES].sort(), []);
