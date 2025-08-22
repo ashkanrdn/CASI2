@@ -184,33 +184,49 @@ const applyFilters = (
     return filtered;
 };
 
+// NEW FUNCTION: Parse string values to numbers (handles currency and comma formatting)
+const parseStringToNumber = (value: any): number => {
+    if (typeof value === 'number') return value;
+    if (typeof value !== 'string') return NaN;
+    
+    // Remove currency symbols, commas, quotes, and whitespace, then parse
+    const cleaned = value.replace(/[$,"'\s]/g, '');
+    const parsed = parseFloat(cleaned);
+    
+    return isNaN(parsed) ? 0 : parsed;
+};
+
 // NEW FUNCTION: Calculate statewide average for demographic metrics
 export const calculateStateWideAverage = (data: CsvRow[], variable: string, year: number): number => {
-    const filteredData = data.filter(row => 
-        row.Variable === variable && 
-        row.Years === year && 
-        typeof row.Value === 'number' && 
-        !isNaN(row.Value)
-    );
+    const filteredData = data.filter(row => {
+        const variableMatch = String(row.Variable).trim() === variable;
+        const yearMatch = Number(row.Years) === year;
+        const parsedValue = parseStringToNumber(row.Value);
+        const hasValidValue = !isNaN(parsedValue) && parsedValue !== null;
+        
+        return variableMatch && yearMatch && hasValidValue;
+    });
     
     if (filteredData.length === 0) return 0;
     
-    const sum = filteredData.reduce((acc, row) => acc + (row.Value as number), 0);
+    const sum = filteredData.reduce((acc, row) => acc + parseStringToNumber(row.Value), 0);
     return sum / filteredData.length;
 };
 
 // NEW FUNCTION: Get demographic data for a specific county
 export const getCountyDemographicData = (data: CsvRow[], county: string, year: number): Record<string, number> => {
-    const countyData = data.filter(row => 
-        row.County === county && 
-        row.Years === year && 
-        typeof row.Value === 'number' && 
-        !isNaN(row.Value)
-    );
+    const countyData = data.filter(row => {
+        const countyMatch = String(row.County).trim() === county;
+        const yearMatch = Number(row.Years) === year;
+        const parsedValue = parseStringToNumber(row.Value);
+        const hasValidValue = !isNaN(parsedValue) && parsedValue !== null;
+        
+        return countyMatch && yearMatch && hasValidValue;
+    });
     
     return countyData.reduce((acc, row) => {
         if (row.Variable) {
-            acc[row.Variable] = row.Value as number;
+            acc[String(row.Variable).trim()] = parseStringToNumber(row.Value);
         }
         return acc;
     }, {} as Record<string, number>);
