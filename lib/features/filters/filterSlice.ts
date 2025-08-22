@@ -193,11 +193,18 @@ const parseStringToNumber = (value: any): number => {
     const cleaned = value.replace(/[$,"'\s]/g, '');
     const parsed = parseFloat(cleaned);
     
+    // Log parsing for debugging problematic values
+    if (value.includes('$') || value.includes(',')) {
+        console.log('🔢 [parseStringToNumber]:', { original: value, cleaned, parsed });
+    }
+    
     return isNaN(parsed) ? 0 : parsed;
 };
 
 // NEW FUNCTION: Calculate statewide average for demographic metrics
 export const calculateStateWideAverage = (data: CsvRow[], variable: string, year: number): number => {
+    console.log('📊 [calculateStateWideAverage] Input:', { variable, year, dataLength: data.length });
+    
     const filteredData = data.filter(row => {
         const variableMatch = String(row.Variable).trim() === variable;
         const yearMatch = Number(row.Years) === year;
@@ -207,14 +214,29 @@ export const calculateStateWideAverage = (data: CsvRow[], variable: string, year
         return variableMatch && yearMatch && hasValidValue;
     });
     
-    if (filteredData.length === 0) return 0;
+    console.log('📊 [calculateStateWideAverage] Filtered data:', {
+        variable,
+        year,
+        filteredCount: filteredData.length,
+        sampleRows: filteredData.slice(0, 3)
+    });
+    
+    if (filteredData.length === 0) {
+        console.log('📊 [calculateStateWideAverage] No data found for:', { variable, year });
+        return 0;
+    }
     
     const sum = filteredData.reduce((acc, row) => acc + parseStringToNumber(row.Value), 0);
-    return sum / filteredData.length;
+    const average = sum / filteredData.length;
+    
+    console.log('📊 [calculateStateWideAverage] Result:', { variable, average, sum, count: filteredData.length });
+    return average;
 };
 
 // NEW FUNCTION: Get demographic data for a specific county
 export const getCountyDemographicData = (data: CsvRow[], county: string, year: number): Record<string, number> => {
+    console.log('🏛️ [getCountyDemographicData] Input:', { county, year, dataLength: data.length });
+    
     const countyData = data.filter(row => {
         const countyMatch = String(row.County).trim() === county;
         const yearMatch = Number(row.Years) === year;
@@ -224,12 +246,22 @@ export const getCountyDemographicData = (data: CsvRow[], county: string, year: n
         return countyMatch && yearMatch && hasValidValue;
     });
     
-    return countyData.reduce((acc, row) => {
+    console.log('🏛️ [getCountyDemographicData] Filtered county data:', {
+        county,
+        year,
+        filteredCount: countyData.length,
+        sampleRows: countyData.slice(0, 3)
+    });
+    
+    const result = countyData.reduce((acc, row) => {
         if (row.Variable) {
             acc[String(row.Variable).trim()] = parseStringToNumber(row.Value);
         }
         return acc;
     }, {} as Record<string, number>);
+    
+    console.log('🏛️ [getCountyDemographicData] Result:', { county, result });
+    return result;
 };
 
 // Create async thunk for fetching CSV data based on source
