@@ -19,7 +19,7 @@ import {
 import { FlyToInterpolator } from '@deck.gl/core';
 import type { ViewStateChangeParameters } from '@deck.gl/core';
 
-import { setBarChartData, setColorScaleValues } from '@/lib/features/map/mapSlice';
+import { setBarChartData, setColorScaleValues, setSelectedCounty } from '@/lib/features/map/mapSlice';
 import { Button } from '@/app/components/ui/button';
 import { Switch } from '@/app/components/ui/switch';
 import { Label } from '@/app/components/ui/label';
@@ -577,6 +577,19 @@ export default function MapStory() {
                 } else {
                     // If not hovering over a feature, clear hoverInfo.
                     setHoverInfo(null);
+                }
+            },
+            // NEW: Callback function when a feature is clicked to select county
+            onClick: (info: PickingInfo) => {
+                if (info.object) {
+                    const feature = info.object as EnhancedFeature;
+                    const countyName = feature.properties.name;
+                    console.log('🗺️ [MapStory] County clicked:', countyName);
+                    dispatch(setSelectedCounty(countyName));
+                } else {
+                    // Clear selection if clicking on empty area
+                    console.log('🗺️ [MapStory] Empty area clicked, clearing selection');
+                    dispatch(setSelectedCounty(''));
                 }
             },
             // Triggers update of the layer when these props change.
