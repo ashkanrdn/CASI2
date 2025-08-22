@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import { loadDataSource } from '@/lib/services/dataService';
 
 // Define supported data sources
-export type DataSourceType = 'arrest' | 'jail' | 'county_prison' //|'demographic'; // Updated sources
+export type DataSourceType = 'arrest' | 'jail' | 'county_prison' | 'demographic'; // Updated sources
 
 
 export interface Filter {
@@ -28,7 +28,7 @@ export const DataSourceMetrics: Record<DataSourceType, string[]> = {
     arrest: [ 'Total_Arrests'], // New arrest data metrics
     jail: ['ADPtotal', 'Felony', 'Misd', 'Postdisp', 'Predisp'], // Removed rate metrics, keeping only count-based metrics
     county_prison: ['Imprisonments', 'Total_Cost'], // Renamed Cost metric
-    //demographic: ['Population_age_10_17', 'Poverty_rate_age_12_17'], // Add demographic metrics
+    demographic: ['Percent of population in poverty', 'Percent of adults with high school diploma or less', 'Unemployment rate', 'Median household income'], // Demographic metrics
 };
 
 export interface FilterState {
@@ -100,16 +100,19 @@ const initialState: FilterState = {
         arrest: [],
         jail: [],
         county_prison: [],
+        demographic: [],
     },
     dataSourcesStatus: {
         arrest: 'idle',
         jail: 'idle', 
         county_prison: 'idle',
+        demographic: 'idle',
     },
     dataSourcesErrors: {
         arrest: null,
         jail: null,
         county_prison: null,
+        demographic: null,
     },
     // Current working data
     filteredData: [],
@@ -179,6 +182,38 @@ const applyFilters = (
     }
 
     return filtered;
+};
+
+// NEW FUNCTION: Calculate statewide average for demographic metrics
+export const calculateStateWideAverage = (data: CsvRow[], variable: string, year: number): number => {
+    const filteredData = data.filter(row => 
+        row.Variable === variable && 
+        row.Years === year && 
+        typeof row.Value === 'number' && 
+        !isNaN(row.Value)
+    );
+    
+    if (filteredData.length === 0) return 0;
+    
+    const sum = filteredData.reduce((acc, row) => acc + (row.Value as number), 0);
+    return sum / filteredData.length;
+};
+
+// NEW FUNCTION: Get demographic data for a specific county
+export const getCountyDemographicData = (data: CsvRow[], county: string, year: number): Record<string, number> => {
+    const countyData = data.filter(row => 
+        row.County === county && 
+        row.Years === year && 
+        typeof row.Value === 'number' && 
+        !isNaN(row.Value)
+    );
+    
+    return countyData.reduce((acc, row) => {
+        if (row.Variable) {
+            acc[row.Variable] = row.Value as number;
+        }
+        return acc;
+    }, {} as Record<string, number>);
 };
 
 // Create async thunk for fetching CSV data based on source

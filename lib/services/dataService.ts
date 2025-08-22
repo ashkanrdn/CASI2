@@ -19,7 +19,7 @@ interface ContentConfig {
 interface DataSourcesConfig {
     version: string;
     lastUpdated: string;
-    dataSources: Record<DataSourceType | 'demographic', DataSourceConfig>;
+    dataSources: Record<DataSourceType, DataSourceConfig>;
     content: Record<string, ContentConfig>;
     settings: {
         retryAttempts: number;

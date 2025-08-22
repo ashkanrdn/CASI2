@@ -1,105 +1,167 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import Link from 'next/link';
 import { 
     DollarSign, 
-    Globe, 
     GraduationCap, 
     Briefcase, 
-    Vote, 
     Users,
+    Home,
+    Building,
+    Flag,
     TrendingUp,
-    TrendingDown,
-    Minus,
     Info
 } from 'lucide-react';
+import type { RootState, AppDispatch } from '@/lib/store';
+import { fetchDataForSource, calculateStateWideAverage, getCountyDemographicData } from '@/lib/features/filters/filterSlice';
 
-interface Metric {
+interface DemographicMetric {
     id: string;
     title: string;
-    value: string;
+    variable: string;
     description: string;
     icon: React.ComponentType<{ className?: string }>;
-    trend?: 'up' | 'down' | 'neutral';
-    trendColor: string;
+    formatType: 'percentage' | 'currency' | 'number';
 }
 
-// Updated metrics with Lucide icons
-const MOCK_METRICS: Metric[] = [
+// NEW CONSTANT: Maps census variables to display information
+const DEMOGRAPHIC_METRICS: DemographicMetric[] = [
     {
         id: 'poverty',
         title: 'Poverty Rate',
-        value: '12.3%',
-        description: 'Individuals below poverty line',
+        variable: 'Percent of population in poverty',
+        description: 'Population below poverty line',
         icon: DollarSign,
-        trend: 'down',
-        trendColor: 'text-green-600',
-    },
-    {
-        id: 'immigration',
-        title: 'Immigration',
-        value: '8.7%',
-        description: 'Noncitizen population',
-        icon: Globe,
-        trend: 'up',
-        trendColor: 'text-blue-600',
+        formatType: 'percentage',
     },
     {
         id: 'education',
-        title: 'Education',
-        value: '34.2%',
-        description: 'Adults with HS diploma or less',
+        title: 'Education Level',
+        variable: 'Percent of adults with high school diploma or less',
+        description: 'Adults with HS education or less',
         icon: GraduationCap,
-        trend: 'down',
-        trendColor: 'text-green-600',
+        formatType: 'percentage',
     },
     {
         id: 'employment',
-        title: 'Employment',
-        value: '4.1%',
+        title: 'Unemployment',
+        variable: 'Unemployment rate',
         description: 'Unemployment rate',
         icon: Briefcase,
-        trend: 'neutral',
-        trendColor: 'text-gray-600',
+        formatType: 'percentage',
     },
     {
-        id: 'politics',
-        title: 'Politics',
-        value: '52.8%',
-        description: 'Voted red in recent elections',
-        icon: Vote,
-        trend: 'up',
-        trendColor: 'text-red-600',
+        id: 'income',
+        title: 'Household Income',
+        variable: 'Median household income',
+        description: 'Median household income',
+        icon: TrendingUp,
+        formatType: 'currency',
+    },
+    {
+        id: 'homeownership',
+        title: 'Home Ownership',
+        variable: 'Percent owner-occupied homes',
+        description: 'Owner-occupied homes',
+        icon: Home,
+        formatType: 'percentage',
+    },
+    {
+        id: 'homevalue',
+        title: 'Home Values',
+        variable: 'Media home value',
+        description: 'Median home value',
+        icon: Building,
+        formatType: 'currency',
+    },
+    {
+        id: 'citizenship',
+        title: 'Citizenship',
+        variable: 'Citizens as percent of age 18+ population',
+        description: 'Citizens 18+ years old',
+        icon: Flag,
+        formatType: 'percentage',
     },
     {
         id: 'population',
-        title: 'Population',
-        value: '1.2M',
-        description: 'Total population',
+        title: 'Adult Population',
+        variable: 'Total population age 18-older',
+        description: 'Total adult population',
         icon: Users,
-        trend: 'up',
-        trendColor: 'text-blue-600',
+        formatType: 'number',
     },
 ];
 
-const getTrendIcon = (trend?: string) => {
-    switch (trend) {
-        case 'up':
-            return TrendingUp;
-        case 'down':
-            return TrendingDown;
+// NEW FUNCTION: Format values based on type
+const formatValue = (value: number, formatType: 'percentage' | 'currency' | 'number'): string => {
+    if (isNaN(value) || value === undefined || value === null) return 'N/A';
+    
+    switch (formatType) {
+        case 'percentage':
+            return `${(value * 100).toFixed(1)}%`;
+        case 'currency':
+            return `$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+        case 'number':
+            return value.toLocaleString(undefined, { maximumFractionDigits: 0 });
         default:
-            return Minus;
+            return value.toString();
     }
 };
 
-
 export default function MetricsCards() {
+    const dispatch = useDispatch<AppDispatch>();
+    const { 
+        csvDataSources, 
+        dataSourcesStatus, 
+        activeFilters 
+    } = useSelector((state: RootState) => state.filters);
+    const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
+    
+    const demographicData = csvDataSources.demographic || [];
+    const isLoading = dataSourcesStatus.demographic === 'loading';
+    const currentYear = activeFilters.year;
+
+    // NEW FUNCTION: Auto-load demographic data on component mount
+    useEffect(() => {
+        if (dataSourcesStatus.demographic === 'idle') {
+            dispatch(fetchDataForSource('demographic'));
+        }
+    }, [dispatch, dataSourcesStatus.demographic]);
+
+    // Get data for selected county or calculate state averages
+    const getMetricData = () => {
+        if (selectedCounty && demographicData.length > 0) {
+            // Get county-specific data
+            return getCountyDemographicData(demographicData, selectedCounty, currentYear);
+        } else if (demographicData.length > 0) {
+            // Calculate state-wide averages
+            const averages: Record<string, number> = {};
+            DEMOGRAPHIC_METRICS.forEach(metric => {
+                averages[metric.variable] = calculateStateWideAverage(demographicData, metric.variable, currentYear);
+            });
+            return averages;
+        }
+        return {};
+    };
+
+    const metricData = getMetricData();
+    const displayTitle = selectedCounty ? `${selectedCounty} County Metrics` : 'California Statewide Averages';
+
+    if (isLoading) {
+        return (
+            <div className="p-4">
+                <div className="flex items-center justify-center h-64">
+                    <div className="text-lg text-gray-600">Loading demographic data...</div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="p-4">
             <div className="flex items-center gap-2 mb-6">
@@ -109,7 +171,7 @@ export default function MetricsCards() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    County Metrics Overview 
+                    {displayTitle}
                 </motion.h2>
                 
                 {/* Info Icon with Popover */}
@@ -125,7 +187,7 @@ export default function MetricsCards() {
                     {/* Info Popover */}
                     <div className='absolute top-full right-0 mt-2 w-64 bg-white/95 backdrop-blur-sm p-3 rounded shadow-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 border'>
                         <p className='mb-2 text-gray-700'>
-                            Learn more about the data metrics, their importance, and how they're calculated.
+                            Demographic and economic indicators for {currentYear}. {selectedCounty ? 'County-specific data.' : 'Statewide averages across all counties.'}
                         </p>
                         <Link 
                             href="/data" 
@@ -138,9 +200,10 @@ export default function MetricsCards() {
             </div>
             
             <div className="flex flex-col gap-4 items-center">
-                {MOCK_METRICS.map((metric, index) => {
+                {DEMOGRAPHIC_METRICS.map((metric, index) => {
                     const IconComponent = metric.icon;
-                    const TrendIcon = getTrendIcon(metric.trend);
+                    const value = metricData[metric.variable] || 0;
+                    const formattedValue = formatValue(value, metric.formatType);
                     
                     return (
                         <motion.div
@@ -154,15 +217,12 @@ export default function MetricsCards() {
                                 stiffness: 300,
                                 damping: 30
                             }}
-      
-         
                             className="w-full max-w-72"
                         >
                             <Card className="hover:shadow-lg transition-shadow duration-200">
                                 <CardHeader className="pb-3">
                                     <div className="flex items-center justify-between">
                                         <IconComponent className="h-8 w-8 text-blue-600" />
-          
                                     </div>
                                 </CardHeader>
                                 <CardContent>
@@ -176,7 +236,7 @@ export default function MetricsCards() {
                                         layoutId={`value-${metric.id}`}
                                         className="text-3xl font-bold text-gray-900 mb-2"
                                     >
-                                        {metric.value}
+                                        {formattedValue}
                                     </motion.div>
                                     
                                     <motion.p

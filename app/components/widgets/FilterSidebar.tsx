@@ -123,7 +123,14 @@ const VALID_FILTERS_PER_SOURCE: Record<DataSourceType, Partial<Record<FilterCate
         race: [],
         sentencing: [],
     },
-
+    demographic: {
+        // Demographic data doesn't use standard filter categories
+        gender: [],
+        age: [],
+        crime: [],
+        race: [],
+        sentencing: [],
+    },
 };
 
 const formatDataSourceLabel = (source: DataSourceType) => {
@@ -134,8 +141,8 @@ const formatDataSourceLabel = (source: DataSourceType) => {
             return 'Jail Population';
         case 'county_prison':
             return 'Prison Population';
-        // case 'demographic':
-        //     return 'Demographics';
+        case 'demographic':
+            return 'Demographics';
         default:
             return source;
     }

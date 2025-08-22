@@ -19,15 +19,15 @@
     "county_prison": {
       "displayName": "County Prison Data",
       "description": "County-level imprisonment numbers and associated costs",
-      "url": "https://drive.google.com/uc?export=download&id=PLACEHOLDER_PRISON_FILE_ID",
+      "url": "https://drive.google.com/uc?export=download&id=1oWkE7OdWY5ULS-o6TuYtpEVp8OvjBT9z",
       "localFallback": "/cleaned/county_prison.csv",
       "type": "csv"
     },
     "demographic": {
       "displayName": "Demographic Data",
       "description": "Population and demographic data for California counties",
-      "url": "https://drive.google.com/uc?export=download&id=PLACEHOLDER_DEMO_FILE_ID",
-      "localFallback": "/cleaned/demographic.csv",
+      "url": "https://drive.google.com/uc?export=download&id=1gTaFZ8Hit3Ud_2Y2npkFkJc_t0vPImed",
+      "localFallback": "/cleaned/census.csv",
       "type": "csv"
     }
   },
