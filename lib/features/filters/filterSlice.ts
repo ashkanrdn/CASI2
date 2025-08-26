@@ -173,8 +173,11 @@ const applyFilters = (
         }
     });
 
-    // Apply year filter
-    filtered = filtered.filter(row => row.Year === activeFilters.year);
+    // Apply year filter (handle different year column names for different data sources)
+    filtered = filtered.filter(row => {
+        const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
+        return yearValue === activeFilters.year;
+    });
 
     // Apply county filter if selectedCounties is not empty
     if (selectedCounties.length > 0) {
@@ -425,7 +428,9 @@ export const filterSlice = createSlice({
                 
                 // Update year range if we have data for this source
                 if (newSourceData.length > 0) {
-                    const years = newSourceData.map(row => row.Year);
+                    const years = newSourceData.map(row => {
+                        return action.payload === 'demographic' ? row.Years : row.Year;
+                    });
                     const uniqueYears = Array.from(new Set(years)).filter(y => y != null).sort((a, b) => a - b);
                     if (uniqueYears.length >= 2) {
                         state.yearRange = [uniqueYears[0], uniqueYears[uniqueYears.length - 1]];
@@ -463,8 +468,12 @@ export const filterSlice = createSlice({
                 const { dataSource, data } = action.payload;
                 state.dataSourcesStatus[dataSource] = 'succeeded';
                 
-                // Ensure data has Year, filter out rows without it or with invalid values
-                const validData = data.filter(row => row && typeof row.Year === 'number' && !isNaN(row.Year));
+                // Ensure data has Year/Years, filter out rows without it or with invalid values
+                const validData = data.filter(row => {
+                    if (!row) return false;
+                    const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
+                    return typeof yearValue === 'number' && !isNaN(yearValue);
+                });
                 
                 // Store data in the specific source slot
                 state.csvDataSources[dataSource] = validData;
@@ -475,7 +484,9 @@ export const filterSlice = createSlice({
                     state.filteredData = applyFilters(validData, state.activeFilters, dataSource, state.selectedCounties);
 
                     // Get min and max years from the data if needed
-                    const years = validData.map(row => row.Year);
+                    const years = validData.map(row => {
+                        return dataSource === 'demographic' ? row.Years : row.Year;
+                    });
                     const uniqueYears = Array.from(new Set(years)).filter(y => y != null).sort((a, b) => a - b);
                     if (uniqueYears.length >= 2) {
                         state.yearRange = [uniqueYears[0], uniqueYears[uniqueYears.length - 1]];
