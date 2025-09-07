@@ -153,7 +153,7 @@ const applyFilters = (
     data: CsvRow[],
     activeFilters: FilterState['activeFilters'],
     dataSource: DataSourceType, // Pass the current data source
-    selectedCounties: string[] = [] // Add selectedCounties parameter with default empty array
+    selectedCounties: string[] = [] // Add selectedCounties p arameter with default empty array
 ): CsvRow[] => {
     let filtered = data;
 
