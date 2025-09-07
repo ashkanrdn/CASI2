@@ -6,6 +6,8 @@
         "start": "next start"
     },
     "dependencies": {
+        "@deck.gl/layers": "^9.1.14",
+        "@deck.gl/react": "^9.1.14",
         "@nivo/bar": "^0.84.0",
         "@nivo/core": "^0.84.0",
         "@radix-ui/react-dropdown-menu": "^2.1.7",
