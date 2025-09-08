@@ -12,6 +12,11 @@ export interface PreloadedData {
     geojsonData: Feature[];
     loadingProgress: Record<DataSourceType | 'geojson', boolean>;
     errors: Record<DataSourceType | 'geojson', string | null>;
+    metrics?: LoadingMetrics & {
+        totalLoadTime: number;
+        geojsonLoadTime: number;
+        totalDataSize: number;
+    };
 }
 
 /**
@@ -25,11 +30,80 @@ export interface DataSourceStatus {
 }
 
 /**
- * Preload all CSV data sources in parallel
+ * Performance metrics for data loading
+ */
+interface LoadingMetrics {
+    sourceTimings: Record<DataSourceType, number>;
+    memoryUsage: {
+        before: number;
+        after: number;
+        peak: number;
+    };
+    dataSize: Record<DataSourceType, number>;
+}
+
+/**
+ * Get current memory usage in MB
+ */
+function getMemoryUsage(): number {
+    if (typeof performance !== 'undefined' && 'memory' in performance) {
+        const memInfo = (performance as any).memory;
+        return Math.round(memInfo.usedJSHeapSize / 1024 / 1024);
+    }
+    return 0;
+}
+
+/**
+ * Optimized CSV parsing with streaming and chunking for large datasets
+ */
+function parseCSVOptimized(csvText: string, dataSource: DataSourceType): Promise<CsvRow[]> {
+    return new Promise((resolve, reject) => {
+        const startTime = Date.now();
+        const chunkSize = 10000; // Process 10k rows at a time
+        const results: CsvRow[] = [];
+        let processedRows = 0;
+        
+        Papa.parse<CsvRow>(csvText, {
+            header: true,
+            dynamicTyping: true,
+            step: (result) => {
+                // Filter and process each row as it's parsed (streaming)
+                if (result.data && typeof result.data === 'object') {
+                    const row = result.data;
+                    // Validate row has required fields
+                    const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
+                    if (typeof yearValue === 'number' && !isNaN(yearValue)) {
+                        results.push(row);
+                    }
+                }
+                
+                processedRows++;
+                
+                // Log progress for large datasets
+                if (processedRows % chunkSize === 0) {
+                    console.log(`📊 [DataPreloader] Processed ${processedRows} rows for ${dataSource}`);
+                }
+            },
+            complete: () => {
+                const duration = Date.now() - startTime;
+                console.log(`✅ [DataPreloader] CSV parsing completed for ${dataSource}: ${results.length} valid rows in ${duration}ms`);
+                resolve(results);
+            },
+            error: (error: Error) => {
+                console.error(`❌ [DataPreloader] CSV parsing failed for ${dataSource}:`, error);
+                reject(error);
+            },
+        });
+    });
+}
+
+/**
+ * Preload all CSV data sources in parallel with performance optimizations
  */
 async function preloadAllCSVSources(): Promise<{
     csvData: Record<DataSourceType, CsvRow[]>;
     errors: Record<DataSourceType, string | null>;
+    metrics: LoadingMetrics;
 }> {
     const dataSources: DataSourceType[] = ['arrest', 'jail', 'county_prison', 'demographic'];
     const csvData: Record<DataSourceType, CsvRow[]> = {
@@ -44,46 +118,58 @@ async function preloadAllCSVSources(): Promise<{
         county_prison: null,
         demographic: null,
     };
+    
+    // Performance tracking
+    const metrics: LoadingMetrics = {
+        sourceTimings: { arrest: 0, jail: 0, county_prison: 0, demographic: 0 },
+        memoryUsage: {
+            before: getMemoryUsage(),
+            after: 0,
+            peak: 0,
+        },
+        dataSize: { arrest: 0, jail: 0, county_prison: 0, demographic: 0 },
+    };
 
-    // Create promises for all data sources
+    // Create promises for all data sources with optimizations
     const loadingPromises = dataSources.map(async (dataSource) => {
+        const sourceStartTime = Date.now();
+        
         try {
+            // Monitor peak memory usage
+            const beforeMemory = getMemoryUsage();
+            metrics.memoryUsage.peak = Math.max(metrics.memoryUsage.peak, beforeMemory);
+            
             // Load CSV text using existing data service
             const csvText = await loadDataSource(dataSource);
-
-            // Parse CSV data using PapaParse
-            const parsedData = await new Promise<CsvRow[]>((resolve, reject) => {
-                Papa.parse<CsvRow>(csvText, {
-                    header: true,
-                    dynamicTyping: true,
-                    complete: (results) => {
-                        // Filter out rows without required fields
-                        const validData = results.data.filter(row => {
-                            if (!row) return false;
-                            const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
-                            return typeof yearValue === 'number' && !isNaN(yearValue);
-                        });
-                        resolve(validData);
-                    },
-                    error: (error: Error) => {
-                        reject(error);
-                    },
-                });
-            });
-
+            metrics.dataSize[dataSource] = csvText.length;
+            
+            console.log(`📁 [DataPreloader] Loaded ${dataSource} CSV: ${(csvText.length / 1024 / 1024).toFixed(2)} MB`);
+            
+            // Use optimized streaming parser
+            const parsedData = await parseCSVOptimized(csvText, dataSource);
+            
+            // Track memory after parsing
+            const afterMemory = getMemoryUsage();
+            metrics.memoryUsage.peak = Math.max(metrics.memoryUsage.peak, afterMemory);
+            
             csvData[dataSource] = parsedData;
-            console.log(`✅ [DataPreloader] Successfully loaded ${dataSource}: ${parsedData.length} rows`);
+            metrics.sourceTimings[dataSource] = Date.now() - sourceStartTime;
+            
+            console.log(`✅ [DataPreloader] Successfully loaded ${dataSource}: ${parsedData.length} rows in ${metrics.sourceTimings[dataSource]}ms`);
         } catch (error) {
+            metrics.sourceTimings[dataSource] = Date.now() - sourceStartTime;
             const errorMessage = `Failed to load ${dataSource} data: ${error}`;
             errors[dataSource] = errorMessage;
-            console.error(`❌ [DataPreloader] ${errorMessage}`);
+            console.error(`❌ [DataPreloader] ${errorMessage} (took ${metrics.sourceTimings[dataSource]}ms)`);
         }
     });
 
     // Wait for all CSV sources to complete (or fail)
     await Promise.allSettled(loadingPromises);
+    
+    metrics.memoryUsage.after = getMemoryUsage();
 
-    return { csvData, errors };
+    return { csvData, errors, metrics };
 }
 
 /**
@@ -142,10 +228,13 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
         county_prison: null,
         demographic: null,
     };
+    
+    let csvMetrics: LoadingMetrics | undefined;
 
     if (csvResult.status === 'fulfilled') {
         Object.assign(csvData, csvResult.value.csvData);
         Object.assign(csvErrors, csvResult.value.errors);
+        csvMetrics = csvResult.value.metrics;
     } else {
         console.error('❌ [DataPreloader] CSV loading failed:', csvResult.reason);
         // Set all CSV errors
@@ -157,12 +246,16 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
     // Process GeoJSON results
     let geojsonData: Feature[] = [];
     let geojsonError: string | null = null;
+    let geojsonLoadTime = 0;
 
+    const geojsonStartTime = Date.now();
     if (geojsonResult.status === 'fulfilled') {
         geojsonData = geojsonResult.value.geojsonData;
         geojsonError = geojsonResult.value.error;
+        geojsonLoadTime = Date.now() - geojsonStartTime;
     } else {
         geojsonError = `GeoJSON loading failed: ${geojsonResult.reason}`;
+        geojsonLoadTime = Date.now() - geojsonStartTime;
         console.error('❌ [DataPreloader] GeoJSON loading failed:', geojsonResult.reason);
     }
 
@@ -182,14 +275,33 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
     };
 
     const endTime = Date.now();
-    const duration = endTime - startTime;
+    const totalLoadTime = endTime - startTime;
 
-    // Log summary
+    // Calculate total data size and create complete metrics
+    const totalDataSize = csvMetrics 
+        ? Object.values(csvMetrics.dataSize).reduce((sum, size) => sum + size, 0) + 
+          JSON.stringify(geojsonData).length
+        : 0;
+
+    const metrics = csvMetrics ? {
+        ...csvMetrics,
+        totalLoadTime,
+        geojsonLoadTime,
+        totalDataSize,
+    } : undefined;
+
+    // Log enhanced summary with performance metrics
     const successCount = Object.values(loadingProgress).filter(Boolean).length;
     const totalCount = Object.keys(loadingProgress).length;
     
-    console.log(`🏁 [DataPreloader] Completed in ${duration}ms`);
+    console.log(`🏁 [DataPreloader] Completed in ${totalLoadTime}ms`);
     console.log(`📊 [DataPreloader] Success: ${successCount}/${totalCount} sources loaded`);
+    
+    if (metrics) {
+        console.log(`💾 [DataPreloader] Total data size: ${(totalDataSize / 1024 / 1024).toFixed(2)} MB`);
+        console.log(`🧠 [DataPreloader] Memory usage: ${metrics.memoryUsage.before}MB → ${metrics.memoryUsage.after}MB (peak: ${metrics.memoryUsage.peak}MB)`);
+        console.log(`⏱️  [DataPreloader] Source timings:`, Object.entries(metrics.sourceTimings).map(([source, time]) => `${source}: ${time}ms`).join(', '));
+    }
     
     if (successCount < totalCount) {
         console.warn('⚠️  [DataPreloader] Some data sources failed to load:', errors);
@@ -200,6 +312,7 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
         geojsonData,
         loadingProgress,
         errors,
+        metrics,
     };
 }
 
