@@ -3,6 +3,7 @@ import type { Feature } from 'geojson';
 import type { CsvRow } from '@/app/types/shared';
 import type { DataSourceType } from '@/lib/features/filters/filterSlice';
 import { preloadAllDataSources, type PreloadedData, type DataSourceStatus } from '@/lib/services/dataPreloader';
+import { initializeMemoryMonitoring, cleanupMemoryMonitoring, globalMemoryMonitor, type MemoryInfo } from '@/lib/utils/memoryMonitor';
 
 /**
  * Global app status states
@@ -37,6 +38,14 @@ export interface AppState {
     // Preload start and completion timestamps
     preloadStartTime: number | null;
     preloadEndTime: number | null;
+    
+    // Memory monitoring data
+    memoryMonitoring: {
+        isEnabled: boolean;
+        currentMemory: MemoryInfo | null;
+        peakMemory: MemoryInfo | null;
+        lastUpdated: number | null;
+    };
 }
 
 /**
@@ -55,6 +64,12 @@ const initialState: AppState = {
     globalError: null,
     preloadStartTime: null,
     preloadEndTime: null,
+    memoryMonitoring: {
+        isEnabled: false,
+        currentMemory: null,
+        peakMemory: null,
+        lastUpdated: null,
+    },
 };
 
 /**
@@ -184,6 +199,46 @@ export const appSlice = createSlice({
                 }
             }
         },
+        
+        /**
+         * Initialize memory monitoring
+         */
+        initializeMemoryMonitoring: (state) => {
+            state.memoryMonitoring.isEnabled = true;
+            state.memoryMonitoring.lastUpdated = Date.now();
+            
+            // Initialize monitoring in the next tick
+            setTimeout(() => {
+                initializeMemoryMonitoring();
+            }, 0);
+        },
+        
+        /**
+         * Update memory monitoring data
+         */
+        updateMemoryStatus: (state, action: PayloadAction<MemoryInfo>) => {
+            const memInfo = action.payload;
+            state.memoryMonitoring.currentMemory = memInfo;
+            state.memoryMonitoring.lastUpdated = memInfo.timestamp;
+            
+            // Update peak memory if this is higher
+            if (!state.memoryMonitoring.peakMemory || 
+                memInfo.usedJSHeapSize > state.memoryMonitoring.peakMemory.usedJSHeapSize) {
+                state.memoryMonitoring.peakMemory = memInfo;
+            }
+        },
+        
+        /**
+         * Stop memory monitoring
+         */
+        stopMemoryMonitoring: (state) => {
+            state.memoryMonitoring.isEnabled = false;
+            
+            // Cleanup monitoring
+            setTimeout(() => {
+                cleanupMemoryMonitoring();
+            }, 0);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -236,6 +291,17 @@ export const appSlice = createSlice({
                 
                 if (hasSuccesses) {
                     state.appStatus = hasErrors ? 'error' : 'ready';
+                    
+                    // Initialize memory monitoring when app is ready
+                    if (!hasErrors) {
+                        state.memoryMonitoring.isEnabled = true;
+                        state.memoryMonitoring.lastUpdated = Date.now();
+                        
+                        // Initialize monitoring in the next tick
+                        setTimeout(() => {
+                            initializeMemoryMonitoring();
+                        }, 0);
+                    }
                 } else {
                     state.appStatus = 'error';
                     state.globalError = 'Failed to load any data sources';
@@ -310,6 +376,9 @@ export const {
     clearGlobalError,
     resetApp,
     setPreloadTiming,
+    initializeMemoryMonitoring,
+    updateMemoryStatus,
+    stopMemoryMonitoring,
 } = appSlice.actions;
 
 export default appSlice.reducer;
