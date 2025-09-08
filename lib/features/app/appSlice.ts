@@ -3,7 +3,7 @@ import type { Feature } from 'geojson';
 import type { CsvRow } from '@/app/types/shared';
 import type { DataSourceType } from '@/lib/features/filters/filterSlice';
 import { preloadAllDataSources, type PreloadedData, type DataSourceStatus } from '@/lib/services/dataPreloader';
-import { initializeMemoryMonitoring, cleanupMemoryMonitoring, globalMemoryMonitor, type MemoryInfo } from '@/lib/utils/memoryMonitor';
+import { initializeMemoryMonitoring as startMemoryMonitoring, cleanupMemoryMonitoring, globalMemoryMonitor, type MemoryInfo } from '@/lib/utils/memoryMonitor';
 
 /**
  * Global app status states
@@ -27,7 +27,11 @@ export interface AppState {
     appStatus: AppStatus;
     
     // Individual data source statuses for progress tracking
-    dataSourceStatuses: Record<DataSourceType | 'geojson', DataSourceLoadingStatus>;
+    dataSourceStatuses: Record<DataSourceType | 'geojson' | 'content', DataSourceLoadingStatus>;
+    
+    // Progressive loading status
+    contentReady: boolean;
+    mapDataReady: boolean;
     
     // GeoJSON data stored at app level since multiple components need it
     geojsonData: Feature[];
@@ -59,7 +63,10 @@ const initialState: AppState = {
         county_prison: { status: 'idle' },
         demographic: { status: 'idle' },
         geojson: { status: 'idle' },
+        content: { status: 'idle' },
     },
+    contentReady: false,
+    mapDataReady: false,
     geojsonData: [],
     globalError: null,
     preloadStartTime: null,
@@ -129,6 +136,119 @@ export const preloadAllAppDataWithProgress = createAsyncThunk(
 );
 
 /**
+ * Async thunk for preloading content only (for immediate page access)
+ */
+export const preloadContentOnly = createAsyncThunk(
+    'app/preloadContentOnly',
+    async (_, { dispatch, rejectWithValue }) => {
+        try {
+            console.log('⚡ [AppSlice] Starting content-only preload...');
+            
+            // Import the content-only preloader
+            const { preloadContentOnly } = await import('@/lib/services/dataPreloader');
+            
+            // Update content status to loading
+            dispatch(updateDataSourceStatus({
+                source: 'content',
+                status: { status: 'loading' }
+            }));
+            
+            const result = await preloadContentOnly();
+            
+            // Update content status based on result
+            dispatch(updateDataSourceStatus({
+                source: 'content',
+                status: {
+                    status: result.error ? 'error' : 'success',
+                    error: result.error || undefined,
+                    loadedCount: result.contentData.length,
+                }
+            }));
+            
+            // Update content readiness
+            dispatch(setContentReady(result.contentReady));
+            
+            return result;
+        } catch (error) {
+            console.error('❌ [AppSlice] Content preload failed:', error);
+            dispatch(updateDataSourceStatus({
+                source: 'content',
+                status: { status: 'error', error: `Content loading failed: ${error}` }
+            }));
+            return rejectWithValue(`Failed to preload content: ${error}`);
+        }
+    }
+);
+
+/**
+ * Async thunk for preloading map data in background
+ */
+export const preloadMapDataInBackground = createAsyncThunk(
+    'app/preloadMapDataInBackground',
+    async (_, { dispatch, rejectWithValue }) => {
+        try {
+            console.log('🗺️  [AppSlice] Starting background map data preload...');
+            
+            // Import the map-only preloader
+            const { preloadMapDataOnly } = await import('@/lib/services/dataPreloader');
+            
+            // Update all map-related statuses to loading
+            const mapSources: (DataSourceType | 'geojson')[] = ['arrest', 'jail', 'county_prison', 'demographic', 'geojson'];
+            mapSources.forEach(source => {
+                dispatch(updateDataSourceStatus({
+                    source,
+                    status: { status: 'loading' }
+                }));
+            });
+            
+            const result = await preloadMapDataOnly();
+            
+            // Update individual map source statuses
+            mapSources.forEach(source => {
+                const error = result.errors[source];
+                let loadedCount: number | undefined;
+                
+                if (source === 'geojson') {
+                    loadedCount = result.geojsonData.length;
+                } else {
+                    loadedCount = result.csvData[source as DataSourceType]?.length;
+                }
+                
+                dispatch(updateDataSourceStatus({
+                    source,
+                    status: {
+                        status: error ? 'error' : (loadedCount && loadedCount > 0 ? 'success' : 'error'),
+                        error: error || undefined,
+                        loadedCount,
+                    }
+                }));
+            });
+            
+            // Update map data readiness
+            dispatch(setMapDataReady(result.mapDataReady));
+            
+            // Store GeoJSON data at app level
+            dispatch(setGeoJsonData(result.geojsonData));
+            
+            return result;
+        } catch (error) {
+            console.error('❌ [AppSlice] Map data preload failed:', error);
+            
+            // Set all map sources to error
+            const mapSources: (DataSourceType | 'geojson')[] = ['arrest', 'jail', 'county_prison', 'demographic', 'geojson'];
+            mapSources.forEach(source => {
+                dispatch(updateDataSourceStatus({
+                    source,
+                    status: { status: 'error', error: `Map data loading failed: ${error}` }
+                }));
+            });
+            
+            return rejectWithValue(`Failed to preload map data: ${error}`);
+        }
+    }
+);
+
+/**
  * App slice
  */
 export const appSlice = createSlice({
@@ -141,7 +261,7 @@ export const appSlice = createSlice({
         updateDataSourceStatus: (
             state,
             action: PayloadAction<{
-                source: DataSourceType | 'geojson';
+                source: DataSourceType | 'geojson' | 'content';
                 status: DataSourceLoadingStatus;
             }>
         ) => {
@@ -209,7 +329,7 @@ export const appSlice = createSlice({
             
             // Initialize monitoring in the next tick
             setTimeout(() => {
-                initializeMemoryMonitoring();
+                startMemoryMonitoring();
             }, 0);
         },
         
@@ -239,6 +359,28 @@ export const appSlice = createSlice({
                 cleanupMemoryMonitoring();
             }, 0);
         },
+        
+        /**
+         * Update content readiness status
+         */
+        setContentReady: (state, action: PayloadAction<boolean>) => {
+            state.contentReady = action.payload;
+            
+            if (action.payload) {
+                console.log('📄 [AppSlice] Content is ready - pages can be displayed');
+            }
+        },
+        
+        /**
+         * Update map data readiness status
+         */
+        setMapDataReady: (state, action: PayloadAction<boolean>) => {
+            state.mapDataReady = action.payload;
+            
+            if (action.payload) {
+                console.log('🗺️  [AppSlice] Map data is ready - full functionality available');
+            }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -250,7 +392,7 @@ export const appSlice = createSlice({
                 
                 // Set all data sources to loading
                 Object.keys(state.dataSourceStatuses).forEach((key) => {
-                    state.dataSourceStatuses[key as DataSourceType | 'geojson'].status = 'loading';
+                    state.dataSourceStatuses[key as DataSourceType | 'geojson' | 'content'].status = 'loading';
                 });
             })
             .addCase(preloadAllAppDataWithProgress.pending, (state) => {
@@ -260,36 +402,48 @@ export const appSlice = createSlice({
                 
                 // Set all data sources to loading
                 Object.keys(state.dataSourceStatuses).forEach((key) => {
-                    state.dataSourceStatuses[key as DataSourceType | 'geojson'].status = 'loading';
+                    state.dataSourceStatuses[key as DataSourceType | 'geojson' | 'content'].status = 'loading';
                 });
             })
             
             // Handle preload success
             .addCase(preloadAllAppData.fulfilled, (state, action: PayloadAction<PreloadedData>) => {
-                const { geojsonData, loadingProgress, errors } = action.payload;
+                const { geojsonData, loadingProgress, errors, contentReady, mapDataReady } = action.payload;
                 
                 // Store GeoJSON data at app level
                 state.geojsonData = geojsonData;
                 
+                // Update progressive loading status
+                state.contentReady = contentReady;
+                state.mapDataReady = mapDataReady;
+                
                 // Update individual data source statuses
                 Object.entries(loadingProgress).forEach(([source, success]) => {
-                    const sourceKey = source as DataSourceType | 'geojson';
+                    const sourceKey = source as DataSourceType | 'geojson' | 'content';
                     const error = errors[sourceKey];
+                    
+                    let loadedCount: number | undefined;
+                    if (sourceKey === 'geojson') {
+                        loadedCount = geojsonData.length;
+                    } else if (sourceKey === 'content') {
+                        loadedCount = action.payload.contentData?.length;
+                    } else {
+                        loadedCount = action.payload.csvData[sourceKey as DataSourceType]?.length;
+                    }
                     
                     state.dataSourceStatuses[sourceKey] = {
                         status: error ? 'error' : (success ? 'success' : 'error'),
                         error: error || undefined,
-                        loadedCount: sourceKey === 'geojson' 
-                            ? geojsonData.length 
-                            : action.payload.csvData[sourceKey as DataSourceType]?.length,
+                        loadedCount,
                     };
                 });
                 
-                // Determine overall app status
+                // Determine overall app status based on progressive loading
                 const hasErrors = Object.values(errors).some(error => error !== null);
                 const hasSuccesses = Object.values(loadingProgress).some(success => success);
                 
                 if (hasSuccesses) {
+                    // App is ready if either content or map data is available
                     state.appStatus = hasErrors ? 'error' : 'ready';
                     
                     // Initialize memory monitoring when app is ready
@@ -299,7 +453,7 @@ export const appSlice = createSlice({
                         
                         // Initialize monitoring in the next tick
                         setTimeout(() => {
-                            initializeMemoryMonitoring();
+                            startMemoryMonitoring();
                         }, 0);
                     }
                 } else {
@@ -311,27 +465,42 @@ export const appSlice = createSlice({
             })
             .addCase(preloadAllAppDataWithProgress.fulfilled, (state, action: PayloadAction<PreloadedData>) => {
                 // Same handling as regular preload
-                const { geojsonData, loadingProgress, errors } = action.payload;
+                const { geojsonData, loadingProgress, errors, contentReady, mapDataReady } = action.payload;
                 
+                // Store GeoJSON data at app level
                 state.geojsonData = geojsonData;
                 
+                // Update progressive loading status
+                state.contentReady = contentReady;
+                state.mapDataReady = mapDataReady;
+                
+                // Update individual data source statuses
                 Object.entries(loadingProgress).forEach(([source, success]) => {
-                    const sourceKey = source as DataSourceType | 'geojson';
+                    const sourceKey = source as DataSourceType | 'geojson' | 'content';
                     const error = errors[sourceKey];
+                    
+                    let loadedCount: number | undefined;
+                    if (sourceKey === 'geojson') {
+                        loadedCount = geojsonData.length;
+                    } else if (sourceKey === 'content') {
+                        loadedCount = action.payload.contentData?.length;
+                    } else {
+                        loadedCount = action.payload.csvData[sourceKey as DataSourceType]?.length;
+                    }
                     
                     state.dataSourceStatuses[sourceKey] = {
                         status: error ? 'error' : (success ? 'success' : 'error'),
                         error: error || undefined,
-                        loadedCount: sourceKey === 'geojson' 
-                            ? geojsonData.length 
-                            : action.payload.csvData[sourceKey as DataSourceType]?.length,
+                        loadedCount,
                     };
                 });
                 
+                // Determine overall app status based on progressive loading
                 const hasErrors = Object.values(errors).some(error => error !== null);
                 const hasSuccesses = Object.values(loadingProgress).some(success => success);
                 
                 if (hasSuccesses) {
+                    // App is ready if either content or map data is available
                     state.appStatus = hasErrors ? 'error' : 'ready';
                 } else {
                     state.appStatus = 'error';
@@ -349,7 +518,7 @@ export const appSlice = createSlice({
                 
                 // Set all data sources to error
                 Object.keys(state.dataSourceStatuses).forEach((key) => {
-                    state.dataSourceStatuses[key as DataSourceType | 'geojson'] = {
+                    state.dataSourceStatuses[key as DataSourceType | 'geojson' | 'content'] = {
                         status: 'error',
                         error: 'Preload failed',
                     };
@@ -361,7 +530,7 @@ export const appSlice = createSlice({
                 state.preloadEndTime = Date.now();
                 
                 Object.keys(state.dataSourceStatuses).forEach((key) => {
-                    state.dataSourceStatuses[key as DataSourceType | 'geojson'] = {
+                    state.dataSourceStatuses[key as DataSourceType | 'geojson' | 'content'] = {
                         status: 'error',
                         error: 'Preload failed',
                     };
@@ -379,6 +548,8 @@ export const {
     initializeMemoryMonitoring,
     updateMemoryStatus,
     stopMemoryMonitoring,
+    setContentReady,
+    setMapDataReady,
 } = appSlice.actions;
 
 export default appSlice.reducer;

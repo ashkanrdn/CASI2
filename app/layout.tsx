@@ -4,10 +4,12 @@ import { type ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { store } from '@/lib/store';
-import { preloadAllAppDataWithProgress, type AppState } from '@/lib/features/app/appSlice';
+import { preloadContentOnly, preloadMapDataInBackground, type AppState } from '@/lib/features/app/appSlice';
 import { fetchDataForSource } from '@/lib/features/filters/filterSlice';
+import { loadAllContentSections } from '@/lib/features/content/contentSlice';
 import type { RootState, AppDispatch } from '@/lib/store';
 import LoadingSplash from '@/app/components/LoadingSplash';
+import BackgroundLoadingIndicator from '@/app/components/BackgroundLoadingIndicator';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import './styles/globals.css';
@@ -17,39 +19,58 @@ interface Props {
 }
 
 /**
- * Data preloader component that runs inside Redux Provider context
- * Handles app-level data preloading and CSV data distribution to filter slice
+ * Progressive data preloader component that runs inside Redux Provider context
+ * First loads content for immediate page access, then loads map data in background
  */
 function DataPreloader() {
     const dispatch = useDispatch<AppDispatch>();
-    const { appStatus, geojsonData } = useSelector((state: RootState) => state.app);
+    const { appStatus, contentReady, mapDataReady } = useSelector((state: RootState) => state.app);
     
     useEffect(() => {
         // Only start preload if app is in idle state
         if (appStatus === 'idle') {
-            console.log('🚀 [Layout] Starting app data preload...');
+            console.log('⚡ [Layout] Starting progressive data loading...');
             
-            // Dispatch the preload action with progress tracking
-            dispatch(preloadAllAppDataWithProgress())
+            // Step 1: Load content first for immediate page access
+            dispatch(preloadContentOnly())
                 .unwrap()
-                .then((preloadedData) => {
-                    console.log('✅ [Layout] Preload completed, distributing CSV data to filter slice...');
+                .then((contentResult) => {
+                    console.log('📄 [Layout] Content loaded, distributing to content slice...');
                     
-                    // Distribute CSV data to filter slice by dispatching individual fetchDataForSource actions
-                    // This ensures the filter slice gets the data in the format it expects
-                    Object.entries(preloadedData.csvData).forEach(([dataSource, csvData]) => {
-                        if (csvData.length > 0) {
-                            // Create a fulfilled action to store the data in the filter slice
-                            dispatch(fetchDataForSource.fulfilled(
-                                { dataSource: dataSource as any, data: csvData },
-                                '', // requestId - not used in the fulfilled case
-                                dataSource as any, // original args
-                            ));
-                        }
-                    });
+                    // Distribute content data to content slice
+                    if (contentResult.contentData.length > 0) {
+                        dispatch(loadAllContentSections.fulfilled(
+                            contentResult.contentData,
+                            '', // requestId
+                            undefined, // original args
+                        ));
+                    }
+                    
+                    // Step 2: Start background map data loading
+                    console.log('🗺️  [Layout] Starting background map data loading...');
+                    dispatch(preloadMapDataInBackground())
+                        .unwrap()
+                        .then((mapResult) => {
+                            console.log('✅ [Layout] Map data loaded, distributing CSV data to filter slice...');
+                            
+                            // Distribute CSV data to filter slice
+                            Object.entries(mapResult.csvData).forEach(([dataSource, csvData]) => {
+                                if (csvData.length > 0) {
+                                    // Create a fulfilled action to store the data in the filter slice
+                                    dispatch(fetchDataForSource.fulfilled(
+                                        { dataSource: dataSource as any, data: csvData },
+                                        '', // requestId - not used in the fulfilled case
+                                        dataSource as any, // original args
+                                    ));
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            console.warn('⚠️  [Layout] Background map data loading failed (pages still functional):', error);
+                        });
                 })
                 .catch((error) => {
-                    console.error('❌ [Layout] Preload failed:', error);
+                    console.error('❌ [Layout] Critical: Content loading failed (pages may be empty):', error);
                 });
         }
     }, [dispatch, appStatus]);
@@ -57,13 +78,18 @@ function DataPreloader() {
     return null; // This component only handles logic, no UI
 }
 
-export default function RootLayout({ children }: Props) {
+/**
+ * App content component that safely uses Redux hooks inside Provider context
+ */
+function AppContent({ children }: Props) {
     const pathname = usePathname();
+    const { mapDataReady } = useSelector((state: RootState) => state.app);
     
     return (
-        <Provider store={store}>
+        <>
             <DataPreloader />
             <LoadingSplash />
+            <BackgroundLoadingIndicator />
             <html lang='en'>
                 <body>
                     <div className='h-screen flex flex-col'>
@@ -101,13 +127,16 @@ export default function RootLayout({ children }: Props) {
                                     </Link>
                                     <Link 
                                         href="/map" 
-                                        className={`transition-colors ${
+                                        className={`transition-colors flex items-center space-x-1 ${
                                             pathname === '/map' 
                                                 ? 'text-white border-b-2 border-white' 
                                                 : 'text-gray-200 hover:text-white'
                                         }`}
                                     >
-                                        Map
+                                        <span>Map</span>
+                                        {!mapDataReady && (
+                                            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" title="Map data loading..."></div>
+                                        )}
                                     </Link>
                                     <Link 
                                         href="/data" 
@@ -133,6 +162,14 @@ export default function RootLayout({ children }: Props) {
                     </div>
                 </body>
             </html>
+        </>
+    );
+}
+
+export default function RootLayout({ children }: Props) {
+    return (
+        <Provider store={store}>
+            <AppContent>{children}</AppContent>
         </Provider>
     );
 }

@@ -2,19 +2,32 @@ import Papa from 'papaparse';
 import type { Feature } from 'geojson';
 import type { CsvRow } from '@/app/types/shared';
 import type { DataSourceType } from '@/lib/features/filters/filterSlice';
+import type { ContentSection } from '@/lib/features/content/contentSlice';
 import { loadDataSource } from './dataService';
+import { getAllContentSections } from '@/lib/content';
 
 /**
  * Result interface for preloaded data
  */
 export interface PreloadedData {
+    // Content data
+    contentData: ContentSection[];
+    contentReady: boolean;
+    
+    // Map data
     csvData: Record<DataSourceType, CsvRow[]>;
     geojsonData: Feature[];
-    loadingProgress: Record<DataSourceType | 'geojson', boolean>;
-    errors: Record<DataSourceType | 'geojson', string | null>;
+    mapDataReady: boolean;
+    
+    // Loading progress
+    loadingProgress: Record<DataSourceType | 'geojson' | 'content', boolean>;
+    errors: Record<DataSourceType | 'geojson' | 'content', string | null>;
+    
+    // Performance metrics
     metrics?: LoadingMetrics & {
         totalLoadTime: number;
         geojsonLoadTime: number;
+        contentLoadTime: number;
         totalDataSize: number;
     };
 }
@@ -23,9 +36,9 @@ export interface PreloadedData {
  * Data source loading status interface
  */
 export interface DataSourceStatus {
-    source: DataSourceType | 'geojson';
+    source: DataSourceType | 'geojson' | 'content';
     status: 'idle' | 'loading' | 'success' | 'error';
-    data?: CsvRow[] | Feature[];
+    data?: CsvRow[] | Feature[] | ContentSection[];
     error?: string;
 }
 
@@ -203,14 +216,157 @@ async function preloadGeoJSONData(): Promise<{
 }
 
 /**
+ * Preload content data (markdown files)
+ */
+async function preloadContentData(): Promise<{
+    contentData: ContentSection[];
+    error: string | null;
+}> {
+    try {
+        console.log('📄 [DataPreloader] Loading content data...');
+        const startTime = Date.now();
+        
+        const contentSections = await getAllContentSections();
+        
+        const loadTime = Date.now() - startTime;
+        console.log(`✅ [DataPreloader] Successfully loaded content: ${contentSections.length} sections in ${loadTime}ms`);
+        
+        return { contentData: contentSections, error: null };
+    } catch (error) {
+        const errorMessage = `Failed to load content data: ${error}`;
+        console.error(`❌ [DataPreloader] ${errorMessage}`);
+        return { contentData: [], error: errorMessage };
+    }
+}
+
+/**
+ * Preload content data only (for immediate content page access)
+ */
+export async function preloadContentOnly(): Promise<{
+    contentData: ContentSection[];
+    contentReady: boolean;
+    error: string | null;
+}> {
+    console.log('⚡ [DataPreloader] Starting content-only preload...');
+    const startTime = Date.now();
+    
+    const result = await preloadContentData();
+    
+    const duration = Date.now() - startTime;
+    const contentReady = result.contentData.length > 0;
+    
+    if (contentReady) {
+        console.log(`🏁 [DataPreloader] Content ready in ${duration}ms - pages can be shown immediately`);
+    } else {
+        console.warn('⚠️  [DataPreloader] Content loading failed - pages may be empty');
+    }
+    
+    return {
+        contentData: result.contentData,
+        contentReady,
+        error: result.error,
+    };
+}
+
+/**
+ * Preload map data only (CSV + GeoJSON) in background
+ */
+export async function preloadMapDataOnly(): Promise<{
+    csvData: Record<DataSourceType, CsvRow[]>;
+    geojsonData: Feature[];
+    mapDataReady: boolean;
+    errors: Record<DataSourceType | 'geojson', string | null>;
+    metrics?: LoadingMetrics & { totalLoadTime: number; geojsonLoadTime: number; };
+}> {
+    console.log('🗺️  [DataPreloader] Starting background map data preload...');
+    const startTime = Date.now();
+    
+    // Load CSV data and GeoJSON in parallel
+    const [csvResult, geojsonResult] = await Promise.allSettled([
+        preloadAllCSVSources(),
+        preloadGeoJSONData()
+    ]);
+    
+    // Process results (same logic as main preloader)
+    const csvData: Record<DataSourceType, CsvRow[]> = {
+        arrest: [],
+        jail: [],
+        county_prison: [],
+        demographic: [],
+    };
+    const csvErrors: Record<DataSourceType, string | null> = {
+        arrest: null,
+        jail: null,
+        county_prison: null,
+        demographic: null,
+    };
+    
+    let csvMetrics: LoadingMetrics | undefined;
+
+    if (csvResult.status === 'fulfilled') {
+        Object.assign(csvData, csvResult.value.csvData);
+        Object.assign(csvErrors, csvResult.value.errors);
+        csvMetrics = csvResult.value.metrics;
+    } else {
+        console.error('❌ [DataPreloader] CSV loading failed:', csvResult.reason);
+        Object.keys(csvErrors).forEach(key => {
+            csvErrors[key as DataSourceType] = `CSV loading failed: ${csvResult.reason}`;
+        });
+    }
+
+    let geojsonData: Feature[] = [];
+    let geojsonError: string | null = null;
+    const geojsonStartTime = Date.now();
+    
+    if (geojsonResult.status === 'fulfilled') {
+        geojsonData = geojsonResult.value.geojsonData;
+        geojsonError = geojsonResult.value.error;
+    } else {
+        geojsonError = `GeoJSON loading failed: ${geojsonResult.reason}`;
+        console.error('❌ [DataPreloader] GeoJSON loading failed:', geojsonResult.reason);
+    }
+    
+    const geojsonLoadTime = Date.now() - geojsonStartTime;
+    const totalLoadTime = Date.now() - startTime;
+    
+    const errors: Record<DataSourceType | 'geojson', string | null> = {
+        ...csvErrors,
+        geojson: geojsonError,
+    };
+    
+    const mapDataReady = geojsonData.length > 0 && Object.values(csvData).some(data => data.length > 0);
+    
+    const metrics = csvMetrics ? {
+        ...csvMetrics,
+        totalLoadTime,
+        geojsonLoadTime,
+    } : undefined;
+    
+    if (mapDataReady) {
+        console.log(`🏁 [DataPreloader] Map data ready in ${totalLoadTime}ms - map functionality enabled`);
+    } else {
+        console.warn('⚠️  [DataPreloader] Map data loading failed - map functionality limited');
+    }
+    
+    return {
+        csvData,
+        geojsonData,
+        mapDataReady,
+        errors,
+        metrics,
+    };
+}
+
+/**
  * Main preloader function that loads all data sources and GeoJSON in parallel
  */
 export async function preloadAllDataSources(): Promise<PreloadedData> {
     console.log('🚀 [DataPreloader] Starting parallel data preload...');
     const startTime = Date.now();
 
-    // Load CSV data and GeoJSON in parallel
-    const [csvResult, geojsonResult] = await Promise.allSettled([
+    // Load all data types in parallel: content, CSV, and GeoJSON
+    const [contentResult, csvResult, geojsonResult] = await Promise.allSettled([
+        preloadContentData(),
         preloadAllCSVSources(),
         preloadGeoJSONData()
     ]);
@@ -243,6 +399,22 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
         });
     }
 
+    // Process content results
+    let contentData: ContentSection[] = [];
+    let contentError: string | null = null;
+    let contentLoadTime = 0;
+
+    const contentStartTime = Date.now();
+    if (contentResult.status === 'fulfilled') {
+        contentData = contentResult.value.contentData;
+        contentError = contentResult.value.error;
+        contentLoadTime = Date.now() - contentStartTime;
+    } else {
+        contentError = `Content loading failed: ${contentResult.reason}`;
+        contentLoadTime = Date.now() - contentStartTime;
+        console.error('❌ [DataPreloader] Content loading failed:', contentResult.reason);
+    }
+
     // Process GeoJSON results
     let geojsonData: Feature[] = [];
     let geojsonError: string | null = null;
@@ -260,18 +432,20 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
     }
 
     // Calculate loading progress
-    const loadingProgress: Record<DataSourceType | 'geojson', boolean> = {
+    const loadingProgress: Record<DataSourceType | 'geojson' | 'content', boolean> = {
         arrest: csvData.arrest.length > 0,
         jail: csvData.jail.length > 0,
         county_prison: csvData.county_prison.length > 0,
         demographic: csvData.demographic.length > 0,
         geojson: geojsonData.length > 0,
+        content: contentData.length > 0,
     };
 
     // Combine all errors
-    const errors: Record<DataSourceType | 'geojson', string | null> = {
+    const errors: Record<DataSourceType | 'geojson' | 'content', string | null> = {
         ...csvErrors,
         geojson: geojsonError,
+        content: contentError,
     };
 
     const endTime = Date.now();
@@ -287,6 +461,7 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
         ...csvMetrics,
         totalLoadTime,
         geojsonLoadTime,
+        contentLoadTime,
         totalDataSize,
     } : undefined;
 
@@ -308,8 +483,16 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
     }
 
     return {
+        // Content data
+        contentData,
+        contentReady: contentData.length > 0,
+        
+        // Map data
         csvData,
         geojsonData,
+        mapDataReady: geojsonData.length > 0 && Object.values(csvData).some(data => data.length > 0),
+        
+        // Loading progress
         loadingProgress,
         errors,
         metrics,
@@ -322,7 +505,7 @@ export async function preloadAllDataSources(): Promise<PreloadedData> {
 export async function preloadAllDataSourcesWithProgress(
     onProgress?: (status: DataSourceStatus) => void
 ): Promise<PreloadedData> {
-    const dataSources: (DataSourceType | 'geojson')[] = ['arrest', 'jail', 'county_prison', 'demographic', 'geojson'];
+    const dataSources: (DataSourceType | 'geojson' | 'content')[] = ['arrest', 'jail', 'county_prison', 'demographic', 'geojson', 'content'];
     
     // Notify start of each source
     dataSources.forEach(source => {
@@ -336,17 +519,27 @@ export async function preloadAllDataSourcesWithProgress(
 
     // Notify completion of each source
     dataSources.forEach(source => {
-        const hasData = source === 'geojson' 
-            ? result.geojsonData.length > 0
-            : result.csvData[source as DataSourceType].length > 0;
+        let hasData: boolean;
+        let data: CsvRow[] | Feature[] | ContentSection[];
+        
+        if (source === 'geojson') {
+            hasData = result.geojsonData.length > 0;
+            data = result.geojsonData;
+        } else if (source === 'content') {
+            hasData = result.contentData.length > 0;
+            data = result.contentData;
+        } else {
+            hasData = result.csvData[source as DataSourceType].length > 0;
+            data = result.csvData[source as DataSourceType];
+        }
         
         const error = result.errors[source];
 
         onProgress?.({
             source,
             status: error ? 'error' : (hasData ? 'success' : 'error'),
-            data: source === 'geojson' ? result.geojsonData : result.csvData[source as DataSourceType],
-            error,
+            data,
+            error: error || undefined,
         });
     });
 

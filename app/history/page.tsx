@@ -1,42 +1,20 @@
 'use client';
-import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { useSelector } from 'react-redux';
 import { Card } from "@/app/components/ui/card"
 import { BarChart3 } from "lucide-react"
-import { getAllContentSections } from '@/lib/content';
+import type { RootState } from '@/lib/store';
 import { Button } from '@/app/components/ui/button';
 
-interface ContentSection {
-  title: string;
-  subtitle?: string;
-  order: number;
-  visible: boolean;
-  section: string;
-  content: string;
-  frontmatter: Record<string, any>;
-}
-
 export default function HistoryPage() {
-    const [contentSections, setContentSections] = useState<ContentSection[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const loadContent = async () => {
-            try {
-                const sections = await getAllContentSections();
-                setContentSections(sections);
-                setLoading(false);
-            } catch (err) {
-                console.error('Error loading content:', err);
-                setError('Failed to load content');
-                setLoading(false);
-            }
-        };
-
-        loadContent();
-    }, []);
+    // Get content from Redux store
+    const { contentSections, status, error } = useSelector((state: RootState) => state.content);
+    const { contentReady } = useSelector((state: RootState) => state.app);
+    
+    // Convert content sections record to array for processing
+    const contentSectionsArray = Object.values(contentSections);
+    const loading = status === 'loading' || !contentReady;
 
     if (loading) {
         return (
@@ -60,8 +38,8 @@ export default function HistoryPage() {
         );
     }
 
-    const historySection = contentSections.find(s => s.section === 'history');
-    const juvenileSection = contentSections.find(s => s.section === 'juvenile');
+    const historySection = contentSectionsArray.find(s => s.section === 'history');
+    const juvenileSection = contentSectionsArray.find(s => s.section === 'juvenile');
 
     return (
         <div className="w-full h-full overflow-auto">

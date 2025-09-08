@@ -9,8 +9,8 @@ import type { RootState } from '@/lib/store';
 export default function MapPage() {
     const [progress, setProgress] = useState(13);
     
-    // Get app status to determine if data is ready
-    const { appStatus, dataSourceStatuses, globalError } = useSelector((state: RootState) => state.app);
+    // Get map data readiness and status for progressive loading
+    const { mapDataReady, dataSourceStatuses, globalError, contentReady } = useSelector((state: RootState) => state.app);
 
     useEffect(() => {
         const timer = setTimeout(() => setProgress(100), 10);
@@ -31,8 +31,8 @@ export default function MapPage() {
         []
     );
 
-    // Show loading state while data is preloading
-    if (appStatus === 'preloading' || appStatus === 'idle') {
+    // Show loading state if content isn't ready yet (initial app loading)
+    if (!contentReady) {
         return (
             <div className='h-full w-full flex items-center justify-center bg-gray-50'>
                 <div className='text-center space-y-4 max-w-md'>
@@ -40,10 +40,10 @@ export default function MapPage() {
                         <MapIcon className='w-8 h-8 text-blue-600' />
                     </div>
                     <h2 className='text-xl font-semibold text-gray-900'>
-                        Preparing Map Data
+                        Initializing Application
                     </h2>
                     <p className='text-gray-600'>
-                        Loading California criminal justice datasets...
+                        Loading application data...
                     </p>
                     <Progress value={progress} className='w-full' />
                 </div>
@@ -51,13 +51,42 @@ export default function MapPage() {
         );
     }
 
-    // Show error state if data loading failed critically
-    if (appStatus === 'error' && globalError) {
-        const successfulSources = Object.values(dataSourceStatuses).filter(s => s.status === 'success').length;
-        const totalSources = Object.keys(dataSourceStatuses).length;
+    // Show loading state while map data is being prepared in background
+    if (!mapDataReady) {
+        return (
+            <div className='h-full w-full flex items-center justify-center bg-gray-50'>
+                <div className='text-center space-y-4 max-w-md'>
+                    <div className='inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full'>
+                        <MapIcon className='w-8 h-8 text-blue-600 animate-pulse' />
+                    </div>
+                    <h2 className='text-xl font-semibold text-gray-900'>
+                        Preparing Map Data
+                    </h2>
+                    <p className='text-gray-600'>
+                        Loading California criminal justice datasets in the background...
+                    </p>
+                    <Progress value={progress} className='w-full' />
+                    <p className='text-sm text-gray-500'>
+                        This may take a moment. You can browse other pages while we prepare the map.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    // Check for map data errors (if data loading completed but failed)
+    const mapSources = ['arrest', 'jail', 'county_prison', 'demographic', 'geojson'];
+    const mapStatuses = mapSources.map(source => dataSourceStatuses[source as keyof typeof dataSourceStatuses]).filter(Boolean);
+    const successfulMapSources = mapStatuses.filter(s => s.status === 'success').length;
+    const totalMapSources = mapSources.length;
+    const hasMapDataErrors = mapStatuses.some(s => s.status === 'error');
+    const allMapSourcesCompleted = mapStatuses.length > 0 && mapStatuses.every(s => s.status === 'success' || s.status === 'error');
+
+    // Show error state if map data loading completed with errors
+    if (contentReady && allMapSourcesCompleted && hasMapDataErrors) {
         
         // If we have some successful data sources, show partial functionality warning
-        if (successfulSources > 0) {
+        if (successfulMapSources > 0) {
             return (
                 <div className='space-y-4 h-[100%] w-[100%]'>
                     {/* Warning banner */}
@@ -69,7 +98,7 @@ export default function MapPage() {
                                     Partial Data Available
                                 </h3>
                                 <p className='text-sm text-yellow-700 mt-1'>
-                                    {successfulSources} of {totalSources} datasets loaded successfully. 
+                                    {successfulMapSources} of {totalMapSources} map datasets loaded successfully. 
                                     Some features may be limited.
                                 </p>
                             </div>

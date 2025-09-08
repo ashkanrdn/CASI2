@@ -1,46 +1,24 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { useSelector } from 'react-redux';
 import { Button } from '@/app/components/ui/button';
 import { ArrowRight, BarChart3 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card"
 import { Badge } from "@/app/components/ui/badge"
 import { Users, DollarSign, Building, Scale, Search, TrendingUp, MessageSquare } from "lucide-react"
-import { getAllContentSections } from '@/lib/content';
+import type { RootState } from '@/lib/store';
 import { MarkdownSectionCards } from '@/app/components/MarkdownSectionCards';
 
-interface ContentSection {
-  title: string;
-  subtitle?: string;
-  order: number;
-  visible: boolean;
-  section: string;
-  content: string;
-  frontmatter: Record<string, any>;
-}
-
 export default function HomePage() {
-    const [contentSections, setContentSections] = useState<ContentSection[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const loadContent = async () => {
-            try {
-                const sections = await getAllContentSections();
-                setContentSections(sections);
-                setLoading(false);
-            } catch (err) {
-                console.error('Error loading content:', err);
-                setError('Failed to load content');
-                setLoading(false);
-            }
-        };
-
-        loadContent();
-    }, []);
+    // Get content from Redux store
+    const { contentSections, status, error } = useSelector((state: RootState) => state.content);
+    const { contentReady } = useSelector((state: RootState) => state.app);
+    
+    // Convert content sections record to array for processing
+    const contentSectionsArray = Object.values(contentSections);
+    const loading = status === 'loading' || !contentReady;
 
     if (loading) {
         return (
@@ -64,9 +42,9 @@ export default function HomePage() {
         );
     }
 
-    const heroSection = contentSections.find(s => s.section === 'hero');
-    const aboutSection = contentSections.find(s => s.section === 'about');
-    const howToUseSection = contentSections.find(s => s.section === 'how-to-use');
+    const heroSection = contentSectionsArray.find(s => s.section === 'hero');
+    const aboutSection = contentSectionsArray.find(s => s.section === 'about');
+    const howToUseSection = contentSectionsArray.find(s => s.section === 'how-to-use');
 
     return (
         <div className="w-full h-full overflow-auto">
