@@ -7,6 +7,7 @@ import { store } from '@/lib/store';
 import { preloadAllAppDataWithProgress, type AppState } from '@/lib/features/app/appSlice';
 import { fetchDataForSource } from '@/lib/features/filters/filterSlice';
 import type { RootState, AppDispatch } from '@/lib/store';
+import LoadingSplash from '@/app/components/LoadingSplash';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import './styles/globals.css';
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: Props) {
     return (
         <Provider store={store}>
             <DataPreloader />
+            <LoadingSplash />
             <html lang='en'>
                 <body>
                     <div className='h-screen flex flex-col'>
