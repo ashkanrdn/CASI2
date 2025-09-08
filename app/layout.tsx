@@ -1,8 +1,12 @@
 'use client';
 
-import { type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { store } from '@/lib/store';
+import { preloadAllAppDataWithProgress, type AppState } from '@/lib/features/app/appSlice';
+import { fetchDataForSource } from '@/lib/features/filters/filterSlice';
+import type { RootState, AppDispatch } from '@/lib/store';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import './styles/globals.css';
@@ -11,11 +15,53 @@ interface Props {
     readonly children: ReactNode;
 }
 
+/**
+ * Data preloader component that runs inside Redux Provider context
+ * Handles app-level data preloading and CSV data distribution to filter slice
+ */
+function DataPreloader() {
+    const dispatch = useDispatch<AppDispatch>();
+    const { appStatus, geojsonData } = useSelector((state: RootState) => state.app);
+    
+    useEffect(() => {
+        // Only start preload if app is in idle state
+        if (appStatus === 'idle') {
+            console.log('🚀 [Layout] Starting app data preload...');
+            
+            // Dispatch the preload action with progress tracking
+            dispatch(preloadAllAppDataWithProgress())
+                .unwrap()
+                .then((preloadedData) => {
+                    console.log('✅ [Layout] Preload completed, distributing CSV data to filter slice...');
+                    
+                    // Distribute CSV data to filter slice by dispatching individual fetchDataForSource actions
+                    // This ensures the filter slice gets the data in the format it expects
+                    Object.entries(preloadedData.csvData).forEach(([dataSource, csvData]) => {
+                        if (csvData.length > 0) {
+                            // Create a fulfilled action to store the data in the filter slice
+                            dispatch(fetchDataForSource.fulfilled(
+                                { dataSource: dataSource as any, data: csvData },
+                                '', // requestId - not used in the fulfilled case
+                                dataSource as any, // original args
+                            ));
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.error('❌ [Layout] Preload failed:', error);
+                });
+        }
+    }, [dispatch, appStatus]);
+    
+    return null; // This component only handles logic, no UI
+}
+
 export default function RootLayout({ children }: Props) {
     const pathname = usePathname();
     
     return (
         <Provider store={store}>
+            <DataPreloader />
             <html lang='en'>
                 <body>
                     <div className='h-screen flex flex-col'>
