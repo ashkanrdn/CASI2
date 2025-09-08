@@ -216,10 +216,9 @@ export default function MapStory() {
         selectedCounties = [],
     } = useSelector((state: RootState) => state.filters);
     const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
-
-
-    // State for storing the fetched GeoJSON data for California counties.
-    const [geojsonData, setGeojsonData] = useState<Feature[]>([]);
+    
+    // Get preloaded GeoJSON data from app slice
+    const { geojsonData, appStatus } = useSelector((state: RootState) => state.app);
     // State for storing information about the currently hovered county feature.
     const [hoverInfo, setHoverInfo] = useState<{
         x: number; // Screen x-coordinate for positioning the tooltip
@@ -292,29 +291,12 @@ export default function MapStory() {
         };
     }, []); // Empty dependency array ensures this runs only on mount and unmount
 
-    /**
-     * Fetches the GeoJSON data for California counties on component mount.
-     */
-    useEffect(() => {
-        const fetchGeoJsonData = async () => {
-            try {
-                const response = await fetch('/california-counties.geojson');
-                const data = await response.json();
-                if (data.features) {
-                    setGeojsonData(data.features);
-                }
-            } catch (error) {
-                console.error('Error loading GeoJSON data:', error);
-            }
-        };
-
-        fetchGeoJsonData();
-    }, []); // Empty dependency array ensures this runs only once on mount.
+    // GeoJSON data is now preloaded via app slice, no need for component-level fetching
 
     // --- Effect to Trigger Worker Calculation ---
     useEffect(() => {
-        // Don't proceed if worker isn't ready or we don't have base geojson yet
-        if (!workerRef.current || geojsonData.length === 0) {
+        // Don't proceed if worker isn't ready, app isn't ready, or we don't have base geojson yet
+        if (!workerRef.current || appStatus !== 'ready' || geojsonData.length === 0) {
             return;
         }
 
@@ -343,7 +325,7 @@ export default function MapStory() {
             dataSource: selectedDataSource,
             isPerCapita,
         });
-    }, [geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita]); // Dependencies that trigger recalculation
+    }, [geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita, appStatus]); // Dependencies that trigger recalculation
 
     /**
      * Memoized calculation for the D3 color scale used to color the map features.
