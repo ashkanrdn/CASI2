@@ -1,15 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import filterReducer from './features/filters/filterSlice';
 import mapReducer from './features/map/mapSlice';
+import appReducer from './features/app/appSlice';
 import logger from 'redux-logger';
 
 const defaultMiddlewareConfig = {
   serializableCheck: {
-    ignoredPaths: ['pdf.data'],
+    ignoredPaths: ['pdf.data', 'app.geojsonData'],
   }
 };
 export const store = configureStore({
   reducer: {
+    app: appReducer,
     filters: filterReducer,
     map: mapReducer,
   },
