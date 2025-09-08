@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/lib/store';
 import {
-    fetchDataForSource,
     Filter,
     FilterCategory,
     removeFilter,
@@ -170,11 +169,7 @@ export default function FiltersSidebar() {
     // Sort county names alphabetically (memoized)
     const sortedCountyNames = React.useMemo(() => [...COUNTY_NAMES].sort(), []);
 
-    useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchDataForSource(selectedDataSource));
-        }
-    }, [status, dispatch, selectedDataSource]);
+    // Data is now preloaded via app initialization, no need for component-level fetching
 
     if (status === 'loading') {
         return <div className='p-4'>Loading data...</div>;

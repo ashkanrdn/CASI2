@@ -18,7 +18,7 @@ import {
     Info
 } from 'lucide-react';
 import type { RootState, AppDispatch } from '@/lib/store';
-import { fetchDataForSource, calculateStateWideAverage, getCountyDemographicData } from '@/lib/features/filters/filterSlice';
+import { calculateStateWideAverage, getCountyDemographicData } from '@/lib/features/filters/filterSlice';
 
 interface DemographicMetric {
     id: string;
@@ -140,18 +140,7 @@ export default function MetricsCards() {
         console.log('🏠 [MetricsCards] County selection changed:', selectedCounty);
     }, [selectedCounty]);
 
-    // NEW FUNCTION: Auto-load demographic data on component mount
-    useEffect(() => {
-        console.log('🏠 [MetricsCards] useEffect triggered:', {
-            status: dataSourcesStatus.demographic,
-            shouldFetch: dataSourcesStatus.demographic === 'idle'
-        });
-        
-        if (dataSourcesStatus.demographic === 'idle') {
-            console.log('🏠 [MetricsCards] Dispatching fetchDataForSource for demographic');
-            dispatch(fetchDataForSource('demographic'));
-        }
-    }, [dispatch, dataSourcesStatus.demographic]);
+    // Demographic data is now preloaded via app initialization, no need for component-level fetching
 
     // Get data for selected county or calculate state averages
     const getMetricData = () => {
