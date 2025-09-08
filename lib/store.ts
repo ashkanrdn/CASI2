@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import filterReducer from './features/filters/filterSlice';
 import mapReducer from './features/map/mapSlice';
 import appReducer from './features/app/appSlice';
+import contentReducer from './features/content/contentSlice';
 import logger from 'redux-logger';
 
 const defaultMiddlewareConfig = {
@@ -12,6 +13,7 @@ const defaultMiddlewareConfig = {
 export const store = configureStore({
   reducer: {
     app: appReducer,
+    content: contentReducer,
     filters: filterReducer,
     map: mapReducer,
   },
