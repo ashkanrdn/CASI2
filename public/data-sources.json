@@ -26,7 +26,7 @@
     "demographic": {
       "displayName": "Demographic Data",
       "description": "Population and demographic data for California counties",
-      "url": "https://drive.google.com/uc?export=download&id=1gTaFZ8Hit3Ud_2Y2npkFkJc_t0vPImed",
+      "url": "https://drive.google.com/uc?export=download&id=1x7_1HSBLRC_WFyFM65zVbWmEza9ztTOj",
       "localFallback": "/cleaned/census.csv",
       "type": "csv"
     }
