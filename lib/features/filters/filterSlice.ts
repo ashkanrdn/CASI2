@@ -155,6 +155,7 @@ const applyFilters = (
     dataSource: DataSourceType, // Pass the current data source
     selectedCounties: string[] = [] // Add selectedCounties p arameter with default empty array
 ): CsvRow[] => {
+    console.log('🔍 [applyFilters] Starting with data length:', data.length, 'dataSource:', dataSource, 'activeFilters.year:', activeFilters.year);
     let filtered = data;
 
     // Apply all active filters
@@ -164,26 +165,40 @@ const applyFilters = (
             const columnName = getColumnName(category, dataSource); // Get the correct column name
 
             if (columnName) { // Only filter if the column is relevant for the source
+                const beforeLength = filtered.length;
                 filtered = filtered.filter(row => {
                     const rowValue = row[columnName];
                     // Handle cases where the column might be missing or value is null/undefined
                     return rowValue != null && activeIds.includes(String(rowValue));
                 });
+                console.log(`🔍 [applyFilters] After ${category} filter:`, filtered.length, '(removed', beforeLength - filtered.length, 'rows)');
             }
         }
     });
 
     // Apply year filter (handle different year column names for different data sources)
+    const beforeYearFilter = filtered.length;
+    // Sample first 3 rows before year filter
+    console.log('🔍 [applyFilters] Sample rows before year filter:', filtered.slice(0, 3).map(row => ({
+        Year: row.Year,
+        Years: row.Years,
+        County: row.County
+    })));
+
     filtered = filtered.filter(row => {
         const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
         return yearValue === activeFilters.year;
     });
+    console.log('🔍 [applyFilters] After year filter (year=' + activeFilters.year + '):', filtered.length, '(removed', beforeYearFilter - filtered.length, 'rows)');
 
     // Apply county filter if selectedCounties is not empty
     if (selectedCounties.length > 0) {
+        const beforeCountyFilter = filtered.length;
         filtered = filtered.filter(row => selectedCounties.includes(row.County));
+        console.log('🔍 [applyFilters] After county filter:', filtered.length, '(removed', beforeCountyFilter - filtered.length, 'rows)');
     }
 
+    console.log('🔍 [applyFilters] Final result length:', filtered.length);
     return filtered;
 };
 
@@ -467,20 +482,36 @@ export const filterSlice = createSlice({
             .addCase(fetchDataForSource.fulfilled, (state, action: PayloadAction<{ dataSource: DataSourceType; data: CsvRow[] }>) => {
                 const { dataSource, data } = action.payload;
                 state.dataSourcesStatus[dataSource] = 'succeeded';
-                
+
+                console.log('📦 [fetchDataForSource.fulfilled] Received data length:', data.length);
+                console.log('📦 [fetchDataForSource.fulfilled] Sample rows:', data.slice(0, 3));
+                console.log('📦 [fetchDataForSource.fulfilled] Sample Year values:', data.slice(0, 5).map(row => ({
+                    Year: row.Year,
+                    YearType: typeof row.Year,
+                    Years: row.Years,
+                    County: row.County
+                })));
+
                 // Ensure data has Year/Years, filter out rows without it or with invalid values
                 const validData = data.filter(row => {
                     if (!row) return false;
                     const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
-                    return typeof yearValue === 'number' && !isNaN(yearValue);
+                    const isValid = typeof yearValue === 'number' && !isNaN(yearValue);
+                    if (!isValid && data.indexOf(row) < 3) {
+                        console.log('❌ [fetchDataForSource.fulfilled] Invalid row:', row, 'yearValue:', yearValue, 'type:', typeof yearValue);
+                    }
+                    return isValid;
                 });
-                
+
+                console.log('📦 [fetchDataForSource.fulfilled] Valid data length after filter:', validData.length, '(removed', data.length - validData.length, 'rows)');
+
                 // Store data in the specific source slot
                 state.csvDataSources[dataSource] = validData;
                 state.dataSourcesErrors[dataSource] = null;
 
                 // If this is the currently selected source, update filtered data and year range
                 if (dataSource === state.selectedDataSource) {
+                    console.log('📦 [fetchDataForSource.fulfilled] Applying filters to', validData.length, 'rows');
                     state.filteredData = applyFilters(validData, state.activeFilters, dataSource, state.selectedCounties);
 
                     // Get min and max years from the data if needed

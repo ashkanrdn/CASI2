@@ -1,5 +1,5 @@
 import { BarDatum, ResponsiveBar } from '@nivo/bar';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import * as d3 from 'd3';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/lib/store';
