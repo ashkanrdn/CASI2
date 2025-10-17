@@ -10,6 +10,7 @@ import { Badge } from "@/app/components/ui/badge"
 import { Users, DollarSign, Building, Scale, Search, TrendingUp, MessageSquare } from "lucide-react"
 import { getAllContentSections } from '@/lib/content';
 import { MarkdownSectionCards } from '@/app/components/MarkdownSectionCards';
+import { HomePageSkeleton } from '@/app/components/HomePageSkeleton';
 
 interface ContentSection {
   title: string;
@@ -43,14 +44,7 @@ export default function HomePage() {
     }, []);
 
     if (loading) {
-        return (
-            <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading content...</p>
-                </div>
-            </div>
-        );
+        return <HomePageSkeleton />;
     }
 
     if (error) {
