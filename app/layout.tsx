@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from '@/lib/store';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import DataPreloader from '@/app/components/DataPreloader';
 import './styles/globals.css';
 
 interface Props {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: Props) {
     
     return (
         <Provider store={store}>
+            <DataPreloader />
             <html lang='en'>
                 <body>
                     <div className='h-screen flex flex-col'>
