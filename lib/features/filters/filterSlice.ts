@@ -560,4 +560,41 @@ export const {
     setSelectedCounties, // Export the new setSelectedCounties action
 } = filterSlice.actions;
 
+// Selectors for aggregate loading states
+export const selectDataSourcesStatus = (state: { filters: FilterState }) => state.filters.dataSourcesStatus;
+export const selectDataSourcesErrors = (state: { filters: FilterState }) => state.filters.dataSourcesErrors;
+
+export const selectLoadingStats = (state: { filters: FilterState }) => {
+    const statuses = state.filters.dataSourcesStatus;
+    const allSources: DataSourceType[] = ['arrest', 'jail', 'county_prison', 'demographic'];
+
+    return {
+        total: allSources.length,
+        loading: allSources.filter(s => statuses[s] === 'loading').length,
+        succeeded: allSources.filter(s => statuses[s] === 'succeeded').length,
+        failed: allSources.filter(s => statuses[s] === 'failed').length,
+        idle: allSources.filter(s => statuses[s] === 'idle').length,
+    };
+};
+
+export const selectFailedSources = (state: { filters: FilterState }) => {
+    const statuses = state.filters.dataSourcesStatus;
+    const errors = state.filters.dataSourcesErrors;
+    const allSources: DataSourceType[] = ['arrest', 'jail', 'county_prison', 'demographic'];
+
+    return allSources
+        .filter(source => statuses[source] === 'failed')
+        .map(source => ({
+            source,
+            error: errors[source],
+        }));
+};
+
+export const selectIsAllDataLoaded = (state: { filters: FilterState }) => {
+    const statuses = state.filters.dataSourcesStatus;
+    const allSources: DataSourceType[] = ['arrest', 'jail', 'county_prison', 'demographic'];
+
+    return allSources.every(source => statuses[source] === 'succeeded');
+};
+
 export default filterSlice.reducer;
