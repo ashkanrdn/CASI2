@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { X, Download, Check, CheckIcon, Info } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/lib/store';
 import {
@@ -38,6 +38,8 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from '@/app/components/ui/dropdown-menu';
+import LoadingProgress from './LoadingProgress';
+import ErrorNotification from './ErrorNotification';
 
 // California county names
 const COUNTY_NAMES = [
@@ -170,19 +172,22 @@ export default function FiltersSidebar() {
     // Sort county names alphabetically (memoized)
     const sortedCountyNames = React.useMemo(() => [...COUNTY_NAMES].sort(), []);
 
+    // Track initialization to ensure we only fetch once
+    const [hasInitialized, setHasInitialized] = useState(false);
+
+    // Fetch all data sources on mount (runs once)
     useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchDataForSource(selectedDataSource));
+        if (!hasInitialized) {
+            const allSources: DataSourceType[] = ['arrest', 'jail', 'county_prison', 'demographic'];
+
+            // Dispatch fetches for all sources in parallel
+            allSources.forEach(source => {
+                dispatch(fetchDataForSource(source));
+            });
+
+            setHasInitialized(true);
         }
-    }, [status, dispatch, selectedDataSource]);
-
-    if (status === 'loading') {
-        return <div className='p-4'>Loading data...</div>;
-    }
-
-    if (status === 'failed') {
-        return <div className='p-4 text-red-500'>Error: {error}</div>;
-    }
+    }, [hasInitialized, dispatch]);
 
     const activeFiltersList = Object.entries(filters).flatMap(([category, categoryFilters]) =>
         (categoryFilters as Filter[]).filter((filter: Filter) => filter.isActive)
@@ -326,6 +331,29 @@ export default function FiltersSidebar() {
                     </SelectContent>
                 </Select>
             </div>
+
+            {/* Loading Progress Indicator */}
+            <LoadingProgress />
+
+            {/* Error Notification for Failed Sources */}
+            <ErrorNotification />
+
+            {/* Show inline message if selected source is loading or failed */}
+            {status === 'loading' && (
+                <div className='mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200'>
+                    <p className='text-sm text-blue-900'>
+                        <strong>{formatDataSourceLabel(selectedDataSource)}</strong> data is currently loading...
+                    </p>
+                </div>
+            )}
+            {status === 'failed' && (
+                <div className='mb-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200'>
+                    <p className='text-sm text-yellow-900'>
+                        <strong>{formatDataSourceLabel(selectedDataSource)}</strong> data failed to load. You can try refreshing the page or select a different data source.
+                    </p>
+                </div>
+            )}
+
             <Separator className='my-4' />
 
             {/* County Multi-Select Dropdown */}
