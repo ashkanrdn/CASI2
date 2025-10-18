@@ -6,7 +6,15 @@ import { store } from '@/lib/store';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import DataPreloader from '@/app/components/DataPreloader';
+import { Open_Sans } from 'next/font/google';
 import './styles/globals.css';
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-open-sans',
+  display: 'swap',
+});
 
 interface Props {
     readonly children: ReactNode;
@@ -18,7 +26,7 @@ export default function RootLayout({ children }: Props) {
     return (
         <Provider store={store}>
             <DataPreloader />
-            <html lang='en'>
+            <html lang='en' className={openSans.className}>
                 <body>
                     <div className='h-screen flex flex-col'>
                         {/* Navigation Header */}
