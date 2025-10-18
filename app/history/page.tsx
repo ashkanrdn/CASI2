@@ -6,6 +6,7 @@ import { Card } from "@/app/components/ui/card"
 import { BarChart3 } from "lucide-react"
 import { getAllContentSections } from '@/lib/content';
 import { Button } from '@/app/components/ui/button';
+import { HistoryPageSkeleton } from '@/app/components/HistoryPageSkeleton';
 
 interface ContentSection {
   title: string;
@@ -39,14 +40,7 @@ export default function HistoryPage() {
     }, []);
 
     if (loading) {
-        return (
-            <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading content...</p>
-                </div>
-            </div>
-        );
+        return <HistoryPageSkeleton />;
     }
 
     if (error) {
@@ -99,13 +93,15 @@ export default function HistoryPage() {
                                     </ReactMarkdown>
                                 </div>
 
-                                <Card className="h-80 flex items-center justify-center bg-gray-50">
-                                    <div className="text-center">
-                                        <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                                        <p className="text-gray-500 font-medium">Prison Population Trends Chart</p>
-                                        <p className="text-gray-400 text-sm">1852 - Present</p>
-                                    </div>
+                                <Card className="h-100 overflow-hidden mt-2">
+                                    <img
+                                        src="/Californians-in-prison-per100k-CASI.png"
+                                        alt="Prison Population Trends Chart (1852 - Present)"
+                                        className="w-full h-full object-cover"
+                                    />
                                 </Card>
+                                <p className="text-gray-500 font-medium">Prison Population Trends Chart</p>
+                                <p className="text-gray-400 text-sm">1852 - Present</p>
                             </div>
                         </div>
                     </section>
@@ -144,13 +140,15 @@ export default function HistoryPage() {
                                     </ReactMarkdown>
                                 </div>
 
-                                <Card className="h-80 flex items-center justify-center bg-white">
-                                    <div className="text-center">
-                                        <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                                        <p className="text-gray-500 font-medium">Youth Incarceration Trends</p>
-                                        <p className="text-gray-400 text-sm">1858 - 2023</p>
-                                    </div>
+                                <Card className="h-100 overflow-hidden mt-2">
+                                    <img
+                                        src="/Youth%20Criminal%20Arrests%20per%20100k%20CASI.png"
+                                        alt="Youth Incarceration Trends (1960 - 2025)"
+                                        className="w-full h-full object-cover"
+                                    />
                                 </Card>
+                                <p className="text-gray-500 font-medium">Youth Incarceration Trends</p>
+                                <p className="text-gray-400 text-sm">1950 - 2025</p>
                             </div>
                         </div>
                     </section>

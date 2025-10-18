@@ -2,11 +2,9 @@
 
 import * as React from 'react';
 import { X, Download, Check, CheckIcon, Info } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/lib/store';
 import {
-    fetchDataForSource,
     Filter,
     FilterCategory,
     removeFilter,
@@ -172,22 +170,9 @@ export default function FiltersSidebar() {
     // Sort county names alphabetically (memoized)
     const sortedCountyNames = React.useMemo(() => [...COUNTY_NAMES].sort(), []);
 
-    // Track initialization to ensure we only fetch once
-    const [hasInitialized, setHasInitialized] = useState(false);
-
-    // Fetch all data sources on mount (runs once)
-    useEffect(() => {
-        if (!hasInitialized) {
-            const allSources: DataSourceType[] = ['arrest', 'jail', 'county_prison', 'demographic'];
-
-            // Dispatch fetches for all sources in parallel
-            allSources.forEach(source => {
-                dispatch(fetchDataForSource(source));
-            });
-
-            setHasInitialized(true);
-        }
-    }, [hasInitialized, dispatch]);
+    // Note: Data fetching is now handled by DataPreloader component in the root layout
+    // This ensures data starts loading immediately when the app loads, not just when
+    // users navigate to this page
 
     const activeFiltersList = Object.entries(filters).flatMap(([category, categoryFilters]) =>
         (categoryFilters as Filter[]).filter((filter: Filter) => filter.isActive)

@@ -1,8 +1,8 @@
 'use client';
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Progress } from '@/app/components/ui/progress';
+import { MapPageSkeleton } from '@/app/components/MapPageSkeleton';
 
 export default function MapPage() {
     const [progress, setProgress] = useState(13);
@@ -16,12 +16,7 @@ export default function MapPage() {
         () =>
             dynamic(() => import('@/app/components/widgets/MapStory'), {
                 ssr: false,
-                loading: () => (
-                    <div className='flex flex-col justify-center items-center w-full h-full'>
-                        <p className='text-sm m-4 text-gray-500'>Loading map...</p>
-                        <Progress value={progress} className='w-[60%]' />
-                    </div>
-                ),
+                loading: () => <MapPageSkeleton />,
             }),
         []
     );

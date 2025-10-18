@@ -6,6 +6,7 @@ import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card"
 
 import { getAllContentSections, parseDataMetrics } from '@/lib/content';
+import { DataPageSkeleton } from '@/app/components/DataPageSkeleton';
 
 interface ContentSection {
   title: string;
@@ -39,14 +40,7 @@ export default function DataPage() {
     }, []);
 
     if (loading) {
-        return (
-            <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading content...</p>
-                </div>
-            </div>
-        );
+        return <DataPageSkeleton />;
     }
 
     if (error) {
