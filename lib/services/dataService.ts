@@ -10,7 +10,7 @@ interface DataSourceConfig {
     sheetName: 'arrest' | 'jail' | 'county_prison' | 'demographic';
     range: string;
     localFallback: string;
-    type: 'csv' | 'markdown';
+    type: 'csv' | 'sheets' | 'markdown';
 }
 
 interface ContentConfig {

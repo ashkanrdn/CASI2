@@ -1,3 +1,18 @@
+/**
+ * DEPRECATED: This proxy route is no longer needed for Google Sheets API integration.
+ * 
+ * Data sources (arrest, jail, county_prison, demographic) now use Google Sheets API directly
+ * via the sheetsService.ts, which fetches data client-side using native fetch().
+ * 
+ * This route was previously used for fetching CSV files from Google Drive, but that functionality
+ * has been replaced by the Google Sheets API integration.
+ * 
+ * If you need to restore this functionality, uncomment the code below.
+ * 
+ * Last updated: 2025-10-29 (TEST-001)
+ */
+
+/*
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -48,3 +63,4 @@ export async function GET(request: NextRequest) {
         );
     }
 }
+*/
