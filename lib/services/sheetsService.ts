@@ -118,7 +118,7 @@ function transformToCsvRows(values: string[][], sheetName: string): CsvRow[] {
   const csvRows: CsvRow[] = dataRows
     .filter(row => row.some(cell => cell !== '' && cell !== null && cell !== undefined)) // Filter empty rows
     .map((row) => {
-      const csvRow: CsvRow = {};
+      const csvRow: any = {};
 
       headers.forEach((header, colIndex) => {
         const value = row[colIndex];
