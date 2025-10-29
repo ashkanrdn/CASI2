@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import type { CsvRow } from '@/app/types/shared'; // Import the updated type
-import Papa from 'papaparse';
 import { loadDataSource } from '@/lib/services/dataService';
 
 // Define supported data sources
@@ -287,26 +286,18 @@ export const fetchDataForSource = createAsyncThunk(
     'filters/fetchDataForSource',
     async (dataSource: DataSourceType, { rejectWithValue }) => {
         try {
-            // Load CSV data using the data service (handles Google Drive + fallback)
-            const csvText = await loadDataSource(dataSource);
+            console.log(`🚀 [Redux] Fetching data source: ${dataSource}`);
 
-            const data = await new Promise<CsvRow[]>((resolve, reject) => {
-                Papa.parse<CsvRow>(csvText, {
-                    header: true,
-                    dynamicTyping: true,
-                    complete: (results) => {
-                        resolve(results.data);
-                    },
-                    error: (error: Error) => {
-                        reject(error);
-                    },
-                });
-            });
+            // Load data from Google Sheets or CSV fallback (already parsed as CsvRow[])
+            const data = await loadDataSource(dataSource);
+
+            console.log(`✅ [Redux] Loaded ${data.length} rows for ${dataSource}`);
 
             // Return both data and source type so reducer knows where to store it
             return { dataSource, data };
-        } catch (error) {
-            return rejectWithValue(`Failed to fetch ${dataSource} data: ${error}`);
+        } catch (error: any) {
+            console.error(`❌ [Redux] Failed to fetch ${dataSource}:`, error);
+            return rejectWithValue(error.message || `Failed to fetch ${dataSource} data`);
         }
     }
 );
