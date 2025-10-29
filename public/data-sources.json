@@ -1,34 +1,38 @@
 {
-  "version": "1.0",
-  "lastUpdated": "2024-01-01T00:00:00Z",
+  "version": "2.0",
+  "lastUpdated": "2025-10-29T00:00:00Z",
   "dataSources": {
     "arrest": {
       "displayName": "Arrest Data",
       "description": "California county-level arrest data with demographic and offense breakdowns",
-      "url": "https://drive.google.com/uc?export=download&id=1ro8VvZK3xB1dHU4frZhfXCjEegu0dPn0",
+      "sheetName": "arrest",
+      "range": "A:Z",
       "localFallback": "/cleaned/combined_arrest_df.csv",
-      "type": "csv"
+      "type": "sheets"
     },
     "jail": {
-      "displayName": "Jail Data", 
+      "displayName": "Jail Data",
       "description": "Average daily population and sentencing status data for county jails",
-      "url": "https://drive.google.com/uc?export=download&id=1v9LJ-5ZFfCQWvs6QOwOmq1mleko8pfWd",
+      "sheetName": "jail",
+      "range": "A:Z",
       "localFallback": "/cleaned/combined_jail_df.csv",
-      "type": "csv"
+      "type": "sheets"
     },
     "county_prison": {
       "displayName": "County Prison Data",
       "description": "County-level imprisonment numbers and associated costs",
-      "url": "https://drive.google.com/uc?export=download&id=1oWkE7OdWY5ULS-o6TuYtpEVp8OvjBT9z",
+      "sheetName": "county_prison",
+      "range": "A:Z",
       "localFallback": "/cleaned/county_prison.csv",
-      "type": "csv"
+      "type": "sheets"
     },
     "demographic": {
       "displayName": "Demographic Data",
       "description": "Population and demographic data for California counties",
-      "url": "https://drive.google.com/uc?export=download&id=1x7_1HSBLRC_WFyFM65zVbWmEza9ztTOj",
+      "sheetName": "demographic",
+      "range": "A:Z",
       "localFallback": "/cleaned/census.csv",
-      "type": "csv"
+      "type": "sheets"
     }
   },
   "content": {
