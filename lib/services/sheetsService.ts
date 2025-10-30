@@ -142,6 +142,12 @@ function validateData(data: CsvRow[], sheetName: string): void {
     throw new Error(`No valid data rows found in sheet "${sheetName}"`);
   }
 
+  // Skip validation for non-data sheets (markdown has filename/content columns)
+  const skipValidation = ['markdown'];
+  if (skipValidation.includes(sheetName)) {
+    return;
+  }
+
   const firstRow = data[0];
   const requiredColumns = ['County', 'Year'];
 
