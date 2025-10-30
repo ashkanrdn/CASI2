@@ -65,13 +65,10 @@ function parseFrontmatter(markdownContent: string): ParsedContent {
  */
 export async function getContentSection(filename: string): Promise<ContentSection | null> {
   try {
-    // Get content name without extension for data service
-    const contentName = filename.replace('.md', '');
-    
-    // Load content using the data service (handles Google Drive + fallback)
-    const { loadContent } = await import('@/lib/services/dataService');
-    const markdownContent = await loadContent(contentName);
-    
+    // Load markdown content from Google Sheets "markdown" tab
+    const { loadMarkdownFromSheets } = await import('@/lib/services/markdownService');
+    const markdownContent = await loadMarkdownFromSheets(filename);
+
     return parseContentSection(markdownContent, filename);
   } catch (error) {
     console.error(`Error loading content section ${filename}:`, error);
@@ -128,28 +125,12 @@ export async function getContentBySection(sectionName: string): Promise<ContentS
 }
 
 /**
- * Content cache for performance
- */
-const contentCache = new Map<string, { content: ContentSection; timestamp: number }>();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
-/**
  * Get cached content or fetch fresh
+ * Note: markdownService already caches the raw markdown, this is kept for parsed ContentSection caching
  */
 export async function getCachedContentSection(filename: string): Promise<ContentSection | null> {
-  const cached = contentCache.get(filename);
-  const now = Date.now();
-  
-  if (cached && (now - cached.timestamp) < CACHE_DURATION) {
-    return cached.content;
-  }
-  
-  const content = await getContentSection(filename);
-  if (content) {
-    contentCache.set(filename, { content, timestamp: now });
-  }
-  
-  return content;
+  // markdownService handles caching, just fetch normally
+  return getContentSection(filename);
 }
 
 /**
