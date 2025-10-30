@@ -126,77 +126,36 @@ export default function MetricsCards() {
     const isLoading = dataSourcesStatus.demographic === 'loading';
     const currentYear = activeFilters.year;
 
-    // LOGGING: Add comprehensive logging
-    console.log('🏠 [MetricsCards] Component render:', {
-        demographicDataLength: demographicData.length,
-        isLoading,
-        selectedCounty,
-        currentYear,
-        dataStatus: dataSourcesStatus.demographic
-    });
-
-    // LOGGING: Add effect to track county selection changes
-    React.useEffect(() => {
-        console.log('🏠 [MetricsCards] County selection changed:', selectedCounty);
-    }, [selectedCounty]);
-
-    // NEW FUNCTION: Auto-load demographic data on component mount
+    // Auto-load demographic data on component mount
     useEffect(() => {
-        console.log('🏠 [MetricsCards] useEffect triggered:', {
-            status: dataSourcesStatus.demographic,
-            shouldFetch: dataSourcesStatus.demographic === 'idle'
-        });
-        
         if (dataSourcesStatus.demographic === 'idle') {
-            console.log('🏠 [MetricsCards] Dispatching fetchDataForSource for demographic');
             dispatch(fetchDataForSource('demographic'));
         }
     }, [dispatch, dataSourcesStatus.demographic]);
 
     // Get data for selected county or calculate state averages
     const getMetricData = () => {
-        console.log('🏠 [MetricsCards] getMetricData called:', {
-            selectedCounty,
-            demographicDataLength: demographicData.length,
-            currentYear
-        });
-
         if (selectedCounty && demographicData.length > 0) {
             // Get county-specific data
-            console.log('🏠 [MetricsCards] Getting county-specific data for:', selectedCounty);
             const countyData = getCountyDemographicData(demographicData, selectedCounty, currentYear);
-            console.log('🏠 [MetricsCards] County data result:', countyData);
             return countyData;
         } else if (demographicData.length > 0) {
             // Calculate state-wide averages
-            console.log('🏠 [MetricsCards] Calculating state-wide averages');
             const averages: Record<string, number> = {};
             DEMOGRAPHIC_METRICS.forEach(metric => {
                 const average = calculateStateWideAverage(demographicData, metric.variable, currentYear);
                 averages[metric.variable] = average;
-                console.log(`🏠 [MetricsCards] ${metric.variable}: ${average}`);
             });
-            console.log('🏠 [MetricsCards] State averages result:', averages);
             return averages;
         }
-        console.log('🏠 [MetricsCards] No data available, returning empty object');
         return {};
     };
 
     const metricData = getMetricData();
     const displayTitle = selectedCounty ? `${selectedCounty} County Metrics` : 'California Statewide Averages';
 
-    // LOGGING: Log final metric data
-    console.log('🏠 [MetricsCards] Final metricData:', metricData);
-
-    // NEW FUNCTION: Handle metric card clicks (for future functionality)
+    // Handle metric card clicks (for future functionality)
     const handleMetricClick = (metric: DemographicMetric) => {
-        console.log('🏠 [MetricsCards] Metric clicked:', {
-            id: metric.id,
-            title: metric.title,
-            variable: metric.variable,
-            value: metricData[metric.variable]
-        });
         // Future functionality: Could navigate to detailed view or show more info
     };
 

@@ -152,9 +152,8 @@ const applyFilters = (
     data: CsvRow[],
     activeFilters: FilterState['activeFilters'],
     dataSource: DataSourceType, // Pass the current data source
-    selectedCounties: string[] = [] // Add selectedCounties p arameter with default empty array
+    selectedCounties: string[] = [] // Add selectedCounties parameter with default empty array
 ): CsvRow[] => {
-    console.log('🔍 [applyFilters] Starting with data length:', data.length, 'dataSource:', dataSource, 'activeFilters.year:', activeFilters.year);
     let filtered = data;
 
     // Apply all active filters
@@ -164,40 +163,26 @@ const applyFilters = (
             const columnName = getColumnName(category, dataSource); // Get the correct column name
 
             if (columnName) { // Only filter if the column is relevant for the source
-                const beforeLength = filtered.length;
                 filtered = filtered.filter(row => {
                     const rowValue = row[columnName];
                     // Handle cases where the column might be missing or value is null/undefined
                     return rowValue != null && activeIds.includes(String(rowValue));
                 });
-                console.log(`🔍 [applyFilters] After ${category} filter:`, filtered.length, '(removed', beforeLength - filtered.length, 'rows)');
             }
         }
     });
 
     // Apply year filter (handle different year column names for different data sources)
-    const beforeYearFilter = filtered.length;
-    // Sample first 3 rows before year filter
-    console.log('🔍 [applyFilters] Sample rows before year filter:', filtered.slice(0, 3).map(row => ({
-        Year: row.Year,
-        Years: row.Years,
-        County: row.County
-    })));
-
     filtered = filtered.filter(row => {
         const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
         return yearValue === activeFilters.year;
     });
-    console.log('🔍 [applyFilters] After year filter (year=' + activeFilters.year + '):', filtered.length, '(removed', beforeYearFilter - filtered.length, 'rows)');
 
     // Apply county filter if selectedCounties is not empty
     if (selectedCounties.length > 0) {
-        const beforeCountyFilter = filtered.length;
         filtered = filtered.filter(row => selectedCounties.includes(row.County));
-        console.log('🔍 [applyFilters] After county filter:', filtered.length, '(removed', beforeCountyFilter - filtered.length, 'rows)');
     }
 
-    console.log('🔍 [applyFilters] Final result length:', filtered.length);
     return filtered;
 };
 
@@ -205,79 +190,53 @@ const applyFilters = (
 const parseStringToNumber = (value: any): number => {
     if (typeof value === 'number') return value;
     if (typeof value !== 'string') return NaN;
-    
+
     // Remove currency symbols, commas, quotes, and whitespace, then parse
     const cleaned = value.replace(/[$,"'\s]/g, '');
     const parsed = parseFloat(cleaned);
-    
-    // Log parsing for debugging problematic values
-    if (value.includes('$') || value.includes(',')) {
-        console.log('🔢 [parseStringToNumber]:', { original: value, cleaned, parsed });
-    }
-    
+
     return isNaN(parsed) ? 0 : parsed;
 };
 
 // NEW FUNCTION: Calculate statewide average for demographic metrics
 export const calculateStateWideAverage = (data: CsvRow[], variable: string, year: number): number => {
-    console.log('📊 [calculateStateWideAverage] Input:', { variable, year, dataLength: data.length });
-    
     const filteredData = data.filter(row => {
         const variableMatch = String(row.Variable).trim() === variable;
         const yearMatch = Number(row.Years) === year;
         const parsedValue = parseStringToNumber(row.Value);
         const hasValidValue = !isNaN(parsedValue) && parsedValue !== null;
-        
+
         return variableMatch && yearMatch && hasValidValue;
     });
-    
-    console.log('📊 [calculateStateWideAverage] Filtered data:', {
-        variable,
-        year,
-        filteredCount: filteredData.length,
-        sampleRows: filteredData.slice(0, 3)
-    });
-    
+
     if (filteredData.length === 0) {
-        console.log('📊 [calculateStateWideAverage] No data found for:', { variable, year });
         return 0;
     }
-    
+
     const sum = filteredData.reduce((acc, row) => acc + parseStringToNumber(row.Value), 0);
     const average = sum / filteredData.length;
-    
-    console.log('📊 [calculateStateWideAverage] Result:', { variable, average, sum, count: filteredData.length });
+
     return average;
 };
 
 // NEW FUNCTION: Get demographic data for a specific county
 export const getCountyDemographicData = (data: CsvRow[], county: string, year: number): Record<string, number> => {
-    console.log('🏛️ [getCountyDemographicData] Input:', { county, year, dataLength: data.length });
-    
     const countyData = data.filter(row => {
         const countyMatch = String(row.County).trim() === county;
         const yearMatch = Number(row.Years) === year;
         const parsedValue = parseStringToNumber(row.Value);
         const hasValidValue = !isNaN(parsedValue) && parsedValue !== null;
-        
+
         return countyMatch && yearMatch && hasValidValue;
     });
-    
-    console.log('🏛️ [getCountyDemographicData] Filtered county data:', {
-        county,
-        year,
-        filteredCount: countyData.length,
-        sampleRows: countyData.slice(0, 3)
-    });
-    
+
     const result = countyData.reduce((acc, row) => {
         if (row.Variable) {
             acc[String(row.Variable).trim()] = parseStringToNumber(row.Value);
         }
         return acc;
     }, {} as Record<string, number>);
-    
-    console.log('🏛️ [getCountyDemographicData] Result:', { county, result });
+
     return result;
 };
 
@@ -286,12 +245,8 @@ export const fetchDataForSource = createAsyncThunk(
     'filters/fetchDataForSource',
     async (dataSource: DataSourceType, { rejectWithValue }) => {
         try {
-            console.log(`🚀 [Redux] Fetching data source: ${dataSource}`);
-
             // Load data from Google Sheets or CSV fallback (already parsed as CsvRow[])
             const data = await loadDataSource(dataSource);
-
-            console.log(`✅ [Redux] Loaded ${data.length} rows for ${dataSource}`);
 
             // Return both data and source type so reducer knows where to store it
             return { dataSource, data };
@@ -340,16 +295,6 @@ export const filterSlice = createSlice({
             // Store data in the current selected source slot
             state.csvDataSources[state.selectedDataSource] = action.payload;
             state.filteredData = applyFilters(action.payload, state.activeFilters, state.selectedDataSource, state.selectedCounties);
-
-            // // Get min and max years from the data
-            // const years = action.payload.map(row => row.Year);
-
-            // const minYear = years[0];
-            // const maxYear = years[years.length - 1];
-
-
-            // state.yearRange = [minYear, maxYear];
-
         },
         toggleFilter: (state, action: PayloadAction<{ category: FilterCategory; filterId: string }>) => {
             const { category, filterId } = action.payload;
@@ -474,27 +419,12 @@ export const filterSlice = createSlice({
                 const { dataSource, data } = action.payload;
                 state.dataSourcesStatus[dataSource] = 'succeeded';
 
-                console.log('📦 [fetchDataForSource.fulfilled] Received data length:', data.length);
-                console.log('📦 [fetchDataForSource.fulfilled] Sample rows:', data.slice(0, 3));
-                console.log('📦 [fetchDataForSource.fulfilled] Sample Year values:', data.slice(0, 5).map(row => ({
-                    Year: row.Year,
-                    YearType: typeof row.Year,
-                    Years: row.Years,
-                    County: row.County
-                })));
-
                 // Ensure data has Year/Years, filter out rows without it or with invalid values
                 const validData = data.filter(row => {
                     if (!row) return false;
                     const yearValue = dataSource === 'demographic' ? row.Years : row.Year;
-                    const isValid = typeof yearValue === 'number' && !isNaN(yearValue);
-                    if (!isValid && data.indexOf(row) < 3) {
-                        console.log('❌ [fetchDataForSource.fulfilled] Invalid row:', row, 'yearValue:', yearValue, 'type:', typeof yearValue);
-                    }
-                    return isValid;
+                    return typeof yearValue === 'number' && !isNaN(yearValue);
                 });
-
-                console.log('📦 [fetchDataForSource.fulfilled] Valid data length after filter:', validData.length, '(removed', data.length - validData.length, 'rows)');
 
                 // Store data in the specific source slot
                 state.csvDataSources[dataSource] = validData;
@@ -502,7 +432,6 @@ export const filterSlice = createSlice({
 
                 // If this is the currently selected source, update filtered data and year range
                 if (dataSource === state.selectedDataSource) {
-                    console.log('📦 [fetchDataForSource.fulfilled] Applying filters to', validData.length, 'rows');
                     state.filteredData = applyFilters(validData, state.activeFilters, dataSource, state.selectedCounties);
 
                     // Get min and max years from the data if needed
