@@ -7,7 +7,6 @@
       "description": "California county-level arrest data with demographic and offense breakdowns",
       "sheetName": "arrest",
       "range": "A:Z",
-      "localFallback": "/cleaned/combined_arrest_df.csv",
       "type": "sheets"
     },
     "jail": {
@@ -15,7 +14,6 @@
       "description": "Average daily population and sentencing status data for county jails",
       "sheetName": "jail",
       "range": "A:Z",
-      "localFallback": "/cleaned/combined_jail_df.csv",
       "type": "sheets"
     },
     "county_prison": {
@@ -23,15 +21,13 @@
       "description": "County-level imprisonment numbers and associated costs",
       "sheetName": "county_prison",
       "range": "A:Z",
-      "localFallback": "/cleaned/county_prison.csv",
       "type": "sheets"
     },
     "demographic": {
       "displayName": "Demographic Data",
       "description": "Population and demographic data for California counties",
-      "sheetName": "demographic",
+      "sheetName": "census",
       "range": "A:Z",
-      "localFallback": "/cleaned/census.csv",
       "type": "sheets"
     }
   },
@@ -82,7 +78,6 @@
   "settings": {
     "retryAttempts": 2,
     "retryDelay": 1000,
-    "cacheTimeout": 300000,
-    "fallbackEnabled": true
+    "cacheTimeout": 300000
   }
 }

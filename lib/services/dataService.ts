@@ -1,6 +1,5 @@
 import type { DataSourceType } from '../features/filters/filterSlice';
 import { fetchFromGoogleSheets } from './sheetsService';
-import Papa from 'papaparse';
 import type { CsvRow } from '@/app/types/shared';
 
 // Types for the configuration file
@@ -9,8 +8,7 @@ interface DataSourceConfig {
     description: string;
     sheetName: 'arrest' | 'jail' | 'county_prison' | 'demographic';
     range: string;
-    localFallback: string;
-    type: 'csv' | 'sheets' | 'markdown';
+    type: 'sheets';
 }
 
 interface ContentConfig {
@@ -29,7 +27,6 @@ interface DataSourcesConfig {
         retryAttempts: number;
         retryDelay: number;
         cacheTimeout: number;
-        fallbackEnabled: boolean;
     };
 }
 
@@ -71,7 +68,7 @@ function isCacheValid(cacheKey: string, cacheTimeout: number): boolean {
 }
 
 /**
- * Load a data source (CSV file) by type
+ * Load a data source from Google Sheets
  */
 export async function loadDataSource(sourceType: DataSourceType): Promise<CsvRow[]> {
     console.log(`🚀 [DataService] Starting to load data source: ${sourceType}`);
@@ -92,93 +89,35 @@ export async function loadDataSource(sourceType: DataSourceType): Promise<CsvRow
         return cached!.data as CsvRow[];
     }
 
-    console.log(`📥 [DataService] Cache miss for ${sourceType}, fetching fresh data`);
+    console.log(`📥 [DataService] Cache miss for ${sourceType}, fetching from Google Sheets`);
 
-    try {
-        // 1. Try Google Sheets first
-        console.log(`☁️ [DataService] Trying Google Sheets for ${sourceType}...`);
-        const spreadsheetId = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
-        if (!spreadsheetId) {
-            throw new Error('NEXT_PUBLIC_SPREADSHEET_ID is not defined in environment variables.');
-        }
-
-        const data = await fetchFromGoogleSheets(
-            spreadsheetId,
-            sourceConfig.sheetName,
-            sourceConfig.range,
-            {
-                retryAttempts: config.settings.retryAttempts,
-                retryDelay: config.settings.retryDelay
-            }
-        );
-
-        console.log(`✅ [DataService] Successfully loaded ${data.length} rows from Google Sheets for ${sourceType}`);
-
-        // Cache the result
-        dataCache.set(cacheKey, {
-            data: data,
-            timestamp: Date.now()
-        });
-        console.log(`💾 [DataService] Cached ${sourceType} data (${data.length} rows) from Google Sheets`);
-
-        return data;
-
-    } catch (sheetsError) {
-        console.warn(`⚠️ [DataService] Google Sheets failed for ${sourceType}:`, sheetsError);
-
-        if (!config.settings.fallbackEnabled) {
-            console.error(`❌ [DataService] Fallback is disabled. Cannot load data for ${sourceType}.`);
-            throw new Error(`Failed to load ${sourceConfig.displayName} from Google Sheets and fallback is disabled.`);
-        }
-
-        // 2. Fallback to local CSV
-        try {
-            console.log(`🏠 [DataService] Falling back to local CSV for ${sourceType}...`);
-            const response = await fetch(sourceConfig.localFallback);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            const csvText = await response.text();
-
-            console.log(`✅ [DataService] Successfully loaded local fallback CSV for ${sourceType}`);
-
-            // Parse CSV text into CsvRow[]
-            const parsedData = await new Promise<CsvRow[]>((resolve, reject) => {
-                Papa.parse<CsvRow>(csvText, {
-                    header: true,
-                    dynamicTyping: true,
-                    skipEmptyLines: true,
-                    complete: (results) => {
-                        if (results.errors.length) {
-                            reject(new Error(`CSV parsing errors: ${JSON.stringify(results.errors)}`));
-                        } else {
-                            resolve(results.data);
-                        }
-                    },
-                    error: (error: Error) => {
-                        reject(error);
-                    }
-                });
-            });
-
-            console.log(`✅ [DataService] Parsed ${parsedData.length} rows from fallback CSV`);
-
-            // Cache the parsed data
-            dataCache.set(cacheKey, {
-                data: parsedData,
-                timestamp: Date.now()
-            });
-            console.log(`💾 [DataService] Cached ${sourceType} data (${parsedData.length} rows) from local fallback`);
-
-            return parsedData;
-
-        } catch (fallbackError) {
-            console.error(`❌ [DataService] Both Google Sheets and local fallback failed for ${sourceType}`);
-            console.error(`Primary error:`, sheetsError);
-            console.error(`Fallback error:`, fallbackError);
-            throw new Error(`Failed to load ${sourceConfig.displayName}: Both primary and fallback sources failed.`);
-        }
+    // Fetch from Google Sheets
+    console.log(`☁️ [DataService] Fetching from Google Sheets: ${sourceConfig.displayName}`);
+    const spreadsheetId = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
+    if (!spreadsheetId) {
+        throw new Error('❌ NEXT_PUBLIC_SPREADSHEET_ID is not defined in environment variables.');
     }
+
+    const data = await fetchFromGoogleSheets(
+        spreadsheetId,
+        sourceConfig.sheetName,
+        sourceConfig.range,
+        {
+            retryAttempts: config.settings.retryAttempts,
+            retryDelay: config.settings.retryDelay
+        }
+    );
+
+    console.log(`✅ [DataService] Successfully loaded ${data.length} rows from Google Sheets for ${sourceType}`);
+
+    // Cache the result
+    dataCache.set(cacheKey, {
+        data: data,
+        timestamp: Date.now()
+    });
+    console.log(`💾 [DataService] Cached ${sourceType} data (${data.length} rows)`);
+
+    return data;
 }
 
 /**
