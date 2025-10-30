@@ -267,8 +267,4 @@ self.onmessage = (event: MessageEvent<any>) => {
         console.error('[Worker] Error during data processing:', error);
         self.postMessage({ error: `Processing failed: ${error instanceof Error ? error.message : String(error)}` }); // Send error back
     }
-};
-
-// Optional: Signal that the worker is ready
-console.log('[Worker] Worker script loaded and ready.');
-// self.postMessage({ type: 'WORKER_READY' }); // Can be useful for more complex initialization 
+}; 
