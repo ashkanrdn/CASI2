@@ -8,12 +8,20 @@ const defaultMiddlewareConfig = {
     ignoredPaths: ['pdf.data'],
   }
 };
+
 export const store = configureStore({
   reducer: {
     filters: filterReducer,
     map: mapReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(defaultMiddlewareConfig).concat(logger)
+  middleware: (getDefaultMiddleware) => {
+    const middleware = getDefaultMiddleware(defaultMiddlewareConfig);
+    // Only add redux-logger in development mode
+    if (process.env.NODE_ENV === 'development') {
+      return middleware.concat(logger);
+    }
+    return middleware;
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
