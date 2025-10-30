@@ -17,8 +17,6 @@ const CACHE_TTL = 300000; // 5 minutes (same as data sources)
  * @returns Promise<string> - The markdown content including frontmatter
  */
 export async function loadMarkdownFromSheets(filename: string): Promise<string> {
-  console.log(`🚀 [MarkdownService] Loading markdown file: ${filename}`);
-
   const spreadsheetId = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
   if (!spreadsheetId) {
     throw new Error('❌ NEXT_PUBLIC_SPREADSHEET_ID is not defined in environment variables.');
@@ -29,8 +27,6 @@ export async function loadMarkdownFromSheets(filename: string): Promise<string> 
   const isCacheValid = markdownCache !== null && (now - markdownCacheTimestamp) < CACHE_TTL;
 
   if (!isCacheValid) {
-    console.log(`📥 [MarkdownService] Cache miss, fetching markdown sheet from Google Sheets`);
-
     try {
       // Fetch the entire "markdown" sheet
       const rawData = await fetchFromGoogleSheets(
@@ -43,8 +39,6 @@ export async function loadMarkdownFromSheets(filename: string): Promise<string> 
         }
       );
 
-      console.log(`✅ [MarkdownService] Successfully fetched ${rawData.length} markdown files from Google Sheets`);
-
       // Transform to MarkdownRow format
       markdownCache = rawData.map((row: CsvRow) => ({
         filename: String(row.filename || ''),
@@ -52,14 +46,10 @@ export async function loadMarkdownFromSheets(filename: string): Promise<string> 
       }));
 
       markdownCacheTimestamp = now;
-      console.log(`💾 [MarkdownService] Cached ${markdownCache.length} markdown files`);
-
     } catch (error) {
       console.error(`❌ [MarkdownService] Failed to fetch markdown sheet:`, error);
       throw new Error(`Failed to load markdown sheet from Google Sheets: ${error}`);
     }
-  } else {
-    console.log(`💾 [MarkdownService] Using cached markdown data`);
   }
 
   // Find the matching filename in cached data
@@ -67,11 +57,8 @@ export async function loadMarkdownFromSheets(filename: string): Promise<string> 
 
   if (!markdownFile) {
     console.error(`❌ [MarkdownService] Markdown file not found: ${filename}`);
-    console.log(`📋 [MarkdownService] Available files: ${markdownCache!.map(r => r.filename).join(', ')}`);
     throw new Error(`Markdown file not found in Google Sheets: ${filename}`);
   }
-
-  console.log(`✅ [MarkdownService] Successfully loaded ${filename} (${markdownFile.content.length} characters)`);
 
   return markdownFile.content;
 }
@@ -80,7 +67,6 @@ export async function loadMarkdownFromSheets(filename: string): Promise<string> 
  * Clear the markdown cache (useful for testing or forcing refresh)
  */
 export function clearMarkdownCache(): void {
-  console.log(`🗑️ [MarkdownService] Clearing markdown cache`);
   markdownCache = null;
   markdownCacheTimestamp = 0;
 }

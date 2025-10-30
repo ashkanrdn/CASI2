@@ -35,14 +35,11 @@ export async function fetchFromGoogleSheets(
   const fullRange = `${sheetName}!${range}`;
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${fullRange}?key=${apiKey}`;
 
-  console.log(`🚀 [SheetsService] Fetching from Google Sheets: ${sheetName}`);
-
   let lastError: Error | null = null;
 
   // Retry loop
   for (let attempt = 0; attempt <= retryAttempts; attempt++) {
     try {
-      console.log(`📡 [SheetsService] Attempt ${attempt + 1}/${retryAttempts + 1}`);
 
       const response = await fetch(url, {
         method: 'GET',
@@ -74,15 +71,11 @@ export async function fetchFromGoogleSheets(
         throw new Error('Invalid response: No data values found');
       }
 
-      console.log(`✅ [SheetsService] Successfully fetched ${data.values.length} rows from ${sheetName}`);
-
       // Transform to CsvRow[]
       const csvRows = transformToCsvRows(data.values, sheetName);
 
       // Basic validation
       validateData(csvRows, sheetName);
-
-      console.log(`✅ [SheetsService] Transformed ${csvRows.length} valid rows`);
 
       return csvRows;
 
@@ -92,7 +85,6 @@ export async function fetchFromGoogleSheets(
 
       if (attempt < retryAttempts) {
         const backoffDelay = retryDelay * Math.pow(2, attempt);
-        console.log(`⏳ [SheetsService] Retrying in ${backoffDelay}ms...`);
         await sleep(backoffDelay);
       }
     }
@@ -112,8 +104,6 @@ function transformToCsvRows(values: string[][], sheetName: string): CsvRow[] {
 
   const headers = values[0];
   const dataRows = values.slice(1);
-
-  console.log(`🔍 [SheetsService] Headers found: ${headers.join(', ')}`);
 
   const csvRows: CsvRow[] = dataRows
     .filter(row => row.some(cell => cell !== '' && cell !== null && cell !== undefined)) // Filter empty rows
@@ -160,8 +150,6 @@ function validateData(data: CsvRow[], sheetName: string): void {
   if (missingColumns.length > 0) {
     console.warn(`⚠️ [SheetsService] Missing expected columns in ${sheetName}: ${missingColumns.join(', ')}`);
   }
-
-  console.log(`✅ [SheetsService] Data validation passed for ${sheetName}`);
 }
 
 /**
@@ -178,8 +166,6 @@ export async function fetchAllDataSources(
   spreadsheetId: string,
   sources: { sheetName: string; range: string }[]
 ): Promise<Record<string, CsvRow[]>> {
-  console.log(`🚀 [SheetsService] Fetching ${sources.length} data sources in parallel`);
-
   const promises = sources.map(async ({ sheetName, range }) => {
     const data = await fetchFromGoogleSheets(spreadsheetId, sheetName, range);
     return { sheetName, data };

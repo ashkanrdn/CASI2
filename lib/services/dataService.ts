@@ -63,7 +63,6 @@ function isCacheValid(cacheKey: string, cacheTimeout: number): boolean {
  * Load a data source from Google Sheets
  */
 export async function loadDataSource(sourceType: DataSourceType): Promise<CsvRow[]> {
-    console.log(`🚀 [DataService] Starting to load data source: ${sourceType}`);
     const config = await loadConfig();
     const sourceConfig = config.dataSources[sourceType];
 
@@ -76,15 +75,11 @@ export async function loadDataSource(sourceType: DataSourceType): Promise<CsvRow
 
     // Check cache first
     if (isCacheValid(cacheKey, config.settings.cacheTimeout)) {
-        console.log(`💾 [DataService] Using cached data for ${sourceType}`);
         const cached = dataCache.get(cacheKey);
         return cached!.data as CsvRow[];
     }
 
-    console.log(`📥 [DataService] Cache miss for ${sourceType}, fetching from Google Sheets`);
-
     // Fetch from Google Sheets
-    console.log(`☁️ [DataService] Fetching from Google Sheets: ${sourceConfig.displayName}`);
     const spreadsheetId = process.env.NEXT_PUBLIC_SPREADSHEET_ID;
     if (!spreadsheetId) {
         throw new Error('❌ NEXT_PUBLIC_SPREADSHEET_ID is not defined in environment variables.');
@@ -100,14 +95,11 @@ export async function loadDataSource(sourceType: DataSourceType): Promise<CsvRow
         }
     );
 
-    console.log(`✅ [DataService] Successfully loaded ${data.length} rows from Google Sheets for ${sourceType}`);
-
     // Cache the result
     dataCache.set(cacheKey, {
         data: data,
         timestamp: Date.now()
     });
-    console.log(`💾 [DataService] Cached ${sourceType} data (${data.length} rows)`);
 
     return data;
 }
