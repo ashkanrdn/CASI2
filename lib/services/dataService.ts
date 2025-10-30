@@ -11,18 +11,10 @@ interface DataSourceConfig {
     type: 'sheets';
 }
 
-interface ContentConfig {
-    displayName: string;
-    url: string;
-    localFallback: string;
-    type: 'markdown';
-}
-
 interface DataSourcesConfig {
     version: string;
     lastUpdated: string;
     dataSources: Record<DataSourceType, DataSourceConfig>;
-    content: Record<string, ContentConfig>;
     settings: {
         retryAttempts: number;
         retryDelay: number;
@@ -121,64 +113,11 @@ export async function loadDataSource(sourceType: DataSourceType): Promise<CsvRow
 }
 
 /**
- * Load content (markdown file) by name
- */
-export async function loadContent(contentName: string): Promise<string> {
-    console.log(`📄 [DataService] Starting to load content: ${contentName}`);
-    const config = await loadConfig();
-    const contentConfig = config.content[contentName];
-
-    if (!contentConfig) {
-        console.error(`❌ [DataService] Unknown content: ${contentName}`);
-        throw new Error(`Unknown content: ${contentName}`);
-    }
-
-    const cacheKey = `content_${contentName}`;
-
-    // Check cache first
-    if (isCacheValid(cacheKey, config.settings.cacheTimeout)) {
-        console.log(`💾 [DataService] Using cached content for ${contentName}`);
-        const cached = dataCache.get(cacheKey);
-        return cached!.data as string;
-    }
-
-    console.log(`📥 [DataService] Cache miss for ${contentName}, fetching fresh content`);
-
-    try {
-        const response = await fetch(contentConfig.localFallback);
-         if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-        const data = await response.text();
-
-        // Cache the result
-        dataCache.set(cacheKey, {
-            data: data,
-            timestamp: Date.now()
-        });
-
-        console.log(`💾 [DataService] Cached ${contentName} content (${data.length} chars)`);
-        return data;
-    } catch (error) {
-        console.error(`❌ [DataService] Failed to load content ${contentName}:`, error);
-        throw new Error(`Failed to load ${contentConfig.displayName}: ${error}`);
-    }
-}
-
-/**
  * Get available data sources
  */
 export async function getAvailableDataSources(): Promise<Record<string, DataSourceConfig>> {
     const config = await loadConfig();
     return config.dataSources;
-}
-
-/**
- * Get available content
- */
-export async function getAvailableContent(): Promise<Record<string, ContentConfig>> {
-    const config = await loadConfig();
-    return config.content;
 }
 
 /**
