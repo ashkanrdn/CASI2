@@ -3,7 +3,8 @@ import type { Feature } from 'geojson';
 import type { CsvRow } from '@/app/types/shared';
 import type { DataSourceType } from '@/lib/features/filters/filterSlice';
 
-// --- Paste COUNTY_POPULATION constant here ---
+// Fallback population data from 2025
+// Used only when census data is unavailable for selected year
 export const COUNTY_POPULATION = {
     Alameda: 1649060,
     Alpine: 1099,
@@ -85,7 +86,8 @@ function enhanceGeoJsonWithData(
     filteredData: CsvRow[],
     selectedMetric: string,
     dataSource: DataSourceType,
-    isPerCapita: boolean
+    isPerCapita: boolean,
+    populationData?: Record<string, number>
 ): EnhancedFeature[] {
     console.log('[Worker] Starting data enhancement...'); // Optional logging
     // Accumulator for county-level data aggregation.
@@ -199,7 +201,9 @@ function enhanceGeoJsonWithData(
         }
 
         // Retrieve population and aggregated data for the county.
-        const population = COUNTY_POPULATION[countyName] || 0;
+        const population = (populationData && populationData[countyName])
+            || COUNTY_POPULATION[countyName]  // Fallback to hardcoded
+            || 0;
         let data = countyData[countyName] || { value: 0, rowCount: 0, totalCost: 0, costSum: 0, costCount: 0 };
 
         // Determine the raw value based on the selected metric.
@@ -248,7 +252,7 @@ function enhanceGeoJsonWithData(
 // --- Worker Message Handling ---
 self.onmessage = (event: MessageEvent<any>) => {
     console.log('[Worker] Message received from main thread:', event.data); // Optional logging
-    const { geojsonFeatures, filteredData, selectedMetric, dataSource, isPerCapita } = event.data;
+    const { geojsonFeatures, filteredData, selectedMetric, dataSource, isPerCapita, populationData } = event.data;
 
     if (!geojsonFeatures || !filteredData || !selectedMetric || !dataSource === undefined) { // Check dataSource presence
         console.error('[Worker] Invalid data received.');
@@ -258,7 +262,7 @@ self.onmessage = (event: MessageEvent<any>) => {
 
     try {
         // Perform the calculation
-        const result = enhanceGeoJsonWithData(geojsonFeatures, filteredData, selectedMetric, dataSource, isPerCapita);
+        const result = enhanceGeoJsonWithData(geojsonFeatures, filteredData, selectedMetric, dataSource, isPerCapita, populationData);
 
         // Send the result back to the main thread
         console.log('[Worker] Posting result back to main thread.'); // Optional logging
