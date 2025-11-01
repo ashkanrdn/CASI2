@@ -15,6 +15,7 @@ import {
     DataSourceMetrics,
     DataSourceType,
     togglePerCapita,
+    getPopulationByCountyAndYear,
 } from '@/lib/features/filters/filterSlice';
 import { FlyToInterpolator } from '@deck.gl/core';
 import type { ViewStateChangeParameters } from '@deck.gl/core';
@@ -214,8 +215,14 @@ export default function MapStory() {
         selectedDataSource,
         isPerCapita,
         selectedCounties = [],
+        csvDataSources,
+        activeFilters,
     } = useSelector((state: RootState) => state.filters);
     const selectedCounty = useSelector((state: RootState) => state.map.selectedCounty);
+
+    // Extract census data and selected year
+    const censusData = csvDataSources.demographic;
+    const selectedYear = activeFilters.year;
 
 
     // State for storing the fetched GeoJSON data for California counties.
@@ -335,6 +342,9 @@ export default function MapStory() {
             loadingTimerRef.current = null;
         }, 500);
 
+        // Calculate dynamic population data for the selected year
+        const populationData = getPopulationByCountyAndYear(censusData, selectedYear);
+
         // Send data needed for calculation to the worker
         workerRef.current.postMessage({
             geojsonFeatures: geojsonData,
@@ -342,8 +352,9 @@ export default function MapStory() {
             selectedMetric,
             dataSource: selectedDataSource,
             isPerCapita,
+            populationData,
         });
-    }, [geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita]); // Dependencies that trigger recalculation
+    }, [geojsonData, filteredData, selectedMetric, selectedDataSource, isPerCapita, censusData, selectedYear]); // Dependencies that trigger recalculation
 
     /**
      * Memoized calculation for the D3 color scale used to color the map features.
