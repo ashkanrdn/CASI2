@@ -239,6 +239,31 @@ export const getCountyDemographicData = (data: CsvRow[], county: string, year: n
     return result;
 };
 
+// NEW FUNCTION: Get population data by county and year from census data
+export const getPopulationByCountyAndYear = (
+    data: CsvRow[],
+    year: number,
+    variable: string = 'Total population age 18-older'
+): Record<string, number> => {
+    const populationMap: Record<string, number> = {};
+
+    const filteredData = data.filter(row => {
+        const variableMatch = String(row.Variable).trim() === variable;
+        const yearMatch = Number(row.Year) === year;
+        const parsedValue = parseStringToNumber(row.Value);
+        const hasValidValue = !isNaN(parsedValue) && parsedValue !== null && parsedValue > 0;
+
+        return variableMatch && yearMatch && hasValidValue;
+    });
+
+    filteredData.forEach(row => {
+        const county = String(row.County).trim();
+        populationMap[county] = parseStringToNumber(row.Value);
+    });
+
+    return populationMap;
+};
+
 // Create async thunk for fetching CSV data based on source
 export const fetchDataForSource = createAsyncThunk(
     'filters/fetchDataForSource',
