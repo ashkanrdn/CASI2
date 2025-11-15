@@ -11,6 +11,7 @@ import { COUNTY_POPULATION } from './MapStory';
 // Helper to format Metric string for display (same as in MapStory)
 function formatMetricLabel(metric: string) {
     if (metric === 'Total_Cost') return 'Total Cost';
+    if (metric === 'ADPtotal') return 'ADP Total';
     // Add formatting for other specific metrics if needed
     if (metric === 'Jail_ADP') return 'Avg Daily Population';
     if (metric === 'Count') return 'Arrests'; // Assuming Count means Arrests here
@@ -72,7 +73,7 @@ export default function CountyRank() {
                                     </motion.p>
                                     <motion.p className='text-gray-600 text-sm' layoutId={`value-${county.name}`}>
                                         {formatMetricLabel(selectedMetric)}
-                                        {isPerCapita ? ' (Per Capita): ' : ': '}
+                                        {isPerCapita ? ' (Per Capita): ' : ' : '}
                                         {isPerCapita
                                             ? Number(county.value).toLocaleString(undefined, {
                                                   maximumSignificantDigits: 4,
